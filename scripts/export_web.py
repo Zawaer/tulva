@@ -47,7 +47,7 @@ COORDS = {
 NE_URL = ("https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/"
           "ne_50m_admin_0_countries.geojson")
 BASEMAP_COUNTRIES = {"Finland", "Aland", "Sweden", "Norway", "Russia", "Estonia"}
-BBOX = (14.0, 56.5, 36.0, 71.5)   # lon_min, lat_min, lon_max, lat_max
+BBOX = (5.0, 53.0, 50.0, 74.0)   # lon_min, lat_min, lon_max, lat_max
 
 
 def basemap() -> dict:

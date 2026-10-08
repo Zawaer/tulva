@@ -184,7 +184,7 @@ function renderOutlook() {
     ];
     const bars = rows.map(([l, v, col]) => `<div class="bar"><span>${l}</span><span class="track"><span class="fill" style="display:block;width:${Math.max(1, v / max * 100)}%;background:${col}"></span></span><span class="num">${pct(v)}</span></div>`).join("");
     return `<div class="tile" style="--cc:${CLUSTER_COLOR[name]}">
-      <h3>${esc(name)}</h3><div class="sub">≥2 of ${cl.n} gauges over their 1-in-50 level · ${state.mode === "latest" ? ordinal(cl.latest_march.pct) + " pct snow in " + cl.latest_march.year : ""}</div>
+      <h3>${esc(name)}</h3><div class="sub">≥2 of ${cl.n} gauges over their 1-in-50 level${state.mode === "latest" ? " · " + ordinal(cl.latest_march.pct) + " pct snow in " + cl.latest_march.year : ""}</div>
       <div class="big">${pct(p)} <span class="unit">per spring</span> ${tag(pn.src, pn.note)}</div>
       <div class="bars">${bars}</div>
       <div class="price-row"><span>Expected payout on €10M ${tag("exact", "probability × €10M; pure premium before loadings")}</span><b>${eur(p * APP.payout_eur)}</b></div>
@@ -204,7 +204,7 @@ function renderCard() {
     ["Regulator view<br>(independent floods)", cl.p_independent, fpI, false, ""],
     ["Tulva<br>(joint risk, no outlook)", cl.p_tulva, fpT, false,
       boot ? `90 % range ${eur(boot[0])}–${eur(boot[2])} ${tag("exact", "year-bootstrap refit of the loadings, out/pricing.json")}` : ""],
-    [`Tulva + this March's snow<br><span style="font-weight:400">${outlookLabel(cl)}</span>`, pNow(NORTH, cl), priceNow(NORTH, cl), true, ""],
+    [`Tulva + March snow outlook<br><span style="font-weight:400">${outlookLabel(cl)}</span>`, pNow(NORTH, cl), priceNow(NORTH, cl), true, ""],
   ];
   $("#card").innerHTML = `
     <div class="kicker">Tulva Index · ${NORTH} cluster</div>
@@ -303,7 +303,8 @@ function renderReplay() {
     L.circleMarker([a.lat, a.lon], {
       radius: isOver ? 11 : 7, color: r == null ? "#9aa6b5" : col, weight: 2,
       dashArray: r == null ? "2 3" : null, fillColor: col, fillOpacity: isOver ? 0.95 : 0.08,
-    }).bindTooltip(`${a.area}: ${r == null ? "no data" : `${Math.round(v)} m³/s = ${(r * 100).toFixed(0)} % of its 1-in-10 level`}`).addTo(layer2);
+    }).bindTooltip(isOver ? a.area : `${a.area}: ${r == null ? "no data" : `${Math.round(v)} m³/s = ${(r * 100).toFixed(0)} % of its 1-in-10 level`}`,
+      isOver ? { permanent: true, direction: LABEL_DIR[a.area] || "right", className: "lbl", offset: [LABEL_DIR[a.area] === "left" ? -8 : 8, 0] } : {}).addTo(layer2);
     const w = r == null ? 0 : Math.min(r / 2, 1) * 100;
     return `<div class="rrow ${r == null ? "na" : isOver ? "over" : ""}"><span class="name">${esc(a.area)}</span>
       <span class="track" title="Line marks the 1-in-10 level (${lvl} m³/s)"><span class="fill" style="width:${w}%;background:${isOver ? col : col + "55"}"></span><span class="mark" style="left:50%"></span></span>

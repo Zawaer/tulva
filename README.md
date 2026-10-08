@@ -26,3 +26,9 @@ python scripts/run_hw.py --backend q20 --ems 2       # FiQCI error mitigation
 ```
 Job ids are written to `out/runs/` before waiting for results, and `backend.retrieve_job(id)` recovers a lost run.
 Check fiqci.fi/status first.
+
+## Demo web app
+```bash
+python scripts/export_web.py                                   # out/ + data/ -> web/data/*.json (rerun after new results)
+python3 -m http.server 3141 --bind 0.0.0.0 --directory web     # static page, no build step
+```
