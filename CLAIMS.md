@@ -22,3 +22,11 @@ Every number in the deck: value · what produced it (exact / monte-carlo / qae-s
 - Flood = spring (Mar–Jun) peak daily discharge over the gauge's own empirical top-10% (1-in-10) / GEV 1-in-50; discharge is not damage; ice-jam/frazil floods (Pori in winter) are missed.
 - Joint tail beyond observed (k≥6, 1-in-50 levels) is Gaussian-copula extrapolation (no tail dependence); at k≥6 the model is above observed (slightly conservative).
 - Snow skill is in-sample on 10 top-snow years per cluster; wide uncertainty.
+- P(Kittilä AND Ivalo both pass 1-in-50 in the same spring) = 0.125 % (two-level model, exact) vs 0.040 % if
+  independent (×3.1); 0.193 % after a top-15 % March snow outlook. QAE on ideal simulator: 0.125 % ± 0.011 pp
+  vs Monte Carlo ± 0.027 pp at the same 16,000 oracle queries · exact / qae-sim / monte-carlo ·
+  scripts/qae_sim.py
+- P(≥2 of 3 Lapland areas pass 1-in-50) = 0.359 % (exact) vs 0.119 % if independent (×3.0) · exact · scripts/qae_sim.py
+
+(Simplified) The quantum circuits use a two-level discretisation of the fitted factor model (wet = top 30 %);
+the continuous model is the classical reference. The outlook shift uses the in-sample snow skill (North 0.47).

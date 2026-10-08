@@ -41,10 +41,17 @@ else:
     a_nat, b_cl = 0.40, 0.60
 
 TRIGGER = 1 / 50
+# March outlook: a top-15 % snow year shifts the factor mean by skill * E[O | O in top 15 %]
+from scipy.stats import norm as _norm  # noqa: E402
+skill_file = OUT / "snow_skill.json"
+SKILL = (json.loads(skill_file.read_text())["clusters"]["North"]["outlook_skill_vs_latent_factor"]
+         if skill_file.exists() else 0.7)
+OUTLOOK_SHIFT = SKILL * _norm.pdf(_norm.ppf(0.85)) / 0.15
+results_skill = {"north_outlook_skill": SKILL, "outlook_shift_sd": OUTLOOK_SHIFT}
 # one cluster, 3 areas (Kittilä, Ivalo, Rovaniemi); areas share loadings in this instance
 model = factor.build_two_level(np.full(3, a_nat), np.full(3, b_cl), np.zeros(3, int), np.full(3, TRIGGER))
 model_hi = factor.build_two_level(np.full(3, a_nat), np.full(3, b_cl), np.zeros(3, int), np.full(3, TRIGGER),
-                                  outlook_shift=1.0)
+                                  outlook_shift=OUTLOOK_SHIFT)
 
 
 def hydrology_prior(m: factor.TwoLevelModel) -> tuple[float, list[tuple[float, float]]]:
@@ -69,7 +76,7 @@ def noise_model(p2: float, ro: float) -> NoiseModel:
 BASIS = ["cz", "rz", "sx", "x"]
 from qiskit.transpiler import CouplingMap  # noqa: E402
 GRID = CouplingMap.from_grid(2, 3)  # tiny square-lattice stand-in (IQM chips are square lattices)
-results = {"parameter_source": source, "trigger": "1-in-50 spring maximum", "instances": {}}
+results = {**results_skill, "parameter_source": source, "trigger": "1-in-50 spring maximum", "instances": {}}
 
 for label, n_areas, event in [("kittila_ivalo_both", 2, "all"), ("lapland_atleast2of3", 3, "atleast2")]:
     for outlook, m in [("climatology", model), ("high_march_outlook", model_hi)]:
