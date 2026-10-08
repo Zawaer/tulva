@@ -1,0 +1,7 @@
+numpy
+scipy
+pandas
+matplotlib
+requests
+qiskit>=1.2
+qiskit-aer
