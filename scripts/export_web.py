@@ -161,11 +161,17 @@ def normalise_pricing(raw) -> dict:
             note = (f"P = {d.get('p_exact')} (exact); premium = P × payout × (1 + {raw.get('risk_load')} risk load)"
                     + (f"; Monte Carlo check P = {d['p_mc']} ± {d.get('p_mc_se')}" if d.get("p_mc") is not None else ""))
             flat[cname][view] = {"v": d["premium_eur"], "p": d.get("p_exact"), "p_mc": d.get("p_mc"),
+                                 "market": d.get("market_premium_eur"),
                                  "rate_on_line": d.get("rate_on_line"), "src": "exact", "note": note}
+            st = (c.get("staged_ge2_half_ge3_full") or {}).get(key)
+            if st:
+                flat[cname][view]["staged"] = {"v": st["premium_eur"], "market": st["market_premium_eur"],
+                                               "expected_payout": st["expected_payout_eur"]}
         boot = ((raw.get("bootstrap") or {}).get("clusters") or {}).get(cname) or {}
         if boot.get("ge2_premium_eur_5_50_95"):
             flat[cname]["tulva_boot90"] = boot["ge2_premium_eur_5_50_95"]
     return {"status": "ready", "generated_from": "out/pricing.json", "risk_load": raw.get("risk_load"),
+            "market_multiples": raw.get("market_multiples"), "market_note": raw.get("market_note"),
             "payout_eur": raw.get("payout_eur"), "flat": flat, "raw": raw}
 
 
@@ -211,7 +217,9 @@ def main() -> None:
 
     # Cluster trigger: >=2 gauges over their 1-in-50 level, under three views and a range of March outlooks.
     clusters = {}
-    for cname in params["cluster_names"]:
+    # Lead with the North (Lapland) cluster: spring-flood risk there is roughly stable to ~2050 (SYKE/FMI).
+    order = sorted(params["cluster_names"], key=lambda c: c != "North")
+    for cname in order:
         c = params["clusters"][cname]
         a_, b_ = c["national_loading"], c["cluster_loading"]
         h = math.sqrt(a_ * a_ + b_ * b_)
@@ -235,7 +243,7 @@ def main() -> None:
             "areas": c["areas"], "n": n, "national_loading": a_, "cluster_loading": b_,
             "outlook_skill": s,
             "spearman_swe_vs_flood": skill["clusters"][cname]["spearman_swe_vs_flood_index"],
-            "p_independent": {"v": p_ind, "src": "exact", "note": "binomial, each gauge 2 %/yr, independent"},
+            "p_independent": {"v": p_ind, "src": "exact", "note": "independence (no co-flooding): binomial, each gauge 2 %/yr"},
             "p_tulva": {"v": p_clim, "src": "exact", "note": "factor model, Gauss–Hermite quadrature",
                         "check_model_params": params["cluster_trigger_ge2_over_1in50"][cname]["p_ge2_model"]},
             "p_high_outlook": {"v": p_high, "src": "exact", "note": "factor model given a top-15 % 1 March SWE"},

@@ -2,6 +2,11 @@
  "status": "ready",
  "generated_from": "out/pricing.json",
  "risk_load": 0.35,
+ "market_multiples": [
+  2.5,
+  3.5
+ ],
+ "market_note": "market price = expected payout x 2.5 / x 3.5: cat bonds 2.4-3.7x expected loss 2024-26 (AM Best), flood ILS ~3.0-3.4x (Flood Re, FloodSmart Re); technical = x (1 + risk load)",
  "payout_eur": 10000000.0,
  "flat": {
   "Ostrobothnia": {
@@ -9,41 +14,101 @@
     "v": 76776,
     "p": 0.0056871,
     "p_mc": null,
+    "market": [
+     142178,
+     199049
+    ],
     "rate_on_line": 0.00768,
     "src": "exact",
-    "note": "P = 0.0056871 (exact); premium = P × payout × (1 + 0.35 risk load)"
+    "note": "P = 0.0056871 (exact); premium = P × payout × (1 + 0.35 risk load)",
+    "staged": {
+     "v": 39420,
+     "market": [
+      73000,
+      102201
+     ],
+     "expected_payout": 29200
+    }
    },
    "tulva": {
     "v": 346060,
     "p": 0.0256341,
     "p_mc": 0.026108,
+    "market": [
+     640852,
+     897193
+    ],
     "rate_on_line": 0.03461,
     "src": "exact",
-    "note": "P = 0.0256341 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.026108 ± 0.0001595"
+    "note": "P = 0.0256341 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.026108 ± 0.0001595",
+    "staged": {
+     "v": 244706,
+     "market": [
+      453160,
+      634424
+     ],
+     "expected_payout": 181264
+    }
    },
    "high": {
     "v": 1740880,
     "p": 0.128954,
     "p_mc": 0.129325,
+    "market": [
+     3223851,
+     4513391
+    ],
     "rate_on_line": 0.17409,
     "src": "exact",
-    "note": "P = 0.128954 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.129325 ± 0.0003356"
+    "note": "P = 0.128954 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.129325 ± 0.0003356",
+    "staged": {
+     "v": 1274589,
+     "market": [
+      2360350,
+      3304490
+     ],
+     "expected_payout": 944140
+    }
    },
    "low": {
     "v": 783,
     "p": 5.8e-05,
     "p_mc": 5e-05,
+    "market": [
+     1450,
+     2029
+    ],
     "rate_on_line": 8e-05,
     "src": "exact",
-    "note": "P = 5.8e-05 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 5e-05 ± 7.1e-06"
+    "note": "P = 5.8e-05 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 5e-05 ± 7.1e-06",
+    "staged": {
+     "v": 428,
+     "market": [
+      792,
+      1109
+     ],
+     "expected_payout": 317
+    }
    },
    "full": {
     "v": 270000,
     "p": 0.02,
     "p_mc": null,
+    "market": [
+     500000,
+     700000
+    ],
     "rate_on_line": 0.027,
     "src": "exact",
-    "note": "P = 0.02 (exact); premium = P × payout × (1 + 0.35 risk load)"
+    "note": "P = 0.02 (exact); premium = P × payout × (1 + 0.35 risk load)",
+    "staged": {
+     "v": 270000,
+     "market": [
+      500000,
+      700000
+     ],
+     "expected_payout": 200000
+    }
    },
    "tulva_boot90": [
     312447,
@@ -56,41 +121,101 @@
     "v": 51872,
     "p": 0.0038424,
     "p_mc": null,
+    "market": [
+     96060,
+     134484
+    ],
     "rate_on_line": 0.00519,
     "src": "exact",
-    "note": "P = 0.0038424 (exact); premium = P × payout × (1 + 0.35 risk load)"
+    "note": "P = 0.0038424 (exact); premium = P × payout × (1 + 0.35 risk load)",
+    "staged": {
+     "v": 26460,
+     "market": [
+      49000,
+      68600
+     ],
+     "expected_payout": 19600
+    }
    },
    "tulva": {
     "v": 265068,
     "p": 0.0196347,
     "p_mc": 0.019572,
+    "market": [
+     490867,
+     687213
+    ],
     "rate_on_line": 0.02651,
     "src": "exact",
-    "note": "P = 0.0196347 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.019572 ± 0.0001385"
+    "note": "P = 0.0196347 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.019572 ± 0.0001385",
+    "staged": {
+     "v": 176990,
+     "market": [
+      327760,
+      458864
+     ],
+     "expected_payout": 131104
+    }
    },
    "high": {
     "v": 870088,
     "p": 0.0644509,
     "p_mc": 0.064301,
+    "market": [
+     1611274,
+     2255783
+    ],
     "rate_on_line": 0.08701,
     "src": "exact",
-    "note": "P = 0.0644509 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.064301 ± 0.0002453"
+    "note": "P = 0.0644509 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.064301 ± 0.0002453",
+    "staged": {
+     "v": 603518,
+     "market": [
+      1117626,
+      1564676
+     ],
+     "expected_payout": 447050
+    }
    },
    "low": {
     "v": 22223,
     "p": 0.0016461,
     "p_mc": 0.001628,
+    "market": [
+     41153,
+     57615
+    ],
     "rate_on_line": 0.00222,
     "src": "exact",
-    "note": "P = 0.0016461 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.001628 ± 4.03e-05"
+    "note": "P = 0.0016461 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.001628 ± 4.03e-05",
+    "staged": {
+     "v": 13262,
+     "market": [
+      24559,
+      34382
+     ],
+     "expected_payout": 9823
+    }
    },
    "full": {
     "v": 270000,
     "p": 0.02,
     "p_mc": null,
+    "market": [
+     500000,
+     700000
+    ],
     "rate_on_line": 0.027,
     "src": "exact",
-    "note": "P = 0.02 (exact); premium = P × payout × (1 + 0.35 risk load)"
+    "note": "P = 0.02 (exact); premium = P × payout × (1 + 0.35 risk load)",
+    "staged": {
+     "v": 270000,
+     "market": [
+      500000,
+      700000
+     ],
+     "expected_payout": 200000
+    }
    },
    "tulva_boot90": [
     220095,
@@ -103,41 +228,101 @@
     "v": 15984,
     "p": 0.001184,
     "p_mc": null,
+    "market": [
+     29600,
+     41440
+    ],
     "rate_on_line": 0.0016,
     "src": "exact",
-    "note": "P = 0.001184 (exact); premium = P × payout × (1 + 0.35 risk load)"
+    "note": "P = 0.001184 (exact); premium = P × payout × (1 + 0.35 risk load)",
+    "staged": {
+     "v": 8046,
+     "market": [
+      14900,
+      20860
+     ],
+     "expected_payout": 5960
+    }
    },
    "tulva": {
     "v": 83466,
     "p": 0.0061827,
     "p_mc": 0.006146,
+    "market": [
+     154567,
+     216394
+    ],
     "rate_on_line": 0.00835,
     "src": "exact",
-    "note": "P = 0.0061827 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.006146 ± 7.82e-05"
+    "note": "P = 0.0061827 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.006146 ± 7.82e-05",
+    "staged": {
+     "v": 45903,
+     "market": [
+      85005,
+      119007
+     ],
+     "expected_payout": 34002
+    }
    },
    "high": {
     "v": 389932,
     "p": 0.0288839,
     "p_mc": 0.0285,
+    "market": [
+     722096,
+     1010935
+    ],
     "rate_on_line": 0.03899,
     "src": "exact",
-    "note": "P = 0.0288839 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.0285 ± 0.0001664"
+    "note": "P = 0.0288839 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.0285 ± 0.0001664",
+    "staged": {
+     "v": 218135,
+     "market": [
+      403953,
+      565535
+     ],
+     "expected_payout": 161581
+    }
    },
    "low": {
     "v": 941,
     "p": 6.97e-05,
     "p_mc": 6.5e-05,
+    "market": [
+     1743,
+     2440
+    ],
     "rate_on_line": 9e-05,
     "src": "exact",
-    "note": "P = 6.97e-05 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 6.5e-05 ± 8.1e-06"
+    "note": "P = 6.97e-05 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 6.5e-05 ± 8.1e-06",
+    "staged": {
+     "v": 479,
+     "market": [
+      888,
+      1243
+     ],
+     "expected_payout": 355
+    }
    },
    "full": {
     "v": 270000,
     "p": 0.02,
     "p_mc": null,
+    "market": [
+     500000,
+     700000
+    ],
     "rate_on_line": 0.027,
     "src": "exact",
-    "note": "P = 0.02 (exact); premium = P × payout × (1 + 0.35 risk load)"
+    "note": "P = 0.02 (exact); premium = P × payout × (1 + 0.35 risk load)",
+    "staged": {
+     "v": 270000,
+     "market": [
+      500000,
+      700000
+     ],
+     "expected_payout": 200000
+    }
    },
    "tulva_boot90": [
     54855,
@@ -150,6 +335,21 @@
   "description": "Tulva Index: pays a fixed sum once per spring when >= m of a cluster's gauges pass their own 1-in-50 spring (Mar-Jun) peak-discharge level. Premium = P(trigger) x payout x (1 + risk load). Model: Gaussian-copula factor model fitted to SYKE/SMHI spring maxima 1961-2025 (out/model_params.json); outlook = 1 March SYKE SWE, top/bottom 15 % (skill from out/snow_skill.json).",
   "payout_eur": 10000000.0,
   "risk_load": 0.35,
+  "market_multiples": [
+   2.5,
+   3.5
+  ],
+  "market_note": "market price = expected payout x 2.5 / x 3.5: cat bonds 2.4-3.7x expected loss 2024-26 (AM Best), flood ILS ~3.0-3.4x (Flood Re, FloodSmart Re); technical = x (1 + risk load)",
+  "staged_stages": [
+   {
+    "min_gauges": 2,
+    "payout_fraction": 0.5
+   },
+   {
+    "min_gauges": 3,
+    "payout_fraction": 1.0
+   }
+  ],
   "return_period_years": 50,
   "mc_springs": 1000000,
   "clusters": {
@@ -174,6 +374,10 @@
        "expected_payout_eur": 1141576,
        "premium_eur": 1541128,
        "rate_on_line": 0.15411,
+       "market_premium_eur": [
+        2853940,
+        3995517
+       ],
        "return_period_years": 8.8
       },
       "tulva": {
@@ -181,6 +385,10 @@
        "expected_payout_eur": 770689,
        "premium_eur": 1040430,
        "rate_on_line": 0.10404,
+       "market_premium_eur": [
+        1926721,
+        2697410
+       ],
        "return_period_years": 13.0,
        "p_mc": 0.077613,
        "p_mc_se": 0.0002676
@@ -190,6 +398,10 @@
        "expected_payout_eur": 200000,
        "premium_eur": 270000,
        "rate_on_line": 0.027,
+       "market_premium_eur": [
+        500000,
+        700000
+       ],
        "return_period_years": 50.0
       },
       "tulva_high_outlook": {
@@ -197,6 +409,10 @@
        "expected_payout_eur": 2989876,
        "premium_eur": 4036333,
        "rate_on_line": 0.40363,
+       "market_premium_eur": [
+        7474690,
+        10464566
+       ],
        "return_period_years": 3.3,
        "p_mc": 0.299512,
        "p_mc_se": 0.000458
@@ -206,6 +422,10 @@
        "expected_payout_eur": 14396,
        "premium_eur": 19435,
        "rate_on_line": 0.00194,
+       "market_premium_eur": [
+        35990,
+        50386
+       ],
        "return_period_years": 694.6,
        "p_mc": 0.001418,
        "p_mc_se": 3.76e-05
@@ -234,6 +454,10 @@
        "expected_payout_eur": 56871,
        "premium_eur": 76776,
        "rate_on_line": 0.00768,
+       "market_premium_eur": [
+        142178,
+        199049
+       ],
        "return_period_years": 175.8
       },
       "tulva": {
@@ -241,6 +465,10 @@
        "expected_payout_eur": 256341,
        "premium_eur": 346060,
        "rate_on_line": 0.03461,
+       "market_premium_eur": [
+        640852,
+        897193
+       ],
        "return_period_years": 39.0,
        "p_mc": 0.026108,
        "p_mc_se": 0.0001595
@@ -250,6 +478,10 @@
        "expected_payout_eur": 200000,
        "premium_eur": 270000,
        "rate_on_line": 0.027,
+       "market_premium_eur": [
+        500000,
+        700000
+       ],
        "return_period_years": 50.0
       },
       "tulva_high_outlook": {
@@ -257,6 +489,10 @@
        "expected_payout_eur": 1289540,
        "premium_eur": 1740880,
        "rate_on_line": 0.17409,
+       "market_premium_eur": [
+        3223851,
+        4513391
+       ],
        "return_period_years": 7.8,
        "p_mc": 0.129325,
        "p_mc_se": 0.0003356
@@ -266,6 +502,10 @@
        "expected_payout_eur": 580,
        "premium_eur": 783,
        "rate_on_line": 8e-05,
+       "market_premium_eur": [
+        1450,
+        2029
+       ],
        "return_period_years": 17247.1,
        "p_mc": 5e-05,
        "p_mc_se": 7.1e-06
@@ -294,6 +534,10 @@
        "expected_payout_eur": 1529,
        "premium_eur": 2064,
        "rate_on_line": 0.00021,
+       "market_premium_eur": [
+        3823,
+        5352
+       ],
        "return_period_years": 6539.6
       },
       "tulva": {
@@ -301,6 +545,10 @@
        "expected_payout_eur": 106187,
        "premium_eur": 143352,
        "rate_on_line": 0.01434,
+       "market_premium_eur": [
+        265468,
+        371655
+       ],
        "return_period_years": 94.2,
        "p_mc": 0.010714,
        "p_mc_se": 0.000103
@@ -310,6 +558,10 @@
        "expected_payout_eur": 200000,
        "premium_eur": 270000,
        "rate_on_line": 0.027,
+       "market_premium_eur": [
+        500000,
+        700000
+       ],
        "return_period_years": 50.0
       },
       "tulva_high_outlook": {
@@ -317,6 +569,10 @@
        "expected_payout_eur": 598739,
        "premium_eur": 808298,
        "rate_on_line": 0.08083,
+       "market_premium_eur": [
+        1496848,
+        2095588
+       ],
        "return_period_years": 16.7,
        "p_mc": 0.060367,
        "p_mc_se": 0.0002382
@@ -326,6 +582,10 @@
        "expected_payout_eur": 54,
        "premium_eur": 72,
        "rate_on_line": 1e-05,
+       "market_premium_eur": [
+        134,
+        188
+       ],
        "return_period_years": 186218.9,
        "p_mc": 7e-06,
        "p_mc_se": 2.6e-06
@@ -347,6 +607,64 @@
       "mispricing_tulva_vs_independent": 69.442,
       "high_vs_low_outlook": 11149.7,
       "high_outlook_vs_climatology": 5.639
+     }
+    },
+    "staged_ge2_half_ge3_full": {
+     "independent": {
+      "expected_payout_fraction": 0.00292,
+      "expected_payout_eur": 29200,
+      "premium_eur": 39420,
+      "market_premium_eur": [
+       73000,
+       102201
+      ],
+      "vs_ge2_full_payout": 0.513
+     },
+     "tulva": {
+      "expected_payout_fraction": 0.0181264,
+      "expected_payout_eur": 181264,
+      "premium_eur": 244706,
+      "market_premium_eur": [
+       453160,
+       634424
+      ],
+      "vs_ge2_full_payout": 0.707,
+      "expected_fraction_mc": 0.018411,
+      "expected_fraction_mc_se": 0.0001193
+     },
+     "full_correlation": {
+      "expected_payout_fraction": 0.02,
+      "expected_payout_eur": 200000,
+      "premium_eur": 270000,
+      "market_premium_eur": [
+       500000,
+       700000
+      ],
+      "vs_ge2_full_payout": 1.0
+     },
+     "tulva_high_outlook": {
+      "expected_payout_fraction": 0.094414,
+      "expected_payout_eur": 944140,
+      "premium_eur": 1274589,
+      "market_premium_eur": [
+       2360350,
+       3304490
+      ],
+      "vs_ge2_full_payout": 0.732,
+      "expected_fraction_mc": 0.094846,
+      "expected_fraction_mc_se": 0.0002619
+     },
+     "tulva_low_outlook": {
+      "expected_payout_fraction": 3.17e-05,
+      "expected_payout_eur": 317,
+      "premium_eur": 428,
+      "market_premium_eur": [
+       792,
+       1109
+      ],
+      "vs_ge2_full_payout": 0.546,
+      "expected_fraction_mc": 2.85e-05,
+      "expected_fraction_mc_se": 4.2e-06
      }
     }
    },
@@ -370,6 +688,10 @@
        "expected_payout_eur": 960792,
        "premium_eur": 1297069,
        "rate_on_line": 0.12971,
+       "market_premium_eur": [
+        2401980,
+        3362772
+       ],
        "return_period_years": 10.4
       },
       "tulva": {
@@ -377,6 +699,10 @@
        "expected_payout_eur": 712040,
        "premium_eur": 961254,
        "rate_on_line": 0.09613,
+       "market_premium_eur": [
+        1780100,
+        2492140
+       ],
        "return_period_years": 14.0,
        "p_mc": 0.070912,
        "p_mc_se": 0.0002567
@@ -386,6 +712,10 @@
        "expected_payout_eur": 200000,
        "premium_eur": 270000,
        "rate_on_line": 0.027,
+       "market_premium_eur": [
+        500000,
+        700000
+       ],
        "return_period_years": 50.0
       },
       "tulva_high_outlook": {
@@ -393,6 +723,10 @@
        "expected_payout_eur": 1818832,
        "premium_eur": 2455423,
        "rate_on_line": 0.24554,
+       "market_premium_eur": [
+        4547081,
+        6365913
+       ],
        "return_period_years": 5.5,
        "p_mc": 0.182091,
        "p_mc_se": 0.0003859
@@ -402,6 +736,10 @@
        "expected_payout_eur": 128694,
        "premium_eur": 173737,
        "rate_on_line": 0.01737,
+       "market_premium_eur": [
+        321736,
+        450430
+       ],
        "return_period_years": 77.7,
        "p_mc": 0.012607,
        "p_mc_se": 0.0001116
@@ -430,6 +768,10 @@
        "expected_payout_eur": 38424,
        "premium_eur": 51872,
        "rate_on_line": 0.00519,
+       "market_premium_eur": [
+        96060,
+        134484
+       ],
        "return_period_years": 260.3
       },
       "tulva": {
@@ -437,6 +779,10 @@
        "expected_payout_eur": 196347,
        "premium_eur": 265068,
        "rate_on_line": 0.02651,
+       "market_premium_eur": [
+        490867,
+        687213
+       ],
        "return_period_years": 50.9,
        "p_mc": 0.019572,
        "p_mc_se": 0.0001385
@@ -446,6 +792,10 @@
        "expected_payout_eur": 200000,
        "premium_eur": 270000,
        "rate_on_line": 0.027,
+       "market_premium_eur": [
+        500000,
+        700000
+       ],
        "return_period_years": 50.0
       },
       "tulva_high_outlook": {
@@ -453,6 +803,10 @@
        "expected_payout_eur": 644509,
        "premium_eur": 870088,
        "rate_on_line": 0.08701,
+       "market_premium_eur": [
+        1611274,
+        2255783
+       ],
        "return_period_years": 15.5,
        "p_mc": 0.064301,
        "p_mc_se": 0.0002453
@@ -462,6 +816,10 @@
        "expected_payout_eur": 16461,
        "premium_eur": 22223,
        "rate_on_line": 0.00222,
+       "market_premium_eur": [
+        41153,
+        57615
+       ],
        "return_period_years": 607.5,
        "p_mc": 0.001628,
        "p_mc_se": 4.03e-05
@@ -490,6 +848,10 @@
        "expected_payout_eur": 776,
        "premium_eur": 1048,
        "rate_on_line": 0.0001,
+       "market_premium_eur": [
+        1940,
+        2717
+       ],
        "return_period_years": 12883.4
       },
       "tulva": {
@@ -497,6 +859,10 @@
        "expected_payout_eur": 65861,
        "premium_eur": 88913,
        "rate_on_line": 0.00889,
+       "market_premium_eur": [
+        164654,
+        230515
+       ],
        "return_period_years": 151.8,
        "p_mc": 0.006568,
        "p_mc_se": 8.08e-05
@@ -506,6 +872,10 @@
        "expected_payout_eur": 200000,
        "premium_eur": 270000,
        "rate_on_line": 0.027,
+       "market_premium_eur": [
+        500000,
+        700000
+       ],
        "return_period_years": 50.0
       },
       "tulva_high_outlook": {
@@ -513,6 +883,10 @@
        "expected_payout_eur": 249591,
        "premium_eur": 336948,
        "rate_on_line": 0.03369,
+       "market_premium_eur": [
+        623978,
+        873569
+       ],
        "return_period_years": 40.1,
        "p_mc": 0.024936,
        "p_mc_se": 0.0001559
@@ -522,6 +896,10 @@
        "expected_payout_eur": 3185,
        "premium_eur": 4300,
        "rate_on_line": 0.00043,
+       "market_premium_eur": [
+        7964,
+        11149
+       ],
        "return_period_years": 3139.3,
        "p_mc": 0.000315,
        "p_mc_se": 1.77e-05
@@ -544,6 +922,64 @@
       "high_vs_low_outlook": 78.4,
       "high_outlook_vs_climatology": 3.79
      }
+    },
+    "staged_ge2_half_ge3_full": {
+     "independent": {
+      "expected_payout_fraction": 0.00196,
+      "expected_payout_eur": 19600,
+      "premium_eur": 26460,
+      "market_premium_eur": [
+       49000,
+       68600
+      ],
+      "vs_ge2_full_payout": 0.51
+     },
+     "tulva": {
+      "expected_payout_fraction": 0.0131104,
+      "expected_payout_eur": 131104,
+      "premium_eur": 176990,
+      "market_premium_eur": [
+       327760,
+       458864
+      ],
+      "vs_ge2_full_payout": 0.668,
+      "expected_fraction_mc": 0.01307,
+      "expected_fraction_mc_se": 9.82e-05
+     },
+     "full_correlation": {
+      "expected_payout_fraction": 0.02,
+      "expected_payout_eur": 200000,
+      "premium_eur": 270000,
+      "market_premium_eur": [
+       500000,
+       700000
+      ],
+      "vs_ge2_full_payout": 1.0
+     },
+     "tulva_high_outlook": {
+      "expected_payout_fraction": 0.044705,
+      "expected_payout_eur": 447050,
+      "premium_eur": 603518,
+      "market_premium_eur": [
+       1117626,
+       1564676
+      ],
+      "vs_ge2_full_payout": 0.694,
+      "expected_fraction_mc": 0.0446185,
+      "expected_fraction_mc_se": 0.0001811
+     },
+     "tulva_low_outlook": {
+      "expected_payout_fraction": 0.0009823,
+      "expected_payout_eur": 9823,
+      "premium_eur": 13262,
+      "market_premium_eur": [
+       24559,
+       34382
+      ],
+      "vs_ge2_full_payout": 0.597,
+      "expected_fraction_mc": 0.0009715,
+      "expected_fraction_mc_se": 2.53e-05
+     }
     }
    },
    "Satakunta–SE": {
@@ -564,6 +1000,10 @@
        "expected_payout_eur": 588080,
        "premium_eur": 793908,
        "rate_on_line": 0.07939,
+       "market_premium_eur": [
+        1470200,
+        2058280
+       ],
        "return_period_years": 17.0
       },
       "tulva": {
@@ -571,6 +1011,10 @@
        "expected_payout_eur": 531996,
        "premium_eur": 718194,
        "rate_on_line": 0.07182,
+       "market_premium_eur": [
+        1329990,
+        1861986
+       ],
        "return_period_years": 18.8,
        "p_mc": 0.05353,
        "p_mc_se": 0.0002251
@@ -580,6 +1024,10 @@
        "expected_payout_eur": 200000,
        "premium_eur": 270000,
        "rate_on_line": 0.027,
+       "market_premium_eur": [
+        500000,
+        700000
+       ],
        "return_period_years": 50.0
       },
       "tulva_high_outlook": {
@@ -587,6 +1035,10 @@
        "expected_payout_eur": 1704601,
        "premium_eur": 2301211,
        "rate_on_line": 0.23012,
+       "market_premium_eur": [
+        4261502,
+        5966103
+       ],
        "return_period_years": 5.9,
        "p_mc": 0.170142,
        "p_mc_se": 0.0003758
@@ -596,6 +1048,10 @@
        "expected_payout_eur": 42724,
        "premium_eur": 57678,
        "rate_on_line": 0.00577,
+       "market_premium_eur": [
+        106810,
+        149534
+       ],
        "return_period_years": 234.1,
        "p_mc": 0.004353,
        "p_mc_se": 6.58e-05
@@ -624,6 +1080,10 @@
        "expected_payout_eur": 11840,
        "premium_eur": 15984,
        "rate_on_line": 0.0016,
+       "market_premium_eur": [
+        29600,
+        41440
+       ],
        "return_period_years": 844.6
       },
       "tulva": {
@@ -631,6 +1091,10 @@
        "expected_payout_eur": 61827,
        "premium_eur": 83466,
        "rate_on_line": 0.00835,
+       "market_premium_eur": [
+        154567,
+        216394
+       ],
        "return_period_years": 161.7,
        "p_mc": 0.006146,
        "p_mc_se": 7.82e-05
@@ -640,6 +1104,10 @@
        "expected_payout_eur": 200000,
        "premium_eur": 270000,
        "rate_on_line": 0.027,
+       "market_premium_eur": [
+        500000,
+        700000
+       ],
        "return_period_years": 50.0
       },
       "tulva_high_outlook": {
@@ -647,6 +1115,10 @@
        "expected_payout_eur": 288839,
        "premium_eur": 389932,
        "rate_on_line": 0.03899,
+       "market_premium_eur": [
+        722096,
+        1010935
+       ],
        "return_period_years": 34.6,
        "p_mc": 0.0285,
        "p_mc_se": 0.0001664
@@ -656,6 +1128,10 @@
        "expected_payout_eur": 697,
        "premium_eur": 941,
        "rate_on_line": 9e-05,
+       "market_premium_eur": [
+        1743,
+        2440
+       ],
        "return_period_years": 14343.7,
        "p_mc": 6.5e-05,
        "p_mc_se": 8.1e-06
@@ -684,6 +1160,10 @@
        "expected_payout_eur": 80,
        "premium_eur": 108,
        "rate_on_line": 1e-05,
+       "market_premium_eur": [
+        200,
+        280
+       ],
        "return_period_years": 125000.0
       },
       "tulva": {
@@ -691,6 +1171,10 @@
        "expected_payout_eur": 6177,
        "premium_eur": 8339,
        "rate_on_line": 0.00083,
+       "market_premium_eur": [
+        15443,
+        21620
+       ],
        "return_period_years": 1618.9,
        "p_mc": 0.000609,
        "p_mc_se": 2.47e-05
@@ -700,6 +1184,10 @@
        "expected_payout_eur": 200000,
        "premium_eur": 270000,
        "rate_on_line": 0.027,
+       "market_premium_eur": [
+        500000,
+        700000
+       ],
        "return_period_years": 50.0
       },
       "tulva_high_outlook": {
@@ -707,6 +1195,10 @@
        "expected_payout_eur": 34324,
        "premium_eur": 46337,
        "rate_on_line": 0.00463,
+       "market_premium_eur": [
+        85810,
+        120134
+       ],
        "return_period_years": 291.3,
        "p_mc": 0.003371,
        "p_mc_se": 5.8e-05
@@ -716,6 +1208,10 @@
        "expected_payout_eur": 13,
        "premium_eur": 18,
        "rate_on_line": 0.0,
+       "market_premium_eur": [
+        33,
+        46
+       ],
        "return_period_years": 768638.4,
        "p_mc": 1e-06,
        "p_mc_se": 1e-06
@@ -737,6 +1233,64 @@
       "mispricing_tulva_vs_independent": 77.215,
       "high_vs_low_outlook": 2638.3,
       "high_outlook_vs_climatology": 5.557
+     }
+    },
+    "staged_ge2_half_ge3_full": {
+     "independent": {
+      "expected_payout_fraction": 0.000596,
+      "expected_payout_eur": 5960,
+      "premium_eur": 8046,
+      "market_premium_eur": [
+       14900,
+       20860
+      ],
+      "vs_ge2_full_payout": 0.503
+     },
+     "tulva": {
+      "expected_payout_fraction": 0.0034002,
+      "expected_payout_eur": 34002,
+      "premium_eur": 45903,
+      "market_premium_eur": [
+       85005,
+       119007
+      ],
+      "vs_ge2_full_payout": 0.55,
+      "expected_fraction_mc": 0.0033775,
+      "expected_fraction_mc_se": 4.45e-05
+     },
+     "full_correlation": {
+      "expected_payout_fraction": 0.02,
+      "expected_payout_eur": 200000,
+      "premium_eur": 270000,
+      "market_premium_eur": [
+       500000,
+       700000
+      ],
+      "vs_ge2_full_payout": 1.0
+     },
+     "tulva_high_outlook": {
+      "expected_payout_fraction": 0.0161581,
+      "expected_payout_eur": 161581,
+      "premium_eur": 218135,
+      "market_premium_eur": [
+       403953,
+       565535
+      ],
+      "vs_ge2_full_payout": 0.559,
+      "expected_fraction_mc": 0.0159355,
+      "expected_fraction_mc_se": 9.7e-05
+     },
+     "tulva_low_outlook": {
+      "expected_payout_fraction": 3.55e-05,
+      "expected_payout_eur": 355,
+      "premium_eur": 479,
+      "market_premium_eur": [
+       888,
+       1243
+      ],
+      "vs_ge2_full_payout": 0.509,
+      "expected_fraction_mc": 3.3e-05,
+      "expected_fraction_mc_se": 4.1e-06
      }
     }
    }

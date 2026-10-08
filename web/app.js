@@ -80,7 +80,9 @@ function priceNow(name, cl) {
   if (state.mode === "preset") return flatPrice(name, { low: "low", clim: "tulva", high: "high" }[state.key]);
   if (!PRICING || PRICING.status !== "ready" || PRICING.risk_load == null) return null;
   const p = pNow(name, cl).v;
+  const mm = PRICING.market_multiples;
   return { v: p * APP.payout_eur * (1 + PRICING.risk_load), src: "exact",
+    market: mm ? mm.map((x) => p * APP.payout_eur * x) : null,
     note: `P × €10M × (1 + ${PRICING.risk_load} risk load), pricing rule from out/pricing.json applied to the slider probability.` };
 }
 function outlookLabel(cl) {
@@ -92,7 +94,12 @@ function outlookLabel(cl) {
 /* ---------------------------------------------------------------- pricing.json (filled by another agent) */
 
 function priceHTML(p) {
-  if (p && p.v != null) return `<b>${eur(p.v)}</b> ${tag(p.src || "exact", p.note || "out/pricing.json")}`;
+  if (p && p.v != null) {
+    const mm = PRICING && PRICING.market_multiples;
+    const mk = p.market && mm ? `<div class="mkt">market ${eur(p.market[0])}–${eur(p.market[1])} ${tag("exact",
+      `expected payout × ${mm[0]}–${mm[1]}: ${PRICING.market_note || "cat-bond / flood-ILS multiples"}`)}</div>` : "";
+    return `<b>${eur(p.v)}</b> <span class="tech">technical</span> ${tag(p.src || "exact", p.note || "out/pricing.json")}${mk}`;
+  }
   return `<b class="ph">awaiting pricing</b> ${tag("placeholder", "Index price (with risk load) comes from out/pricing.json, not produced yet.")}`;
 }
 
@@ -178,7 +185,7 @@ function renderOutlook() {
   const tiles = Object.entries(APP.clusters).map(([name, cl]) => {
     const pn = pNow(name, cl), p = pn.v;
     const rows = [
-      ["Independent", cl.p_independent.v, "#9aa6b5", tag("exact", cl.p_independent.note)],
+      ["Independence", cl.p_independent.v, "#9aa6b5", tag("exact", cl.p_independent.note)],
       ["Tulva, no outlook", cl.p_tulva.v, CLUSTER_COLOR[name] + "99", tag("exact", cl.p_tulva.note)],
       ["Tulva + snow", p, CLUSTER_COLOR[name]],
     ];
@@ -201,7 +208,7 @@ function renderCard() {
   const fpI = flatPrice(NORTH, "indep"), fpT = flatPrice(NORTH, "tulva");
   const boot = PRICING && PRICING.flat && PRICING.flat[NORTH] && PRICING.flat[NORTH].tulva_boot90;
   const views = [
-    ["Regulator view<br>(independent floods)", cl.p_independent, fpI, false, ""],
+    ["Independence<br>(no co-flooding)", cl.p_independent, fpI, false, ""],
     ["Tulva<br>(joint risk, no outlook)", cl.p_tulva, fpT, false,
       boot ? `90 % range ${eur(boot[0])}–${eur(boot[2])} ${tag("exact", "year-bootstrap refit of the loadings, out/pricing.json")}` : ""],
     [`Tulva + March snow outlook<br><span style="font-weight:400">${outlookLabel(cl)}</span>`, pNow(NORTH, cl), priceNow(NORTH, cl), true, ""],
@@ -217,8 +224,17 @@ function renderCard() {
         <div class="vs">chance per spring ${tag(p.src, p.note)}</div>
         <div class="vpr">Expected payout <b>${eur(p.v * APP.payout_eur)}</b> ${tag("exact", "probability × €10M")}</div>
         <div class="vpr">Index price ${priceHTML(price)}${extra ? `<div class="vs">${extra}</div>` : ""}</div>
+        ${price && price.staged ? `<div class="vpr stg">Staged (50 % at ≥2, 100 % at ≥3): <b>${eur(price.staged.v)}</b>
+          · market ${eur(price.staged.market[0])}–${eur(price.staged.market[1])} ${tag("exact",
+          "expected payout " + eur(price.staged.expected_payout) + "; out/pricing.json staged_ge2_half_ge3_full")}</div>` : ""}
       </div>`).join("")}</div>
-    <div class="note">Independent view: each gauge 2 %/yr, no correlation (EIOPA standard formula sets Nordic flood correlation to 0).
+    <div class="note">Independence (no co-flooding): each gauge 2 %/yr, floods unrelated. For comparison, from 30 Jan 2027
+      the Solvency II standard formula (Del. Reg. (EU) 2026/269) gives Finland a flood factor with 0 % correlation to
+      Sweden, Norway and Denmark (EIOPA considered 25 % for snowmelt floods and rejected it); inside Finland a 19-zone
+      matrix applies (mean ≈ 0.27).
+      Technical price = expected payout × ${PRICING && PRICING.risk_load != null ? (1 + PRICING.risk_load).toFixed(2) : "1.35"};
+      market price = × ${PRICING && PRICING.market_multiples ? PRICING.market_multiples.join("–") : "2.5–3.5"}, the expected-loss
+      multiples cat bonds and flood ILS traded at in 2024–26.
       Tulva: Gaussian-copula factor model fitted to 1961–2025 spring peaks (×${(cl.p_tulva.v / cl.p_independent.v).toFixed(1)} vs independent).
       Snow view: conditioned on the cluster's 1 March SWE (in-sample skill ${cl.outlook_skill.toFixed(2)}). Move the snow slider above to update.</div>`;
 }

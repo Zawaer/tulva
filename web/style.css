@@ -147,3 +147,7 @@ table.cmp tr.ref td { font-weight: 700; color: var(--navy); }
   .wrap { max-width: 1440px; }
   .leaf { height: 760px; }
 }
+.tech { font-size: 12px; opacity: .75; }
+.mkt { font-size: 13px; margin-top: 2px; text-align: right; }
+.view .mkt { text-align: left; }
+.view .vpr.stg b { font-size: 16px; }

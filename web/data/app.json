@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-08 18:22 UTC",
+ "generated_utc": "2026-10-08 18:28 UTC",
  "payout_eur": 10000000,
  "edge_min_spearman": 0.6,
  "areas": [
@@ -315,79 +315,6 @@
   "src": "exact"
  },
  "clusters": {
-  "Ostrobothnia": {
-   "areas": [
-    "Lapväärtti",
-    "Ilmajoki–Seinäjoki",
-    "Laihia",
-    "Ylistaro–Koivulahti",
-    "Alavieska–Ylivieska",
-    "Lower Pyhäjoki"
-   ],
-   "n": 6,
-   "national_loading": 0.443,
-   "cluster_loading": 0.635,
-   "outlook_skill": 0.74,
-   "spearman_swe_vs_flood": 0.686,
-   "p_independent": {
-    "v": 0.005687123520000001,
-    "src": "exact",
-    "note": "binomial, each gauge 2 %/yr, independent"
-   },
-   "p_tulva": {
-    "v": 0.02563409553003774,
-    "src": "exact",
-    "note": "factor model, Gauss–Hermite quadrature",
-    "check_model_params": 0.02563
-   },
-   "p_high_outlook": {
-    "v": 0.12838805672052908,
-    "src": "exact",
-    "note": "factor model given a top-15 % 1 March SWE"
-   },
-   "p_low_outlook": {
-    "v": 5.8798764603871315e-05,
-    "src": "exact",
-    "note": "factor model given a bottom-15 % 1 March SWE"
-   },
-   "p_by_snow_pct": {
-    "v": {
-     "5": 1.9584400001246373e-05,
-     "10": 7.56896445384629e-05,
-     "15": 0.00017862998285301293,
-     "20": 0.0003427265046603925,
-     "25": 0.0005864860645733753,
-     "30": 0.0009339201647004598,
-     "35": 0.0014165334786989344,
-     "40": 0.002076251761266417,
-     "45": 0.002969812891600222,
-     "50": 0.004175538259136536,
-     "55": 0.005804136133078649,
-     "60": 0.008016656546974307,
-     "65": 0.011055851843132285,
-     "70": 0.015304440775751393,
-     "75": 0.021402255172340342,
-     "80": 0.03050789563963349,
-     "85": 0.04497652273431989,
-     "90": 0.07056730061381859,
-     "95": 0.12743122960310727
-    },
-    "src": "exact",
-    "note": "factor model conditioned on 1 March SWE percentile; in-sample snow skill"
-   },
-   "latest_march": {
-    "year": 2025,
-    "pct": 6.9,
-    "src": "data",
-    "note": "SYKE areal SWE 1 March, cluster index percentile among 1961–2025"
-   },
-   "observed": {
-    "p_ge2_1in10_top_snow": 0.6,
-    "p_ge2_1in10_other": 0.109,
-    "n_top_years": 10,
-    "src": "exact"
-   }
-  },
   "North": {
    "areas": [
     "Pudasjärvi",
@@ -404,7 +331,7 @@
    "p_independent": {
     "v": 0.003842387200000001,
     "src": "exact",
-    "note": "binomial, each gauge 2 %/yr, independent"
+    "note": "independence (no co-flooding): binomial, each gauge 2 %/yr"
    },
    "p_tulva": {
     "v": 0.019634663765795077,
@@ -460,6 +387,79 @@
     "src": "exact"
    }
   },
+  "Ostrobothnia": {
+   "areas": [
+    "Lapväärtti",
+    "Ilmajoki–Seinäjoki",
+    "Laihia",
+    "Ylistaro–Koivulahti",
+    "Alavieska–Ylivieska",
+    "Lower Pyhäjoki"
+   ],
+   "n": 6,
+   "national_loading": 0.443,
+   "cluster_loading": 0.635,
+   "outlook_skill": 0.74,
+   "spearman_swe_vs_flood": 0.686,
+   "p_independent": {
+    "v": 0.005687123520000001,
+    "src": "exact",
+    "note": "independence (no co-flooding): binomial, each gauge 2 %/yr"
+   },
+   "p_tulva": {
+    "v": 0.02563409553003774,
+    "src": "exact",
+    "note": "factor model, Gauss–Hermite quadrature",
+    "check_model_params": 0.02563
+   },
+   "p_high_outlook": {
+    "v": 0.12838805672052908,
+    "src": "exact",
+    "note": "factor model given a top-15 % 1 March SWE"
+   },
+   "p_low_outlook": {
+    "v": 5.8798764603871315e-05,
+    "src": "exact",
+    "note": "factor model given a bottom-15 % 1 March SWE"
+   },
+   "p_by_snow_pct": {
+    "v": {
+     "5": 1.9584400001246373e-05,
+     "10": 7.56896445384629e-05,
+     "15": 0.00017862998285301293,
+     "20": 0.0003427265046603925,
+     "25": 0.0005864860645733753,
+     "30": 0.0009339201647004598,
+     "35": 0.0014165334786989344,
+     "40": 0.002076251761266417,
+     "45": 0.002969812891600222,
+     "50": 0.004175538259136536,
+     "55": 0.005804136133078649,
+     "60": 0.008016656546974307,
+     "65": 0.011055851843132285,
+     "70": 0.015304440775751393,
+     "75": 0.021402255172340342,
+     "80": 0.03050789563963349,
+     "85": 0.04497652273431989,
+     "90": 0.07056730061381859,
+     "95": 0.12743122960310727
+    },
+    "src": "exact",
+    "note": "factor model conditioned on 1 March SWE percentile; in-sample snow skill"
+   },
+   "latest_march": {
+    "year": 2025,
+    "pct": 6.9,
+    "src": "data",
+    "note": "SYKE areal SWE 1 March, cluster index percentile among 1961–2025"
+   },
+   "observed": {
+    "p_ge2_1in10_top_snow": 0.6,
+    "p_ge2_1in10_other": 0.109,
+    "n_top_years": 10,
+    "src": "exact"
+   }
+  },
   "Satakunta–SE": {
    "areas": [
     "Pori",
@@ -474,7 +474,7 @@
    "p_independent": {
     "v": 0.0011840000000000002,
     "src": "exact",
-    "note": "binomial, each gauge 2 %/yr, independent"
+    "note": "independence (no co-flooding): binomial, each gauge 2 %/yr"
    },
    "p_tulva": {
     "v": 0.00618269350949981,
@@ -2224,6 +2224,49 @@
      ],
      "shots": 18000,
      "mc_rmse_same_shots": 0.00044566110154651347
+    }
+   }
+  },
+  {
+   "file": "out/runs/iqm-garnet-20261008T182534Z.analysis.json",
+   "backend": "iqm",
+   "src": "qae-sim-noisy",
+   "ems": 0,
+   "param_source": "out/model_params.json",
+   "created_utc": "20261008T182534Z",
+   "instances": {
+    "A3_kittila_ivalo_both": {
+     "exact": 0.0012496992187709922,
+     "raw_mlae": 0.0036824506849696247,
+     "noise_aware_mlae": 0.0016359156781654684,
+     "k0_only": 0.00335,
+     "noise_aware_per_copy_mlae": 0.0016295737918430827,
+     "gain_by_k": {
+      "0": 1.0502522087582005,
+      "1": 0.7680169306552412,
+      "2": 0.6027987130455552
+     },
+     "offset_by_k": {
+      "0": 0.0016249996493444023,
+      "1": 0.023524997692187744,
+      "2": 0.06307499496847661
+     },
+     "two_qubit_gates_by_k": {
+      "0": 4,
+      "1": 26,
+      "2": 53
+     },
+     "oracle_queries": 360000,
+     "mc_rmse_same_queries": 5.888164849541634e-05,
+     "copies": 4,
+     "per_copy_k0_rate": [
+      0.0028,
+      0.0029,
+      0.0046,
+      0.0031
+     ],
+     "shots": 120000,
+     "mc_rmse_same_shots": 0.00010198600682747264
     }
    }
   },
