@@ -1,0 +1,92 @@
+{
+  "parameter_source": "PLACEHOLDER loadings (data pipeline not finished yet)",
+  "trigger": "1-in-50 spring maximum",
+  "instances": {
+    "kittila_ivalo_both/climatology": {
+      "qubits": 3,
+      "exact": 0.0012156924976676692,
+      "if_independent": 0.00040070599214684147,
+      "joint_multiplier": 3.0338765116898236,
+      "statevector_max_error": 4.85722573273506e-17,
+      "qae_ideal_mean": 0.0012188396509029845,
+      "qae_ideal_rmse": 0.0001086904667796576,
+      "mc_same_queries_rmse": 0.0002644199313756697,
+      "oracle_queries": 16000,
+      "cz_by_k_grid": [
+        4,
+        27,
+        50,
+        73
+      ],
+      "qae_noisy_raw": 0.001989627713570246
+    },
+    "kittila_ivalo_both/high_march_outlook": {
+      "qubits": 3,
+      "exact": 0.002073702107945416,
+      "if_independent": 0.0011041927039441375,
+      "joint_multiplier": 1.8780255480209431,
+      "statevector_max_error": 2.0816681711721685e-17,
+      "qae_ideal_mean": 0.0020582751126187343,
+      "qae_ideal_rmse": 0.00015016488351087548,
+      "mc_same_queries_rmse": 0.00036913853388634597,
+      "oracle_queries": 16000,
+      "cz_by_k_grid": [
+        4,
+        27,
+        50,
+        73
+      ],
+      "qae_noisy_raw": 0.0025888937705889296
+    },
+    "lapland_atleast2of3/climatology": {
+      "qubits": 4,
+      "exact": 0.0034925517185839007,
+      "if_independent": 0.0011860755982262743,
+      "joint_multiplier": 2.9446282545622418,
+      "statevector_max_error": 4.440892098500626e-16,
+      "qae_ideal_mean": 0.003445239787129622,
+      "qae_ideal_rmse": 0.00018666466845319087,
+      "mc_same_queries_rmse": 0.00047581704176755595,
+      "oracle_queries": 16000,
+      "cz_by_k_grid": [
+        6,
+        45,
+        80,
+        119
+      ],
+      "qae_noisy_raw": 0.004652226831841346
+    },
+    "lapland_atleast2of3/high_march_outlook": {
+      "qubits": 4,
+      "exact": 0.005957365078848205,
+      "if_independent": 0.0032391948004067547,
+      "joint_multiplier": 1.8391499881699371,
+      "statevector_max_error": 4.996003610813204e-16,
+      "qae_ideal_mean": 0.005895481756688615,
+      "qae_ideal_rmse": 0.00025647081800600046,
+      "mc_same_queries_rmse": 0.0006148428455130064,
+      "oracle_queries": 16000,
+      "cz_by_k_grid": [
+        6,
+        45,
+        80,
+        119
+      ],
+      "qae_noisy_raw": 0.006243549220233458
+    }
+  },
+  "loader_check": {
+    "exact": [
+      0.9435168885378524,
+      0.052990559743563516,
+      0.003415288831374347,
+      7.726288720955384e-05
+    ],
+    "sampled": [
+      0.9423,
+      0.053599999999999995,
+      0.00395,
+      0.00015
+    ]
+  }
+}
