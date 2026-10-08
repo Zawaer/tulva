@@ -27,3 +27,7 @@ Jury: Toikka (OP), Anbarjafari (PwC), Steinmann (IQM), Seesto (IBM), Mehtola (VT
 ## Stack
 Python 3.11, numpy/scipy/pandas/matplotlib, qiskit + qiskit-aer. On LUMI: `module load Local-quantum
 fiqci-vtt-qiskit`, `IQMProvider(os.getenv("Q20_CORTEX_URL"), quantum_computer="radiance20")`.
+
+## Collaboration
+Two people (Toivo: data/model/quantum/web; Vaishnav: deck/, business/). Read COLLABORATION.md: pull --rebase
+before every push, only edit your owner's folders, numbers only from CLAIMS.md.
