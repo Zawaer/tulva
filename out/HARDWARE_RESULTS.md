@@ -23,3 +23,18 @@ Job ids:
 - Classical Monte Carlo at the same budget is still more precise. No quantum advantage is claimed.
 - 'Best qubits' on IBM uses today's calibration data; IQM publishes none through this API, so there the copies are only placed on well-separated qubits. The first IQM run had 1 copy (small sample, ±0.05 pp shot noise).
 - The independence line (0.040 %) is what P(both) would be if the two areas flooded independently: every run, even raw, is far above it, i.e. the hardware reproduces the co-flooding.
+
+## Full-scale loader: all 14 areas on emerald (18 qubits, 44 two-qubit gates)
+Job `01a11cd4-da38-718b-80c9-7e259c6e4452`, 8,000 shots, readout flip rates 0.5 % / 0.6 %. Chart: `out/loader_emerald.png`.
+
+| k areas over 1-in-10 | Hardware (readout-corrected) | Exact model | Independence | Observed 1961–2025 |
+|---|---|---|---|---|
+| ≥2 | 46.6 % | 37.9 % | 41.58 % | 41.5 % |
+| ≥3 | 26.6 % | 21.6 % | 15.86 % | 18.5 % |
+| ≥4 | 13.8 % | 10.9 % | 4.42 % | 15.4 % |
+| ≥5 | 6.3 % | 4.8 % | 0.93 % | 7.7 % |
+| ≥6 | 2.4 % | 1.9 % | 0.15 % | 1.5 % |
+| ≥7 | 0.9 % | 0.6 % | 0.02 % | 0.0 % |
+
+## Qrisp implementation on IQM Garnet
+Same 3-qubit joint-trigger circuit written natively in Qrisp (IQM's high-level framework), compiled with IQM's pass manager (4 / 23 / 45 CZ for k = 0 / 1 / 2), run on IQM Garnet without the calibration circuits: raw MLAE matches the raw Qiskit run on the same chip. File: `qrisp_qae_iqm_garnet20261008T184156Z.json`.

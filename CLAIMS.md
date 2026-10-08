@@ -90,3 +90,11 @@ the continuous model is the classical reference. The outlook shift uses the in-s
   noise-aware 0.164 % · per-copy calibrated 0.163 % · k=0 only 0.335 % (readout false positives). 120k shots.
   Per-copy k=0 rates 0.28–0.46 % · qae-iqm
 - IQM Resonance credits: 280 per account (250 event voucher + 30 monthly); ~0.5 credits per second of runtime.
+- **Full-scale loader on IQM Emerald (job 01a11cd4-da38-718b-80c9-7e259c6e4452, 8,000 shots):** all 14 river areas,
+  18 qubits, 44 two-qubit gates, readout flips 0.5 %/0.6 % (corrected). P(≥4 areas over 1-in-10 in a spring):
+  hardware 13.8 % · exact model 10.9 % · independence 4.4 % · observed 1961–2025 15.4 %. P(≥5): 6.3 % / 4.8 % /
+  0.9 % / 7.7 %. The chip reproduces the joint tail that independence misses · qae-iqm (sampling) ·
+  scripts/run_loader_hw.py, chart out/loader_emerald.png
+- **Qrisp on IQM Garnet:** native Qrisp implementation, IQM pass manager 4/23/45 CZ; raw MLAE 0.354 % (exact
+  0.125 %; no calibration circuits in this run), consistent with the raw Qiskit run (0.368 %) · qae-iqm ·
+  scripts/qae_qrisp.py

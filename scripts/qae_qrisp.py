@@ -56,7 +56,8 @@ if args.backend == "fake-garnet":
 elif args.backend == "iqm":
     from iqm.qrisp_iqm import IQMBackend
     url = os.getenv("IQM_SERVER_URL", "https://resonance.iqm.tech")
-    backend = IQMBackend(url, device_instance=args.device, token=os.environ["IQM_TOKEN"])
+    os.environ["IQM_TOKEN"]   # iqm-client reads the token from the environment itself
+    backend = IQMBackend(url, device_instance=args.device)
     connectivity, device_label = backend._connectivity, f"IQM {args.device} ({url})"
 
 # ── instances (same parameters as scripts/qae_sim.py) ─────────────────────────

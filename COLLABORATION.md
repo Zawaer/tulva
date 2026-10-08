@@ -26,6 +26,7 @@ Don't edit the other person's files without saying so first. Shared files: appen
   - `out/index_price.png`: the index cover price (technical + market range), independence vs Tulva vs snow outlook
   - `out/qae_scaling.png`: when does quantum matter?
   - `out/hardware_results.png`: the joint-flood probability on real IBM and IQM chips (raw vs calibrated vs exact); details in `out/HARDWARE_RESULTS.md`
+  - `out/loader_emerald.png`: **headline quantum chart**, all 14 areas sampled on IQM Emerald vs model, observed years and independence
   - `out/loader_check.png`: all 14 areas on one quantum circuit
 - **Demo app:** `web/`. Run `python3 -m http.server 3141 --directory web` and open http://localhost:3141.
   Refresh its data with `python scripts/export_web.py`.

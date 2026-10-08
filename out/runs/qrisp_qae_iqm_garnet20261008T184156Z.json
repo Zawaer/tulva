@@ -1,0 +1,96 @@
+{
+  "instance": "Kittil\u00e4 AND Ivalo both pass their 1-in-50 spring level (North cluster, two-level model)",
+  "backend": "IQM garnet (https://resonance.iqm.tech)",
+  "ks": [
+    0,
+    1,
+    2
+  ],
+  "shots_per_k": 10000,
+  "reps": 1,
+  "qrisp_version": null,
+  "instances": {
+    "climatology": {
+      "exact": 0.0012496992187709924,
+      "if_independent": 0.0004007359618521595,
+      "p_hydrology_wet": 0.3000808290021181,
+      "p_trigger_dry_wet": [
+        0.0009400925916117998,
+        0.06451728965144674
+      ],
+      "circuit_check_max_abs_error": 1.2222422183585935e-06,
+      "mlae_estimates": [
+        0.003541112373550366
+      ],
+      "mlae_mean": 0.003541112373550366,
+      "mlae_rmse": 0.0022914131547793733,
+      "hits_by_k": [
+        [
+          10,
+          325,
+          875
+        ]
+      ],
+      "oracle_queries": 90000,
+      "mc_same_queries_rmse": 0.00011776329699083269,
+      "seconds": 22.0
+    },
+    "high_march_outlook": {
+      "exact": 0.0019328133815970402,
+      "if_independent": 0.0009274707639532425,
+      "p_hydrology_wet": 0.46422795350759927,
+      "p_trigger_dry_wet": [
+        0.0009400925916117998,
+        0.06451728965144674
+      ],
+      "circuit_check_max_abs_error": 4.22245859582962e-06,
+      "mlae_estimates": [
+        0.0037015039895252106
+      ],
+      "mlae_mean": 0.0037015039895252106,
+      "mlae_rmse": 0.0017686906079281703,
+      "hits_by_k": [
+        [
+          23,
+          393,
+          850
+        ]
+      ],
+      "oracle_queries": 90000,
+      "mc_same_queries_rmse": 0.00014640422026510332,
+      "seconds": 15.5
+    }
+  },
+  "gate_counts_garnet": {
+    "0": {
+      "qrisp_iqm_pass_manager": {
+        "cz": 4,
+        "prx": 5
+      },
+      "qiskit_transpile_fake_garnet": {
+        "cz": 4,
+        "r": 5
+      }
+    },
+    "1": {
+      "qrisp_iqm_pass_manager": {
+        "cz": 23,
+        "prx": 37
+      },
+      "qiskit_transpile_fake_garnet": {
+        "cz": 28,
+        "r": 49
+      }
+    },
+    "2": {
+      "qrisp_iqm_pass_manager": {
+        "cz": 45,
+        "prx": 67
+      },
+      "qiskit_transpile_fake_garnet": {
+        "cz": 52,
+        "r": 87
+      }
+    }
+  }
+}

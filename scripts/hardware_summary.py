@@ -52,6 +52,29 @@ md += ["", "Job ids:", *[f"- {r['platform']} {r['device']} {r['created']}: `{r['
        "only placed on well-separated qubits. The first IQM run had 1 copy (small sample, ±0.05 pp shot noise).",
        "- The independence line (0.040 %) is what P(both) would be if the two areas flooded independently: every run, "
        "even raw, is far above it, i.e. the hardware reproduces the co-flooding."]
+for f in sorted(glob.glob(str(OUT / "runs" / "loader-iqm-emerald-*.json")) + sorted(glob.glob(str(OUT / "runs" / "loader-ibm-*.json"))) + sorted(glob.glob(str(OUT / "runs" / "loader-q50-*.json")))):
+    r = json.loads(Path(f).read_text())
+    if "p_at_least_k_exact" not in r:
+        continue
+    md += ["", f"## Full-scale loader: all 14 areas on {r['device']} ({r['qubits']} qubits, {r['two_qubit_gates']} two-qubit gates)",
+           f"Job `{r['jobs'][0]}`, {r['shots']:,} shots, readout flip rates {100*r['readout_p01']:.1f} % / {100*r['readout_p10']:.1f} %. "
+           "Chart: `out/loader_emerald.png`.", "",
+           "| k areas over 1-in-10 | Hardware (readout-corrected) | Exact model | Independence | Observed 1961–2025 |",
+           "|---|---|---|---|---|"]
+    obsd = {}
+    oj = r.get("observed_reference") or {}
+    if "k" in oj:
+        obsd = dict(zip(oj["k"], oj["observed"]))
+    for k in range(2, 8):
+        md.append(f"| ≥{k} | {100*r['p_at_least_k_readout_corrected'][k]:.1f} % | {100*r['p_at_least_k_exact'][k]:.1f} % | "
+                  f"{100*r['p_at_least_k_independent'][k]:.2f} % | {('%.1f %%' % (100*obsd[k])) if k in obsd else '–'} |")
+q = sorted(glob.glob(str(OUT / "runs" / "qrisp_qae_iqm_*.json")))
+if q:
+    qr = json.loads(Path(q[-1]).read_text())
+    md += ["", "## Qrisp implementation on IQM Garnet",
+           "Same 3-qubit joint-trigger circuit written natively in Qrisp (IQM's high-level framework), compiled with IQM's "
+           "pass manager (4 / 23 / 45 CZ for k = 0 / 1 / 2), run on IQM Garnet without the calibration circuits: raw "
+           "MLAE matches the raw Qiskit run on the same chip. File: `" + Path(q[-1]).name + "`."]
 (OUT / "HARDWARE_RESULTS.md").write_text("\n".join(md) + "\n")
 
 import matplotlib  # noqa: E402
