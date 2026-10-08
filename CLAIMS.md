@@ -56,3 +56,10 @@ the continuous model is the classical reference. The outlook shift uses the in-s
   model: P(≥4 areas over 1-in-10) exact 10.9 %, ideal-sim 10.8 %, independence 4.4 %. With 0.5 % CZ +
   2–3 % readout noise: 14.0 % (biased up by readout errors; needs readout mitigation) · exact / qae-sim ·
   scripts/loader_check.py
+- **IBM hardware (ibm_marrakesh, job db3sssqmb58s7388bb00, 8 Oct 20:10):** P(Kittilä AND Ivalo both pass 1-in-50):
+  exact 0.125 % · raw MLAE 0.308 % · noise-aware MLAE (two-twin calibration) 0.146 % · k=0 only 0.446 %.
+  25 side-by-side copies × 2,000 shots per circuit (200k shots per estimate); 4/23/42/61 two-qubit gates for
+  k=0..3. Per-copy k=0 rate ranged 0–2.95 % across the chip (qubit quality varies) · qae-ibm ·
+  scripts/run_hw.py + scripts/analyse_run.py
+- IBM, ≥2 of 3 Lapland (4 qubits): amplified circuits (k≥1, 67–164 two-qubit gates) were fully scrambled
+  (signal gain ≈ 0); noise-aware estimate 0.491 % vs exact 0.359 %. A measured limit of today's hardware · qae-ibm
