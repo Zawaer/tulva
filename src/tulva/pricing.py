@@ -108,3 +108,27 @@ def mc_prob(counts: np.ndarray, m: int) -> tuple[float, float]:
 def premium(p: float, payout: float = 10e6, risk_load: float = 0.35) -> float:
     """Premium = expected payout x (1 + risk load)."""
     return p * payout * (1 + risk_load)
+
+
+# Market price: cat bonds traded at ~2.4-3.7x expected loss in 2024-26 (AM Best), flood ILS ~3.0-3.4x
+# (Flood Re Vision 2039, FloodSmart Re); see business/CHEATSHEET.md. Premium = multiple x expected loss.
+MARKET_MULTIPLES = (2.5, 3.5)
+
+
+def market_price(p: float, payout: float = 10e6, multiple: float = 2.5) -> float:
+    """Premium = expected payout x multiple (market convention for cat bonds / ILS)."""
+    return p * payout * multiple
+
+
+# Staged payout: a fraction of the limit at >= m gauges (steps in ascending m).
+STAGES = ((2, 0.5), (3, 1.0))
+
+
+def staged_payout_fraction(p_at_least: dict[int, float], stages=STAGES) -> float:
+    """Expected payout as a fraction of the limit for a staged cover, from P(>= m) per stage threshold.
+    Pays the highest stage reached: E = sum_j (f_j - f_{j-1}) P(>= m_j)."""
+    e, prev = 0.0, 0.0
+    for m, f in stages:
+        e += (f - prev) * p_at_least[m]
+        prev = f
+    return float(e)

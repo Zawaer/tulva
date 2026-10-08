@@ -68,3 +68,10 @@ the continuous model is the classical reference. The outlook shift uses the in-s
   copy-to-copy spread from 0–2.95 % to 0.10–0.45 % and raised surviving signal (gain k=1: 0.78 vs 0.65).
   Residual bias +0.023 pp. Classical Monte Carlo with the same number of model evaluations would have ±0.004 pp, so
   classical wins on today's hardware · qae-ibm · IBM usage total 36 s of 600
+- **IQM Garnet run 1 (8 Oct 21:21, job 613143, 34 s, 17 credits):** Kittilä+Ivalo exact 0.125 % · raw 0.269 % ·
+  noise-aware 0.073 % (only 6,000 shots ≈ 7 expected events: shot-noise limited). ≥2 of 3 Lapland: exact 0.359 % ·
+  raw 1.070 % · noise-aware 0.432 % (better than IBM's 0.491 %; 65 % of signal survives k=1 on Garnet) · qae-iqm
+- **IQM Garnet run 2 (4 side-by-side copies, 10,000 shots, k=0..2):** Kittilä+Ivalo exact 0.125 % · raw 0.368 % ·
+  noise-aware 0.164 % · per-copy calibrated 0.163 % · k=0 only 0.335 % (readout false positives). 120k shots.
+  Per-copy k=0 rates 0.28–0.46 % · qae-iqm
+- IQM Resonance credits: 280 per account (250 event voucher + 30 monthly); ~0.5 credits per second of runtime.
