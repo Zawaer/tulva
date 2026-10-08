@@ -41,6 +41,7 @@ Don't edit the other person's files without saying so first. Shared files: appen
 | Thu night | **Checkpoint 2 form before leaving** (Slack / QR on the table, one per team) |
 | Fri 09:00 | Checkpoint 2: sync 10 min before. Hardware batch submitted by 10:00 |
 | Fri 13:00 | Pitching training (at least Vaishnav) |
+| Fri 16:00 | **Checkpoint 3 form** (one per team) |
 | Fri 17:00 | Checkpoint 3: deck v1 ready, demo app frozen except fixes |
 | Fri evening | Record the demo video, write the submission text |
 | Sat 06:30 | Freeze: no new features. Rehearse 3× |
