@@ -38,6 +38,7 @@ Don't edit the other person's files without saying so first. Shared files: appen
 ## Rhythm
 | When | What |
 |---|---|
+| Thu night | **Checkpoint 2 form before leaving** (Slack / QR on the table, one per team) |
 | Fri 09:00 | Checkpoint 2: sync 10 min before. Hardware batch submitted by 10:00 |
 | Fri 13:00 | Pitching training (at least Vaishnav) |
 | Fri 17:00 | Checkpoint 3: deck v1 ready, demo app frozen except fixes |
