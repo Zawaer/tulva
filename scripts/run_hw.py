@@ -6,6 +6,8 @@
     python scripts/run_hw.py --backend ibm-fake                         # rehearsal with ibm_kingston's noise
     python scripts/run_hw.py --backend ibm --ibm-name ibm_kingston      # IBM Quantum (saved account)
     python scripts/run_hw.py --backend q20 [--ems 2]                    # Aalto Q20 on LUMI
+    python scripts/run_hw.py --backend q50 [--ems 2]                    # VTT Q50 on LUMI (53 qubits)
+    python scripts/run_hw.py --backend ibm --copies 25                  # 25 side-by-side copies per circuit
 
 IQM's Qiskit plugin needs an older Qiskit than IBM's runtime, so IQM runs use the separate .venv-iqm
 (see README).
@@ -35,7 +37,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from tulva import factor, quantum as q  # noqa: E402
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--backend", default="sim-noisy", choices=["sim", "sim-noisy", "iqm", "iqm-fake", "ibm", "ibm-fake", "q20"])
+ap.add_argument("--backend", default="sim-noisy", choices=["sim", "sim-noisy", "iqm", "iqm-fake", "ibm", "ibm-fake", "q20", "q50"])
 ap.add_argument("--ibm-name", default="ibm_kingston")
 ap.add_argument("--iqm-name", default="garnet", help="IQM Resonance device, e.g. garnet (20q), emerald (54q)")
 ap.add_argument("--iqm-fake", default="apollo", choices=["apollo", "aphrodite"],
@@ -44,6 +46,9 @@ ap.add_argument("--ems", type=int, default=0, help="FiQCI-EMS mitigation level (
 ap.add_argument("--shots", type=int, default=2000)
 ap.add_argument("--ks", default="0,1,2,3")
 ap.add_argument("--repeats", type=int, default=1)
+ap.add_argument("--copies", type=int, default=1,
+                help="run N copies of each small circuit side by side on disjoint qubits in one circuit "
+                     "(N× the shots per job, plus per-copy spread across the chip). Use 20-30 on IBM's 156 qubits.")
 args = ap.parse_args()
 KS = [int(k) for k in args.ks.split(",")]
 
@@ -69,6 +74,15 @@ def get_backend():
     if args.backend == "ibm-fake":
         from qiskit_ibm_runtime.fake_provider import FakeKingston
         return FakeKingston()
+    if args.backend == "q50":
+        # VTT Q50 via LUMI (CSC docs: DEVICES=("q50"), env Q50_CORTEX_URL, quantum_computer="q50").
+        # Check the QxF Q50 QuickStart: access differs slightly from Q20 for the hackathon.
+        from iqm.qiskit_iqm import IQMProvider
+        be = IQMProvider(os.getenv("Q50_CORTEX_URL"), quantum_computer="q50").get_backend()
+        if args.ems:
+            from fiqci.ems import FiQCIBackend
+            be = FiQCIBackend(be, mitigation_level=args.ems)
+        return be
     if args.backend == "q20":
         from iqm.qiskit_iqm import IQMProvider
         be = IQMProvider(os.getenv("Q20_CORTEX_URL"), quantum_computer="radiance20").get_backend()
@@ -113,6 +127,16 @@ def exact(m, n, event):
     return float(d[n]) if event == "all" else float(d[2:].sum())
 
 
+def widen(qc, copies: int):
+    """copies of qc on disjoint qubits; copy j's measured bits are clbits [j*nb, (j+1)*nb)."""
+    from qiskit import QuantumCircuit
+    nq, nb = qc.num_qubits, qc.num_clbits
+    wide = QuantumCircuit(nq * copies, nb * copies, name=qc.name)
+    for j in range(copies):
+        wide.compose(qc, qubits=range(j * nq, (j + 1) * nq), clbits=range(j * nb, (j + 1) * nb), inplace=True)
+    return wide
+
+
 def main():
     backend = get_backend()
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -131,6 +155,10 @@ def main():
                     record["circuits"].append({"name": qc.name, "instance": name, "role": role, "k": k,
                                                "rep": r, "event": event, "n_areas": n,
                                                "exact": exact(m, n, event)})
+    if args.copies > 1:
+        circuits = [widen(c, args.copies) for c in circuits]
+        for c in record["circuits"]:
+            c["copies"] = args.copies
     # fix the layout so target and twin land on the same physical qubits
     tqcs = transpile(circuits, backend, optimization_level=3, seed_transpiler=11)
     for c, t in zip(record["circuits"], tqcs):

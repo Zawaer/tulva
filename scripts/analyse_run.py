@@ -18,14 +18,33 @@ from tulva import quantum as q  # noqa: E402
 
 run = json.loads(Path(sys.argv[1]).read_text())
 groups = defaultdict(lambda: defaultdict(lambda: [0, 0]))   # (instance, role) -> k -> [good, shots]
+per_copy = defaultdict(lambda: defaultdict(lambda: [0, 0]))  # (instance, k, copy) for target circuits
+
+
+def split_counts(counts: dict, copies: int, nb: int) -> list[dict]:
+    """Split counts of a widened circuit into one count dict per copy (qiskit strings: highest clbit first)."""
+    out = [defaultdict(int) for _ in range(copies)]
+    for b, v in counts.items():
+        b = b.replace(" ", "")
+        for j in range(copies):
+            lo = len(b) - (j + 1) * nb
+            out[j][b[lo:lo + nb]] += v
+    return out
 info = {}
 for c in run["circuits"]:
     if "counts" not in c:
         continue
-    good, tot = q.good_fraction(c["counts"], c["event"])
+    copies = c.get("copies", 1)
+    parts = split_counts(c["counts"], copies, c["n_areas"]) if copies > 1 else [c["counts"]]
     g = groups[(c["instance"], c["role"])][c["k"]]
-    g[0] += good
-    g[1] += tot
+    for j, part in enumerate(parts):
+        good, tot = q.good_fraction(part, c["event"])
+        g[0] += good
+        g[1] += tot
+        if c["role"] == "target":
+            pc = per_copy[(c["instance"], c["k"])][j]
+            pc[0] += good
+            pc[1] += tot
     info[(c["instance"], c["role"])] = c
     info[(c["instance"], c["role"], c["k"])] = c
 
@@ -56,8 +75,10 @@ for (inst, role) in sorted({k for k in groups if k[1] == "target"}):
     summary[inst] = {
         "exact": exact, "raw_mlae": raw, "noise_aware_mlae": aware, "k0_only": k0,
         "gain_by_k": dict(zip(ks, gain)), "offset_by_k": dict(zip(ks, offset)),
-        "two_qubit_gates_by_k": {k: info[(inst, "target", k)]["two_qubit_gates"] for k in ks},
+        "two_qubit_gates_by_k": {k: info[(inst, "target", k)]["two_qubit_gates"] // c0.get("copies", 1) for k in ks},
         "oracle_queries": nq, "mc_rmse_same_queries": float(np.sqrt(exact * (1 - exact) / nq)),
+        "copies": c0.get("copies", 1),
+        "per_copy_k0_rate": [v[0] / v[1] for _, v in sorted(per_copy[(inst, 0)].items())] if (inst, 0) in per_copy else [],
         "shots": int(sum(shots)), "mc_rmse_same_shots": float(np.sqrt(exact * (1 - exact) / sum(shots))),
     }
 out = Path(sys.argv[1]).with_suffix(".analysis.json")
@@ -65,4 +86,4 @@ out.write_text(json.dumps(summary, indent=2))
 for inst, s in summary.items():
     print(f"{inst}: exact {100*s['exact']:.3f}% | raw {100*s['raw_mlae']:.3f}% | noise-aware {100*s['noise_aware_mlae']:.3f}%"
           f" | k=0 {100*s['k0_only']:.3f}% | MC rmse (same queries) {100*s['mc_rmse_same_queries']:.3f}pp"
-          f" | gain {[round(v, 2) for v in s['gain_by_k'].values()]} offset {[round(v, 4) for v in s['offset_by_k'].values()]} | 2q {list(s['two_qubit_gates_by_k'].values())}")
+          f" | copies {s['copies']} | gain {[round(v, 2) for v in s['gain_by_k'].values()]} offset {[round(v, 4) for v in s['offset_by_k'].values()]} | 2q {list(s['two_qubit_gates_by_k'].values())}")

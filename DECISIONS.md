@@ -20,3 +20,7 @@ Append one line per decision: date time · who · decision · why.
   currently connects through LUMI (Q20_CORTEX_URL); Resonance needs an API token and its own device URL, so Toivo to adapt.
 - 2026-10-08 19:00 · team · Hardware: IQM Resonance primary (effectively unlimited credits via Niklas Steinmann),
   IBM as the cross-check on a second architecture; Aalto Q20 optional. Same circuits and analysis on all.
+- 2026-10-08 22:10 · Toivo · IBM runs use --copies 20–30 (side-by-side copies of the 3–4-qubit circuits on
+  disjoint qubits): N× shots per job for the 10-min budget, plus per-copy spread across the chip.
+- 2026-10-08 22:10 · Toivo · VTT Q50 is back (CSC Slack): unlimited priority via LUMI. Added --backend q50. IQM-type
+  hardware = Q50 (if LUMI access works) and/or IQM Resonance.
