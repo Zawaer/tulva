@@ -46,15 +46,16 @@ for label, trig in [("1-in-10", 0.1), ("1-in-50", 0.02)]:
     exact = m.count_distribution()
     L = q.loader(m)
     t = min((transpile(L, basis_gates=BASIS, coupling_map=GRID, optimization_level=3, seed_transpiler=s)
-             for s in range(6)), key=lambda c: c.count_ops().get("cz", 0))
+             for s in range(3)), key=lambda c: c.count_ops().get("cz", 0))
     cz = int(t.count_ops().get("cz", 0))
     depth2 = int(t.depth(lambda i: i.operation.num_qubits == 2))
     dist = {}
-    for sim_name, sim in [("ideal", AerSimulator()), ("noisy", AerSimulator(noise_model=nm))]:
-        cnt = sim.run(t, shots=50_000, seed_simulator=4).result().get_counts()
+    for sim_name, sim, shots in [("ideal", AerSimulator(method="statevector"), 50_000),
+                                 ("noisy", AerSimulator(method="matrix_product_state", noise_model=nm), 4_000)]:
+        cnt = sim.run(t, shots=shots, seed_simulator=4).result().get_counts()
         d = np.zeros(len(gauges) + 1)
         for b, v in cnt.items():
-            d[b.replace(" ", "").count("1")] += v / 50_000
+            d[b.replace(" ", "").count("1")] += v / shots
         dist[sim_name] = d
     # independence with the same marginals
     p_marg = m.count_distribution([0])  # placeholder to keep API symmetric
@@ -88,7 +89,7 @@ ax.semilogy(ks, [r["p_at_least_k_exact"][k] for k in ks], "-", color="#1f6feb", 
 ax.semilogy(ks, [r["p_at_least_k_ideal_sampled"][k] for k in ks], "o", color="#1f6feb", ms=7,
             label="Loader circuit, ideal simulator (50k shots)")
 ax.semilogy(ks, [r["p_at_least_k_noisy_sampled"][k] for k in ks], "s", mfc="none", color="#d4a72c", ms=8,
-            label="Loader circuit, noisy simulator (0.5 % CZ, 2–3 % readout)")
+            label="Loader circuit, noisy simulator (0.5 % CZ, 2–3 % readout, 4k shots)")
 ax.semilogy(ks, [r["p_at_least_k_independent"][k] for k in ks], "--", color="#cf222e", lw=2,
             label="Independence (EIOPA 0 %)")
 ax.set_xlabel("k = number of the 14 river areas over their 1-in-10 spring level")
