@@ -2,8 +2,9 @@
 
 ## The project
 Tulva prices Finland's spring floods as a joint risk. Several river flood-risk areas flood in the same spring
-(shared snowpack). Regulators assume independence (EIOPA: 0 % Nordic flood correlation); SYKE's national
-totals implicitly assume everything floods at once. We estimate the joint risk from SYKE discharge data,
+(shared snowpack). Our baseline is independence (no co-flooding); the upper bound is every area flooding at once.
+(Regulation: from 30 Jan 2027 Finland's Solvency II flood factor has 0 % correlation to SE/NO/DK, 25 % for
+snowmelt was considered and rejected; a 19-zone matrix, mean ≈ 0.27, applies inside Finland.) We estimate the joint risk from SYKE discharge data,
 condition it on the March snowpack, and price a parametric index cover ("pays when ≥2 gauges in a cluster pass
 their 1-in-50 level"). Quantum amplitude estimation (QAE) estimates the joint-trigger probability; we compare it
 honestly with exact values and classical Monte Carlo.

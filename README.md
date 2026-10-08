@@ -12,6 +12,12 @@ Built at the Quantum x Finance hackathon (Hanken × Ultrahack, 8–10 Oct 2026) 
 - `notebooks/`: LUMI / Q20 notebooks
 - `out/`: generated results and charts (every number in the deck comes from here)
 
+## Pricing
+`scripts/price_index.py` → `out/pricing.json`, `out/index_price.png`: per cluster and trigger, the technical price
+(expected payout × 1.35), a market price range (× 2.5 to × 3.5, cat-bond / flood-ILS multiples) and a staged payout
+(50 % at ≥2 gauges, 100 % at ≥3), under independence (no co-flooding), the Tulva model and the high / low March snow
+outlook.
+
 ## Running the hardware batch
 ```bash
 python scripts/run_hw.py --backend sim-noisy        # rehearsal on a noisy simulator

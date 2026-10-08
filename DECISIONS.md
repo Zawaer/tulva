@@ -27,3 +27,11 @@ Append one line per decision: date time · who · decision · why.
 - 2026-10-08 · Vaishnav · Business research done; corrections for CLAIMS/web (EIOPA 0 % wording, 18 = 14 river + 4
   coastal areas, risk load vs 2.5–3.5× market, no confirmed 2024 Lapland damage) in business/NOTES_FOR_TOIVO.md. ·
   Mentor: focus on business case + why quantum; Finland-only scope is good. Larger circuits than 3–4 qubits are OK.
+- 2026-10-09 · Toivo · Baseline relabelled "independence (no co-flooding)" everywhere (charts, web, CLAIMS); "all at
+  once" is "if every area flooded at once (an upper bound)", not attributed to SYKE. EIOPA is cited precisely: 0 % flood
+  correlation FI↔SE/NO/DK from 30 Jan 2027 (Del. Reg. 2026/269), 25 % snowmelt option rejected, 19-zone matrix inside
+  Finland (mean ≈ 0.27). · Vaishnav's research: "EIOPA 0 %" overstated what the regulator assumes.
+- 2026-10-09 · Toivo (pricing) · price_index.py also outputs a market price = expected payout × 2.5 and × 3.5 next to
+  the 1.35× technical price, and a staged variant (50 % at ≥2 gauges, 100 % at ≥3) per cluster and scenario
+  (out/pricing.json `market_premium_eur`, `staged_ge2_half_ge3_full`). Web app and index_price.png lead with North. ·
+  Market multiples from cat-bond/flood-ILS sources; staged payout reduces basis risk; Lapland risk stable to ~2050.
