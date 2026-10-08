@@ -91,6 +91,12 @@ def get_backend():
             be = FiQCIBackend(be, mitigation_level=args.ems)
         return be
     from qiskit_ibm_runtime import QiskitRuntimeService
+    token = os.getenv("IBM_QUANTUM_TOKEN")
+    if token:   # from .env (never committed); otherwise a saved account
+        kw = {"channel": "ibm_quantum_platform", "token": token}
+        if os.getenv("IBM_QUANTUM_INSTANCE"):
+            kw["instance"] = os.environ["IBM_QUANTUM_INSTANCE"]
+        return QiskitRuntimeService(**kw).backend(args.ibm_name)
     return QiskitRuntimeService().backend(args.ibm_name)
 
 

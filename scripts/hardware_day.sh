@@ -8,6 +8,8 @@
 #   bash scripts/hardware_day.sh rehearse # fake backends, no hardware needed
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# secrets (IBM_QUANTUM_TOKEN, IBM_QUANTUM_INSTANCE, IQM_TOKEN) live in .env, which git ignores
+if [ -f .env ]; then set -a; . ./.env; set +a; fi
 latest() { ls -t out/runs/"$1"*.json | grep -v analysis | head -1; }
 analyse() { .venv/bin/python scripts/analyse_run.py "$(latest "$1")"; }
 
