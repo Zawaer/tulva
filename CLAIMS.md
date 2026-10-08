@@ -18,7 +18,24 @@ Every number in the deck: value · what produced it (exact / monte-carlo / qae-s
 - P(≥2 cluster areas over 1-in-10) in top-15% snow years vs other years: Ostrobothnia **60% vs 11%**, North **40% vs 7%**, Satakunta–SE 30% vs 0% (10 top years each) · exact (counts, in-sample) · out/snow_skill.json
 - Outlook skill (corr of March SWE with the cluster's latent factor): Ostrobothnia 0.74, North 0.47, Satakunta–SE 0.68 · derived · out/snow_skill.json
 
+### Tulva Index pricing (€10M per triggered spring, premium = expected payout × 1.35) · scripts/price_index.py → out/pricing.json, out/index_price.png
+- **"≥2 of 6 Ostrobothnia gauges over 1-in-50": P = 2.56 % → premium €346k; independence (EIOPA 0 %) 0.57 % → €77k (Tulva 4.5× the independence price)** · exact (quadrature); MC 1M springs 2.61 % ± 0.016 pp
+- **North "≥2 of 5": 1.96 % → €265k vs €52k independent (5.1×)**; Satakunta–SE "≥2 of 3": 0.62 % → €83k vs €16k (5.2×) · exact; MC 1M agrees (1.96 %, 0.62 %)
+- "≥3 of cluster": Ostrobothnia €143k vs €2k (69×), North €89k vs €1k (85×), Satakunta–SE €8.3k vs €0.1k (77×) · exact; MC 1M agrees
+- "≥1 of cluster": independence over-prices: Ostrobothnia €1.04M vs €1.54M (0.67×), North €961k vs €1.30M (0.74×), Satakunta–SE €718k vs €794k (0.90×). Correlation concentrates floods in fewer springs, so "any gauge" triggers less often · exact
+- Full correlation (all at once): every trigger = 2 % → €270k, the same for m = 1, 2, 3 · exact
+- After a **high-snow March outlook (top 15 %)**: Ostrobothnia "≥2" **€1.74M** (5.0× climatology), North €870k (3.3×), Satakunta–SE €390k (4.7×); after a **low-snow outlook (bottom 15 %)**: €0.8k, €22k, €0.9k · exact conditional on the outlook (in-sample skill 0.74 / 0.47 / 0.68); MC 1M agrees
+- Robustness, Student-t copula with the same correlations, "≥2": price ×1.06 (df 10) / ×1.09 (df 5) Ostrobothnia, ×1.10 / ×1.18 North, ×1.33 / ×1.62 Satakunta–SE; "≥3": ×1.21–1.94 (df 10), ×1.38–3.00 (df 5). Gaussian Tulva price is a lower bound if tails are heavier · exact (2-D quadrature) + MC 1M
+- Loading uncertainty (200 year-bootstrap refits), "≥2" premium 90 % interval: Ostrobothnia **€312k–€368k** (×4.1–4.8 independence), North €220k–€291k (×4.2–5.6), Satakunta–SE €55k–€118k (×3.4–7.4) · bootstrap + exact
+
+### Back-test on 1961–2025 (trigger "≥2 of cluster over fitted GEV 1-in-10") · scripts/backtest_index.py → out/backtest.json
+- Paying years: Ostrobothnia 1965, 1966, 1971, 1972, 1974, 1977, 1984, 2000 (8/65 = 12 %, model 15 %, independence 11 %); North 1981, 1993, 2000, 2005, 2015, 2018, 2023, 2024 (8/65, model 13 %, indep 8 %); Satakunta–SE 1966, 1984, 1988 (3/65, model 6 %, indep 3 %) · exact (counts)
+- March outlook (top-15 % SWE, 10 flags per cluster) flagged **11 of 19** paying cluster-years in advance (58 %, 90 % CI 40–74 %); 11 of 30 flags were followed by a payout (37 % vs 10 % base rate); **no payout ever followed a bottom-15 % snow year** (0 of ~30 cluster-years) · exact (counts), in-sample, small sample. Per cluster: Ostrobothnia 4/8 hit (1965, 1966, 1974, 1984), North 4/8 (1993, 2000, 2005, 2018), Satakunta–SE 3/3 (1966, 1984, 1988); Fisher one-sided p = 0.016 / 0.016 / 0.003
+- Observed "≥2 over fitted 1-in-50" cluster-years: **4** (Ostrobothnia 1984, 2000; North 2005; Satakunta–SE 1966); model expects 3.4, independence 0.7 · exact (counts) vs exact (model)
+
 ## Simplified or assumed
+- Tulva Index price = expected payout × (1 + 35 % risk load), one €10M payout per spring; no expenses, capital cost or reinsurance margin; Gaussian copula at 1-in-50 is extrapolation (t-copula check shows the price could be 5–60 % higher for ≥2).
+- Back-test uses GEV 1-in-10 (1-in-50 too rare in 65 years) and is in-sample (snow skill and loadings fitted to the same years).
 - Flood = spring (Mar–Jun) peak daily discharge over the gauge's own empirical top-10% (1-in-10) / GEV 1-in-50; discharge is not damage; ice-jam/frazil floods (Pori in winter) are missed.
 - Joint tail beyond observed (k≥6, 1-in-50 levels) is Gaussian-copula extrapolation (no tail dependence); at k≥6 the model is above observed (slightly conservative).
 - Snow skill is in-sample on 10 top-snow years per cluster; wide uncertainty.

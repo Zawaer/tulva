@@ -1,0 +1,454 @@
+{
+ "description": "Trigger = >= 2 of the cluster's gauges over their fitted GEV 1-in-10 spring level (q10_m3s in out/model_params.json). Outlook flag = 1 March SWE index (mean normal score of the cluster's SYKE catchments) in its top 15 %. In-sample, 1961-2025.",
+ "trigger_m": 2,
+ "outlook_top_fraction": 0.15,
+ "clusters": {
+  "Ostrobothnia": {
+   "n_gauges": 6,
+   "years": 65,
+   "gauge_years_missing": 26,
+   "trigger_years": [
+    1965,
+    1966,
+    1971,
+    1972,
+    1974,
+    1977,
+    1984,
+    2000
+   ],
+   "trigger_detail": {
+    "1965": {
+     "n_over_1in10": 3,
+     "n_observed": 4,
+     "areas": [
+      "Ilmajoki–Seinäjoki",
+      "Ylistaro–Koivulahti",
+      "Alavieska–Ylivieska"
+     ],
+     "swe_index": 0.97,
+     "outlook_flag": true
+    },
+    "1966": {
+     "n_over_1in10": 3,
+     "n_observed": 4,
+     "areas": [
+      "Ilmajoki–Seinäjoki",
+      "Ylistaro–Koivulahti",
+      "Lower Pyhäjoki"
+     ],
+     "swe_index": 1.17,
+     "outlook_flag": true
+    },
+    "1971": {
+     "n_over_1in10": 4,
+     "n_observed": 5,
+     "areas": [
+      "Lapväärtti",
+      "Ilmajoki–Seinäjoki",
+      "Alavieska–Ylivieska",
+      "Lower Pyhäjoki"
+     ],
+     "swe_index": 0.06,
+     "outlook_flag": false
+    },
+    "1972": {
+     "n_over_1in10": 2,
+     "n_observed": 6,
+     "areas": [
+      "Ilmajoki–Seinäjoki",
+      "Laihia"
+     ],
+     "swe_index": 0.93,
+     "outlook_flag": false
+    },
+    "1974": {
+     "n_over_1in10": 2,
+     "n_observed": 6,
+     "areas": [
+      "Lapväärtti",
+      "Laihia"
+     ],
+     "swe_index": 1.93,
+     "outlook_flag": true
+    },
+    "1977": {
+     "n_over_1in10": 3,
+     "n_observed": 6,
+     "areas": [
+      "Laihia",
+      "Alavieska–Ylivieska",
+      "Lower Pyhäjoki"
+     ],
+     "swe_index": 0.92,
+     "outlook_flag": false
+    },
+    "1984": {
+     "n_over_1in10": 3,
+     "n_observed": 6,
+     "areas": [
+      "Ilmajoki–Seinäjoki",
+      "Laihia",
+      "Ylistaro–Koivulahti"
+     ],
+     "swe_index": 1.86,
+     "outlook_flag": true
+    },
+    "2000": {
+     "n_over_1in10": 2,
+     "n_observed": 6,
+     "areas": [
+      "Alavieska–Ylivieska",
+      "Lower Pyhäjoki"
+     ],
+     "swe_index": 0.46,
+     "outlook_flag": false
+    }
+   },
+   "observed_freq": 0.123,
+   "observed_freq_ci90": [
+    0.071,
+    0.206
+   ],
+   "model_p": 0.15,
+   "independent_p": 0.1143,
+   "outlook_flag_years": [
+    1962,
+    1965,
+    1966,
+    1974,
+    1981,
+    1982,
+    1984,
+    1988,
+    2022,
+    2024
+   ],
+   "hits": [
+    1965,
+    1966,
+    1974,
+    1984
+   ],
+   "misses": [
+    1971,
+    1972,
+    1977,
+    2000
+   ],
+   "false_alarms": [
+    1962,
+    1981,
+    1982,
+    1988,
+    2022,
+    2024
+   ],
+   "hit_rate": 0.5,
+   "hit_rate_ci90": [
+    0.249,
+    0.751
+   ],
+   "false_alarm_ratio": 0.6,
+   "p_trigger_given_flag_observed": 0.4,
+   "p_trigger_given_flag_ci90": [
+    0.194,
+    0.648
+   ],
+   "p_trigger_given_flag_model": 0.503,
+   "p_trigger_no_flag_observed": 0.073,
+   "p_trigger_given_low_snow_observed": 0.0,
+   "p_trigger_given_low_snow_model": 0.004,
+   "triggers_in_low_snow_years": [],
+   "years_ge2_over_fitted_1in50": [
+    1984,
+    2000
+   ],
+   "ge2_over_1in50_observed": 2,
+   "ge2_over_1in50_expected_model": 1.67,
+   "ge2_over_1in50_expected_independent": 0.37,
+   "fisher_exact_p_one_sided": 0.0156
+  },
+  "North": {
+   "n_gauges": 5,
+   "years": 65,
+   "gauge_years_missing": 9,
+   "trigger_years": [
+    1981,
+    1993,
+    2000,
+    2005,
+    2015,
+    2018,
+    2023,
+    2024
+   ],
+   "trigger_detail": {
+    "1981": {
+     "n_over_1in10": 2,
+     "n_observed": 5,
+     "areas": [
+      "Pudasjärvi",
+      "Ivalo"
+     ],
+     "swe_index": 0.52,
+     "outlook_flag": false
+    },
+    "1993": {
+     "n_over_1in10": 2,
+     "n_observed": 5,
+     "areas": [
+      "Pudasjärvi",
+      "Rovaniemi"
+     ],
+     "swe_index": 0.92,
+     "outlook_flag": true
+    },
+    "2000": {
+     "n_over_1in10": 2,
+     "n_observed": 5,
+     "areas": [
+      "Ivalo",
+      "Kittilä"
+     ],
+     "swe_index": 1.45,
+     "outlook_flag": true
+    },
+    "2005": {
+     "n_over_1in10": 3,
+     "n_observed": 5,
+     "areas": [
+      "Ivalo",
+      "Kittilä",
+      "Rovaniemi"
+     ],
+     "swe_index": 0.82,
+     "outlook_flag": true
+    },
+    "2015": {
+     "n_over_1in10": 2,
+     "n_observed": 5,
+     "areas": [
+      "Pudasjärvi",
+      "Rovaniemi"
+     ],
+     "swe_index": 0.56,
+     "outlook_flag": false
+    },
+    "2018": {
+     "n_over_1in10": 4,
+     "n_observed": 5,
+     "areas": [
+      "Ivalo",
+      "Kittilä",
+      "Rovaniemi",
+      "Tornio"
+     ],
+     "swe_index": 0.78,
+     "outlook_flag": true
+    },
+    "2023": {
+     "n_over_1in10": 2,
+     "n_observed": 5,
+     "areas": [
+      "Kittilä",
+      "Tornio"
+     ],
+     "swe_index": 0.28,
+     "outlook_flag": false
+    },
+    "2024": {
+     "n_over_1in10": 3,
+     "n_observed": 5,
+     "areas": [
+      "Ivalo",
+      "Rovaniemi",
+      "Tornio"
+     ],
+     "swe_index": 0.55,
+     "outlook_flag": false
+    }
+   },
+   "observed_freq": 0.123,
+   "observed_freq_ci90": [
+    0.071,
+    0.206
+   ],
+   "model_p": 0.127,
+   "independent_p": 0.0815,
+   "outlook_flag_years": [
+    1969,
+    1973,
+    1974,
+    1993,
+    1998,
+    2000,
+    2005,
+    2016,
+    2018,
+    2020
+   ],
+   "hits": [
+    1993,
+    2000,
+    2005,
+    2018
+   ],
+   "misses": [
+    1981,
+    2015,
+    2023,
+    2024
+   ],
+   "false_alarms": [
+    1969,
+    1973,
+    1974,
+    1998,
+    2016,
+    2020
+   ],
+   "hit_rate": 0.5,
+   "hit_rate_ci90": [
+    0.249,
+    0.751
+   ],
+   "false_alarm_ratio": 0.6,
+   "p_trigger_given_flag_observed": 0.4,
+   "p_trigger_given_flag_ci90": [
+    0.194,
+    0.648
+   ],
+   "p_trigger_given_flag_model": 0.299,
+   "p_trigger_no_flag_observed": 0.073,
+   "p_trigger_given_low_snow_observed": 0.0,
+   "p_trigger_given_low_snow_model": 0.026,
+   "triggers_in_low_snow_years": [],
+   "years_ge2_over_fitted_1in50": [
+    2005
+   ],
+   "ge2_over_1in50_observed": 1,
+   "ge2_over_1in50_expected_model": 1.28,
+   "ge2_over_1in50_expected_independent": 0.25,
+   "fisher_exact_p_one_sided": 0.0156
+  },
+  "Satakunta–SE": {
+   "n_gauges": 3,
+   "years": 65,
+   "gauge_years_missing": 0,
+   "trigger_years": [
+    1966,
+    1984,
+    1988
+   ],
+   "trigger_detail": {
+    "1966": {
+     "n_over_1in10": 2,
+     "n_observed": 3,
+     "areas": [
+      "Pori",
+      "Huittinen"
+     ],
+     "swe_index": 1.87,
+     "outlook_flag": true
+    },
+    "1984": {
+     "n_over_1in10": 2,
+     "n_observed": 3,
+     "areas": [
+      "Pori",
+      "Huittinen"
+     ],
+     "swe_index": 2.01,
+     "outlook_flag": true
+    },
+    "1988": {
+     "n_over_1in10": 2,
+     "n_observed": 3,
+     "areas": [
+      "Pori",
+      "Lower Kymijoki"
+     ],
+     "swe_index": 0.86,
+     "outlook_flag": true
+    }
+   },
+   "observed_freq": 0.046,
+   "observed_freq_ci90": [
+    0.019,
+    0.11
+   ],
+   "model_p": 0.059,
+   "independent_p": 0.028,
+   "outlook_flag_years": [
+    1962,
+    1966,
+    1967,
+    1969,
+    1974,
+    1981,
+    1982,
+    1984,
+    1988,
+    2011
+   ],
+   "hits": [
+    1966,
+    1984,
+    1988
+   ],
+   "misses": [],
+   "false_alarms": [
+    1962,
+    1967,
+    1969,
+    1974,
+    1981,
+    1982,
+    2011
+   ],
+   "hit_rate": 1.0,
+   "hit_rate_ci90": [
+    0.526,
+    1.0
+   ],
+   "false_alarm_ratio": 0.7,
+   "p_trigger_given_flag_observed": 0.3,
+   "p_trigger_given_flag_ci90": [
+    0.127,
+    0.558
+   ],
+   "p_trigger_given_flag_model": 0.2,
+   "p_trigger_no_flag_observed": 0.0,
+   "p_trigger_given_low_snow_observed": 0.0,
+   "p_trigger_given_low_snow_model": 0.003,
+   "triggers_in_low_snow_years": [],
+   "years_ge2_over_fitted_1in50": [
+    1966
+   ],
+   "ge2_over_1in50_observed": 1,
+   "ge2_over_1in50_expected_model": 0.4,
+   "ge2_over_1in50_expected_independent": 0.08,
+   "fisher_exact_p_one_sided": 0.0027
+  }
+ },
+ "pooled": {
+  "cluster_trigger_years": 19,
+  "flagged_in_advance": 11,
+  "hit_rate": 0.58,
+  "hit_rate_ci90": [
+   0.395,
+   0.744
+  ],
+  "flags": 30,
+  "flag_precision": 0.37,
+  "flag_precision_ci90": [
+   0.239,
+   0.517
+  ],
+  "base_rate": 0.097,
+  "ge2_over_1in50_observed": 4,
+  "ge2_over_1in50_expected_model": 3.35,
+  "ge2_over_1in50_expected_independent": 0.7
+ }
+}
