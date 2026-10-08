@@ -32,3 +32,12 @@ Check fiqci.fi/status first.
 python scripts/export_web.py                                   # out/ + data/ -> web/data/*.json (rerun after new results)
 python3 -m http.server 3141 --bind 0.0.0.0 --directory web     # static page, no build step
 ```
+
+## Two Python environments
+IBM's runtime needs Qiskit ≥2.3; IQM's Qiskit plugin needs Qiskit <2.2. So:
+```bash
+uv venv -p 3.11 .venv     && VIRTUAL_ENV=.venv     uv pip install -r requirements.txt qiskit-ibm-runtime
+uv venv -p 3.11 .venv-iqm && VIRTUAL_ENV=.venv-iqm uv pip install "iqm-client[qiskit]" numpy scipy pandas matplotlib
+```
+IQM runs: `IQM_TOKEN=... .venv-iqm/bin/python scripts/run_hw.py --backend iqm --iqm-name garnet`.
+Rehearsals without hardware: `--backend iqm-fake` (IQM's 20-qubit noise model) and `--backend ibm-fake` (ibm_kingston).

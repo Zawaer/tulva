@@ -18,3 +18,5 @@ Append one line per decision: date time · who · decision · why.
 - 2026-10-08 21:30 · Toivo (pricing) · Back-test trigger = ≥2 of cluster over fitted GEV 1-in-10 (q10_m3s), flag = top-15 % 1 March SWE index of the cluster. Robustness = Student-t copula (df 10, 5) with the same factor correlations and a 200-sample year-bootstrap refit of loadings. · 1-in-50 has ~1 event per cluster in 65 years.
 - 2026-10-08 · Vaishnav · Hardware: run the QAE circuits on IQM via IQM Resonance (https://resonance.iqm.tech/). · run_hw.py
   currently connects through LUMI (Q20_CORTEX_URL); Resonance needs an API token and its own device URL, so Toivo to adapt.
+- 2026-10-08 19:00 · team · Hardware: IQM Resonance primary (effectively unlimited credits via Niklas Steinmann),
+  IBM as the cross-check on a second architecture; Aalto Q20 optional. Same circuits and analysis on all.

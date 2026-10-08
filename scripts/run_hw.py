@@ -1,8 +1,14 @@
 """Run the Tulva QAE batch on a backend and save everything needed to analyse it later.
 
-    python scripts/run_hw.py --backend sim-noisy           # local rehearsal with a noise model
-    python scripts/run_hw.py --backend q20 [--ems 2]       # on LUMI (module fiqci-vtt-qiskit loaded)
-    python scripts/run_hw.py --backend ibm --ibm-name ibm_kingston
+    python scripts/run_hw.py --backend sim-noisy                       # local rehearsal, generic noise
+    .venv-iqm/bin/python scripts/run_hw.py --backend iqm-fake            # rehearsal with IQM's noise model (20q)
+    IQM_TOKEN=... .venv-iqm/bin/python scripts/run_hw.py --backend iqm --iqm-name garnet   # IQM Resonance
+    python scripts/run_hw.py --backend ibm-fake                         # rehearsal with ibm_kingston's noise
+    python scripts/run_hw.py --backend ibm --ibm-name ibm_kingston      # IBM Quantum (saved account)
+    python scripts/run_hw.py --backend q20 [--ems 2]                    # Aalto Q20 on LUMI
+
+IQM's Qiskit plugin needs an older Qiskit than IBM's runtime, so IQM runs use the separate .venv-iqm
+(see README).
 
 Batch = for each instance and each Grover power k: the target circuit and two calibration twins with the
 same gates and layout but known answers: one large ("twin") and one ≈ 0 ("zero"). Together they give an
@@ -29,8 +35,11 @@ sys.path.insert(0, str(ROOT / "src"))
 from tulva import factor, quantum as q  # noqa: E402
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--backend", default="sim-noisy", choices=["sim", "sim-noisy", "q20", "ibm"])
+ap.add_argument("--backend", default="sim-noisy", choices=["sim", "sim-noisy", "iqm", "iqm-fake", "ibm", "ibm-fake", "q20"])
 ap.add_argument("--ibm-name", default="ibm_kingston")
+ap.add_argument("--iqm-name", default="garnet", help="IQM Resonance device, e.g. garnet (20q), emerald (54q)")
+ap.add_argument("--iqm-fake", default="apollo", choices=["apollo", "aphrodite"],
+                help="IQM fake backend: apollo = 20-qubit square lattice, aphrodite = 54-qubit")
 ap.add_argument("--ems", type=int, default=0, help="FiQCI-EMS mitigation level (q20 only); 0 = raw")
 ap.add_argument("--shots", type=int, default=2000)
 ap.add_argument("--ks", default="0,1,2,3")
@@ -50,6 +59,16 @@ def get_backend():
         nm.add_all_qubit_quantum_error(depolarizing_error(0.005, 2), ["cz"])
         nm.add_all_qubit_readout_error(ReadoutError([[0.98, 0.02], [0.03, 0.97]]))
         return AerSimulator(noise_model=nm, basis_gates=["cz", "rz", "sx", "x"])
+    if args.backend == "iqm":
+        from iqm.qiskit_iqm import IQMProvider
+        url = os.getenv("IQM_SERVER_URL", "https://resonance.meetiqm.com")
+        return IQMProvider(url, quantum_computer=args.iqm_name, token=os.environ["IQM_TOKEN"]).get_backend()
+    if args.backend == "iqm-fake":
+        from iqm.qiskit_iqm import IQMFakeAphrodite, IQMFakeApollo
+        return (IQMFakeApollo if args.iqm_fake == "apollo" else IQMFakeAphrodite)()
+    if args.backend == "ibm-fake":
+        from qiskit_ibm_runtime.fake_provider import FakeKingston
+        return FakeKingston()
     if args.backend == "q20":
         from iqm.qiskit_iqm import IQMProvider
         be = IQMProvider(os.getenv("Q20_CORTEX_URL"), quantum_computer="radiance20").get_backend()
@@ -120,11 +139,18 @@ def main():
         c["depth"] = int(t.depth())
     out_dir = ROOT / "out" / "runs"
     out_dir.mkdir(parents=True, exist_ok=True)
-    path = out_dir / f"{args.backend}{'-ems' + str(args.ems) if args.ems else ''}-{stamp}.json"
+    dev = {"iqm": args.iqm_name, "iqm-fake": args.iqm_fake, "ibm": args.ibm_name}.get(args.backend, "")
+    record["device"] = dev or args.backend
+    path = out_dir / f"{args.backend}{'-' + dev if dev else ''}{'-ems' + str(args.ems) if args.ems else ''}-{stamp}.json"
 
-    if args.backend == "ibm":
+    if args.backend in ("ibm", "ibm-fake"):
         from qiskit_ibm_runtime import SamplerV2
-        job = SamplerV2(mode=backend).run(tqcs, shots=args.shots)
+        sampler = SamplerV2(mode=backend)
+        if args.backend == "ibm":   # error suppression that the Sampler supports
+            sampler.options.dynamical_decoupling.enable = True
+            sampler.options.dynamical_decoupling.sequence_type = "XY4"
+            sampler.options.twirling.enable_gates = True
+        job = sampler.run(tqcs, shots=args.shots)
         record["jobs"].append(job.job_id())
         path.write_text(json.dumps(record, indent=2))
         res = job.result()
