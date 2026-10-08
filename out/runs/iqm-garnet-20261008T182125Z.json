@@ -1,0 +1,1093 @@
+{
+  "backend": "iqm",
+  "ems": 0,
+  "shots": 2000,
+  "ks": [
+    0,
+    1,
+    2
+  ],
+  "param_source": "out/model_params.json",
+  "created_utc": "20261008T182125Z",
+  "circuits": [
+    {
+      "name": "A3_kittila_ivalo_both|target|k0|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 0,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1821,
+        "10": 124,
+        "01": 52,
+        "11": 3
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k0|r1",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 0,
+      "rep": 1,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1843,
+        "10": 93,
+        "01": 61,
+        "11": 3
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k0|r2",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 0,
+      "rep": 2,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1842,
+        "10": 94,
+        "11": 5,
+        "01": 59
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k1|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 1,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 29,
+      "depth": 53,
+      "counts": {
+        "00": 1546,
+        "10": 231,
+        "01": 164,
+        "11": 59
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k1|r1",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 1,
+      "rep": 1,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 29,
+      "depth": 53,
+      "counts": {
+        "00": 1545,
+        "11": 69,
+        "01": 170,
+        "10": 216
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k1|r2",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 1,
+      "rep": 2,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 29,
+      "depth": 53,
+      "counts": {
+        "00": 1531,
+        "10": 215,
+        "01": 192,
+        "11": 62
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k2|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 2,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 50,
+      "depth": 88,
+      "counts": {
+        "01": 283,
+        "00": 1347,
+        "10": 261,
+        "11": 109
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k2|r1",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 2,
+      "rep": 1,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 50,
+      "depth": 88,
+      "counts": {
+        "11": 123,
+        "00": 1343,
+        "10": 270,
+        "01": 264
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k2|r2",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 2,
+      "rep": 2,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 50,
+      "depth": 88,
+      "counts": {
+        "00": 1375,
+        "11": 124,
+        "01": 255,
+        "10": 246
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k0|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 0,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "10": 246,
+        "00": 1414,
+        "11": 125,
+        "01": 215
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k0|r1",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 0,
+      "rep": 1,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1399,
+        "01": 211,
+        "10": 263,
+        "11": 127
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k0|r2",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 0,
+      "rep": 2,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "01": 214,
+        "10": 279,
+        "00": 1400,
+        "11": 107
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k1|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 1,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 29,
+      "depth": 53,
+      "counts": {
+        "10": 249,
+        "11": 664,
+        "00": 812,
+        "01": 275
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k1|r1",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 1,
+      "rep": 1,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 29,
+      "depth": 53,
+      "counts": {
+        "11": 626,
+        "00": 829,
+        "01": 324,
+        "10": 221
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k1|r2",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 1,
+      "rep": 2,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 29,
+      "depth": 53,
+      "counts": {
+        "01": 265,
+        "11": 638,
+        "00": 841,
+        "10": 256
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k2|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 2,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 50,
+      "depth": 88,
+      "counts": {
+        "11": 1069,
+        "00": 366,
+        "01": 240,
+        "10": 325
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k2|r1",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 2,
+      "rep": 1,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 50,
+      "depth": 88,
+      "counts": {
+        "01": 259,
+        "10": 309,
+        "11": 1093,
+        "00": 339
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k2|r2",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 2,
+      "rep": 2,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 50,
+      "depth": 88,
+      "counts": {
+        "00": 352,
+        "11": 1060,
+        "01": 251,
+        "10": 337
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k0|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 0,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1900,
+        "10": 67,
+        "01": 31,
+        "11": 2
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k0|r1",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 0,
+      "rep": 1,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1909,
+        "10": 68,
+        "01": 23
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k0|r2",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 0,
+      "rep": 2,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1905,
+        "10": 72,
+        "01": 22,
+        "11": 1
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k1|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 1,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 29,
+      "depth": 53,
+      "counts": {
+        "00": 1571,
+        "10": 227,
+        "01": 154,
+        "11": 48
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k1|r1",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 1,
+      "rep": 1,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 29,
+      "depth": 53,
+      "counts": {
+        "00": 1574,
+        "11": 50,
+        "01": 154,
+        "10": 222
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k1|r2",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 1,
+      "rep": 2,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 29,
+      "depth": 53,
+      "counts": {
+        "00": 1565,
+        "10": 219,
+        "01": 172,
+        "11": 44
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k2|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 2,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 50,
+      "depth": 88,
+      "counts": {
+        "00": 1469,
+        "11": 109,
+        "10": 236,
+        "01": 186
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k2|r1",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 2,
+      "rep": 1,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 50,
+      "depth": 88,
+      "counts": {
+        "10": 242,
+        "00": 1431,
+        "01": 209,
+        "11": 118
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k2|r2",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 2,
+      "rep": 2,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 50,
+      "depth": 88,
+      "counts": {
+        "00": 1426,
+        "10": 267,
+        "01": 202,
+        "11": 105
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|target|k0|r0",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "target",
+      "k": 0,
+      "rep": 0,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.0035879218973109356,
+      "two_qubit_gates": 6,
+      "depth": 12,
+      "counts": {
+        "000": 1737,
+        "100": 102,
+        "010": 82,
+        "001": 57,
+        "110": 8,
+        "011": 8,
+        "111": 4,
+        "101": 2
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|target|k0|r1",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "target",
+      "k": 0,
+      "rep": 1,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.0035879218973109356,
+      "two_qubit_gates": 6,
+      "depth": 12,
+      "counts": {
+        "000": 1776,
+        "011": 6,
+        "100": 70,
+        "010": 88,
+        "001": 49,
+        "110": 8,
+        "101": 3
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|target|k0|r2",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "target",
+      "k": 0,
+      "rep": 2,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.0035879218973109356,
+      "two_qubit_gates": 6,
+      "depth": 12,
+      "counts": {
+        "000": 1748,
+        "010": 94,
+        "001": 53,
+        "100": 86,
+        "011": 4,
+        "110": 9,
+        "101": 5,
+        "111": 1
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|target|k1|r0",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "target",
+      "k": 1,
+      "rep": 0,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.0035879218973109356,
+      "two_qubit_gates": 43,
+      "depth": 83,
+      "counts": {
+        "000": 1295,
+        "001": 129,
+        "110": 70,
+        "010": 141,
+        "101": 61,
+        "100": 206,
+        "011": 76,
+        "111": 22
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|target|k1|r1",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "target",
+      "k": 1,
+      "rep": 1,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.0035879218973109356,
+      "two_qubit_gates": 43,
+      "depth": 83,
+      "counts": {
+        "000": 1294,
+        "110": 97,
+        "011": 62,
+        "100": 178,
+        "001": 150,
+        "010": 133,
+        "101": 64,
+        "111": 22
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|target|k1|r2",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "target",
+      "k": 1,
+      "rep": 2,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.0035879218973109356,
+      "two_qubit_gates": 43,
+      "depth": 83,
+      "counts": {
+        "000": 1264,
+        "010": 136,
+        "011": 75,
+        "001": 133,
+        "110": 83,
+        "100": 234,
+        "101": 55,
+        "111": 20
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|target|k2|r0",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "target",
+      "k": 2,
+      "rep": 0,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.0035879218973109356,
+      "two_qubit_gates": 83,
+      "depth": 160,
+      "counts": {
+        "010": 207,
+        "001": 156,
+        "100": 256,
+        "000": 949,
+        "110": 141,
+        "101": 103,
+        "111": 92,
+        "011": 96
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|target|k2|r1",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "target",
+      "k": 2,
+      "rep": 1,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.0035879218973109356,
+      "two_qubit_gates": 83,
+      "depth": 160,
+      "counts": {
+        "000": 909,
+        "001": 163,
+        "100": 274,
+        "010": 179,
+        "110": 161,
+        "111": 58,
+        "011": 120,
+        "101": 136
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|target|k2|r2",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "target",
+      "k": 2,
+      "rep": 2,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.0035879218973109356,
+      "two_qubit_gates": 83,
+      "depth": 160,
+      "counts": {
+        "010": 221,
+        "000": 901,
+        "111": 62,
+        "011": 109,
+        "100": 250,
+        "001": 187,
+        "110": 130,
+        "101": 140
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|twin|k0|r0",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "twin",
+      "k": 0,
+      "rep": 0,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.12750672357617185,
+      "two_qubit_gates": 6,
+      "depth": 12,
+      "counts": {
+        "000": 1256,
+        "001": 168,
+        "011": 67,
+        "100": 160,
+        "010": 175,
+        "101": 58,
+        "110": 65,
+        "111": 51
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|twin|k0|r1",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "twin",
+      "k": 0,
+      "rep": 1,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.12750672357617185,
+      "two_qubit_gates": 6,
+      "depth": 12,
+      "counts": {
+        "000": 1217,
+        "100": 171,
+        "101": 65,
+        "111": 62,
+        "001": 139,
+        "010": 190,
+        "110": 87,
+        "011": 69
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|twin|k0|r2",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "twin",
+      "k": 0,
+      "rep": 2,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.12750672357617185,
+      "two_qubit_gates": 6,
+      "depth": 12,
+      "counts": {
+        "001": 142,
+        "000": 1211,
+        "110": 72,
+        "100": 196,
+        "010": 184,
+        "011": 68,
+        "101": 70,
+        "111": 57
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|twin|k1|r0",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "twin",
+      "k": 1,
+      "rep": 0,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.12750672357617185,
+      "two_qubit_gates": 43,
+      "depth": 83,
+      "counts": {
+        "011": 324,
+        "000": 334,
+        "111": 263,
+        "110": 304,
+        "101": 299,
+        "100": 183,
+        "010": 152,
+        "001": 141
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|twin|k1|r1",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "twin",
+      "k": 1,
+      "rep": 1,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.12750672357617185,
+      "two_qubit_gates": 43,
+      "depth": 83,
+      "counts": {
+        "110": 340,
+        "000": 326,
+        "111": 269,
+        "101": 302,
+        "011": 317,
+        "100": 173,
+        "010": 123,
+        "001": 150
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|twin|k1|r2",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "twin",
+      "k": 1,
+      "rep": 2,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.12750672357617185,
+      "two_qubit_gates": 43,
+      "depth": 83,
+      "counts": {
+        "000": 307,
+        "110": 304,
+        "101": 310,
+        "011": 311,
+        "001": 149,
+        "111": 303,
+        "100": 157,
+        "010": 159
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|twin|k2|r0",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "twin",
+      "k": 2,
+      "rep": 0,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.12750672357617185,
+      "two_qubit_gates": 83,
+      "depth": 160,
+      "counts": {
+        "100": 173,
+        "011": 331,
+        "110": 397,
+        "101": 278,
+        "111": 274,
+        "010": 181,
+        "000": 212,
+        "001": 154
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|twin|k2|r1",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "twin",
+      "k": 2,
+      "rep": 1,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.12750672357617185,
+      "two_qubit_gates": 83,
+      "depth": 160,
+      "counts": {
+        "011": 332,
+        "101": 349,
+        "110": 371,
+        "010": 180,
+        "111": 270,
+        "000": 186,
+        "100": 194,
+        "001": 118
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|twin|k2|r2",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "twin",
+      "k": 2,
+      "rep": 2,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 0.12750672357617185,
+      "two_qubit_gates": 83,
+      "depth": 160,
+      "counts": {
+        "101": 319,
+        "100": 175,
+        "111": 288,
+        "110": 393,
+        "011": 314,
+        "000": 200,
+        "010": 169,
+        "001": 142
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|zero|k0|r0",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "zero",
+      "k": 0,
+      "rep": 0,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 1.0016102713189018e-09,
+      "two_qubit_gates": 6,
+      "depth": 12,
+      "counts": {
+        "000": 1861,
+        "010": 68,
+        "100": 46,
+        "001": 18,
+        "011": 1,
+        "111": 1,
+        "110": 5
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|zero|k0|r1",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "zero",
+      "k": 0,
+      "rep": 1,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 1.0016102713189018e-09,
+      "two_qubit_gates": 6,
+      "depth": 12,
+      "counts": {
+        "000": 1858,
+        "100": 41,
+        "001": 33,
+        "010": 61,
+        "110": 2,
+        "101": 2,
+        "011": 3
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|zero|k0|r2",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "zero",
+      "k": 0,
+      "rep": 2,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 1.0016102713189018e-09,
+      "two_qubit_gates": 6,
+      "depth": 12,
+      "counts": {
+        "000": 1840,
+        "111": 2,
+        "100": 53,
+        "010": 82,
+        "001": 18,
+        "011": 3,
+        "110": 2
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|zero|k1|r0",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "zero",
+      "k": 1,
+      "rep": 0,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 1.0016102713189018e-09,
+      "two_qubit_gates": 43,
+      "depth": 83,
+      "counts": {
+        "111": 22,
+        "000": 1408,
+        "100": 151,
+        "001": 111,
+        "010": 147,
+        "011": 41,
+        "101": 48,
+        "110": 72
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|zero|k1|r1",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "zero",
+      "k": 1,
+      "rep": 1,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 1.0016102713189018e-09,
+      "two_qubit_gates": 43,
+      "depth": 83,
+      "counts": {
+        "000": 1419,
+        "001": 116,
+        "100": 149,
+        "010": 126,
+        "111": 41,
+        "110": 60,
+        "011": 48,
+        "101": 41
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|zero|k1|r2",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "zero",
+      "k": 1,
+      "rep": 2,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 1.0016102713189018e-09,
+      "two_qubit_gates": 43,
+      "depth": 83,
+      "counts": {
+        "000": 1408,
+        "111": 19,
+        "100": 148,
+        "010": 131,
+        "011": 54,
+        "001": 110,
+        "110": 80,
+        "101": 50
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|zero|k2|r0",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "zero",
+      "k": 2,
+      "rep": 0,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 1.0016102713189018e-09,
+      "two_qubit_gates": 83,
+      "depth": 160,
+      "counts": {
+        "000": 1002,
+        "100": 274,
+        "001": 155,
+        "101": 94,
+        "010": 207,
+        "110": 127,
+        "011": 90,
+        "111": 51
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|zero|k2|r1",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "zero",
+      "k": 2,
+      "rep": 1,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 1.0016102713189018e-09,
+      "two_qubit_gates": 83,
+      "depth": 160,
+      "counts": {
+        "001": 152,
+        "000": 1044,
+        "100": 279,
+        "010": 190,
+        "111": 49,
+        "110": 133,
+        "101": 80,
+        "011": 73
+      }
+    },
+    {
+      "name": "A4_lapland_atleast2of3|zero|k2|r2",
+      "instance": "A4_lapland_atleast2of3",
+      "role": "zero",
+      "k": 2,
+      "rep": 2,
+      "event": "atleast2",
+      "n_areas": 3,
+      "exact": 1.0016102713189018e-09,
+      "two_qubit_gates": 83,
+      "depth": 160,
+      "counts": {
+        "000": 1055,
+        "100": 269,
+        "010": 189,
+        "101": 103,
+        "001": 151,
+        "110": 122,
+        "111": 43,
+        "011": 68
+      }
+    }
+  ],
+  "jobs": [
+    "01a11cbf-bb06-7672-a667-c85255613143"
+  ],
+  "device": "garnet"
+}
