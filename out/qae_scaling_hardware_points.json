@@ -1,0 +1,28 @@
+{
+  "hardware_points": [
+    {
+      "vendor": "IBM",
+      "queries": 800000,
+      "abs_error": 0.00020729469208643678,
+      "run": "ibm-ibm_marrakesh-20261008T170341Z.analysis.json"
+    },
+    {
+      "vendor": "IBM",
+      "queries": 720000,
+      "abs_error": 0.00022532417389641338,
+      "run": "ibm-ibm_marrakesh-20261008T174523Z.analysis.json"
+    },
+    {
+      "vendor": "IQM",
+      "queries": 54000,
+      "abs_error": 0.0005193992668833802,
+      "run": "iqm-garnet-20261008T182125Z.analysis.json"
+    },
+    {
+      "vendor": "IQM",
+      "queries": 360000,
+      "abs_error": 0.00037987457307209053,
+      "run": "iqm-garnet-20261008T182534Z.analysis.json"
+    }
+  ]
+}

@@ -80,6 +80,11 @@ for label, p2 in [("ideal", None), ("2q error 0.1%", 0.001), ("2q error 0.3%", 0
     print(label, [(p["kmax"], f"{100*p['rmse']:.4f}pp") for p in pts], flush=True)
 
 qmax = max(p["queries"] for p in curves["ideal"])
+import glob as _g0  # noqa: E402
+for _f in _g0.glob(str(OUT / "runs" / "*.analysis.json")):
+    _a = json.loads(Path(_f).read_text()).get("A3_kittila_ivalo_both")
+    if _a and (Path(_f).name.startswith("ibm-ibm") or Path(_f).name.startswith("iqm-garnet")):
+        qmax = max(qmax, 1.3 * _a["oracle_queries"])
 mc = [{"queries": float(n), "rmse": float(np.sqrt(exact * (1 - exact) / n))} for n in np.geomspace(SHOTS, qmax, 20)]
 json.dump({"exact": exact, "shots_per_power": SHOTS, "two_qubit_gates_by_k_grid": gate_counts,
            "curves": curves, "monte_carlo": mc}, open(OUT / "qae_scaling.json", "w"), indent=2)
@@ -91,20 +96,45 @@ import matplotlib.pyplot as plt  # noqa: E402
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.loglog([p["queries"] for p in mc], [100 * p["rmse"] for p in mc], color="#222", lw=2.5,
           label="Classical Monte Carlo  (error ∝ 1/√N)")
+_id = curves["ideal"][-1]
+_xs = np.geomspace(_id["queries"], qmax, 10)
+ax.loglog(_xs, 100 * _id["rmse"] * _id["queries"] / _xs, ":", color="#1f6feb", lw=1.5, alpha=0.7,
+          label="Ideal QAE, extrapolated (∝ 1/N)")
 styles = {"ideal": ("#1f6feb", "o-"), "2q error 0.1%": ("#2da44e", "s--"), "2q error 0.3%": ("#d4a72c", "^--"),
           "2q error 1%": ("#cf222e", "v:")}
 for lab, pts in curves.items():
     col, st = styles[lab]
     name = "Quantum amplitude estimation, ideal  (∝ 1/N)" if lab == "ideal" else f"QAE with {lab}"
     ax.loglog([p["queries"] for p in pts], [100 * p["rmse"] for p in pts], st, color=col, lw=2, ms=6, label=name)
+# real hardware points (Kittilä+Ivalo, calibrated estimate vs exact) from out/runs/*.analysis.json
+import glob as _glob  # noqa: E402
+hw_pts = []
+for f in sorted(_glob.glob(str(OUT / "runs" / "*.analysis.json"))):
+    name = Path(f).name
+    if not (name.startswith("ibm-ibm") or name.startswith("iqm-garnet") or name.startswith("iqm-emerald")):
+        continue
+    a3 = json.loads(Path(f).read_text()).get("A3_kittila_ivalo_both")
+    if not a3:
+        continue
+    est = a3.get("noise_aware_per_copy_mlae") or a3["noise_aware_mlae"]
+    vendor = "IBM" if name.startswith("ibm") else "IQM"
+    hw_pts.append((vendor, a3["oracle_queries"], abs(est - a3["exact"]), name))
+for vendor, mk, col in (("IBM", "D", "#0f62fe"), ("IQM", "P", "#00a19a")):
+    pts = [p for p in hw_pts if p[0] == vendor]
+    if pts:
+        ax.loglog([p[1] for p in pts], [100 * p[2] for p in pts], mk, color=col, ms=11, mec="black", mew=0.8,
+                  label=f"Real hardware: {'IBM Marrakesh' if vendor == 'IBM' else 'IQM Garnet'} (calibrated, error vs exact)")
+json.dump({"hardware_points": [{"vendor": v, "queries": int(qq), "abs_error": e, "run": n} for v, qq, e, n in hw_pts]},
+          open(OUT / "qae_scaling_hardware_points.json", "w"), indent=2)
 ax.set_xlabel("Model evaluations (oracle queries)", fontsize=12)
 ax.set_ylabel("Error in P(both flood), percentage points", fontsize=12)
 ax.set_title("When does quantum matter?  P(Kittilä and Ivalo both pass their 1-in-50 level)\n"
-             f"exact {100*exact:.3f} %  ·  3 qubits  ·  simulator", fontsize=13, loc="left")
+             f"exact {100*exact:.3f} %  ·  3 qubits  ·  simulator curves + real hardware points", fontsize=13, loc="left")
 ax.grid(True, which="both", alpha=0.25)
-ax.legend(fontsize=10, frameon=False)
+ax.legend(fontsize=9, frameon=True, framealpha=0.92, loc="lower left")
 fig.text(0.01, 0.01, "Fitted to SYKE spring peaks 1961–2025. Noisy curves: depolarising noise + 1 % readout, "
-         "square-lattice routing. Error = RMS over 200 repetitions.", fontsize=8, color="#666")
-fig.tight_layout(rect=(0, 0.03, 1, 1))
+         "square-lattice routing; simulator error = RMS over 200 repetitions.\nHardware points = |calibrated estimate − exact| of one run "
+         "(mostly residual bias), at that run's total model evaluations.", fontsize=8, color="#666")
+fig.tight_layout(rect=(0, 0.05, 1, 1))
 fig.savefig(OUT / "qae_scaling.png", dpi=130)
 print("saved out/qae_scaling.png; CZ by k:", gate_counts)

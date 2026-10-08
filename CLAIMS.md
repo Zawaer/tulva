@@ -109,3 +109,8 @@ the continuous model is the classical reference. The outlook shift uses the in-s
 - Web app line "5 areas at once 7× likelier than independence says": P(≥5 of 14 over 1-in-10) on IQM Emerald
   6.3 % vs independence 0.93 % = 6.8× (exact model 4.8 % = 5.2×; observed 7.7 % = 8.3×) · qae-iqm / exact ·
   out/runs/loader-iqm-emerald-*.json
+- "When does quantum matter" chart (out/qae_scaling.png): at the hardware runs' budgets (5×10⁴–8×10⁵ model
+  evaluations) classical Monte Carlo error is ~0.004–0.016 pp; the calibrated hardware estimates are off by
+  0.021–0.052 pp (IBM best 0.021, IQM 4-copy 0.038), so ~5–10× worse than classical today. Ideal QAE extrapolated
+  (1/N) would be ~0.0002 pp at 10⁶, i.e. ~25× better than Monte Carlo · qae-sim / qae-ibm / qae-iqm ·
+  scripts/qae_scaling.py, out/qae_scaling_hardware_points.json
