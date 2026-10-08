@@ -106,3 +106,6 @@ the continuous model is the classical reference. The outlook shift uses the in-s
   1998, 2000, 2005, 2016, 2018, 2020) · out/snow_skill.json, out/backtest.json
 - 1 March → the May peak ≈ 2–2.5 months. Damage ~€5M (SYKE/FMI, research notes); see business/CHEATSHEET.md for
   the €5–17M range and its sources.
+- Web app line "5 areas at once 7× likelier than independence says": P(≥5 of 14 over 1-in-10) on IQM Emerald
+  6.3 % vs independence 0.93 % = 6.8× (exact model 4.8 % = 5.2×; observed 7.7 % = 8.3×) · qae-iqm / exact ·
+  out/runs/loader-iqm-emerald-*.json
