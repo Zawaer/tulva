@@ -122,19 +122,19 @@ def good_fraction(counts: dict, event: str) -> tuple[int, int]:
 _THETA = np.linspace(1e-5, np.pi / 2 - 1e-5, 20001)
 
 
-def mlae(hits: list[int], shots: list[int], ks: list[int], decay: list[float] | None = None,
-         floor: float = 0.0) -> float:
+def mlae(hits: list[int], shots: list[int], ks: list[int], gain: list[float] | None = None,
+         offset: list[float] | None = None) -> float:
     """Maximum-likelihood amplitude estimation (Suzuki et al. 2020).
 
     Ideal model: P(good | k) = sin^2((2k+1)θ), a = sin^2 θ.
-    Noise-aware model (decay given): P = c_k sin^2((2k+1)θ) + (1 - c_k) * floor, with c_k measured on a
-    calibration circuit whose answer is known.
+    Noise-aware model: P = gain_k * sin^2((2k+1)θ) + offset_k, with gain_k and offset_k measured on two
+    calibration circuits with the same gates but known answers.
     """
     ll = np.zeros_like(_THETA)
     for i, (h, s, k) in enumerate(zip(hits, shots, ks)):
         p = np.sin((2 * k + 1) * _THETA) ** 2
-        if decay is not None:
-            p = decay[i] * p + (1 - decay[i]) * floor
+        if gain is not None:
+            p = gain[i] * p + (offset[i] if offset is not None else 0.0)
         p = np.clip(p, 1e-12, 1 - 1e-12)
         ll += h * np.log(p) + (s - h) * np.log(1 - p)
     return float(np.sin(_THETA[np.argmax(ll)]) ** 2)
