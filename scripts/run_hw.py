@@ -146,9 +146,9 @@ def best_triples(backend, n: int) -> list[tuple[int, int, int]]:
     twoq = next(g for g in ("cz", "ecr", "cx") if g in tgt.operation_names)
     err2 = {}
     for qargs, props in tgt[twoq].items():
-        if props is not None and props.error is not None:
-            a, b = qargs
-            err2[frozenset((a, b))] = min(props.error, err2.get(frozenset((a, b)), 1.0))
+        a, b = qargs
+        e = props.error if props is not None and props.error is not None else 0.01   # no calibration data → uniform
+        err2[frozenset((a, b))] = min(e, err2.get(frozenset((a, b)), 1.0))
     ro = {qargs[0]: (props.error if props is not None and props.error is not None else 0.05)
           for qargs, props in tgt["measure"].items()}
     nbrs = {}
