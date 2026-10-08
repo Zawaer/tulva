@@ -44,6 +44,11 @@ Every number in the deck: value · what produced it (exact / monte-carlo / qae-s
   vs Monte Carlo ± 0.027 pp at the same 16,000 oracle queries · exact / qae-sim / monte-carlo ·
   scripts/qae_sim.py
 - P(≥2 of 3 Lapland areas pass 1-in-50) = 0.359 % (exact) vs 0.119 % if independent (×3.0) · exact · scripts/qae_sim.py
+- Qrisp version, Kittilä AND Ivalo both pass 1-in-50 (exact 0.125 %): MLAE over Grover powers k=0,1,2 on
+  Qrisp's simulator 0.118 % ± 0.017 pp RMSE (10 reps, 9,000 oracle queries each) vs Monte Carlo ± 0.037 pp at the
+  same queries; Qrisp's IQAE (ε=3·10⁻⁴, deep circuits, simulator only) 0.125 %. Compiled for IQM Garnet with
+  IQM's Qrisp pass manager: 4 / 23 / 45 CZ at k=0/1/2 (Qiskit transpile: 4 / 28 / 52) · qae-sim-qrisp ·
+  scripts/qae_qrisp.py → out/qrisp_qae.json (simulator shots unseeded: estimates vary run to run)
 
 (Simplified) The quantum circuits use a two-level discretisation of the fitted factor model (wet = top 30 %);
 the continuous model is the classical reference. The outlook shift uses the in-sample snow skill (North 0.47).
