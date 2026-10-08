@@ -41,3 +41,18 @@ uv venv -p 3.11 .venv-iqm && VIRTUAL_ENV=.venv-iqm uv pip install "iqm-client[qi
 ```
 IQM runs: `IQM_TOKEN=... .venv-iqm/bin/python scripts/run_hw.py --backend iqm --iqm-name garnet`.
 Rehearsals without hardware: `--backend iqm-fake` (IQM's 20-qubit noise model) and `--backend ibm-fake` (ibm_kingston).
+
+## Qrisp version
+The 3-qubit joint-trigger QAE ("Kittilä and Ivalo both pass their 1-in-50 spring level") is also written in
+Qrisp: `src/tulva/qrisp_qae.py`. Hydrology and the two areas are `QuantumBool`s; each area gets `ry` plus a
+further `ry` inside `with control(hydrology)`; the oracle is `tag_state({kittila: True, ivalo: True})`; Grover
+powers come from `qrisp.amplitude_amplification`, and MLAE over k = 0, 1, 2 gives the estimate. Qrisp's own `IQAE`
+runs as a simulator-only reference (it needs dozens of Grover iterates at a ≈ 0.1 %). Gate counts come from IQM's
+Qrisp pass manager (`iqm.qrisp_iqm.create_iqm_pass_manager`) on Garnet's coupling map. Qrisp lives in `.venv-iqm`
+(`VIRTUAL_ENV=.venv-iqm uv pip install "qrisp[iqm]"`; no conflict with iqm-client 36 / Qiskit 2.1).
+```bash
+.venv-iqm/bin/python scripts/qae_qrisp.py                         # Qrisp simulator -> out/qrisp_qae.json
+.venv-iqm/bin/python scripts/qae_qrisp.py --backend fake-garnet   # Garnet noise model via Qrisp's QiskitBackend
+IQM_TOKEN=... .venv-iqm/bin/python scripts/qae_qrisp.py --backend iqm --device garnet   # Qrisp IQMBackend
+```
+Hardware and fake-device runs go to `out/runs/qrisp_qae_*.json`.
