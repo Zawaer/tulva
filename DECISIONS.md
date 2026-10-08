@@ -24,3 +24,6 @@ Append one line per decision: date time · who · decision · why.
   disjoint qubits): N× shots per job for the 10-min budget, plus per-copy spread across the chip.
 - 2026-10-08 22:10 · Toivo · VTT Q50 is back (CSC Slack): unlimited priority via LUMI. Added --backend q50. IQM-type
   hardware = Q50 (if LUMI access works) and/or IQM Resonance.
+- 2026-10-08 · Vaishnav · Business research done; corrections for CLAIMS/web (EIOPA 0 % wording, 18 = 14 river + 4
+  coastal areas, risk load vs 2.5–3.5× market, no confirmed 2024 Lapland damage) in business/NOTES_FOR_TOIVO.md. ·
+  Mentor: focus on business case + why quantum; Finland-only scope is good. Larger circuits than 3–4 qubits are OK.
