@@ -3,8 +3,9 @@
     python scripts/export_web.py
 
 Reads only generated files in out/ and data/. Every number carries a `src` label:
-exact / monte-carlo / qae-sim / qae-sim-noisy / qae-q20 / data / placeholder.
-out/pricing.json (index-cover prices) and Q20 runs in out/runs/ fill in automatically when they exist;
+exact / monte-carlo / qae-sim / qae-sim-noisy / qae-q20 / qae-ibm / qae-iqm / data / placeholder.
+out/pricing.json (index-cover prices) and hardware runs in out/runs/ (latest IBM / IQM QAE run, 14-area
+loader on IQM Emerald, Qrisp run) fill in automatically when they exist;
 rerun this script after they appear.
 """
 from __future__ import annotations
@@ -177,16 +178,74 @@ def normalise_pricing(raw) -> dict:
 
 # ---------------------------------------------------------------- QAE / hardware runs
 
+def run_src(name: str) -> str | None:
+    """Source label of a run file in out/runs/ (None = rehearsal on a fake backend / simulator)."""
+    if name.startswith("ibm-ibm"):
+        return "qae-ibm"
+    if name.startswith(("iqm-garnet", "iqm-emerald", "iqm-radiance")):
+        return "qae-iqm"
+    if name.startswith(("q20", "q50")):
+        return "qae-q20"
+    return None
+
+
 def runs_summary() -> list[dict]:
     res = []
-    for a in sorted((OUT / "runs").glob("*.analysis.json")):
+    for a in sorted((OUT / "runs").glob("*.analysis.json"), key=lambda p: p.name.rsplit("-", 1)[-1]):
         run = load(a.with_name(a.name.replace(".analysis.json", ".json"))) or {}
         backend = run.get("backend", a.name.split("-2026")[0])
-        src = {"q20": "qae-q20", "ibm": "qae-ibm"}.get(backend.split("-")[0], "qae-sim-noisy")
-        res.append({"file": f"out/runs/{a.name}", "backend": backend, "src": src, "ems": run.get("ems"),
+        res.append({"file": f"out/runs/{a.name}", "backend": backend, "device": run.get("device"),
+                    "src": run_src(a.name) or "qae-sim-noisy", "ems": run.get("ems"), "jobs": run.get("jobs", []),
+                    "best_qubits": bool(run.get("layout_triples")),
                     "param_source": run.get("param_source"), "created_utc": run.get("created_utc"),
-                    "instances": load(a)})
+                    "instances": load(a) or {}})
     return res
+
+
+def hardware_summary(runs: list[dict]) -> dict:
+    """Latest real-hardware QAE result per platform and instance, the latest 14-area loader run, the latest Qrisp run."""
+    qae = {}
+    for inst in ("A3_kittila_ivalo_both", "A4_lapland_atleast2of3"):
+        rows = {}
+        for r in runs:                       # sorted by timestamp: later runs overwrite earlier ones
+            s = r["instances"].get(inst)
+            if r["src"] == "qae-sim-noisy" or not s:
+                continue
+            corr = s.get("noise_aware_per_copy_mlae") or s["noise_aware_mlae"]
+            rows[r["src"]] = {
+                "src": r["src"], "platform": {"qae-ibm": "IBM", "qae-iqm": "IQM", "qae-q20": "Aalto"}[r["src"]],
+                "device": r["device"] or r["backend"], "jobs": r["jobs"], "file": r["file"], "created_utc": r["created_utc"],
+                "best_qubits": r["best_qubits"], "copies": s.get("copies", 1), "shots": s["shots"],
+                "exact": s["exact"], "raw": s["raw_mlae"], "corrected": corr, "k0": s["k0_only"],
+                "two_qubit_gates_by_k": s["two_qubit_gates_by_k"], "oracle_queries": s["oracle_queries"],
+                "mc_rmse_same_queries": s["mc_rmse_same_queries"]}
+        key = "kittila_ivalo_both" if inst.startswith("A3") else "lapland_atleast2of3"
+        qae[key] = [rows[k] for k in ("qae-ibm", "qae-iqm", "qae-q20") if k in rows]
+
+    loader = None
+    lf = sorted((OUT / "runs").glob("loader-iqm-emerald-*.json"))
+    if lf:
+        r = load(lf[-1])
+        obs = (r.get("observed_reference") or {}).get("observed") or load(OUT / "joint_counts.json")["observed"]
+        ks = list(range(2, 8))
+        loader = {"file": f"out/runs/{lf[-1].name}", "device": r["device"], "jobs": r["jobs"], "shots": r["shots"],
+                  "qubits": r["qubits"], "two_qubit_gates": r["two_qubit_gates"], "created_utc": r["created_utc"],
+                  "readout_flip": [r["readout_p01"], r["readout_p10"]], "level": r["level"], "k": ks,
+                  "hardware": [r["p_at_least_k_readout_corrected"][k] for k in ks],
+                  "hardware_raw": [r["p_at_least_k_raw"][k] for k in ks],
+                  "exact": [r["p_at_least_k_exact"][k] for k in ks],
+                  "independent": [r["p_at_least_k_independent"][k] for k in ks],
+                  "observed": [obs[k - 1] for k in ks]}
+
+    qrisp = None
+    qf = sorted((OUT / "runs").glob("qrisp_qae_iqm_*.json"))
+    if qf:
+        r = load(qf[-1])
+        c = r["instances"]["climatology"]
+        qrisp = {"file": f"out/runs/{qf[-1].name}", "backend": r["backend"], "raw_mlae": c["mlae_mean"],
+                 "exact": c["exact"], "shots_per_k": r["shots_per_k"],
+                 "cz_by_k": [v["qrisp_iqm_pass_manager"]["cz"] for v in r["gate_counts_garnet"].values()]}
+    return {"qae": qae, "loader": loader, "qrisp": qrisp}
 
 
 def main() -> None:
@@ -269,6 +328,7 @@ def main() -> None:
     nat_vals = np.array(list(swe_nat.values()))
     swe_pct = {str(y): round(float((nat_vals < v).sum() + 0.5) / len(nat_vals) * 100) for y, v in swe_nat.items()}
 
+    runs = runs_summary()
     app = {
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         "payout_eur": PAYOUT_EUR,
@@ -283,7 +343,8 @@ def main() -> None:
         "replay": {"peaks": replay, "swe_national_pct": swe_pct, "src": "data",
                    "level_src": "the gauge's empirical 1-in-10 level (top 10 % of its 1961–2025 spring peaks), as in out/joint_counts.json"},
         "qae": qae,
-        "runs": runs_summary(),
+        "runs": runs,
+        "hardware": hardware_summary(runs),
     }
     (WEB / "app.json").write_text(json.dumps(app, ensure_ascii=False, indent=1))
     (WEB / "basemap.json").write_text(json.dumps(basemap(), ensure_ascii=False, separators=(",", ":")))

@@ -4,7 +4,7 @@
 const CLUSTER_COLOR = { "Ostrobothnia": "#2f6fde", "North": "#0f9e94", "Satakunta–SE": "#d4902a" };
 const SRC_LABEL = {
   "exact": "exact", "monte-carlo": "Monte Carlo", "qae-sim": "QAE sim", "qae-sim-noisy": "QAE noisy sim",
-  "qae-q20": "Q20", "qae-ibm": "IBM", "data": "observed", "placeholder": "placeholder",
+  "qae-q20": "Q20", "qae-ibm": "IBM", "qae-iqm": "IQM", "data": "observed", "placeholder": "placeholder",
 };
 const SRC_HELP = {
   "exact": "Exact value of the fitted model (quadrature / closed form), no sampling error.",
@@ -12,7 +12,8 @@ const SRC_HELP = {
   "qae-sim": "Quantum amplitude estimation on an ideal (noise-free) simulator.",
   "qae-sim-noisy": "Quantum amplitude estimation on a noisy simulator; rehearsal, not hardware.",
   "qae-q20": "Quantum amplitude estimation run on the Aalto Q20 quantum computer (IQM, via LUMI).",
-  "qae-ibm": "Quantum amplitude estimation run on IBM quantum hardware.",
+  "qae-ibm": "Run on real IBM quantum hardware.",
+  "qae-iqm": "Run on real IQM quantum hardware (IQM Resonance).",
   "data": "Observed data (SYKE / SMHI).",
   "placeholder": "Not a real result yet. Fills in automatically when the pipeline produces it.",
 };
@@ -241,50 +242,137 @@ function renderCard() {
 
 /* ---------------------------------------------------------------- 4. under the hood */
 
+const DEVICE_NAME = { ibm_marrakesh: "IBM Marrakesh", garnet: "IQM Garnet", emerald: "IQM Emerald" };
+const devName = (d) => DEVICE_NAME[d] || d;
+const pp = (x, d = 3) => (x * 100).toFixed(d) + " pp";
+
+function hwNote(r) {
+  return `${devName(r.device)}, job ${r.jobs.join(", ")} · ${r.copies} cop${r.copies === 1 ? "y" : "ies"}${r.best_qubits ? " on hand-picked qubits" : ""}, `
+    + `${r.shots.toLocaleString("en")} shots · two-qubit gates by Grover step k: ${Object.values(r.two_qubit_gates_by_k).join(" / ")} · `
+    + `calibrated = noise-aware MLAE with two known-answer circuits in the same job · ${r.file}`;
+}
+
 function renderHood() {
   const q = APP.qae;
   if (!q) { $("#hood-body").innerHTML = `<p>${tag("placeholder")} out/qae_sim.json not available.</p>`; return; }
+  const HW = APP.hardware || { qae: {} };
   const insts = [["kittila_ivalo_both", "Kittilä and Ivalo both pass 1-in-50"], ["lapland_atleast2of3", "≥2 of 3 Lapland areas pass 1-in-50"]];
-  const hwRuns = APP.runs.filter((r) => r.src === "qae-q20" || r.src === "qae-ibm");
-  const noisyRuns = APP.runs.filter((r) => r.src === "qae-sim-noisy");
   const panels = insts.map(([key, title]) => {
     const c = q.instances[key + "/climatology"], h = q.instances[key + "/high_march_outlook"];
     if (!c) return "";
-    const runFor = (runs) => {
-      for (const r of runs.slice().reverse()) {
-        const k = Object.keys(r.instances || {}).find((n) => n.includes(key));
-        if (k) return { run: r, res: r.instances[k] };
-      }
-      return null;
-    };
-    const hw = runFor(hwRuns), noisy = runFor(noisyRuns);
-    const hwRow = hw
-      ? `<tr><td>QAE on ${hw.run.backend === "q20" || hw.run.src === "qae-q20" ? "Aalto Q20" : esc(hw.run.backend)}${hw.run.ems ? " (EMS " + hw.run.ems + ")" : ""}, noise-aware</td><td class="v">${pct(hw.res.noise_aware_mlae)} ${tag(hw.run.src, `${hw.run.file}; raw MLAE ${pct(hw.res.raw_mlae)}; run's exact reference ${pct(hw.res.exact)}; params: ${hw.run.param_source}`)}</td></tr>`
-      : `<tr><td>QAE on Aalto Q20 hardware</td><td class="v"><span class="ph">pending</span> ${tag("placeholder", "Hardware batch not run yet; fills in from out/runs/q20-*.analysis.json.")}</td></tr>`;
-    const noisyNote = noisy ? `${noisy.run.file}; params: ${noisy.run.param_source}; run's exact ${pct(noisy.res.exact)}` : "qae_sim.json";
+    const hw = HW.qae[key] || [];
+    const hwRows = hw.length ? hw.map((r) => `<tr class="hw"><td>${devName(r.device)}<span class="hw-sub">raw → calibrated</span></td>
+        <td class="v"><span class="raw">${pct(r.raw, 3)}</span> → <b>${pct(r.corrected, 3)}</b> ${tag(r.src, hwNote(r))}</td></tr>`).join("")
+      : `<tr><td>QAE on quantum hardware</td><td class="v"><span class="ph">pending</span> ${tag("placeholder", "Fills in from out/runs/*.analysis.json.")}</td></tr>`;
+    const mc = hw.length
+      ? hw.map((r) => `± ${pp(r.mc_rmse_same_queries)}`).join(" / ")
+      : `± ${pp(c.mc_same_queries_rmse)}`;
+    const mcNote = hw.length
+      ? "RMSE of classical Monte Carlo with the same number of model evaluations as each hardware run (" + hw.map((r) => devName(r.device) + " " + r.oracle_queries.toLocaleString("en")).join(", ") + ")"
+      : "RMSE with the same number of model evaluations";
+    const shallow = key === "kittila_ivalo_both";
+    const honest = hw.length ? `<p class="honest">${shallow
+        ? `Calibration pulls both chips from 2–3× the exact value to within ${pp(Math.max(...hw.map((r) => Math.abs(r.corrected - r.exact))), 2)} of it. Classical Monte Carlo at the same budget is still more precise; no quantum advantage is claimed.`
+        : "4-qubit circuits are deeper (up to " + Math.max(...hw.map((r) => Math.max(...Object.values(r.two_qubit_gates_by_k)))) + " two-qubit gates) and lose most of their signal: the measured limit of today's hardware. Monte Carlo is more precise."}</p>` : "";
     return `<div class="panel">
       <h3>${title}</h3><div class="sub">Two-level factor model, ${c.qubits} qubits · ${q.trigger}</div>
       <div class="chips">
         <div class="chip"><b>${c.qubits}</b>qubits</div>
-        <div class="chip"><b>${c.cz_by_k_grid.join(" / ")}</b>CZ gates for k = 0…${c.cz_by_k_grid.length - 1} Grover steps</div>
-        <div class="chip"><b>${c.oracle_queries.toLocaleString("en")}</b>oracle queries</div>
+        <div class="chip"><b>${(hw[0] ? Object.values(hw[0].two_qubit_gates_by_k) : c.cz_by_k_grid).join(" / ")}</b>two-qubit gates by Grover step</div>
+        <div class="chip"><b>${hw.length ? hw.map((r) => (r.shots / 1000).toFixed(0) + "k").join(" + ") : c.oracle_queries.toLocaleString("en")}</b>${hw.length ? "hardware shots" : "oracle queries"}</div>
       </div>
       <table class="cmp">
         <tr><th>Method</th><th style="text-align:right">P(trigger)</th></tr>
         <tr class="ref"><td>Exact (classical reference)</td><td class="v">${pct(c.exact, 3)} ${tag("exact", "statevector check, max error " + c.statevector_max_error.toExponential(0))}</td></tr>
-        <tr><td>QAE, ideal simulator</td><td class="v">${pct(c.qae_ideal_mean, 3)} ± ${(c.qae_ideal_rmse * 100).toFixed(3)} pp ${tag("qae-sim", "mean ± RMSE over repeats")}</td></tr>
-        <tr><td>Monte Carlo, same query budget</td><td class="v">± ${(c.mc_same_queries_rmse * 100).toFixed(3)} pp ${tag("monte-carlo", "RMSE with the same number of model evaluations")}</td></tr>
-        <tr><td>QAE, noisy simulator (raw)</td><td class="v">${pct(noisy ? noisy.res.raw_mlae : c.qae_noisy_raw, 3)} ${tag("qae-sim-noisy", noisyNote)}</td></tr>
-        ${hwRow}
+        ${hwRows}
+        <tr><td>Monte Carlo, same budget</td><td class="v">${mc} ${tag("monte-carlo", mcNote)}</td></tr>
+        <tr><td>QAE, ideal simulator</td><td class="v">${pct(c.qae_ideal_mean, 3)} ± ${pp(c.qae_ideal_rmse)} ${tag("qae-sim", "mean ± RMSE over repeats, " + c.oracle_queries.toLocaleString("en") + " oracle queries")}</td></tr>
         <tr><td>If independent</td><td class="v">${pct(c.if_independent, 3)} ${tag("exact")}</td></tr>
         ${h ? `<tr><td>Exact after a high March outlook</td><td class="v">${pct(h.exact, 3)} ${tag("exact", "top-15 % snow year; QAE sim " + pct(h.qae_ideal_mean, 3))}</td></tr>` : ""}
-      </table>
+      </table>${honest}
     </div>`;
   });
-  $("#hood-body").innerHTML = `<div class="hood-grid">${panels.join("")}</div>
-    <p class="fine">At equal query budgets the ideal-simulator QAE error is smaller than Monte Carlo's
-    (expected quadratic scaling); on today's noisy hardware the deeper circuits lose that edge, so hardware values are reported
-    raw and with a noise-aware fit, next to the exact answer. Circuits are a two-level discretisation of the fitted model.</p>`;
+  const qr = HW.qrisp;
+  const qrLine = qr ? `<p class="qrisp">Also implemented natively in Qrisp and run on IQM Garnet. ${tag("qae-iqm",
+    `IQM's high-level framework, compiled with IQM's pass manager (${qr.cz_by_k.join(" / ")} CZ for k = 0 / 1 / 2), ${qr.shots_per_k.toLocaleString("en")} shots per k, no calibration circuits: raw MLAE ${pct(qr.raw_mlae, 3)} vs exact ${pct(qr.exact, 3)}, matching the raw Qiskit run on the same chip. ${qr.file}`)}</p>` : "";
+  $("#hood-body").innerHTML = `${loaderCard(HW.loader)}<div class="hood-grid">${panels.join("")}</div>${qrLine}
+    <p class="fine">Hardware values are shown raw and calibrated (noise-aware maximum-likelihood amplitude estimation, using two circuits
+    with known answers run in the same job on the same qubits), next to the exact answer. Circuits are a two-level discretisation of the
+    fitted model. Hover a label for the job id.</p>`;
+  bindLoaderHover();
+}
+
+/* 14-area loader on IQM Emerald: P(>= k areas over their 1-in-10 level), log scale */
+const LOADER_SERIES = [
+  { key: "hardware", label: "IQM Emerald, readout-corrected", color: "#c4307a", mark: "square" },
+  { key: "exact", label: "Exact model", color: "#0a7fc2", mark: "line" },
+  { key: "independent", label: "If independent", color: "#b4581b", mark: "dash" },
+  { key: "observed", label: "Observed 1961–2025", color: "#1c2b40", mark: "ring" },
+];
+function loaderCard(L) {
+  if (!L) return "";
+  const W = 640, H = 360, m = { l: 58, r: 22, t: 16, b: 46 };
+  const lo = -4, hi = 0;                      // 0.01 % .. 100 %
+  const x = (k) => m.l + (k - L.k[0]) / (L.k[L.k.length - 1] - L.k[0]) * (W - m.l - m.r);
+  const y = (p) => m.t + (hi - Math.log10(p)) / (hi - lo) * (H - m.t - m.b);
+  const ticks = [1, 0.1, 0.01, 0.001, 0.0001];
+  const tickLbl = { 1: "100 %", 0.1: "10 %", 0.01: "1 %", 0.001: "0.1 %", 0.0001: "0.01 %" };
+  let g = ticks.map((t) => `<line x1="${m.l}" x2="${W - m.r}" y1="${y(t)}" y2="${y(t)}" class="grid"/><text x="${m.l - 8}" y="${y(t) + 4}" class="ax" text-anchor="end">${tickLbl[t]}</text>`).join("");
+  g += L.k.map((k) => `<text x="${x(k)}" y="${H - m.b + 20}" class="ax" text-anchor="middle">≥${k}</text>`).join("");
+  g += `<text x="${(m.l + W - m.r) / 2}" y="${H - 6}" class="ax t" text-anchor="middle">areas (of 14) over their 1-in-10 spring level</text>`;
+  const pts = (key) => L.k.map((k, i) => [x(k), L[key][i] > 0 ? y(L[key][i]) : null]).filter((p) => p[1] != null);
+  const path = (key) => "M" + pts(key).map((p) => p.map((v) => v.toFixed(1)).join(",")).join("L");
+  g += `<path d="${path("independent")}" class="ln" stroke="#b4581b" stroke-dasharray="7 5"/>`;
+  g += `<path d="${path("exact")}" class="ln" stroke="#0a7fc2"/>`;
+  g += pts("observed").map(([a, b]) => `<circle cx="${a}" cy="${b}" r="7.5" fill="#fff" stroke="#1c2b40" stroke-width="2"/>`).join("");
+  g += pts("hardware").map(([a, b]) => `<rect x="${a - 6}" y="${b - 6}" width="12" height="12" rx="2" fill="#c4307a" stroke="#fff" stroke-width="2"/>`).join("");
+  // direct labels at the right end of the two lines
+  const lastI = L.k.length - 1;
+  g += `<text x="${x(L.k[lastI]) - 4}" y="${y(L.independent[lastI]) - 10}" class="dl" text-anchor="end">if independent</text>`;
+  g += `<text x="${x(L.k[lastI]) - 4}" y="${y(L.exact[lastI]) + 19}" class="dl" text-anchor="end">exact model</text>`;
+  // hover columns
+  g += L.k.map((k, i) => `<rect class="hit" data-i="${i}" x="${x(k) - 40}" y="${m.t}" width="80" height="${H - m.t - m.b}"/>`).join("");
+  const legend = LOADER_SERIES.map((s) => `<span class="lg"><i class="mk ${s.mark}" style="--c:${s.color}"></i>${s.label}</span>`).join("");
+  const job = L.jobs.join(", ");
+  const rows = L.k.map((k, i) => `<tr><td>≥${k}</td><td class="v hwv">${pct(L.hardware[i], 1)}</td><td class="v">${pct(L.exact[i], 1)}</td><td class="v">${pct(L.independent[i], L.independent[i] < 0.01 ? 2 : 1)}</td><td class="v">${L.observed[i] ? pct(L.observed[i], 1) : "0 %"}</td></tr>`).join("");
+  return `<div class="panel loader">
+    <div class="loader-head">
+      <div><h3>All 14 areas on one quantum chip</h3>
+      <div class="sub">Chance per spring that k or more of Finland's 14 river flood-risk areas pass their 1-in-10 level together:
+        the full joint model loaded into one circuit and sampled on real hardware.</div></div>
+      <div class="chips"><div class="chip"><b>${L.qubits}</b>qubits</div><div class="chip"><b>${L.two_qubit_gates}</b>two-qubit gates</div>
+        <div class="chip"><b>${devName(L.device).replace("IQM ", "")}</b>IQM</div><div class="chip"><b>${L.shots.toLocaleString("en")}</b>shots</div></div>
+    </div>
+    <div class="loader-body">
+      <div class="lchart"><div class="legend-row">${legend}</div>
+        <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="P(at least k areas) on IQM Emerald vs exact model, independence and observed">${g}</svg>
+        <div id="ltip" class="ltip" hidden></div></div>
+      <div class="ltable"><table class="cmp">
+        <tr><th>k areas</th><th style="text-align:right">Hardware ${tag("qae-iqm", `IQM Emerald, job ${job}, ${L.shots.toLocaleString("en")} shots, readout-corrected (flip rates ${pct(L.readout_flip[0], 1)} / ${pct(L.readout_flip[1], 1)}). ${L.file}`)}</th>
+          <th style="text-align:right">Exact ${tag("exact", "the circuit's two-level factor model, computed exactly")}</th>
+          <th style="text-align:right">Indep. ${tag("exact", "each area 10 %/yr, independently")}</th>
+          <th style="text-align:right">Observed ${tag("data", "share of years 1961–2025, SYKE / SMHI spring peaks")}</th></tr>
+        ${rows}</table>
+        <p class="honest">The chip reproduces the fat joint tail: ≥5 areas at once is ${Math.round(L.hardware[3] / L.independent[3])}× likelier than independence says, close to the exact model and to what Finland saw (1966, 1977, 1984, 2018, 2024). Sampling noise and gate errors lift the hardware a little above the model.</p>
+      </div>
+    </div>
+  </div>`;
+}
+function bindLoaderHover() {
+  const L = APP.hardware && APP.hardware.loader, tip = $("#ltip");
+  if (!L || !tip) return;
+  document.querySelectorAll(".loader .hit").forEach((r) => {
+    r.addEventListener("mouseenter", () => {
+      const i = +r.dataset.i;
+      tip.innerHTML = `<b>≥${L.k[i]} of 14 areas</b>` + LOADER_SERIES.map((s) =>
+        `<div><i class="mk ${s.mark}" style="--c:${s.color}"></i>${s.label}<span>${pct(L[s.key][i], 2)}</span></div>`).join("");
+      tip.hidden = false;
+      const box = r.closest("svg").getBoundingClientRect(), rb = r.getBoundingClientRect();
+      const left = rb.left - box.left + rb.width / 2;
+      tip.style.left = Math.min(Math.max(left, 120), box.width - 120) + "px";
+    });
+    r.addEventListener("mouseleave", () => { tip.hidden = true; });
+  });
 }
 
 /* ---------------------------------------------------------------- 5. year replay */

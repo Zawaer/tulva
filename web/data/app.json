@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-08 18:28 UTC",
+ "generated_utc": "2026-10-08 19:13 UTC",
  "payout_eur": 10000000,
  "edge_min_spearman": 0.6,
  "areas": [
@@ -1756,10 +1756,86 @@
  },
  "runs": [
   {
+   "file": "out/runs/sim-noisy-20261008T153601Z.analysis.json",
+   "backend": "sim-noisy",
+   "device": null,
+   "src": "qae-sim-noisy",
+   "ems": 0,
+   "jobs": [
+    "1c87ef65-a7ad-4f22-8a41-cb1a0d1c04e1"
+   ],
+   "best_qubits": false,
+   "param_source": "out/model_params.json",
+   "created_utc": "20261008T153601Z",
+   "instances": {
+    "A3_kittila_ivalo_both": {
+     "exact": 0.0012496992187709922,
+     "raw_mlae": 0.0014629914375824775,
+     "noise_aware_mlae": 0.001333887546314822,
+     "k0_only": 0.002375,
+     "gain_by_k": {
+      "0": 1.0418333533773734,
+      "1": 0.8732103722094714,
+      "2": 0.7977970089369715,
+      "3": 0.7523547402914937
+     },
+     "offset_by_k": {
+      "0": 0.0008749996521552689,
+      "1": 0.0066249973760922195,
+      "2": 0.011249993340837946,
+      "3": 0.016124987691477844
+     },
+     "two_qubit_gates_by_k": {
+      "0": 4,
+      "1": 17,
+      "2": 30,
+      "3": 43
+     },
+     "oracle_queries": 128000,
+     "mc_rmse_same_queries": 9.874752649724936e-05,
+     "shots": 32000,
+     "mc_rmse_same_shots": 0.00019749505299449871
+    },
+    "A4_lapland_atleast2of3": {
+     "exact": 0.0035879218973109356,
+     "raw_mlae": 0.004357730127981088,
+     "noise_aware_mlae": 0.0028926246764011945,
+     "k0_only": 0.007625,
+     "gain_by_k": {
+      "0": 1.0283771502582746,
+      "1": 0.82839223168876,
+      "2": 0.7570076353295208,
+      "3": 1.0021014096992804
+     },
+     "offset_by_k": {
+      "0": 0.0016249989699668834,
+      "1": 0.023124992532464507,
+      "2": 0.040749981044334575,
+      "3": 0.06337495081796261
+     },
+     "two_qubit_gates_by_k": {
+      "0": 6,
+      "1": 33,
+      "2": 60,
+      "3": 87
+     },
+     "oracle_queries": 128000,
+     "mc_rmse_same_queries": 0.00016712291307994256,
+     "shots": 32000,
+     "mc_rmse_same_shots": 0.00033424582615988513
+    }
+   }
+  },
+  {
    "file": "out/runs/ibm-fake-20261008T155308Z.analysis.json",
    "backend": "ibm-fake",
-   "src": "qae-ibm",
+   "device": "ibm-fake",
+   "src": "qae-sim-noisy",
    "ems": 0,
+   "jobs": [
+    "112ac47d-7d7c-4f09-be8e-fa8d5857809a"
+   ],
+   "best_qubits": false,
    "param_source": "out/model_params.json",
    "created_utc": "20261008T155308Z",
    "instances": {
@@ -1822,10 +1898,86 @@
    }
   },
   {
+   "file": "out/runs/iqm-fake-apollo-20261008T155351Z.analysis.json",
+   "backend": "iqm-fake",
+   "device": "apollo",
+   "src": "qae-sim-noisy",
+   "ems": 0,
+   "jobs": [
+    "564c5d06-5e00-4d8d-ba97-7fbd4c4b03c1"
+   ],
+   "best_qubits": false,
+   "param_source": "out/model_params.json",
+   "created_utc": "20261008T155351Z",
+   "instances": {
+    "A3_kittila_ivalo_both": {
+     "exact": 0.0012496992187709922,
+     "raw_mlae": 0.004285603804644104,
+     "noise_aware_mlae": 0.002393180985454939,
+     "k0_only": 0.01175,
+     "gain_by_k": {
+      "0": 1.0271003564609258,
+      "1": 0.4771490663052387,
+      "2": 0.2972929449837401,
+      "3": 0.1719667977809128
+     },
+     "offset_by_k": {
+      "0": 0.007249999657074286,
+      "1": 0.057749998566215904,
+      "2": 0.08899999751851426,
+      "3": 0.14474999718662349
+     },
+     "two_qubit_gates_by_k": {
+      "0": 4,
+      "1": 29,
+      "2": 50,
+      "3": 77
+     },
+     "oracle_queries": 64000,
+     "mc_rmse_same_queries": 0.00013965009122320662,
+     "shots": 16000,
+     "mc_rmse_same_shots": 0.00027930018244641324
+    },
+    "A4_lapland_atleast2of3": {
+     "exact": 0.0035879218973109356,
+     "raw_mlae": 0.012915237187121478,
+     "noise_aware_mlae": 0.0022421355489199014,
+     "k0_only": 0.03175,
+     "gain_by_k": {
+      "0": 0.9921045529660378,
+      "1": 0.3646254029918458,
+      "2": 0.2210553066664938,
+      "3": 0.33553415922964874
+     },
+     "offset_by_k": {
+      "0": 0.017749999006297888,
+      "1": 0.16849999671308707,
+      "2": 0.2997499944647184,
+      "3": 0.3994999835323517
+     },
+     "two_qubit_gates_by_k": {
+      "0": 6,
+      "1": 43,
+      "2": 83,
+      "3": 123
+     },
+     "oracle_queries": 64000,
+     "mc_rmse_same_queries": 0.00023634749026095467,
+     "shots": 16000,
+     "mc_rmse_same_shots": 0.00047269498052190934
+    }
+   }
+  },
+  {
    "file": "out/runs/ibm-fake-20261008T155658Z.analysis.json",
    "backend": "ibm-fake",
-   "src": "qae-ibm",
+   "device": "ibm-fake",
+   "src": "qae-sim-noisy",
    "ems": 0,
+   "jobs": [
+    "fe082497-52df-4e89-96af-f1c01bfd9918"
+   ],
+   "best_qubits": false,
    "param_source": "out/model_params.json",
    "created_utc": "20261008T155658Z",
    "instances": {}
@@ -1833,8 +1985,13 @@
   {
    "file": "out/runs/ibm-fake-20261008T160716Z.analysis.json",
    "backend": "ibm-fake",
-   "src": "qae-ibm",
+   "device": "ibm-fake",
+   "src": "qae-sim-noisy",
    "ems": 0,
+   "jobs": [
+    "fe9e140e-8236-492f-821a-c508036b9a26"
+   ],
+   "best_qubits": false,
    "param_source": "out/model_params.json",
    "created_utc": "20261008T160716Z",
    "instances": {
@@ -1911,8 +2068,13 @@
   {
    "file": "out/runs/ibm-ibm_marrakesh-20261008T170341Z.analysis.json",
    "backend": "ibm",
+   "device": "ibm_marrakesh",
    "src": "qae-ibm",
    "ems": 0,
+   "jobs": [
+    "db3sssqmb58s7388bb00"
+   ],
+   "best_qubits": false,
    "param_source": "out/model_params.json",
    "created_utc": "20261008T170341Z",
    "instances": {
@@ -2035,8 +2197,13 @@
   {
    "file": "out/runs/ibm-ibm_marrakesh-20261008T174523Z.analysis.json",
    "backend": "ibm",
+   "device": "ibm_marrakesh",
    "src": "qae-ibm",
    "ems": 0,
+   "jobs": [
+    "db3tddsvf2bc73ctoprg"
+   ],
+   "best_qubits": true,
    "param_source": "out/model_params.json",
    "created_utc": "20261008T174523Z",
    "instances": {
@@ -2092,76 +2259,15 @@
    }
   },
   {
-   "file": "out/runs/iqm-fake-apollo-20261008T155351Z.analysis.json",
-   "backend": "iqm-fake",
-   "src": "qae-sim-noisy",
-   "ems": 0,
-   "param_source": "out/model_params.json",
-   "created_utc": "20261008T155351Z",
-   "instances": {
-    "A3_kittila_ivalo_both": {
-     "exact": 0.0012496992187709922,
-     "raw_mlae": 0.004285603804644104,
-     "noise_aware_mlae": 0.002393180985454939,
-     "k0_only": 0.01175,
-     "gain_by_k": {
-      "0": 1.0271003564609258,
-      "1": 0.4771490663052387,
-      "2": 0.2972929449837401,
-      "3": 0.1719667977809128
-     },
-     "offset_by_k": {
-      "0": 0.007249999657074286,
-      "1": 0.057749998566215904,
-      "2": 0.08899999751851426,
-      "3": 0.14474999718662349
-     },
-     "two_qubit_gates_by_k": {
-      "0": 4,
-      "1": 29,
-      "2": 50,
-      "3": 77
-     },
-     "oracle_queries": 64000,
-     "mc_rmse_same_queries": 0.00013965009122320662,
-     "shots": 16000,
-     "mc_rmse_same_shots": 0.00027930018244641324
-    },
-    "A4_lapland_atleast2of3": {
-     "exact": 0.0035879218973109356,
-     "raw_mlae": 0.012915237187121478,
-     "noise_aware_mlae": 0.0022421355489199014,
-     "k0_only": 0.03175,
-     "gain_by_k": {
-      "0": 0.9921045529660378,
-      "1": 0.3646254029918458,
-      "2": 0.2210553066664938,
-      "3": 0.33553415922964874
-     },
-     "offset_by_k": {
-      "0": 0.017749999006297888,
-      "1": 0.16849999671308707,
-      "2": 0.2997499944647184,
-      "3": 0.3994999835323517
-     },
-     "two_qubit_gates_by_k": {
-      "0": 6,
-      "1": 43,
-      "2": 83,
-      "3": 123
-     },
-     "oracle_queries": 64000,
-     "mc_rmse_same_queries": 0.00023634749026095467,
-     "shots": 16000,
-     "mc_rmse_same_shots": 0.00047269498052190934
-    }
-   }
-  },
-  {
    "file": "out/runs/iqm-garnet-20261008T182125Z.analysis.json",
    "backend": "iqm",
-   "src": "qae-sim-noisy",
+   "device": "garnet",
+   "src": "qae-iqm",
    "ems": 0,
+   "jobs": [
+    "01a11cbf-bb06-7672-a667-c85255613143"
+   ],
+   "best_qubits": false,
    "param_source": "out/model_params.json",
    "created_utc": "20261008T182125Z",
    "instances": {
@@ -2230,8 +2336,13 @@
   {
    "file": "out/runs/iqm-garnet-20261008T182534Z.analysis.json",
    "backend": "iqm",
-   "src": "qae-sim-noisy",
+   "device": "garnet",
+   "src": "qae-iqm",
    "ems": 0,
+   "jobs": [
+    "01a11cc3-7f6c-711e-a732-81b7eda761ec"
+   ],
+   "best_qubits": true,
    "param_source": "out/model_params.json",
    "created_utc": "20261008T182534Z",
    "instances": {
@@ -2269,72 +2380,187 @@
      "mc_rmse_same_shots": 0.00010198600682747264
     }
    }
-  },
-  {
-   "file": "out/runs/sim-noisy-20261008T153601Z.analysis.json",
-   "backend": "sim-noisy",
-   "src": "qae-sim-noisy",
-   "ems": 0,
-   "param_source": "out/model_params.json",
-   "created_utc": "20261008T153601Z",
-   "instances": {
-    "A3_kittila_ivalo_both": {
+  }
+ ],
+ "hardware": {
+  "qae": {
+   "kittila_ivalo_both": [
+    {
+     "src": "qae-ibm",
+     "platform": "IBM",
+     "device": "ibm_marrakesh",
+     "jobs": [
+      "db3tddsvf2bc73ctoprg"
+     ],
+     "file": "out/runs/ibm-ibm_marrakesh-20261008T174523Z.analysis.json",
+     "created_utc": "20261008T174523Z",
+     "best_qubits": true,
+     "copies": 20,
+     "shots": 240000,
      "exact": 0.0012496992187709922,
-     "raw_mlae": 0.0014629914375824775,
-     "noise_aware_mlae": 0.001333887546314822,
-     "k0_only": 0.002375,
-     "gain_by_k": {
-      "0": 1.0418333533773734,
-      "1": 0.8732103722094714,
-      "2": 0.7977970089369715,
-      "3": 0.7523547402914937
-     },
-     "offset_by_k": {
-      "0": 0.0008749996521552689,
-      "1": 0.0066249973760922195,
-      "2": 0.011249993340837946,
-      "3": 0.016124987691477844
-     },
+     "raw": 0.0026209197186222413,
+     "corrected": 0.0014750233926674055,
+     "k0": 0.002375,
      "two_qubit_gates_by_k": {
       "0": 4,
-      "1": 17,
-      "2": 30,
-      "3": 43
+      "1": 23,
+      "2": 42
      },
-     "oracle_queries": 128000,
-     "mc_rmse_same_queries": 9.874752649724936e-05,
-     "shots": 32000,
-     "mc_rmse_same_shots": 0.00019749505299449871
+     "oracle_queries": 720000,
+     "mc_rmse_same_queries": 4.163561293855156e-05
     },
-    "A4_lapland_atleast2of3": {
+    {
+     "src": "qae-iqm",
+     "platform": "IQM",
+     "device": "garnet",
+     "jobs": [
+      "01a11cc3-7f6c-711e-a732-81b7eda761ec"
+     ],
+     "file": "out/runs/iqm-garnet-20261008T182534Z.analysis.json",
+     "created_utc": "20261008T182534Z",
+     "best_qubits": true,
+     "copies": 4,
+     "shots": 120000,
+     "exact": 0.0012496992187709922,
+     "raw": 0.0036824506849696247,
+     "corrected": 0.0016295737918430827,
+     "k0": 0.00335,
+     "two_qubit_gates_by_k": {
+      "0": 4,
+      "1": 26,
+      "2": 53
+     },
+     "oracle_queries": 360000,
+     "mc_rmse_same_queries": 5.888164849541634e-05
+    }
+   ],
+   "lapland_atleast2of3": [
+    {
+     "src": "qae-ibm",
+     "platform": "IBM",
+     "device": "ibm_marrakesh",
+     "jobs": [
+      "db3sssqmb58s7388bb00"
+     ],
+     "file": "out/runs/ibm-ibm_marrakesh-20261008T170341Z.analysis.json",
+     "created_utc": "20261008T170341Z",
+     "best_qubits": false,
+     "copies": 25,
+     "shots": 200000,
      "exact": 0.0035879218973109356,
-     "raw_mlae": 0.004357730127981088,
-     "noise_aware_mlae": 0.0028926246764011945,
-     "k0_only": 0.007625,
-     "gain_by_k": {
-      "0": 1.0283771502582746,
-      "1": 0.82839223168876,
-      "2": 0.7570076353295208,
-      "3": 1.0021014096992804
+     "raw": 0.020031126949297453,
+     "corrected": 0.004912279255469296,
+     "k0": 0.02756,
+     "two_qubit_gates_by_k": {
+      "0": 8,
+      "1": 67,
+      "2": 115,
+      "3": 164
      },
-     "offset_by_k": {
-      "0": 0.0016249989699668834,
-      "1": 0.023124992532464507,
-      "2": 0.040749981044334575,
-      "3": 0.06337495081796261
-     },
+     "oracle_queries": 800000,
+     "mc_rmse_same_queries": 6.684916523197702e-05
+    },
+    {
+     "src": "qae-iqm",
+     "platform": "IQM",
+     "device": "garnet",
+     "jobs": [
+      "01a11cbf-bb06-7672-a667-c85255613143"
+     ],
+     "file": "out/runs/iqm-garnet-20261008T182125Z.analysis.json",
+     "created_utc": "20261008T182125Z",
+     "best_qubits": false,
+     "copies": 1,
+     "shots": 18000,
+     "exact": 0.0035879218973109356,
+     "raw": 0.010695171294857043,
+     "corrected": 0.004316441705443601,
+     "k0": 0.009666666666666667,
      "two_qubit_gates_by_k": {
       "0": 6,
-      "1": 33,
-      "2": 60,
-      "3": 87
+      "1": 43,
+      "2": 83
      },
-     "oracle_queries": 128000,
-     "mc_rmse_same_queries": 0.00016712291307994256,
-     "shots": 32000,
-     "mc_rmse_same_shots": 0.00033424582615988513
+     "oracle_queries": 54000,
+     "mc_rmse_same_queries": 0.0002573025569452247
     }
-   }
+   ]
+  },
+  "loader": {
+   "file": "out/runs/loader-iqm-emerald-20261008T184433Z.json",
+   "device": "emerald",
+   "jobs": [
+    "01a11cd4-da38-718b-80c9-7e259c6e4452"
+   ],
+   "shots": 8000,
+   "qubits": 18,
+   "two_qubit_gates": 44,
+   "created_utc": "20261008T184433Z",
+   "readout_flip": [
+    0.004741071428571428,
+    0.00555357142857138
+   ],
+   "level": 0.1,
+   "k": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "hardware": [
+    0.465726233431979,
+    0.26589775499260576,
+    0.13831834314923896,
+    0.06326291001052363,
+    0.02424724290065512,
+    0.00885232472352185
+   ],
+   "hardware_raw": [
+    0.4796249999999995,
+    0.2752499999999997,
+    0.14337500000000009,
+    0.06575000000000004,
+    0.025375000000000016,
+    0.009125000000000005
+   ],
+   "exact": [
+    0.37940002261426137,
+    0.21605044265970708,
+    0.10861873228513744,
+    0.0482511847394654,
+    0.018878949578014205,
+    0.0063535807351451055
+   ],
+   "independent": [
+    0.4157631991183381,
+    0.15862165194374553,
+    0.044239576081349395,
+    0.009259850512660666,
+    0.0014799843917987418,
+    0.00018224014429434187
+   ],
+   "observed": [
+    0.4154,
+    0.1846,
+    0.1538,
+    0.0769,
+    0.0154,
+    0.0
+   ]
+  },
+  "qrisp": {
+   "file": "out/runs/qrisp_qae_iqm_garnet20261008T184156Z.json",
+   "backend": "IQM garnet (https://resonance.iqm.tech)",
+   "raw_mlae": 0.003541112373550366,
+   "exact": 0.0012496992187709924,
+   "shots_per_k": 10000,
+   "cz_by_k": [
+    4,
+    23,
+    45
+   ]
   }
- ]
+ }
 }

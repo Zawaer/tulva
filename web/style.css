@@ -51,7 +51,7 @@ nav a:hover { color: var(--navy); }
 .src[data-src="monte-carlo"] { color: #6a5a2a; }
 .src[data-src="qae-sim"] { color: #5b3fb0; }
 .src[data-src="qae-sim-noisy"] { color: #7d4fa8; }
-.src[data-src="qae-q20"], .src[data-src="qae-ibm"] { color: #a0306a; }
+.src[data-src="qae-q20"], .src[data-src="qae-ibm"], .src[data-src="qae-iqm"] { color: #a0306a; }
 .src[data-src="data"] { color: #2c5c8a; }
 .src[data-src="placeholder"] { color: var(--warn); background: #fff4e8; }
 
@@ -112,6 +112,40 @@ table.cmp td, table.cmp th { padding: 7px 4px; border-bottom: 1px solid var(--li
 table.cmp th { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 table.cmp td.v { text-align: right; white-space: nowrap; }
 table.cmp tr.ref td { font-weight: 700; color: var(--navy); }
+table.cmp tr.hw td { background: #fbf2f7; }
+table.cmp tr.hw td:first-child { font-weight: 600; color: var(--navy); }
+.hw-sub { display: block; font-size: 12px; font-weight: 400; color: var(--muted); }
+table.cmp .raw { color: var(--muted); }
+table.cmp tr.hw b { color: var(--navy); font-size: 16px; }
+.honest { font-size: 13.5px; color: var(--ink); margin: 12px 0 0; padding-left: 10px; border-left: 3px solid var(--line); }
+.qrisp { margin: 18px 0 6px; font-size: 15px; color: var(--ink); }
+.panel.loader { margin-top: 20px; }
+.loader-head { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+.loader-head h3 { font-size: 22px; }
+.loader-head .sub { max-width: 620px; font-size: 14px; }
+.loader-body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 6px; }
+.lchart { position: relative; }
+.lchart svg { width: 100%; height: auto; display: block; }
+.lchart .grid { stroke: var(--line); stroke-width: 1; }
+.lchart .ax { font-size: 12px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.lchart .ax.t { font-size: 13px; }
+.lchart .ln { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.lchart .dl { font-size: 12.5px; fill: var(--ink); font-weight: 600; paint-order: stroke; stroke: #fff; stroke-width: 4px; }
+.lchart .hit { fill: transparent; cursor: crosshair; }
+.lchart .hit:hover { fill: rgba(10,127,194,.06); }
+.legend-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink); margin-bottom: 6px; }
+.lg { display: inline-flex; align-items: center; gap: 7px; }
+.mk { display: inline-block; width: 18px; height: 12px; position: relative; flex: none; }
+.mk.square::after { content: ""; position: absolute; left: 3px; top: 0; width: 12px; height: 12px; border-radius: 2px; background: var(--c); }
+.mk.line::after, .mk.dash::after { content: ""; position: absolute; left: 0; right: 0; top: 5px; border-top: 2.5px solid var(--c); }
+.mk.dash::after { border-top-style: dashed; }
+.mk.ring::after { content: ""; position: absolute; left: 3px; top: 0; width: 8px; height: 8px; border-radius: 50%; border: 2px solid var(--c); background: #fff; }
+.ltip { position: absolute; top: 40px; transform: translateX(-50%); background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(11,31,58,.12); padding: 10px 12px; font-size: 13px; min-width: 230px; pointer-events: none; }
+.ltip div { display: flex; align-items: center; gap: 7px; margin-top: 4px; }
+.ltip span { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 600; }
+.ltable table.cmp { font-size: 15px; }
+.ltable td.hwv { font-weight: 700; color: var(--navy); }
 
 /* replay */
 .years { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 10px; }
@@ -133,7 +167,7 @@ table.cmp tr.ref td { font-weight: 700; color: var(--navy); }
   .wrap { padding: 0 18px; }
   nav { display: none; }
   .sec { padding: 40px 0; }
-  .grid-map, .tiles, .views, .hood-grid { grid-template-columns: 1fr; }
+  .grid-map, .tiles, .views, .hood-grid, .loader-body { grid-template-columns: 1fr; }
   .leaf { height: 440px; }
   .stats { grid-template-columns: 1fr 1fr; }
   .big { font-size: 34px; }
@@ -151,3 +185,5 @@ table.cmp tr.ref td { font-weight: 700; color: var(--navy); }
 .mkt { font-size: 13px; margin-top: 2px; text-align: right; }
 .view .mkt { text-align: left; }
 .view .vpr.stg b { font-size: 16px; }
+
+.ltable th { white-space: nowrap; }
