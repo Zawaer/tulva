@@ -6,3 +6,4 @@ data/raw/
 .env
 .env.*
 !.env.example
+deck/video/raw/

@@ -28,3 +28,11 @@ recording over the frame, delete the label and the still, and set the video to s
 (Playback → Start: Automatically) so it plays on the organisers' computer without a click. Save the result
 under a new name (e.g. `Tulva_QxF2026_final.pptx`) so a rebuild doesn't overwrite it. Check the video file is
 embedded, not linked, before submitting.
+
+## Demo video (draft)
+`deck/video/tulva_demo.mp4`: a 61-second scripted walkthrough of the demo app at 1920×1080 with burned-in captions
+(map → snow outlook → index card → real quantum results → the 14-area Emerald chart → 2005 replay).
+Re-record after the app changes with:
+`source /data/chats/s_7z3ZoxoroN/env.sh; node deck/video/record_demo.mjs`, then convert the webm in
+deck/video/raw/ to MP4 (see the ffmpeg line in the git history). It's silent: add the voice-over from PITCH.md
+slide 5, or keep it captions-only.
