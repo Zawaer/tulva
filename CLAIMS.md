@@ -63,3 +63,8 @@ the continuous model is the classical reference. The outlook shift uses the in-s
   scripts/run_hw.py + scripts/analyse_run.py
 - IBM, ≥2 of 3 Lapland (4 qubits): amplified circuits (k≥1, 67–164 two-qubit gates) were fully scrambled
   (signal gain ≈ 0); noise-aware estimate 0.491 % vs exact 0.359 %. A measured limit of today's hardware · qae-ibm
+- **IBM run 2 (ibm_marrakesh, best-calibrated qubit triples, 20 copies, k=0..2, 4,000 shots):** exact 0.125 % ·
+  raw 0.262 % · noise-aware 0.149 % · per-copy calibrated 0.148 % · k=0 only 0.237 %. Qubit selection cut the
+  copy-to-copy spread from 0–2.95 % to 0.10–0.45 % and raised surviving signal (gain k=1: 0.78 vs 0.65).
+  Residual bias +0.023 pp. Classical Monte Carlo with the same number of model evaluations would have ±0.004 pp, so
+  classical wins on today's hardware · qae-ibm · IBM usage total 36 s of 600

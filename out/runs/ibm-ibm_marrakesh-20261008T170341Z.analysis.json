@@ -4,6 +4,7 @@
     "raw_mlae": 0.0030811822826328724,
     "noise_aware_mlae": 0.001456993910857429,
     "k0_only": 0.00446,
+    "noise_aware_per_copy_mlae": null,
     "gain_by_k": {
       "0": 1.0442748214378132,
       "1": 0.6464073547504403,
@@ -60,6 +61,7 @@
     "raw_mlae": 0.020031126949297453,
     "noise_aware_mlae": 0.004912279255469296,
     "k0_only": 0.02756,
+    "noise_aware_per_copy_mlae": null,
     "gain_by_k": {
       "0": 1.0843349841350545,
       "1": 0.05,

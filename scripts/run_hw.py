@@ -46,6 +46,11 @@ ap.add_argument("--ems", type=int, default=0, help="FiQCI-EMS mitigation level (
 ap.add_argument("--shots", type=int, default=2000)
 ap.add_argument("--ks", default="0,1,2,3")
 ap.add_argument("--repeats", type=int, default=1)
+ap.add_argument("--instances", default="A3_kittila_ivalo_both,A4_lapland_atleast2of3",
+                help="comma-separated instance names to run")
+ap.add_argument("--best-qubits", action="store_true",
+                help="place each copy on the best-calibrated connected qubit triple (3-qubit instances); "
+                     "target, twin and zero circuits of a copy share the same physical qubits")
 ap.add_argument("--copies", type=int, default=1,
                 help="run N copies of each small circuit side by side on disjoint qubits in one circuit "
                      "(N× the shots per job, plus per-copy spread across the chip). Use 20-30 on IBM's 156 qubits.")
@@ -133,6 +138,49 @@ def exact(m, n, event):
     return float(d[n]) if event == "all" else float(d[2:].sum())
 
 
+def best_triples(backend, n: int) -> list[tuple[int, int, int]]:
+    """n disjoint, non-adjacent qubit paths a-b-c ranked by today's calibration (two-qubit + readout errors)."""
+    import math
+    tgt = backend.target
+    twoq = next(g for g in ("cz", "ecr", "cx") if g in tgt.operation_names)
+    err2 = {}
+    for qargs, props in tgt[twoq].items():
+        if props is not None and props.error is not None:
+            a, b = qargs
+            err2[frozenset((a, b))] = min(props.error, err2.get(frozenset((a, b)), 1.0))
+    ro = {qargs[0]: (props.error if props is not None and props.error is not None else 0.05)
+          for qargs, props in tgt["measure"].items()}
+    nbrs = {}
+    for e in err2:
+        a, b = tuple(e)
+        nbrs.setdefault(a, set()).add(b)
+        nbrs.setdefault(b, set()).add(a)
+    cands = []
+    for b, ns in nbrs.items():
+        ns = sorted(ns)
+        for i in range(len(ns)):
+            for j in range(i + 1, len(ns)):
+                a, c = ns[i], ns[j]
+                e_ab, e_bc = err2[frozenset((a, b))], err2[frozenset((b, c))]
+                # each Grover step uses ~10 two-qubit gates per edge; readout on the two measured area qubits
+                score = 10 * (math.log1p(-min(e_ab, .5)) + math.log1p(-min(e_bc, .5))) \
+                    + math.log1p(-ro.get(a, .05)) + math.log1p(-ro.get(c, .05))
+                cands.append((score, (a, b, c)))
+    cands.sort(reverse=True)
+    used, picked = set(), []
+    for _, (a, b, c) in cands:
+        block = {a, b, c}
+        if block & used:
+            continue
+        picked.append((a, b, c))
+        used |= block | {x for q_ in block for x in nbrs.get(q_, ())}   # keep a buffer qubit between copies
+        if len(picked) == n:
+            break
+    if len(picked) < n:
+        raise SystemExit(f"only {len(picked)} disjoint good triples; lower --copies")
+    return picked
+
+
 def widen(qc, copies: int):
     """copies of qc on disjoint qubits; copy j's measured bits are clbits [j*nb, (j+1)*nb)."""
     from qiskit import QuantumCircuit
@@ -149,7 +197,10 @@ def main():
     record = {"backend": args.backend, "ems": args.ems, "shots": args.shots, "ks": KS, "param_source": SRC,
               "created_utc": stamp, "circuits": [], "jobs": []}
     circuits = []
+    wanted = set(args.instances.split(","))
     for name, (n, event) in INSTANCES.items():
+        if name not in wanted:
+            continue
         for role, m in (("target", TARGET), ("twin", TWIN), ("zero", ZERO)):
             p_s, p_area = collapse(m)
             A = q.a_operator(p_s, p_area[:n])
@@ -166,7 +217,13 @@ def main():
         for c in record["circuits"]:
             c["copies"] = args.copies
     # fix the layout so target and twin land on the same physical qubits
-    tqcs = transpile(circuits, backend, optimization_level=3, seed_transpiler=11)
+    layout = None
+    if args.best_qubits:
+        assert all(c.num_qubits == 3 * max(1, args.copies) for c in circuits), "--best-qubits supports 3-qubit instances"
+        triples = best_triples(backend, max(1, args.copies))
+        layout = [q_ for (a, b, c) in triples for q_ in (b, a, c)]   # hydrology on the middle qubit
+        record["layout_triples"] = triples
+    tqcs = transpile(circuits, backend, optimization_level=3, seed_transpiler=11, initial_layout=layout)
     for c, t in zip(record["circuits"], tqcs):
         ops = t.count_ops()
         c["two_qubit_gates"] = int(sum(v for g, v in ops.items() if g in ("cz", "cx", "ecr")))
