@@ -61,7 +61,7 @@ def get_backend():
         return AerSimulator(noise_model=nm, basis_gates=["cz", "rz", "sx", "x"])
     if args.backend == "iqm":
         from iqm.qiskit_iqm import IQMProvider
-        url = os.getenv("IQM_SERVER_URL", "https://resonance.meetiqm.com")
+        url = os.getenv("IQM_SERVER_URL", "https://resonance.iqm.tech")  # override if the token page shows another URL
         return IQMProvider(url, quantum_computer=args.iqm_name, token=os.environ["IQM_TOKEN"]).get_backend()
     if args.backend == "iqm-fake":
         from iqm.qiskit_iqm import IQMFakeAphrodite, IQMFakeApollo
