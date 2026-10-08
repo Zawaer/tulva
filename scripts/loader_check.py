@@ -91,7 +91,7 @@ ax.semilogy(ks, [r["p_at_least_k_ideal_sampled"][k] for k in ks], "o", color="#1
 ax.semilogy(ks, [r["p_at_least_k_noisy_sampled"][k] for k in ks], "s", mfc="none", color="#d4a72c", ms=8,
             label="Loader circuit, noisy simulator (0.5 % CZ, 2–3 % readout, 4k shots)")
 ax.semilogy(ks, [r["p_at_least_k_independent"][k] for k in ks], "--", color="#cf222e", lw=2,
-            label="Independence (EIOPA 0 %)")
+            label="Independence (no co-flooding)")
 ax.set_xlabel("k = number of the 14 river areas over their 1-in-10 spring level")
 ax.set_ylabel("P(k or more in the same spring)")
 ax.set_title(f"Finland's joint spring-flood model on one circuit: {r['qubits']} qubits, {r['cz_q20_like_grid']} two-qubit gates",

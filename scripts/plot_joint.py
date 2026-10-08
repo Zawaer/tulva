@@ -60,9 +60,9 @@ def lab(x, y, text, color, dy=0, ha="left"):
     ax.annotate(text, (x, y), xytext=(8, dy), textcoords="offset points", color=color, fontsize=12,
                 fontweight="bold", va="center", ha=ha)
 
-lab(k[-1] - 0.05, 0.1, "All 14 at once (SYKE summed figures)", INK2, dy=12, ha="right")
+lab(k[-1] - 0.05, 0.1, "If all 14 flooded at once (upper bound)", INK2, dy=12, ha="right")
 i4 = list(k).index(4)
-ax.annotate(f"Independence (EIOPA 0%):\n4+ areas {ind[i4]*100:.1f}% a year", (3.92, ind[i4]), xytext=(-6, -22),
+ax.annotate(f"Independence (no co-flooding):\n4+ areas {ind[i4]*100:.1f}% a year", (3.92, ind[i4]), xytext=(-6, -22),
             textcoords="offset points", color=ORANGE, fontsize=12, fontweight="bold", va="center", ha="right")
 j = list(k).index(6)
 lab(6.1, mod[j], f"Tulva fitted model", BLUE, dy=12)
@@ -71,8 +71,8 @@ ax.annotate(f"4+ areas observed in {nobs[i4]} of {ny} years ({obs[i4]*100:.0f}%)
             arrowprops=dict(arrowstyle="-", color=INK2, lw=1))
 ax.scatter([], [], s=70, color=INK, label=f"Observed, {1961}–{1960 + ny}")
 ax.plot([], [], color=BLUE, lw=2.4, label="Tulva joint model (fitted)")
-ax.plot([], [], color=ORANGE, lw=2.4, label="Independence (EIOPA 0%)")
-ax.plot([], [], color=GRAY, lw=2, ls=(0, (6, 4)), label="All at once (SYKE sum)")
+ax.plot([], [], color=ORANGE, lw=2.4, label="Independence (no co-flooding)")
+ax.plot([], [], color=GRAY, lw=2, ls=(0, (6, 4)), label="All at once (upper bound)")
 ax.legend(loc="lower left", frameon=False, fontsize=10.5, labelcolor=INK2)
 
 fig.text(0.015, 0.965, "Finnish river floods come together", fontsize=19, fontweight="bold", color=INK)
