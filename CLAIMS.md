@@ -52,3 +52,7 @@ Every number in the deck: value · what produced it (exact / monte-carlo / qae-s
 
 (Simplified) The quantum circuits use a two-level discretisation of the fitted factor model (wet = top 30 %);
 the continuous model is the classical reference. The outlook shift uses the in-sample snow skill (North 0.47).
+- Full 14-area loader: 18 qubits, 49 CZ on a 20-qubit square lattice. Sampling reproduces the exact two-level
+  model: P(≥4 areas over 1-in-10) exact 10.9 %, ideal-sim 10.8 %, independence 4.4 %. With 0.5 % CZ +
+  2–3 % readout noise: 14.0 % (biased up by readout errors; needs readout mitigation) · exact / qae-sim ·
+  scripts/loader_check.py
