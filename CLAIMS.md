@@ -98,3 +98,11 @@ the continuous model is the classical reference. The outlook shift uses the in-s
 - **Qrisp on IQM Garnet:** native Qrisp implementation, IQM pass manager 4/23/45 CZ; raw MLAE 0.354 % (exact
   0.125 %; no calibration circuits in this run), consistent with the raw Qiskit run (0.368 %) · qae-iqm ·
   scripts/qae_qrisp.py
+
+## Pitch hook (verified 8 Oct)
+"In May 2005, Kittilä and Ivalo flooded together. The snow had warned us for two months."
+- 2005 is a North-cluster trigger year (≥2 areas over 1-in-10, and over the fitted 1-in-50) · out/backtest.json
+- The 1 March snow index flagged 2005 in advance (one of the North's top-15 % snow years: 1969, 1973, 1974, 1993,
+  1998, 2000, 2005, 2016, 2018, 2020) · out/snow_skill.json, out/backtest.json
+- 1 March → the May peak ≈ 2–2.5 months. Damage ~€5M (SYKE/FMI, research notes); see business/CHEATSHEET.md for
+  the €5–17M range and its sources.
