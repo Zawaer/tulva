@@ -1,0 +1,151 @@
+{
+ "definition": "SWE index = mean normal score of 1 March areal SWE over the cluster's catchments; flood index = mean normal score of the cluster's spring peaks. Top years = top 15% of the SWE index.",
+ "clusters": {
+  "Ostrobothnia": {
+   "swe_catchments": [
+    131,
+    147
+   ],
+   "years": 65,
+   "spearman_swe_vs_flood_index": 0.686,
+   "spearman_swe_vs_each_gauge": {
+    "Lapväärtti": 0.576,
+    "Ilmajoki–Seinäjoki": 0.678,
+    "Laihia": 0.661,
+    "Ylistaro–Koivulahti": 0.642,
+    "Alavieska–Ylivieska": 0.482,
+    "Lower Pyhäjoki": 0.399
+   },
+   "outlook_skill_vs_latent_factor": 0.74,
+   "n_top_years": 10,
+   "top_years": [
+    1962,
+    1965,
+    1966,
+    1974,
+    1981,
+    1982,
+    1984,
+    1988,
+    2022,
+    2024
+   ],
+   "p_ge2_over_1in10_top_snow": 0.6,
+   "p_ge2_over_1in10_other": 0.109,
+   "p_ge2_over_1in10_below_median_snow": 0.0
+  },
+  "North": {
+   "swe_catchments": [
+    188,
+    216,
+    230,
+    236
+   ],
+   "years": 65,
+   "spearman_swe_vs_flood_index": 0.392,
+   "spearman_swe_vs_each_gauge": {
+    "Pudasjärvi": 0.523,
+    "Ivalo": 0.253,
+    "Kittilä": 0.257,
+    "Rovaniemi": 0.365,
+    "Tornio": 0.368
+   },
+   "outlook_skill_vs_latent_factor": 0.472,
+   "n_top_years": 10,
+   "top_years": [
+    1969,
+    1973,
+    1974,
+    1993,
+    1998,
+    2000,
+    2005,
+    2016,
+    2018,
+    2020
+   ],
+   "p_ge2_over_1in10_top_snow": 0.4,
+   "p_ge2_over_1in10_other": 0.073,
+   "p_ge2_over_1in10_below_median_snow": 0.0
+  },
+  "Satakunta–SE": {
+   "swe_catchments": [
+    55,
+    109,
+    112
+   ],
+   "years": 65,
+   "spearman_swe_vs_flood_index": 0.531,
+   "spearman_swe_vs_each_gauge": {
+    "Pori": 0.56,
+    "Huittinen": 0.633,
+    "Lower Kymijoki": 0.113
+   },
+   "outlook_skill_vs_latent_factor": 0.682,
+   "n_top_years": 10,
+   "top_years": [
+    1962,
+    1966,
+    1967,
+    1969,
+    1974,
+    1981,
+    1982,
+    1984,
+    1988,
+    2011
+   ],
+   "p_ge2_over_1in10_top_snow": 0.3,
+   "p_ge2_over_1in10_other": 0.0,
+   "p_ge2_over_1in10_below_median_snow": 0.0
+  },
+  "National": {
+   "swe_catchments": [
+    55,
+    109,
+    112,
+    131,
+    147,
+    188,
+    216,
+    230,
+    236
+   ],
+   "years": 65,
+   "spearman_swe_vs_flood_index": 0.609,
+   "spearman_swe_vs_each_gauge": {
+    "Lapväärtti": 0.413,
+    "Ilmajoki–Seinäjoki": 0.609,
+    "Laihia": 0.601,
+    "Ylistaro–Koivulahti": 0.565,
+    "Alavieska–Ylivieska": 0.549,
+    "Lower Pyhäjoki": 0.531,
+    "Pudasjärvi": 0.407,
+    "Ivalo": 0.211,
+    "Kittilä": 0.186,
+    "Rovaniemi": 0.084,
+    "Tornio": 0.262,
+    "Pori": 0.487,
+    "Huittinen": 0.445,
+    "Lower Kymijoki": 0.203
+   },
+   "outlook_skill_vs_latent_factor": 0.896,
+   "n_top_years": 10,
+   "top_years": [
+    1962,
+    1966,
+    1967,
+    1969,
+    1974,
+    1981,
+    1984,
+    1998,
+    2000,
+    2024
+   ],
+   "p_ge2_over_1in10_top_snow": 0.7,
+   "p_ge2_over_1in10_other": 0.364,
+   "p_ge2_over_1in10_below_median_snow": 0.25
+  }
+ }
+}

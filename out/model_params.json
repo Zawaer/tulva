@@ -1,0 +1,351 @@
+{
+ "description": "Gaussian-copula factor model on spring (Mar–Jun) max discharge, 1961–2025. Z_i = a*F + b_c*G_c + sqrt(1-a^2-b_c^2)*e_i; gauge i over its 1-in-T level iff Z_i > Phi^-1(1-1/T). Fit: least squares on off-diagonal copula correlations (rho = 2 sin(pi*rho_s/6)).",
+ "cluster_names": [
+  "Ostrobothnia",
+  "North",
+  "Satakunta–SE"
+ ],
+ "clusters": {
+  "Ostrobothnia": {
+   "national_loading": 0.443,
+   "cluster_loading": 0.635,
+   "within_corr": 0.599,
+   "areas": [
+    "Lapväärtti",
+    "Ilmajoki–Seinäjoki",
+    "Laihia",
+    "Ylistaro–Koivulahti",
+    "Alavieska–Ylivieska",
+    "Lower Pyhäjoki"
+   ]
+  },
+  "North": {
+   "national_loading": 0.443,
+   "cluster_loading": 0.603,
+   "within_corr": 0.56,
+   "areas": [
+    "Pudasjärvi",
+    "Ivalo",
+    "Kittilä",
+    "Rovaniemi",
+    "Tornio"
+   ]
+  },
+  "Satakunta–SE": {
+   "national_loading": 0.443,
+   "cluster_loading": 0.459,
+   "within_corr": 0.407,
+   "areas": [
+    "Pori",
+    "Huittinen",
+    "Lower Kymijoki"
+   ]
+  }
+ },
+ "national_loading": 0.443,
+ "cluster_loading": {
+  "Ostrobothnia": 0.635,
+  "North": 0.603,
+  "Satakunta–SE": 0.459
+ },
+ "ci90": {
+  "national": [
+   0.314,
+   0.543
+  ],
+  "Ostrobothnia": [
+   0.543,
+   0.706
+  ],
+  "North": [
+   0.49,
+   0.687
+  ],
+  "Satakunta–SE": [
+   0.29,
+   0.583
+  ]
+ },
+ "fit_rmse": 0.214,
+ "alt_per_cluster_national_loading": {
+  "national": {
+   "Ostrobothnia": 0.651,
+   "North": 0.188,
+   "Satakunta–SE": 0.597
+  },
+  "cluster": {
+   "Ostrobothnia": 0.42,
+   "North": 0.724,
+   "Satakunta–SE": 0.226
+  },
+  "fit_rmse": 0.189
+ },
+ "alt_data_driven_grouping": {
+  "3_groups": {
+   "groups": [
+    [
+     "Ivalo",
+     "Kittilä",
+     "Rovaniemi",
+     "Tornio"
+    ],
+    [
+     "Pori",
+     "Lower Kymijoki"
+    ],
+    [
+     "Lapväärtti",
+     "Ilmajoki–Seinäjoki",
+     "Laihia",
+     "Ylistaro–Koivulahti",
+     "Alavieska–Ylivieska",
+     "Lower Pyhäjoki",
+     "Pudasjärvi",
+     "Huittinen"
+    ]
+   ],
+   "national": 0.403,
+   "cluster": [
+    0.758,
+    0.691,
+    0.58
+   ],
+   "rmse": 0.195
+  },
+  "4_groups": {
+   "groups": [
+    [
+     "Ivalo",
+     "Kittilä",
+     "Rovaniemi",
+     "Tornio"
+    ],
+    [
+     "Pori",
+     "Lower Kymijoki"
+    ],
+    [
+     "Lapväärtti",
+     "Ilmajoki–Seinäjoki",
+     "Laihia",
+     "Ylistaro–Koivulahti",
+     "Huittinen"
+    ],
+    [
+     "Alavieska–Ylivieska",
+     "Lower Pyhäjoki",
+     "Pudasjärvi"
+    ]
+   ],
+   "national": 0.446,
+   "cluster": [
+    0.734,
+    0.665,
+    0.716,
+    0.657
+   ],
+   "rmse": 0.178
+  }
+ },
+ "gauges": [
+  {
+   "area": "Lapväärtti",
+   "cluster": "Ostrobothnia",
+   "gauge": "Lapväärtinjoki, Perus",
+   "source": "SYKE 1197+1198",
+   "years": 56,
+   "q10_m3s": 159.9,
+   "q50_m3s": 245.3,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Ilmajoki–Seinäjoki",
+   "cluster": "Ostrobothnia",
+   "gauge": "Kyrönjoki, Hanhikoski",
+   "source": "SYKE 1213",
+   "years": 63,
+   "q10_m3s": 352.9,
+   "q50_m3s": 450.6,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Laihia",
+   "cluster": "Ostrobothnia",
+   "gauge": "Laihianjoki, Karkkimala",
+   "source": "SYKE 1204",
+   "years": 54,
+   "q10_m3s": 43.5,
+   "q50_m3s": 55.0,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Ylistaro–Koivulahti",
+   "cluster": "Ostrobothnia",
+   "gauge": "Kyrönjoki, Skatila",
+   "source": "SYKE 1214",
+   "years": 65,
+   "q10_m3s": 404.5,
+   "q50_m3s": 488.9,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Alavieska–Ylivieska",
+   "cluster": "Ostrobothnia",
+   "gauge": "Kalajoki, Niskakoski/Hihnalankoski",
+   "source": "SYKE 1253+1254",
+   "years": 65,
+   "q10_m3s": 325.3,
+   "q50_m3s": 388.3,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Lower Pyhäjoki",
+   "cluster": "Ostrobothnia",
+   "gauge": "Pyhäjoki, Tolpankoski/Pyhänkoski",
+   "source": "SYKE 1262+1261",
+   "years": 61,
+   "q10_m3s": 379.5,
+   "q50_m3s": 470.3,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Pudasjärvi",
+   "cluster": "North",
+   "gauge": "Iijoki, Kurenalus",
+   "source": "SYKE 1332+1334+1333",
+   "years": 62,
+   "q10_m3s": 590.6,
+   "q50_m3s": 753.9,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Ivalo",
+   "cluster": "North",
+   "gauge": "Ivalojoki, Pajakoski",
+   "source": "SYKE 1419",
+   "years": 60,
+   "q10_m3s": 754.7,
+   "q50_m3s": 984.4,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Kittilä",
+   "cluster": "North",
+   "gauge": "Ounasjoki, Köngäs",
+   "source": "SYKE 1374",
+   "years": 64,
+   "q10_m3s": 686.5,
+   "q50_m3s": 789.2,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Rovaniemi",
+   "cluster": "North",
+   "gauge": "Ounasjoki, Marraskoski",
+   "source": "SYKE 1377+1378",
+   "years": 65,
+   "q10_m3s": 1316.9,
+   "q50_m3s": 1480.3,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Tornio",
+   "cluster": "North",
+   "gauge": "Tornionjoki, Kukkolankoski (SMHI 16722)",
+   "source": "SMHI 16722",
+   "years": 65,
+   "q10_m3s": 3001.3,
+   "q50_m3s": 3511.1,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Pori",
+   "cluster": "Satakunta–SE",
+   "gauge": "Kokemäenjoki, Harjavalta",
+   "source": "SYKE 1188",
+   "years": 65,
+   "q10_m3s": 712.7,
+   "q50_m3s": 865.2,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Huittinen",
+   "cluster": "Satakunta–SE",
+   "gauge": "Loimijoki, Maurialankoski",
+   "source": "SYKE 1185+1184",
+   "years": 65,
+   "q10_m3s": 267.0,
+   "q50_m3s": 357.3,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  },
+  {
+   "area": "Lower Kymijoki",
+   "cluster": "Satakunta–SE",
+   "gauge": "Kymijoki, Anjala",
+   "source": "SYKE 1058",
+   "years": 65,
+   "q10_m3s": 544.8,
+   "q50_m3s": 612.3,
+   "p10": 0.1,
+   "p50": 0.02,
+   "z10": 1.2816,
+   "z50": 2.0537
+  }
+ ],
+ "cluster_trigger_ge2_over_1in50": {
+  "Ostrobothnia": {
+   "n_gauges": 6,
+   "p_ge2_model": 0.02563,
+   "p_ge2_independent": 0.00569
+  },
+  "North": {
+   "n_gauges": 5,
+   "p_ge2_model": 0.01964,
+   "p_ge2_independent": 0.00384
+  },
+  "Satakunta–SE": {
+   "n_gauges": 3,
+   "p_ge2_model": 0.00619,
+   "p_ge2_independent": 0.00118
+  }
+ }
+}
