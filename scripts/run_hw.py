@@ -72,7 +72,8 @@ def get_backend():
     if args.backend == "iqm":
         from iqm.qiskit_iqm import IQMProvider
         url = os.getenv("IQM_SERVER_URL", "https://resonance.iqm.tech")  # override if the token page shows another URL
-        return IQMProvider(url, quantum_computer=args.iqm_name, token=os.environ["IQM_TOKEN"]).get_backend()
+        os.environ["IQM_TOKEN"]   # the IQM client reads the token from the environment itself
+        return IQMProvider(url, quantum_computer=args.iqm_name).get_backend()
     if args.backend == "iqm-fake":
         from iqm.qiskit_iqm import IQMFakeAphrodite, IQMFakeApollo
         return (IQMFakeApollo if args.iqm_fake == "apollo" else IQMFakeAphrodite)()
