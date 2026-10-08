@@ -1,0 +1,829 @@
+{
+ "status": "ready",
+ "generated_from": "out/pricing.json",
+ "risk_load": 0.35,
+ "payout_eur": 10000000.0,
+ "flat": {
+  "Ostrobothnia": {
+   "indep": {
+    "v": 76776,
+    "p": 0.0056871,
+    "p_mc": null,
+    "rate_on_line": 0.00768,
+    "src": "exact",
+    "note": "P = 0.0056871 (exact); premium = P × payout × (1 + 0.35 risk load)"
+   },
+   "tulva": {
+    "v": 346060,
+    "p": 0.0256341,
+    "p_mc": 0.026108,
+    "rate_on_line": 0.03461,
+    "src": "exact",
+    "note": "P = 0.0256341 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.026108 ± 0.0001595"
+   },
+   "high": {
+    "v": 1740880,
+    "p": 0.128954,
+    "p_mc": 0.129325,
+    "rate_on_line": 0.17409,
+    "src": "exact",
+    "note": "P = 0.128954 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.129325 ± 0.0003356"
+   },
+   "low": {
+    "v": 783,
+    "p": 5.8e-05,
+    "p_mc": 5e-05,
+    "rate_on_line": 8e-05,
+    "src": "exact",
+    "note": "P = 5.8e-05 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 5e-05 ± 7.1e-06"
+   },
+   "full": {
+    "v": 270000,
+    "p": 0.02,
+    "p_mc": null,
+    "rate_on_line": 0.027,
+    "src": "exact",
+    "note": "P = 0.02 (exact); premium = P × payout × (1 + 0.35 risk load)"
+   },
+   "tulva_boot90": [
+    312447,
+    344046,
+    367909
+   ]
+  },
+  "North": {
+   "indep": {
+    "v": 51872,
+    "p": 0.0038424,
+    "p_mc": null,
+    "rate_on_line": 0.00519,
+    "src": "exact",
+    "note": "P = 0.0038424 (exact); premium = P × payout × (1 + 0.35 risk load)"
+   },
+   "tulva": {
+    "v": 265068,
+    "p": 0.0196347,
+    "p_mc": 0.019572,
+    "rate_on_line": 0.02651,
+    "src": "exact",
+    "note": "P = 0.0196347 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.019572 ± 0.0001385"
+   },
+   "high": {
+    "v": 870088,
+    "p": 0.0644509,
+    "p_mc": 0.064301,
+    "rate_on_line": 0.08701,
+    "src": "exact",
+    "note": "P = 0.0644509 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.064301 ± 0.0002453"
+   },
+   "low": {
+    "v": 22223,
+    "p": 0.0016461,
+    "p_mc": 0.001628,
+    "rate_on_line": 0.00222,
+    "src": "exact",
+    "note": "P = 0.0016461 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.001628 ± 4.03e-05"
+   },
+   "full": {
+    "v": 270000,
+    "p": 0.02,
+    "p_mc": null,
+    "rate_on_line": 0.027,
+    "src": "exact",
+    "note": "P = 0.02 (exact); premium = P × payout × (1 + 0.35 risk load)"
+   },
+   "tulva_boot90": [
+    220095,
+    261168,
+    290691
+   ]
+  },
+  "Satakunta–SE": {
+   "indep": {
+    "v": 15984,
+    "p": 0.001184,
+    "p_mc": null,
+    "rate_on_line": 0.0016,
+    "src": "exact",
+    "note": "P = 0.001184 (exact); premium = P × payout × (1 + 0.35 risk load)"
+   },
+   "tulva": {
+    "v": 83466,
+    "p": 0.0061827,
+    "p_mc": 0.006146,
+    "rate_on_line": 0.00835,
+    "src": "exact",
+    "note": "P = 0.0061827 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.006146 ± 7.82e-05"
+   },
+   "high": {
+    "v": 389932,
+    "p": 0.0288839,
+    "p_mc": 0.0285,
+    "rate_on_line": 0.03899,
+    "src": "exact",
+    "note": "P = 0.0288839 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 0.0285 ± 0.0001664"
+   },
+   "low": {
+    "v": 941,
+    "p": 6.97e-05,
+    "p_mc": 6.5e-05,
+    "rate_on_line": 9e-05,
+    "src": "exact",
+    "note": "P = 6.97e-05 (exact); premium = P × payout × (1 + 0.35 risk load); Monte Carlo check P = 6.5e-05 ± 8.1e-06"
+   },
+   "full": {
+    "v": 270000,
+    "p": 0.02,
+    "p_mc": null,
+    "rate_on_line": 0.027,
+    "src": "exact",
+    "note": "P = 0.02 (exact); premium = P × payout × (1 + 0.35 risk load)"
+   },
+   "tulva_boot90": [
+    54855,
+    83779,
+    117637
+   ]
+  }
+ },
+ "raw": {
+  "description": "Tulva Index: pays a fixed sum once per spring when >= m of a cluster's gauges pass their own 1-in-50 spring (Mar-Jun) peak-discharge level. Premium = P(trigger) x payout x (1 + risk load). Model: Gaussian-copula factor model fitted to SYKE/SMHI spring maxima 1961-2025 (out/model_params.json); outlook = 1 March SYKE SWE, top/bottom 15 % (skill from out/snow_skill.json).",
+  "payout_eur": 10000000.0,
+  "risk_load": 0.35,
+  "return_period_years": 50,
+  "mc_springs": 1000000,
+  "clusters": {
+   "Ostrobothnia": {
+    "n_gauges": 6,
+    "areas": [
+     "Lapväärtti",
+     "Ilmajoki–Seinäjoki",
+     "Laihia",
+     "Ylistaro–Koivulahti",
+     "Alavieska–Ylivieska",
+     "Lower Pyhäjoki"
+    ],
+    "national_loading": 0.443,
+    "cluster_loading": 0.635,
+    "within_corr": 0.599,
+    "outlook_skill": 0.74,
+    "triggers": {
+     "ge1": {
+      "independent": {
+       "p_exact": 0.1141576,
+       "expected_payout_eur": 1141576,
+       "premium_eur": 1541128,
+       "rate_on_line": 0.15411,
+       "return_period_years": 8.8
+      },
+      "tulva": {
+       "p_exact": 0.0770689,
+       "expected_payout_eur": 770689,
+       "premium_eur": 1040430,
+       "rate_on_line": 0.10404,
+       "return_period_years": 13.0,
+       "p_mc": 0.077613,
+       "p_mc_se": 0.0002676
+      },
+      "full_correlation": {
+       "p_exact": 0.02,
+       "expected_payout_eur": 200000,
+       "premium_eur": 270000,
+       "rate_on_line": 0.027,
+       "return_period_years": 50.0
+      },
+      "tulva_high_outlook": {
+       "p_exact": 0.2989876,
+       "expected_payout_eur": 2989876,
+       "premium_eur": 4036333,
+       "rate_on_line": 0.40363,
+       "return_period_years": 3.3,
+       "p_mc": 0.299512,
+       "p_mc_se": 0.000458
+      },
+      "tulva_low_outlook": {
+       "p_exact": 0.0014396,
+       "expected_payout_eur": 14396,
+       "premium_eur": 19435,
+       "rate_on_line": 0.00194,
+       "return_period_years": 694.6,
+       "p_mc": 0.001418,
+       "p_mc_se": 3.76e-05
+      },
+      "tulva_t_copula_df10": {
+       "p_exact": 0.0701243,
+       "p_mc": 0.070004,
+       "p_mc_se": 0.0002552,
+       "premium_eur": 946677,
+       "vs_gaussian": 0.91
+      },
+      "tulva_t_copula_df5": {
+       "p_exact": 0.0643423,
+       "p_mc": 0.064446,
+       "p_mc_se": 0.0002455,
+       "premium_eur": 868622,
+       "vs_gaussian": 0.835
+      },
+      "mispricing_tulva_vs_independent": 0.675,
+      "high_vs_low_outlook": 207.7,
+      "high_outlook_vs_climatology": 3.879
+     },
+     "ge2": {
+      "independent": {
+       "p_exact": 0.0056871,
+       "expected_payout_eur": 56871,
+       "premium_eur": 76776,
+       "rate_on_line": 0.00768,
+       "return_period_years": 175.8
+      },
+      "tulva": {
+       "p_exact": 0.0256341,
+       "expected_payout_eur": 256341,
+       "premium_eur": 346060,
+       "rate_on_line": 0.03461,
+       "return_period_years": 39.0,
+       "p_mc": 0.026108,
+       "p_mc_se": 0.0001595
+      },
+      "full_correlation": {
+       "p_exact": 0.02,
+       "expected_payout_eur": 200000,
+       "premium_eur": 270000,
+       "rate_on_line": 0.027,
+       "return_period_years": 50.0
+      },
+      "tulva_high_outlook": {
+       "p_exact": 0.128954,
+       "expected_payout_eur": 1289540,
+       "premium_eur": 1740880,
+       "rate_on_line": 0.17409,
+       "return_period_years": 7.8,
+       "p_mc": 0.129325,
+       "p_mc_se": 0.0003356
+      },
+      "tulva_low_outlook": {
+       "p_exact": 5.8e-05,
+       "expected_payout_eur": 580,
+       "premium_eur": 783,
+       "rate_on_line": 8e-05,
+       "return_period_years": 17247.1,
+       "p_mc": 5e-05,
+       "p_mc_se": 7.1e-06
+      },
+      "tulva_t_copula_df10": {
+       "p_exact": 0.0270801,
+       "p_mc": 0.026976,
+       "p_mc_se": 0.000162,
+       "premium_eur": 365582,
+       "vs_gaussian": 1.056
+      },
+      "tulva_t_copula_df5": {
+       "p_exact": 0.0279958,
+       "p_mc": 0.028402,
+       "p_mc_se": 0.0001661,
+       "premium_eur": 377944,
+       "vs_gaussian": 1.092
+      },
+      "mispricing_tulva_vs_independent": 4.507,
+      "high_vs_low_outlook": 2224.1,
+      "high_outlook_vs_climatology": 5.031
+     },
+     "ge3": {
+      "independent": {
+       "p_exact": 0.0001529,
+       "expected_payout_eur": 1529,
+       "premium_eur": 2064,
+       "rate_on_line": 0.00021,
+       "return_period_years": 6539.6
+      },
+      "tulva": {
+       "p_exact": 0.0106187,
+       "expected_payout_eur": 106187,
+       "premium_eur": 143352,
+       "rate_on_line": 0.01434,
+       "return_period_years": 94.2,
+       "p_mc": 0.010714,
+       "p_mc_se": 0.000103
+      },
+      "full_correlation": {
+       "p_exact": 0.02,
+       "expected_payout_eur": 200000,
+       "premium_eur": 270000,
+       "rate_on_line": 0.027,
+       "return_period_years": 50.0
+      },
+      "tulva_high_outlook": {
+       "p_exact": 0.0598739,
+       "expected_payout_eur": 598739,
+       "premium_eur": 808298,
+       "rate_on_line": 0.08083,
+       "return_period_years": 16.7,
+       "p_mc": 0.060367,
+       "p_mc_se": 0.0002382
+      },
+      "tulva_low_outlook": {
+       "p_exact": 5.4e-06,
+       "expected_payout_eur": 54,
+       "premium_eur": 72,
+       "rate_on_line": 1e-05,
+       "return_period_years": 186218.9,
+       "p_mc": 7e-06,
+       "p_mc_se": 2.6e-06
+      },
+      "tulva_t_copula_df10": {
+       "p_exact": 0.0128288,
+       "p_mc": 0.012719,
+       "p_mc_se": 0.0001121,
+       "premium_eur": 173189,
+       "vs_gaussian": 1.208
+      },
+      "tulva_t_copula_df5": {
+       "p_exact": 0.0146088,
+       "p_mc": 0.014918,
+       "p_mc_se": 0.0001212,
+       "premium_eur": 197219,
+       "vs_gaussian": 1.376
+      },
+      "mispricing_tulva_vs_independent": 69.442,
+      "high_vs_low_outlook": 11149.7,
+      "high_outlook_vs_climatology": 5.639
+     }
+    }
+   },
+   "North": {
+    "n_gauges": 5,
+    "areas": [
+     "Pudasjärvi",
+     "Ivalo",
+     "Kittilä",
+     "Rovaniemi",
+     "Tornio"
+    ],
+    "national_loading": 0.443,
+    "cluster_loading": 0.603,
+    "within_corr": 0.56,
+    "outlook_skill": 0.472,
+    "triggers": {
+     "ge1": {
+      "independent": {
+       "p_exact": 0.0960792,
+       "expected_payout_eur": 960792,
+       "premium_eur": 1297069,
+       "rate_on_line": 0.12971,
+       "return_period_years": 10.4
+      },
+      "tulva": {
+       "p_exact": 0.071204,
+       "expected_payout_eur": 712040,
+       "premium_eur": 961254,
+       "rate_on_line": 0.09613,
+       "return_period_years": 14.0,
+       "p_mc": 0.070912,
+       "p_mc_se": 0.0002567
+      },
+      "full_correlation": {
+       "p_exact": 0.02,
+       "expected_payout_eur": 200000,
+       "premium_eur": 270000,
+       "rate_on_line": 0.027,
+       "return_period_years": 50.0
+      },
+      "tulva_high_outlook": {
+       "p_exact": 0.1818832,
+       "expected_payout_eur": 1818832,
+       "premium_eur": 2455423,
+       "rate_on_line": 0.24554,
+       "return_period_years": 5.5,
+       "p_mc": 0.182091,
+       "p_mc_se": 0.0003859
+      },
+      "tulva_low_outlook": {
+       "p_exact": 0.0128694,
+       "expected_payout_eur": 128694,
+       "premium_eur": 173737,
+       "rate_on_line": 0.01737,
+       "return_period_years": 77.7,
+       "p_mc": 0.012607,
+       "p_mc_se": 0.0001116
+      },
+      "tulva_t_copula_df10": {
+       "p_exact": 0.0654001,
+       "p_mc": 0.065548,
+       "p_mc_se": 0.0002475,
+       "premium_eur": 882901,
+       "vs_gaussian": 0.918
+      },
+      "tulva_t_copula_df5": {
+       "p_exact": 0.0604978,
+       "p_mc": 0.060776,
+       "p_mc_se": 0.0002389,
+       "premium_eur": 816720,
+       "vs_gaussian": 0.85
+      },
+      "mispricing_tulva_vs_independent": 0.741,
+      "high_vs_low_outlook": 14.1,
+      "high_outlook_vs_climatology": 2.554
+     },
+     "ge2": {
+      "independent": {
+       "p_exact": 0.0038424,
+       "expected_payout_eur": 38424,
+       "premium_eur": 51872,
+       "rate_on_line": 0.00519,
+       "return_period_years": 260.3
+      },
+      "tulva": {
+       "p_exact": 0.0196347,
+       "expected_payout_eur": 196347,
+       "premium_eur": 265068,
+       "rate_on_line": 0.02651,
+       "return_period_years": 50.9,
+       "p_mc": 0.019572,
+       "p_mc_se": 0.0001385
+      },
+      "full_correlation": {
+       "p_exact": 0.02,
+       "expected_payout_eur": 200000,
+       "premium_eur": 270000,
+       "rate_on_line": 0.027,
+       "return_period_years": 50.0
+      },
+      "tulva_high_outlook": {
+       "p_exact": 0.0644509,
+       "expected_payout_eur": 644509,
+       "premium_eur": 870088,
+       "rate_on_line": 0.08701,
+       "return_period_years": 15.5,
+       "p_mc": 0.064301,
+       "p_mc_se": 0.0002453
+      },
+      "tulva_low_outlook": {
+       "p_exact": 0.0016461,
+       "expected_payout_eur": 16461,
+       "premium_eur": 22223,
+       "rate_on_line": 0.00222,
+       "return_period_years": 607.5,
+       "p_mc": 0.001628,
+       "p_mc_se": 4.03e-05
+      },
+      "tulva_t_copula_df10": {
+       "p_exact": 0.0216473,
+       "p_mc": 0.021714,
+       "p_mc_se": 0.0001457,
+       "premium_eur": 292239,
+       "vs_gaussian": 1.103
+      },
+      "tulva_t_copula_df5": {
+       "p_exact": 0.0230865,
+       "p_mc": 0.02319,
+       "p_mc_se": 0.0001505,
+       "premium_eur": 311668,
+       "vs_gaussian": 1.176
+      },
+      "mispricing_tulva_vs_independent": 5.11,
+      "high_vs_low_outlook": 39.2,
+      "high_outlook_vs_climatology": 3.283
+     },
+     "ge3": {
+      "independent": {
+       "p_exact": 7.76e-05,
+       "expected_payout_eur": 776,
+       "premium_eur": 1048,
+       "rate_on_line": 0.0001,
+       "return_period_years": 12883.4
+      },
+      "tulva": {
+       "p_exact": 0.0065861,
+       "expected_payout_eur": 65861,
+       "premium_eur": 88913,
+       "rate_on_line": 0.00889,
+       "return_period_years": 151.8,
+       "p_mc": 0.006568,
+       "p_mc_se": 8.08e-05
+      },
+      "full_correlation": {
+       "p_exact": 0.02,
+       "expected_payout_eur": 200000,
+       "premium_eur": 270000,
+       "rate_on_line": 0.027,
+       "return_period_years": 50.0
+      },
+      "tulva_high_outlook": {
+       "p_exact": 0.0249591,
+       "expected_payout_eur": 249591,
+       "premium_eur": 336948,
+       "rate_on_line": 0.03369,
+       "return_period_years": 40.1,
+       "p_mc": 0.024936,
+       "p_mc_se": 0.0001559
+      },
+      "tulva_low_outlook": {
+       "p_exact": 0.0003185,
+       "expected_payout_eur": 3185,
+       "premium_eur": 4300,
+       "rate_on_line": 0.00043,
+       "return_period_years": 3139.3,
+       "p_mc": 0.000315,
+       "p_mc_se": 1.77e-05
+      },
+      "tulva_t_copula_df10": {
+       "p_exact": 0.0086305,
+       "p_mc": 0.008665,
+       "p_mc_se": 9.27e-05,
+       "premium_eur": 116512,
+       "vs_gaussian": 1.31
+      },
+      "tulva_t_copula_df5": {
+       "p_exact": 0.0103835,
+       "p_mc": 0.010587,
+       "p_mc_se": 0.0001023,
+       "premium_eur": 140178,
+       "vs_gaussian": 1.577
+      },
+      "mispricing_tulva_vs_independent": 84.852,
+      "high_vs_low_outlook": 78.4,
+      "high_outlook_vs_climatology": 3.79
+     }
+    }
+   },
+   "Satakunta–SE": {
+    "n_gauges": 3,
+    "areas": [
+     "Pori",
+     "Huittinen",
+     "Lower Kymijoki"
+    ],
+    "national_loading": 0.443,
+    "cluster_loading": 0.459,
+    "within_corr": 0.407,
+    "outlook_skill": 0.682,
+    "triggers": {
+     "ge1": {
+      "independent": {
+       "p_exact": 0.058808,
+       "expected_payout_eur": 588080,
+       "premium_eur": 793908,
+       "rate_on_line": 0.07939,
+       "return_period_years": 17.0
+      },
+      "tulva": {
+       "p_exact": 0.0531996,
+       "expected_payout_eur": 531996,
+       "premium_eur": 718194,
+       "rate_on_line": 0.07182,
+       "return_period_years": 18.8,
+       "p_mc": 0.05353,
+       "p_mc_se": 0.0002251
+      },
+      "full_correlation": {
+       "p_exact": 0.02,
+       "expected_payout_eur": 200000,
+       "premium_eur": 270000,
+       "rate_on_line": 0.027,
+       "return_period_years": 50.0
+      },
+      "tulva_high_outlook": {
+       "p_exact": 0.1704601,
+       "expected_payout_eur": 1704601,
+       "premium_eur": 2301211,
+       "rate_on_line": 0.23012,
+       "return_period_years": 5.9,
+       "p_mc": 0.170142,
+       "p_mc_se": 0.0003758
+      },
+      "tulva_low_outlook": {
+       "p_exact": 0.0042724,
+       "expected_payout_eur": 42724,
+       "premium_eur": 57678,
+       "rate_on_line": 0.00577,
+       "return_period_years": 234.1,
+       "p_mc": 0.004353,
+       "p_mc_se": 6.58e-05
+      },
+      "tulva_t_copula_df10": {
+       "p_exact": 0.0504876,
+       "p_mc": 0.050504,
+       "p_mc_se": 0.000219,
+       "premium_eur": 681583,
+       "vs_gaussian": 0.949
+      },
+      "tulva_t_copula_df5": {
+       "p_exact": 0.0480337,
+       "p_mc": 0.047626,
+       "p_mc_se": 0.000213,
+       "premium_eur": 648455,
+       "vs_gaussian": 0.903
+      },
+      "mispricing_tulva_vs_independent": 0.905,
+      "high_vs_low_outlook": 39.9,
+      "high_outlook_vs_climatology": 3.204
+     },
+     "ge2": {
+      "independent": {
+       "p_exact": 0.001184,
+       "expected_payout_eur": 11840,
+       "premium_eur": 15984,
+       "rate_on_line": 0.0016,
+       "return_period_years": 844.6
+      },
+      "tulva": {
+       "p_exact": 0.0061827,
+       "expected_payout_eur": 61827,
+       "premium_eur": 83466,
+       "rate_on_line": 0.00835,
+       "return_period_years": 161.7,
+       "p_mc": 0.006146,
+       "p_mc_se": 7.82e-05
+      },
+      "full_correlation": {
+       "p_exact": 0.02,
+       "expected_payout_eur": 200000,
+       "premium_eur": 270000,
+       "rate_on_line": 0.027,
+       "return_period_years": 50.0
+      },
+      "tulva_high_outlook": {
+       "p_exact": 0.0288839,
+       "expected_payout_eur": 288839,
+       "premium_eur": 389932,
+       "rate_on_line": 0.03899,
+       "return_period_years": 34.6,
+       "p_mc": 0.0285,
+       "p_mc_se": 0.0001664
+      },
+      "tulva_low_outlook": {
+       "p_exact": 6.97e-05,
+       "expected_payout_eur": 697,
+       "premium_eur": 941,
+       "rate_on_line": 9e-05,
+       "return_period_years": 14343.7,
+       "p_mc": 6.5e-05,
+       "p_mc_se": 8.1e-06
+      },
+      "tulva_t_copula_df10": {
+       "p_exact": 0.0082463,
+       "p_mc": 0.008367,
+       "p_mc_se": 9.11e-05,
+       "premium_eur": 111325,
+       "vs_gaussian": 1.334
+      },
+      "tulva_t_copula_df5": {
+       "p_exact": 0.0100307,
+       "p_mc": 0.010033,
+       "p_mc_se": 9.97e-05,
+       "premium_eur": 135415,
+       "vs_gaussian": 1.622
+      },
+      "mispricing_tulva_vs_independent": 5.222,
+      "high_vs_low_outlook": 414.3,
+      "high_outlook_vs_climatology": 4.672
+     },
+     "ge3": {
+      "independent": {
+       "p_exact": 8e-06,
+       "expected_payout_eur": 80,
+       "premium_eur": 108,
+       "rate_on_line": 1e-05,
+       "return_period_years": 125000.0
+      },
+      "tulva": {
+       "p_exact": 0.0006177,
+       "expected_payout_eur": 6177,
+       "premium_eur": 8339,
+       "rate_on_line": 0.00083,
+       "return_period_years": 1618.9,
+       "p_mc": 0.000609,
+       "p_mc_se": 2.47e-05
+      },
+      "full_correlation": {
+       "p_exact": 0.02,
+       "expected_payout_eur": 200000,
+       "premium_eur": 270000,
+       "rate_on_line": 0.027,
+       "return_period_years": 50.0
+      },
+      "tulva_high_outlook": {
+       "p_exact": 0.0034324,
+       "expected_payout_eur": 34324,
+       "premium_eur": 46337,
+       "rate_on_line": 0.00463,
+       "return_period_years": 291.3,
+       "p_mc": 0.003371,
+       "p_mc_se": 5.8e-05
+      },
+      "tulva_low_outlook": {
+       "p_exact": 1.3e-06,
+       "expected_payout_eur": 13,
+       "premium_eur": 18,
+       "rate_on_line": 0.0,
+       "return_period_years": 768638.4,
+       "p_mc": 1e-06,
+       "p_mc_se": 1e-06
+      },
+      "tulva_t_copula_df10": {
+       "p_exact": 0.0012002,
+       "p_mc": 0.00121,
+       "p_mc_se": 3.48e-05,
+       "premium_eur": 16202,
+       "vs_gaussian": 1.943
+      },
+      "tulva_t_copula_df5": {
+       "p_exact": 0.0018512,
+       "p_mc": 0.001866,
+       "p_mc_se": 4.32e-05,
+       "premium_eur": 24992,
+       "vs_gaussian": 2.997
+      },
+      "mispricing_tulva_vs_independent": 77.215,
+      "high_vs_low_outlook": 2638.3,
+      "high_outlook_vs_climatology": 5.557
+     }
+    }
+   }
+  },
+  "bootstrap": {
+   "n_boot": 200,
+   "method": "year-bootstrap refit of the factor loadings (common national loading), exact price per refit; outlook skill held fixed",
+   "clusters": {
+    "Ostrobothnia": {
+     "ge2_p_5_50_95": [
+      0.023144,
+      0.025485,
+      0.027253
+     ],
+     "ge2_premium_eur_5_50_95": [
+      312447,
+      344046,
+      367909
+     ],
+     "ge2_high_outlook_premium_eur_5_50_95": [
+      1526598,
+      1727656,
+      1891520
+     ],
+     "ge2_mispricing_5_50_95": [
+      4.07,
+      4.48,
+      4.79
+     ],
+     "ge2_premium_eur_at_ci90_loading_ends": [
+      267178,
+      379924
+     ]
+    },
+    "North": {
+     "ge2_p_5_50_95": [
+      0.016303,
+      0.019346,
+      0.021533
+     ],
+     "ge2_premium_eur_5_50_95": [
+      220095,
+      261168,
+      290691
+     ],
+     "ge2_high_outlook_premium_eur_5_50_95": [
+      700076,
+      855245,
+      968521
+     ],
+     "ge2_mispricing_5_50_95": [
+      4.24,
+      5.03,
+      5.6
+     ],
+     "ge2_premium_eur_at_ci90_loading_ends": [
+      178504,
+      322539
+     ]
+    },
+    "Satakunta–SE": {
+     "ge2_p_5_50_95": [
+      0.004063,
+      0.006206,
+      0.008714
+     ],
+     "ge2_premium_eur_5_50_95": [
+      54855,
+      83779,
+      117637
+     ],
+     "ge2_high_outlook_premium_eur_5_50_95": [
+      233193,
+      391652,
+      578755
+     ],
+     "ge2_mispricing_5_50_95": [
+      3.43,
+      5.24,
+      7.36
+     ],
+     "ge2_premium_eur_at_ci90_loading_ends": [
+      38715,
+      145611
+     ]
+    }
+   }
+  }
+ }
+}
