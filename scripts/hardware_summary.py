@@ -68,6 +68,21 @@ for f in sorted(glob.glob(str(OUT / "runs" / "loader-iqm-emerald-*.json")) + sor
     for k in range(2, 8):
         md.append(f"| ≥{k} | {100*r['p_at_least_k_readout_corrected'][k]:.1f} % | {100*r['p_at_least_k_exact'][k]:.1f} % | "
                   f"{100*r['p_at_least_k_independent'][k]:.2f} % | {('%.1f %%' % (100*obsd[k])) if k in obsd else '–'} |")
+snow = sorted(glob.glob(str(OUT / "runs" / "product-iqm-emerald-*.analysis.json")))
+if snow:
+    d = json.loads(Path(snow[-1]).read_text())
+    rows_s = [(lab, d.get(f"A3_kittila_ivalo_both_{key}")) for lab, key in (("Low-snow March", "low"),
+              ("Normal (no outlook)", "clim"), ("Snowy March (top 15 %)", "high"))]
+    if all(r for _, r in rows_s):
+        lo, hi = rows_s[0][1], rows_s[2][1]
+        md += ["", "## The March snow signal, measured on IQM Emerald",
+               f"Kittilä + Ivalo both over 1-in-50, 3 qubits, {lo['copies']} side-by-side copies, {lo['shots']:,} shots "
+               f"per instance (run by Vaishnav, `{Path(snow[-1]).name.replace('.analysis.json', '')}`).", "",
+               "| March snow | Exact | Hardware raw | Hardware calibrated |", "|---|---|---|---|"]
+        for lab, r in rows_s:
+            md.append(f"| {lab} | {100*r['exact']:.3f} % | {100*r['raw_mlae']:.3f} % | **{100*r['noise_aware_mlae']:.3f} %** |")
+        md += ["", f"Snowy vs low-snow risk ratio: exact **{hi['exact']/lo['exact']:.1f}×**, on the chip "
+               f"**{hi['noise_aware_mlae']/lo['noise_aware_mlae']:.1f}×**. The early-warning signal survives on real hardware."]
 q = sorted(glob.glob(str(OUT / "runs" / "qrisp_qae_iqm_*.json")))
 if q:
     qr = json.loads(Path(q[-1]).read_text())

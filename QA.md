@@ -31,6 +31,16 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   perils), not our nanosecond toy.
 - *"Is there advantage today?"* No, and we say so. At the same budget Monte Carlo is within ±0.004–0.006 pp.
 
+- *"Why quantum and not a supercomputer?"* (mentor feedback) "Today a supercomputer wins: it's classical sampling,
+  just faster. Amplitude estimation's advantage is against any classical sampler, supercomputers included:
+  quadratically fewer model runs for the same precision. That pays off when each scenario is expensive, such as a
+  full hydrological simulation or multi-peril repricing every day, and rare joint events need many runs.
+  Fault-tolerant hardware has to arrive first."
+- *"Did the snow signal survive on hardware?"* Yes. On IQM Emerald the snowy-vs-low-snow risk ratio was 3.1× against
+  2.7× exact (Kittilä + Ivalo, 240k shots each).
+- *"What breaks?"* Rare events: the 14-area circuit at the 1-in-50 level read 16 % vs 4.8 % exact. Gate noise creates
+  false triggers that swamp rare signals, which is exactly why this needs error correction.
+
 **Niklas Steinmann (IQM):**
 - *"Why Qrisp?"* We wrote the circuit natively in Qrisp, compiled it with IQM's pass manager (fewer gates than
   Qiskit's transpiler: 23 vs 28 at one step) and ran it on Garnet. Same raw result as the Qiskit version.

@@ -40,9 +40,10 @@ Voice-over recorded in the video (not spoken live):
 
 ## 6 · Quantum, in practice (2:05–2:25)
 
-> Pricing this cover means estimating one rare joint probability: a job for quantum amplitude estimation. We
-> loaded all fourteen areas onto IQM Emerald, 18 qubits, 44 two-qubit gates, and it reproduced the joint tail.
-> On IBM and IQM, calibrated amplitude estimation landed within 0.04 points of the exact answer.
+> Pricing means estimating a rare joint probability, a job for quantum amplitude estimation. We loaded all
+> fourteen areas onto IQM Emerald, 18 qubits, 44 two-qubit gates, and it reproduced the joint tail. On IBM and
+> IQM, calibrated estimates landed within 0.04 points of exact, and the chip even reproduced the snow warning:
+> three times the risk after a snowy March.
 
 ## 7 · Quantum, honestly (2:25–2:39)
 

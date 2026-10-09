@@ -132,3 +132,5 @@ Two-level model (circuit's own model), North loadings, 8,000 shots per circuit, 
   vs low-snow risk ratio: exact 2.8×, hardware 3.0×.** Product "≥2 of 5 North", k=0 only: exact 1.10 % / 1.70 % →
   1.84 % / 2.68 % (worse than the k=0,1 run: the ≈0 twin has no single-trigger states, so it under-calibrates the
   false ≥2 counts) · qae-iqm (emerald) · product-iqm-emerald-20261009T075338Z
+- Snow ratio, recomputed from product-iqm-emerald-20261009T075338Z.analysis.json (use these): high-snow / low-snow
+  exact 0.1933/0.0704 = **2.7×**, hardware calibrated 0.2494/0.0818 = **3.1×** (supersedes the rounded 2.8×/3.0× above)

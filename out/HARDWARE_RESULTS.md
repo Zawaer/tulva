@@ -36,5 +36,28 @@ Job `01a11cd4-da38-718b-80c9-7e259c6e4452`, 8,000 shots, readout flip rates 0.5 
 | ≥6 | 2.4 % | 1.9 % | 0.15 % | 1.5 % |
 | ≥7 | 0.9 % | 0.6 % | 0.02 % | 0.0 % |
 
+## Full-scale loader: all 14 areas on emerald (18 qubits, 44 two-qubit gates)
+Job `01a11f9b-c62a-7026-a22d-67b26167cf26`, 20,000 shots, readout flip rates 0.4 % / 0.5 %. Chart: `out/loader_emerald.png`.
+
+| k areas over 1-in-10 | Hardware (readout-corrected) | Exact model | Independence | Observed 1961–2025 |
+|---|---|---|---|---|
+| ≥2 | 16.0 % | 4.8 % | 3.11 % | 41.5 % |
+| ≥3 | 4.6 % | 0.8 % | 0.25 % | 18.5 % |
+| ≥4 | 1.1 % | 0.1 % | 0.01 % | 15.4 % |
+| ≥5 | 0.2 % | 0.0 % | 0.00 % | 7.7 % |
+| ≥6 | 0.0 % | 0.0 % | 0.00 % | 1.5 % |
+| ≥7 | 0.0 % | 0.0 % | 0.00 % | 0.0 % |
+
+## The March snow signal, measured on IQM Emerald
+Kittilä + Ivalo both over 1-in-50, 3 qubits, 10 side-by-side copies, 240,000 shots per instance (run by Vaishnav, `product-iqm-emerald-20261009T075338Z`).
+
+| March snow | Exact | Hardware raw | Hardware calibrated |
+|---|---|---|---|
+| Low-snow March | 0.070 % | 0.296 % | **0.082 %** |
+| Normal (no outlook) | 0.125 % | 0.340 % | **0.166 %** |
+| Snowy March (top 15 %) | 0.193 % | 0.388 % | **0.249 %** |
+
+Snowy vs low-snow risk ratio: exact **2.7×**, on the chip **3.1×**. The early-warning signal survives on real hardware.
+
 ## Qrisp implementation on IQM Garnet
 Same 3-qubit joint-trigger circuit written natively in Qrisp (IQM's high-level framework), compiled with IQM's pass manager (4 / 23 / 45 CZ for k = 0 / 1 / 2), run on IQM Garnet without the calibration circuits: raw MLAE matches the raw Qiskit run on the same chip. File: `qrisp_qae_iqm_garnet20261008T184156Z.json`.

@@ -284,10 +284,11 @@ def s6_quantum(prs, n):
         rect(s, x, y + 0.53, w, 0.012, LINE)
         y += 0.56
     text(s, x, y + 0.05, w, 0.3, "raw → calibrated", size=11, color=GREY, align=PP_ALIGN.RIGHT)
-    text(s, x, 6.1, w, 0.4, "Also native Qrisp on IQM Garnet; 20–25 side-by-side copies on IBM.",
-         size=12, color=NAVY)
-    source(s, "IQM Emerald job 01a11cd4…, 8,000 shots; IBM ibm_marrakesh (best-qubit run, 20 copies); "
-              "IQM Garnet 4 copies, 120k shots")
+    text(s, x, 6.0, w, 0.6, [[("Snow signal on the chip: ", {"bold": True}),
+                              ("snowy vs low March 3.1× (exact 2.7×)", {"color": BLUE, "bold": True})]],
+         size=13, color=NAVY)
+    source(s, "IQM Emerald job 01a11cd4…, 8,000 shots; snow runs: Emerald, 10 copies, 240k shots each; IBM "
+              "ibm_marrakesh (20 copies); IQM Garnet (4 copies); also native Qrisp on Garnet")
     return s
 
 def s7_honest(prs, n):
