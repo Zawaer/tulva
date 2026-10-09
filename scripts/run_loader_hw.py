@@ -37,6 +37,8 @@ ap.add_argument("--iqm-name", default="emerald")
 ap.add_argument("--ibm-name", default="ibm_marrakesh")
 ap.add_argument("--shots", type=int, default=8000)
 ap.add_argument("--level", type=float, default=0.1, help="per-area trigger probability (0.1 = 1-in-10)")
+ap.add_argument("--independent", action="store_true",
+                help="control run: same circuit shape, all correlations switched off (loadings 0)")
 args = ap.parse_args()
 
 P = json.loads((ROOT / "out" / "model_params.json").read_text())
@@ -45,6 +47,9 @@ gauges = P["gauges"]
 area_cluster = np.array([names.index(g["cluster"]) for g in gauges])
 a_nat = np.full(len(gauges), P["national_loading"])
 b_cl = np.array([P["cluster_loading"][g["cluster"]] for g in gauges])
+if args.independent:
+    # tiny (not zero) loadings: keeps the same gates as the real run (zero angles crash the transpiler); correlation ~1e-6
+    a_nat, b_cl = np.full_like(a_nat, 1e-3), np.full_like(b_cl, 1e-3)
 model = factor.build_two_level(a_nat, b_cl, area_cluster, np.full(len(gauges), args.level))
 N = len(gauges)
 
@@ -105,11 +110,12 @@ def main():
     circs = [tL, *tcal]
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dev = {"iqm": args.iqm_name, "ibm": args.ibm_name}.get(args.backend, args.backend)
-    path = ROOT / "out" / "runs" / f"loader-{args.backend}-{dev}-{stamp}.json"
+    tag = "-control-indep" if args.independent else ""
+    path = ROOT / "out" / "runs" / f"loader{tag}-{args.backend}-{dev}-{stamp}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     ops = tL.count_ops()
     rec = {"backend": args.backend, "device": dev, "created_utc": stamp, "shots": args.shots, "level": args.level,
-           "qubits": nq, "two_qubit_gates": int(sum(v for g, v in ops.items() if g in ("cz", "cx", "ecr"))),
+           "control_independent": bool(args.independent), "qubits": nq, "two_qubit_gates": int(sum(v for g, v in ops.items() if g in ("cz", "cx", "ecr"))),
            "layout": layout, "jobs": []}
     if args.backend == "ibm":
         from qiskit_ibm_runtime import SamplerV2

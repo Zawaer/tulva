@@ -1,0 +1,80 @@
+{
+  "ibm-ibm_marrakesh-20261008T1|A3_kittila_iva": {
+    "run": "ibm-ibm_marrakesh-20261008T174523Z.json",
+    "instance": "A3_kittila_ivalo_both",
+    "exact": 0.0012496992187709922,
+    "estimate": 0.001487104548942039,
+    "ci90": [
+      0.0014035697213951185,
+      0.001566831260919699
+    ]
+  },
+  "ibm-ibm_marrakesh-20261008T1|A4_lapland_atl": {
+    "run": "ibm-ibm_marrakesh-20261008T170341Z.json",
+    "instance": "A4_lapland_atleast2of3",
+    "exact": 0.0035879218973109356,
+    "estimate": 0.004912279255469296,
+    "ci90": [
+      0.0037772445424240956,
+      0.006121042658977992
+    ]
+  },
+  "iqm-garnet-20261008T182125Z.|A3_kittila_iva": {
+    "run": "iqm-garnet-20261008T182125Z.json",
+    "instance": "A3_kittila_ivalo_both",
+    "exact": 0.0012496992187709922,
+    "estimate": 0.0007302999518876119,
+    "ci90": [
+      0.0003823278519054689,
+      0.0011357372504144495
+    ]
+  },
+  "iqm-garnet-20261008T182125Z.|A4_lapland_atl": {
+    "run": "iqm-garnet-20261008T182125Z.json",
+    "instance": "A4_lapland_atleast2of3",
+    "exact": 0.0035879218973109356,
+    "estimate": 0.004316441705443601,
+    "ci90": [
+      0.0036629721741811066,
+      0.0051024215800917795
+    ]
+  },
+  "iqm-garnet-20261008T182534Z.|A3_kittila_iva": {
+    "run": "iqm-garnet-20261008T182534Z.json",
+    "instance": "A3_kittila_ivalo_both",
+    "exact": 0.0012496992187709922,
+    "estimate": 0.0016359156781654684,
+    "ci90": [
+      0.0014690012649018979,
+      0.0017984587305810618
+    ]
+  },
+  "emerald snow low": {
+    "run": "product-iqm-emerald-20261009T075338Z.json",
+    "instance": "A3_kittila_ivalo_both_low",
+    "exact": 0.000703690350986917,
+    "estimate": 0.0008176300538869975,
+    "ci90": [
+      0.0006926089416401861,
+      0.000948410720022248
+    ]
+  },
+  "emerald snow high": {
+    "run": "product-iqm-emerald-20261009T075338Z.json",
+    "instance": "A3_kittila_ivalo_both_high",
+    "exact": 0.0019328133815970402,
+    "estimate": 0.002493994166834117,
+    "ci90": [
+      0.0023545787794657836,
+      0.0026209197186222413
+    ]
+  },
+  "snow_ratio_high_over_low": {
+    "estimate": 3.050272130993372,
+    "ci90": [
+      2.5887569216092694,
+      3.6279839572065598
+    ],
+    "exact": 2.7466816603159234
+  }
+}

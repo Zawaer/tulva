@@ -192,3 +192,20 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   credited under internal models · source (business case §3)
 - Demo video deck/video/tulva_demo.mp4: 37 s, shows the 1-in-10 Emerald loader run (job 01a11cd4…, ≥4: hardware
   13.8 % vs exact 10.9 % vs independence 4.4 %) · qae-iqm
+
+## Review fixes (Fri 9 Oct evening)
+- **Control run, IQM Emerald (independent loader, same 18 qubits / 44 CZ, 8,000 shots):** noise alone fattens tails.
+  P(≥4 areas over 1-in-10): exact independent 4.4 %, chip-independent 9.7 %; exact correlated 10.9 %, chip-correlated
+  13.8 %. ≥5: 0.9 / 2.6 / 4.8 / 6.3 %. ≥6: 0.1 / 0.6 / 1.9 / 2.4 %. → On the same chip, the correlated model gives
+  1.4× (≥4), 2.4× (≥5), 4× (≥6) more multi-area floods than the identical independent circuit (exact: 2.5× / 5.3× / 19×).
+  The correlation survives on hardware but is attenuated by noise. Supersedes the "7× likelier than independence" line,
+  which compared hardware with an exact value · qae-iqm (sampling) · out/runs/loader-control-indep-iqm-emerald-*.json
+- **Bootstrap 90 % intervals of calibrated QAE estimates** (scripts/bootstrap_ci.py → out/bootstrap_ci.json), Kittilä+Ivalo
+  exact 0.125 %: IBM run 1 0.146 % (0.133–0.157), IBM run 2 0.149 % (0.140–0.157), IQM Garnet run 1 0.073 % (0.038–0.114),
+  IQM Garnet run 2 0.164 % (0.147–0.180). Lapland ≥2 of 3 exact 0.359 %: IBM 0.491 % (0.378–0.612), Garnet 0.432 %
+  (0.366–0.510). All calibrated runs: −42 % to +37 % (best +17 %); raw readings were 2–3× off. The IBM/IQM best-run biases
+  (+17–31 %) are systematic (intervals exclude exact) · qae-ibm / qae-iqm
+- **Snow ratio on IQM Emerald, high/low March:** 3.05× (90 % CI 2.6–3.6) vs exact 2.75×. The interval contains the exact
+  ratio, so the snow signal survives on hardware · qae-iqm · out/bootstrap_ci.json
+- Illustrative limit for the pitch: €3M (≈ one insurer's share of the 2005 Lapland insured loss, market ~€5–17M per the
+  business report) × market rate 4.9–6.9 % = **€147k–207k per year** (North ≥2 of 5) · derived
