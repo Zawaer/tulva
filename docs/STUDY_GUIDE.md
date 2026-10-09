@@ -40,9 +40,11 @@ Read this top to bottom once. The words in **bold** are what to say out loud.
 
   | Machine | Calibrated result | Error |
   |---|---|---|
-  | VTT Q50 | 0.107 % | −14 % (raw reading 1.5 %) |
   | IBM Marrakesh | 0.149 % | +19 % |
   | IQM Garnet | 0.164 % | +31 % |
+  | VTT Q50 (3 repeats) | 0.465 %, 0.534 %, 0.107 % | **not stable**: spread 5× (raw 1.5 %) |
+
+  Q50: the noise calibration itself drifted between repeats, and the boost step kept only 12–19 % of the signal (other chips 56–80 %). Say: **"On Q50 our calibration wasn't stable yet: three repeats spread 5×."** Never say Q50 was the most accurate.
 
 - **The boost steps barely work** on any chip: the signal fades after the first step. So today the answer comes mostly from the **calibrated first measurement**. Say it before they ask.
 - **Snow survives on the chip**: snowy-March ratio 3.05× on chip vs 2.75× exact.
