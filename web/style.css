@@ -53,6 +53,7 @@ nav a:hover { color: var(--navy); }
 .src[data-src="qae-sim-noisy"] { color: #7d4fa8; }
 .src[data-src="qae-q20"], .src[data-src="qae-ibm"], .src[data-src="qae-iqm"] { color: #a0306a; }
 .src[data-src="data"] { color: #2c5c8a; }
+.src[data-src="model"], .src[data-src="model-market"] { color: #5a6472; }
 .src[data-src="placeholder"] { color: var(--warn); background: #fff4e8; }
 
 /* slider */

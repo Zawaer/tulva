@@ -5,6 +5,7 @@ const CLUSTER_COLOR = { "Ostrobothnia": "#2f6fde", "North": "#0f9e94", "Satakunt
 const SRC_LABEL = {
   "exact": "exact", "monte-carlo": "Monte Carlo", "qae-sim": "QAE sim", "qae-sim-noisy": "QAE noisy sim",
   "qae-q20": "Q20", "qae-ibm": "IBM", "qae-iqm": "IQM", "data": "observed", "placeholder": "placeholder",
+  "model": "model", "model-market": "model + market multiple",
 };
 const SRC_HELP = {
   "exact": "Exact value of the fitted model (quadrature / closed form), no sampling error.",
@@ -16,8 +17,14 @@ const SRC_HELP = {
   "qae-iqm": "Run on real IQM quantum hardware (IQM Resonance).",
   "data": "Observed data (SYKE / SMHI).",
   "placeholder": "Not a real result yet. Fills in automatically when the pipeline produces it.",
+  "model": "Fitted model conditioned on the March snow outlook; the snow skill is fitted in-sample (1961–2025), so treat it as a model estimate, not an exact fact.",
+  "model-market": "Model expected payout × the market multiple (2.5–3.5×, outside cat-bond / flood-ILS sources); the multiple is an assumption, not our model.",
 };
 const NORTH = "North";
+// "3.15" -> "3.2": round half up (toFixed(1) on the binary 3.15 gives "3.1"; CLAIMS.md says 3.2×)
+const fix1 = (x) => (Math.round(x * 10 + 1e-6) / 10).toFixed(1);
+// any snow-conditioned view (not the no-outlook climatology) uses the in-sample snow skill
+const conditional = () => !(state.mode === "preset" && state.key === "clim");
 
 let APP, PRICING, BASEMAP;
 // mode: "preset" (key low | clim | high, matching out/pricing.json), "pct" (slider), "latest" (observed March)
@@ -69,20 +76,23 @@ function pNow(name, cl) {
   if (state.mode === "preset") {
     const view = { low: "low", clim: "tulva", high: "high" }[state.key];
     const fp = flatPrice(name, view);
-    if (fp && fp.p != null) return { v: fp.p, src: "exact", note: "out/pricing.json. " + fp.note };
+    if (fp && fp.p != null) return { v: fp.p, src: conditional() ? "model" : "exact", note: "out/pricing.json. " + fp.note };
     const own = { low: cl.p_low_outlook, clim: cl.p_tulva, high: cl.p_high_outlook }[state.key];
     return own;
   }
   const at = state.mode === "latest" ? cl.latest_march.pct : state.pct;
-  return { v: pAtPct(cl, at), src: "exact", note: cl.p_by_snow_pct.note + ` (at the ${ordinal(at)} percentile)` };
+  return { v: pAtPct(cl, at), src: "model", note: cl.p_by_snow_pct.note + ` (at the ${ordinal(at)} percentile)` };
 }
 // Index price under the current outlook: {v, src, note} or null
 function priceNow(name, cl) {
-  if (state.mode === "preset") return flatPrice(name, { low: "low", clim: "tulva", high: "high" }[state.key]);
+  if (state.mode === "preset") {
+    const fp = flatPrice(name, { low: "low", clim: "tulva", high: "high" }[state.key]);
+    return fp && conditional() ? { ...fp, src: "model" } : fp;
+  }
   if (!PRICING || PRICING.status !== "ready" || PRICING.risk_load == null) return null;
   const p = pNow(name, cl).v;
   const mm = PRICING.market_multiples;
-  return { v: p * APP.payout_eur * (1 + PRICING.risk_load), src: "exact",
+  return { v: p * APP.payout_eur * (1 + PRICING.risk_load), src: "model",
     market: mm ? mm.map((x) => p * APP.payout_eur * x) : null,
     note: `P × €10M × (1 + ${PRICING.risk_load} risk load), pricing rule from out/pricing.json applied to the slider probability.` };
 }
@@ -97,7 +107,7 @@ function outlookLabel(cl) {
 function priceHTML(p) {
   if (p && p.v != null) {
     const mm = PRICING && PRICING.market_multiples;
-    const mk = p.market && mm ? `<div class="mkt">market ${eur(p.market[0])}–${eur(p.market[1])} ${tag("exact",
+    const mk = p.market && mm ? `<div class="mkt">market ${eur(p.market[0])}–${eur(p.market[1])} ${tag("model-market",
       `expected payout × ${mm[0]}–${mm[1]}: ${PRICING.market_note || "cat-bond / flood-ILS multiples"}`)}</div>` : "";
     return `<b>${eur(p.v)}</b> <span class="tech">technical</span> ${tag(p.src || "exact", p.note || "out/pricing.json")}${mk}`;
   }
@@ -141,11 +151,11 @@ function drawMap() {
 function drawIntro() {
   $("#edge-min").textContent = APP.edge_min_spearman.toFixed(1);
   const j = APP.dependence.joint_1in10;
-  $("#st-within").textContent = j.within.multiplier.toFixed(1) + "×";
+  $("#st-within").textContent = fix1(j.within.multiplier) + "×";
   $("#st-years").textContent = APP.joint_counts.observed_years_ge4.length + " of 65";
   const ul = $("#legend");
   Object.entries(APP.clusters).forEach(([name, cl]) => {
-    const mult = j[name] ? j[name].multiplier.toFixed(1) + "× joint floods" : "";
+    const mult = j[name] ? fix1(j[name].multiplier) + "× joint floods" : "";
     ul.insertAdjacentHTML("beforeend", `<li><span class="dot" style="background:${CLUSTER_COLOR[name]}"></span>
       <span><b>${esc(name)}</b> · ${cl.n} areas · ${mult} <span class="who">${cl.areas.map(esc).join(", ")}</span></span></li>`);
   });
@@ -195,7 +205,7 @@ function renderOutlook() {
       <h3>${esc(name)}</h3><div class="sub">≥2 of ${cl.n} gauges over their 1-in-50 level${state.mode === "latest" ? " · " + ordinal(cl.latest_march.pct) + " pct snow in " + cl.latest_march.year : ""}</div>
       <div class="big">${pct(p)} <span class="unit">per spring</span> ${tag(pn.src, pn.note)}</div>
       <div class="bars">${bars}</div>
-      <div class="price-row"><span>Expected payout on €10M ${tag("exact", "probability × €10M; pure premium before loadings")}</span><b>${eur(p * APP.payout_eur)}</b></div>
+      <div class="price-row"><span>Expected payout on €10M ${tag(pn.src === "model" ? "model" : "exact", "probability × €10M; pure premium before loadings")}</span><b>${eur(p * APP.payout_eur)}</b></div>
       <div class="price-row"><span>Index cover price</span><span>${priceHTML(priceNow(name, cl))}</span></div>
     </div>`;
   });
@@ -223,10 +233,10 @@ function renderCard() {
         <div class="vt">${t}</div>
         <div class="vp">${pct(p.v)}</div>
         <div class="vs">chance per spring ${tag(p.src, p.note)}</div>
-        <div class="vpr">Expected payout <b>${eur(p.v * APP.payout_eur)}</b> ${tag("exact", "probability × €10M")}</div>
+        <div class="vpr">Expected payout <b>${eur(p.v * APP.payout_eur)}</b> ${tag(p.src === "model" ? "model" : "exact", "probability × €10M")}</div>
         <div class="vpr">Index price ${priceHTML(price)}${extra ? `<div class="vs">${extra}</div>` : ""}</div>
         ${price && price.staged ? `<div class="vpr stg">Staged (50 % at ≥2, 100 % at ≥3): <b>${eur(price.staged.v)}</b>
-          · market ${eur(price.staged.market[0])}–${eur(price.staged.market[1])} ${tag("exact",
+          · market ${eur(price.staged.market[0])}–${eur(price.staged.market[1])} ${tag("model-market",
           "expected payout " + eur(price.staged.expected_payout) + "; out/pricing.json staged_ge2_half_ge3_full")}</div>` : ""}
       </div>`).join("")}</div>
     <div class="note">Independence (no co-flooding): each gauge 2 %/yr, floods unrelated. For comparison, from 30 Jan 2027
@@ -343,9 +353,9 @@ function loaderCard(L) {
   const fmtR = (r) => (r < 2 ? r.toFixed(1) : Math.round(r)) + "×";
   return `<div class="panel loader">
     <div class="loader-head">
-      <div><h3>All 14 areas on one quantum chip</h3>
+      <div><h3>A two-level version of our 14-river model, on one quantum chip</h3>
       <div class="sub">Chance per spring that k or more of Finland's 14 river flood-risk areas pass their 1-in-10 level together:
-        the full joint model loaded into one circuit and sampled on real hardware.</div></div>
+        a two-level version of our 14-river model, loaded into one circuit and sampled on real hardware.</div></div>
       <div class="chips"><div class="chip"><b>${L.qubits}</b>qubits</div><div class="chip"><b>${L.two_qubit_gates}</b>two-qubit gates</div>
         <div class="chip"><b>${devName(L.device).replace("IQM ", "")}</b>IQM</div><div class="chip"><b>${L.shots.toLocaleString("en")}</b>shots</div></div>
     </div>

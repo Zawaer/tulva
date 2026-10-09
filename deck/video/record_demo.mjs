@@ -50,7 +50,7 @@ const Y = {
   map: await findY(`document.querySelector("#map .map-box")`, 10),
   snow: await findY(`document.querySelector("#presets")`, 10),
   shots: await findY(`document.querySelector("#pl-canvas").closest(".pl-step")`, 10),
-  loader: await findY(`[...document.querySelectorAll("h3")].find((x) => x.textContent.includes("All 14 areas"))`, 10),
+  loader: await findY(`[...document.querySelectorAll("h3")].find((x) => x.textContent.includes("14-river model"))`, 10),
   replay: await findY(`document.querySelector("#replay")`, 0),
 };
 console.log("scroll targets", Y);
@@ -71,11 +71,11 @@ await page.evaluate(() => { const b = document.querySelector('.pl-snow button[da
 await glide(Y.shots); await w(800);
 await cap("Real IQM Emerald shots. Red = BOTH rivers flood. Low snow: little red"); await w(5800);
 await page.evaluate(() => { const b = document.querySelector('.pl-snow button[data-k="high"]'); if (b) b.click(); });
-await cap("Snowy March: more red, about 3× the risk"); await w(5600);
-// (d) all 14 areas on one chip, 1-in-10 run
+await cap("Snowy March: more than twice the red"); await w(5600);
+// (d) simplified (two-level) 14-river model on one chip, 1-in-10 run
 await glide(Y.loader);
 await w(800);
-await cap("Our whole flood model on ONE chip: 14 areas, 18 qubits"); await w(6500);
+await cap("Simplified 14-river model on one chip: 18 qubits"); await w(6500);
 // (e) 2005 replay
 await glide(Y.replay); await w(600);
 await clickText("#year-chips", "2005");
