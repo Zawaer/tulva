@@ -24,9 +24,8 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   controlled RY, so it's linear in the number of areas. All 14 areas fit on 18 qubits with 44 two-qubit gates (run
   on Emerald).
 - *"When would this beat Monte Carlo?"* On ideal hardware the error falls like 1/N vs 1/√N (our simulation
-  shows it). It needs fault tolerance: published estimates for comparable pricing are about 8,000 logical qubits
-  (Chakrabarti et al. 2021). It also needs an expensive model per scenario (a hydrological simulation, many
-  perils), not our nanosecond toy.
+  shows it). It needs fault tolerance, and an expensive model per scenario (a hydrological simulation, many
+  perils), not our nanosecond toy. (The ~8k logical qubits figure is for derivative pricing, see below.)
 - *"Is there advantage today?"* No, and we say so. At the same budget Monte Carlo is within ±0.004–0.006 pp.
 
 - *"Why quantum and not a supercomputer?"* (mentor feedback) "Today a supercomputer wins: it's classical sampling,
@@ -34,8 +33,9 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   quadratically fewer model runs for the same precision. That pays off when each scenario is expensive, such as a
   full hydrological simulation or multi-peril repricing every day, and rare joint events need many runs.
   Fault-tolerant hardware has to arrive first."
-- *"Did the snow signal survive on hardware?"* Yes. On IQM Emerald the snowy-vs-low-snow risk ratio was 3.1× against
-  2.7× exact (Kittilä + Ivalo, 240k shots each).
+- *"Did the snow signal survive on hardware?"* Yes. On IQM Emerald the snowy-vs-low-snow risk ratio was 3.05×
+  (bootstrap 90 % CI 2.6–3.6) against 2.75× exact (Kittilä + Ivalo, 240k shots each). The interval contains the
+  exact ratio.
 - *"What breaks?"* Rare events: the 14-area circuit at the 1-in-50 level read 16 % vs 4.8 % exact. Gate noise creates
   false triggers that swamp rare signals, which is exactly why this needs error correction.
 
@@ -57,31 +57,32 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   physical (how strongly a region's rivers move together, how much the snow matters). No black box.
 - *"Basis risk?"* The cover pays on gauges, not on the insurer's claims. The back-test: a "≥2 gauges" trigger paid
   in 2005 when Lapland flooded. We'd fit the gauge choice to each buyer's exposure; the staged payout
-  (50 % at 2, 100 % at 3) reduces it.
+  (50 % at 2, 100 % at 3) reduces it. Not yet tested against claims: that is step one of the pilot (postcode
+  claims for 2005, 2018, 2024; see the review-fixes section below).
 - *"Does the snow signal work?"* At the 1-in-10 level, the 1 March snow flag caught 11 of 19 payout years in advance, and no payout
   followed a low-snow March. That's in-sample with a small sample, and we say so.
 
 ## Business (Vaishnav)
-- *"Who buys, and why?"* Insurers first (pilot: a Finnish non-life insurer, for the joint flood loss it retains),
-  then reinsurers and brokers across Nordic and Central European flood. It's sold in autumn, ahead of the 1 January
-  renewal; the March snow update then tells the insurer how much joint risk sits on its own books (claims
-  readiness, capital, next season's price). An index cover pays fast, with no claims adjustment.
+- *"Who buys, and why?"* An insurer buys it for the joint spring-flood loss it retains; a reinsurer carries the
+  risk. It's priced and sold in autumn, ahead of the 1 January renewal; the March snow update then tells the insurer
+  how much joint risk sits on its own books (claims readiness, capital, next season's price). An index cover pays
+  fast, with no claims adjustment.
 - *"What does it cost?"* As rate on line (market premium as % of the limit per year), North "≥2 of 5 over
   1-in-50": Tulva 4.9–6.9 %; priced as independent 1.0–1.3 %; the same cover is worth 16–23 % after a snowy March.
-  On an illustrative €10M limit that is €491k–€687k a year.
-- *"Your payout is bigger than Finnish flood losses."* "The €10M is only an illustration. The limit is sized to each
-  insurer's own retained 1-in-50 joint loss, so the price is a rate: 4.9–6.9 % of whatever limit fits its book."
-- *"Isn't the Finnish market tiny?"* "Yes, Finland is the pilot, because it has the best open data. The engine
-  sells to reinsurers and brokers across Nordic and Central European flood (for scale, rain-driven events there:
-  Gävle 2021 SEK 1.9bn, storm Boris €2.15bn insured)."
+  On an illustrative €3M limit (about one insurer's share of the 2005 Lapland loss) that is ~€150–210k a year.
+- *"Your payout is bigger than Finnish flood losses."* "The €3M is only an illustration. The limit is sized from the
+  insurer's own claims in the pilot, so the price is a rate: 4.9–6.9 % of whatever limit fits its book."
+- *"Isn't the Finnish market tiny?"* "Yes, Finland is first because its data is open. The method fits any
+  snowmelt region: Sweden, Norway, the Alps, Canada. (For scale, rain-driven Nordic/European events: Gävle 2021
+  SEK 1.9bn, storm Boris €2.15bn insured.)"
 - *"Do you get capital credit?"* "Under the Solvency II standard formula, an index cover likely gets no capital
   credit (EIOPA Q&A 1597: basis risk can't be haircut there). The value is basis-risk-managed protection of the
   retained loss, plus credit under internal models, where basis risk can be modelled."
 - *"Won't sellers just raise the price after a snowy March?"* Yes, that's why it's sold in autumn, ahead of the
-  1 January renewal. The March update tells the insurer how much joint risk it holds; Tulva is the pricing engine
-  for whoever carries the risk.
-- *"Why now?"* EIOPA adds a Finnish flood capital factor from January 2027, and insurers must include climate
-  scenarios in ORSA.
+  1 January renewal. The price is fixed in autumn; the March update tells the insurer how much joint risk it holds.
+  Tulva is the index and pricing engine for whoever carries the risk.
+- *"Why now?"* From January 2027 Solvency II charges capital for Finnish flood, with 0 % correlation to SE/NO/DK
+  (EIOPA considered 25 % for snowmelt floods and rejected it), and insurers must include climate scenarios in ORSA.
 
 ## New jury questions (research/18)
 
@@ -101,12 +102,49 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   business/NOTES_FOR_TOIVO.md.)
 - **Toikka (OP as buyer): "Who sells us this, and why not just buy more treaty reinsurance?"** "A reinsurer or an
   ILS fund that wants Nordic diversification sells it at the 2.5–3.5× multiple we priced. It doesn't replace your
-  treaty. It fills the gap the treaty can't: the correlated spring layer you retain, priced once the snow is known
-  and paid in days off a public gauge. We license the engine to whichever side you're on."
+  treaty. It fills the gap the treaty can't: the correlated spring layer you retain, priced jointly in autumn and
+  paid in days off a public gauge. We are the index provider and calculation agent, paid per placed deal."
 - **Anbarjafari: "The theme is AI × quantum. Where is the AI?"** "Honestly: the product's early-warning signal is
   statistical, snow index to risk shift, because an insurer has to defend the trigger to a regulator. We built it
   with AI coding agents (Claude Code). The next step is an ML seasonal forecaster: snow plus soil moisture plus
   ECMWF seasonal forecasts."
+
+## Review fixes (Fri 9 Oct evening): the hard questions
+
+**Technical (Toivo)**
+- **"Which number did a QPU compute?"** "None of the prices. Every price we quote is computed classically, exactly.
+  The QPUs ran the pipeline end to end: the whole 14-area model on one IQM chip, amplitude estimation on IBM and IQM,
+  and the snow effect on Emerald. They show where today's hardware stops. Quantum is our R&D track."
+- **"How do your calibration twins scale?"** "Today they validate the noise model: circuits of the same shape with
+  known answers, run in the same job. At scale we'd use twins that are classically trivial to compute, for example
+  product states, so the known answer never needs the hard simulation."
+- **"What's the confidence interval on 0.148 %?"** "Bootstrap 90 %: IBM 0.149 % (0.140–0.157), IQM Garnet 0.164 %
+  (0.147–0.180), exact 0.125 %. Both intervals exclude the exact value, so the remaining +17–31 % is a systematic
+  bias, not shot noise. Across all our calibrated runs the error ranges from −42 % to +37 %; raw readings were 2–3×
+  off."
+- **"Did the noise create your fat tail?"** "Partly, and we measured it. We ran the identical 18-qubit circuit with
+  correlations switched off. ≥4 of 14 areas: independent exact 4.4 %, chip 9.7 %; correlated exact 10.9 %, chip
+  13.8 %. So noise alone roughly doubles the tail. But chip vs chip, the correlated model still gives 1.4× (≥4),
+  2.4× (≥5) and 4× (≥6) more multi-area floods. The correlation survives, weakened by noise."
+- **"Doesn't this need 8,000 logical qubits?"** "That number is for derivative pricing (Chakrabarti et al. 2021).
+  Our circuits are few qubits but deep: 3 qubits for Kittilä + Ivalo. The bottleneck is a coherent hydrology oracle,
+  a flood model evaluated inside the circuit, and the circuit depth that needs."
+- **"Two-level circuit vs your continuous model?"** "The circuits use a two-level version of the factor model (wet
+  spring or not). For ≥4 of 14 areas over 1-in-10 it gives 10.9 % vs 12.2 % for the continuous model (observed
+  15.4 %). The continuous model is the classical reference and the one we price with."
+
+**Business (Vaishnav)**
+- **"Who signs as risk carrier?"** "A reinsurer. We are the index provider and calculation agent, like PERILS for
+  industry-loss indices, paid a fee per placed deal (€25k pilot)."
+- **"2005 was about €5M market-wide, below any retention. Why buy?"** "The value is not one river in one year. It's
+  the multi-region spring that the treaty doesn't price by snow. The limit is sized from the insurer's own claims in
+  the pilot, not from our illustration."
+- **"Basis risk?"** "Not tested yet, and we say so. It's step one of the pilot: the insurer's postcode-level claims
+  for 2005, 2018 and 2024 against our gauge triggers give a basis-risk map before anything is sold."
+- **"What does OP do with the March signal?"** "Claims staffing in the regions at risk; on the bank side, a watch
+  on agricultural and mortgage collateral there; and a top-up quote for extra cover if they want it."
+- **"Regulated rivers, Kemijoki or Kokemäenjoki?"** "Hydropower regulation changes discharge. The index would use
+  gauges on unregulated tributaries, or water levels instead of flow. That is to be tested in the pilot."
 
 ## "What did you do before the event?" (answer honestly, calmly, ~15 s)
 "Before the event we did research: we read up on Finnish floods, insurance and reinsurance, found the public data
