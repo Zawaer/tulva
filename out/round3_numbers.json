@@ -1,0 +1,44 @@
+{
+ "north_ge2_of5_1in50": {
+  "tulva_exact": 0.01963,
+  "high_snow_exact": 0.06445,
+  "equicorr_0.27_exact_quadrature": 0.01111,
+  "equicorr_0.27_mc_2M": 0.01122,
+  "equicorr_0.27_mc_se": 7.4e-05,
+  "tulva_over_equicorr": 1.768,
+  "high_over_tulva": 3.282,
+  "independent_exact": 0.0038424
+ },
+ "ge4_of14_1in10": {
+  "observed_years": 10,
+  "n_years": 65,
+  "observed": 0.1538,
+  "wilson90": [
+   0.0942,
+   0.2411
+  ],
+  "independent_same_gauge_years": 0.0391,
+  "independent_all14_binomial": 0.0441,
+  "ratio_same_gauge_years": 3.93,
+  "ratio_all14": 3.48,
+  "ratio_wilson_low_same_years": 2.41,
+  "note": "35 gauge-years are missing, so in many years fewer than 14 gauges could flood. The like-for-like chance baseline uses each year's available gauges (3.9 %); 4.4 % assumes all 14 every year (the two-level circuit's independent case, 4.42 %, is the same binomial)."
+ },
+ "lapland_2005": {
+  "over_1in10_empirical": [
+   "Ivalo",
+   "Kittilä",
+   "Rovaniemi",
+   "Tornio"
+  ],
+  "over_1in50_gev": [
+   "Ivalo",
+   "Kittilä",
+   "Rovaniemi"
+  ],
+  "north_snow_percentile": {
+   "pct": 87,
+   "top15": true
+  }
+ }
+}

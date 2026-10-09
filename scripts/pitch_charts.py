@@ -31,21 +31,25 @@ def clean(ax):
 
 
 def gap_chart():
-    """Slide 2: P(>=4 of 14 areas over their own 1-in-10 in the same spring), observed vs independence."""
+    """Slide 2: P(>=4 of 14 areas over their own 1-in-10 in the same spring), observed vs chance (independence on the
+    same gauge-years as observed; 35 gauge-years are missing). Wilson 90 % interval from scripts/round3_numbers.py."""
     j = json.loads((OUT / "joint_counts.json").read_text())
+    r3 = json.loads((OUT / "round3_numbers.json").read_text())["ge4_of14_1in10"]
     i = j["k"].index(4)
     n_obs, n_years = j["observed_n_years"][i], j["n_years"]
     obs, ind = j["observed"][i], j["independent_same_years"][i]
+    lo, hi = r3["wilson90"]
     fig, ax = plt.subplots(figsize=(12.1, 4.35), dpi=DPI)
     xs = [0, 2]
     ax.bar(xs, [obs, ind], width=0.9, color=[NAVY, RED])
     for x, v, c in zip(xs, [obs, ind], [NAVY, RED]):
         ax.text(x, v + 0.005, f"{100 * v:.1f} %", ha="center", va="bottom", fontsize=40, fontweight="bold", color=c)
-    ax.text(0, obs / 2, f"{n_obs} of {n_years}\nsprings", ha="center", va="center", fontsize=22, color="white")
-    ax.text(1.0, obs * 0.62, f"≈{obs / ind:.0f}×", ha="center", va="center", fontsize=72, fontweight="bold",
+    ax.text(0, obs / 2, f"{n_obs} of {n_years}\nsprings\n(90 %: {100 * lo:.0f}–{100 * hi:.0f} %)", ha="center",
+            va="center", fontsize=21, color="white")
+    ax.text(1.0, obs * 0.62, f"{obs / ind:.1f}×", ha="center", va="center", fontsize=72, fontweight="bold",
             color=RED)
-    ax.text(1.0, obs * 0.36, "as often as\nindependence says", ha="center", va="center", fontsize=20, color=GREY)
-    ax.set_xticks(xs, ["Observed 1961–2025", "If rivers were independent"], fontsize=24)
+    ax.text(1.0, obs * 0.36, "as often\nas chance", ha="center", va="center", fontsize=22, color=GREY)
+    ax.set_xticks(xs, ["Observed 1961–2025", "By chance (no co-flooding)"], fontsize=24)
     ax.set_xlim(-0.8, 2.8)
     ax.set_yticks([])
     ax.set_ylim(0, obs * 1.3)
@@ -56,8 +60,8 @@ def gap_chart():
 
 
 # North ">=2 of 5 over 1-in-50" under one equicorrelation of 0.27 (~ mean of the regulator's 19-zone matrix inside
-# Finland): 2M-sample Monte Carlo of the Gaussian copula, CLAIMS.md "Realistic baseline (round 2 review)".
-P_REG_027 = 0.0109
+# Finland): one-factor quadrature, scripts/round3_numbers.py (MC 2M agrees).
+P_REG_027 = json.loads((OUT / "round3_numbers.json").read_text())["north_ge2_of5_1in50"]["equicorr_0.27_exact_quadrature"]
 
 
 def cost_chart():
@@ -68,9 +72,8 @@ def cost_chart():
     t, limit, mm = d["clusters"]["North"]["triggers"]["ge2"], d["payout_eur"], d["market_multiples"]
     reg = [P_REG_027 * limit * m for m in mm]
     rows = [("Independent", t["independent"]["market_premium_eur"], RED),
-            ("Regulator-style correlation (0.27)", reg, GREY),
-            ("Tulva (sold in autumn)", t["tulva"]["market_premium_eur"], BLUE),
-            ("After a snowy March", t["tulva_high_outlook"]["market_premium_eur"], NAVY)]
+            ("2027 rule's average link (0.27)", reg, GREY),
+            ("Tulva (sold in autumn)", t["tulva"]["market_premium_eur"], BLUE)]
 
     def rol(v):
         return 100 * v / limit
@@ -79,18 +82,18 @@ def cost_chart():
         f = (lambda x: f"{x:.1f}") if hi < 10 else (lambda x: f"{x:.0f}")
         return f"{f(lo)}–{f(hi)} %"
 
-    fig, ax = plt.subplots(figsize=(12.1, 2.4), dpi=DPI)
-    ys = [3, 2, 1, 0]
+    fig, ax = plt.subplots(figsize=(12.1, 2.0), dpi=DPI)
+    ys = [2, 1, 0]
     xmax = max(rol(r[1][1]) for r in rows)
     for y, (lab, (lo, hi), c) in zip(ys, rows):
         lo, hi = rol(lo), rol(hi)
         w = max(hi - lo, xmax * 0.012)
         ax.barh(y, w, left=lo, height=0.62, color=c)
-        ax.text(hi + xmax * 0.015, y, fmt(lo, hi), va="center", fontsize=22, fontweight="bold", color=c)
-    ax.set_yticks(ys, [r[0] for r in rows], fontsize=18)
-    ax.set_xlim(0, xmax * 1.25)
-    ax.set_ylim(-0.55, 3.55)
-    ax.set_xticks([0, 5, 10, 15, 20], ["0 %", "5 %", "10 %", "15 %", "20 %"], fontsize=16, color=GREY)
+        ax.text(hi + xmax * 0.015, y, fmt(lo, hi), va="center", fontsize=24, fontweight="bold", color=c)
+    ax.set_yticks(ys, [r[0] for r in rows], fontsize=20)
+    ax.set_xlim(0, xmax * 1.3)
+    ax.set_ylim(-0.55, 2.55)
+    ax.set_xticks([0, 2, 4, 6, 8], ["0 %", "2 %", "4 %", "6 %", "8 %"], fontsize=18, color=GREY)
     ax.grid(axis="x", color=LIGHTGREY, lw=1)
     ax.set_axisbelow(True)
     clean(ax)
@@ -172,16 +175,16 @@ def scaling_chart():
         pts = [p for p in hw if p["vendor"] == vendor]
         ax.loglog([p["queries"] for p in pts], [100 * p["abs_error"] for p in pts], mk, color=col, ms=16,
                   mec="black", mew=1)
-    ax.text(1.2e6, 2.6e-3, "Classical\nMonte Carlo", fontsize=18, fontweight="bold", color=NAVY, ha="right",
+    ax.text(1.2e6, 2.6e-3, "Classical\nMonte Carlo", fontsize=20, fontweight="bold", color=NAVY, ha="right",
             va="top")
-    ax.text(5.5e2, 1.3e-3, "Ideal quantum\n(needs fault tolerance)", fontsize=18, fontweight="bold", color=BLUE,
+    ax.text(5.5e2, 1.3e-3, "Ideal quantum\n(needs fault tolerance)", fontsize=20, fontweight="bold", color=BLUE,
             va="top")
-    ax.text(1.2e6, 0.1, "IBM & IQM chips today", fontsize=18, fontweight="bold", color="#0f62fe", ha="right")
-    ax.set_xticks([1e3, 1e4, 1e5, 1e6], ["1k", "10k", "100k", "1M"], fontsize=17)
-    ax.set_yticks([1e-1, 1e-2, 1e-3, 1e-4], ["0.1", "0.01", "0.001", "0.0001"], fontsize=17)
+    ax.text(1.2e6, 0.1, "IBM & IQM chips today", fontsize=20, fontweight="bold", color="#0f62fe", ha="right")
+    ax.set_xticks([1e3, 1e4, 1e5, 1e6], ["1k", "10k", "100k", "1M"], fontsize=21)
+    ax.set_yticks([1e-1, 1e-2, 1e-3, 1e-4], ["0.1", "0.01", "0.001", "0.0001"], fontsize=21)
     ax.minorticks_off()
-    ax.set_xlabel("Model evaluations", fontsize=17)
-    ax.set_ylabel("Error (percentage points)", fontsize=17)
+    ax.set_xlabel("Model evaluations", fontsize=21)
+    ax.set_ylabel("Error (percentage points)", fontsize=21)
     ax.grid(True, which="major", color=LIGHTGREY, lw=1)
     clean(ax)
     fig.tight_layout(pad=0.3)

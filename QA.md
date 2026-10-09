@@ -17,7 +17,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   0 / 1 / 2 steps; the 4-qubit version passes 60+ and on IBM loses almost all signal. That's the measured limit.
 - *"How does your error mitigation work?"* In the same job, on the same qubits, we run two calibration copies
   of the circuit with known answers (one large, one ≈ 0). They give each step's surviving signal and false-positive
-  offset, and we invert that. On IBM it moved 0.262 % → 0.148 % (exact 0.125 %).
+  offset, and we invert that. On IBM it moved 0.262 % → 0.149 % (exact 0.125 %).
 - *"Why not Q50?"* "We set it up: same code, one flag (`--backend q50`). Q50 had the cryostat issue on Thursday and
   our LUMI account was still syncing, so we used IQM Garnet and Emerald, same architecture." One sentence, no blame.
 - *"State loading kills the speed-up."* Not for a factor model: one qubit per area, each needing one RY and one
@@ -68,8 +68,10 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   how much joint risk sits on its own books (claims readiness, capital, next season's price). An index cover pays
   fast, with no claims adjustment.
 - *"What does it cost?"* As rate on line (market premium as % of the limit per year), North "≥2 of 5 over
-  1-in-50": Tulva 4.9–6.9 %; with the regulator's average correlation 2.7–3.8 %; priced as independent 1.0–1.3 %; the
-  same cover is worth 16–23 % after a snowy March. Per €1M of cover that is ~€49–69k a year.
+  1-in-50": Tulva 4.9–6.9 %; with the 2027 rule's average link (0.27) 2.8–3.9 %; priced as independent 1.0–1.3 %.
+  Per €1M of cover that is ~€49–69k a year. After a snowy March the fair risk triples (1.96 % → 6.4 %), but nobody
+  re-prices the autumn cover then: the insurer buys a top-up / second layer if it wants one, staffs claims and uses
+  the number in its ORSA.
 - *"Your payout is bigger than Finnish flood losses."* "The €10M in the app is only an illustration. The limit is sized from the
   insurer's own claims in the pilot, so the price is a rate: 4.9–6.9 % of whatever limit fits its book."
 - *"Isn't the Finnish market tiny?"* "Yes, Finland is first because its data is open. The method fits any
@@ -81,8 +83,9 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - *"Won't sellers just raise the price after a snowy March?"* Yes, that's why it's sold in autumn, ahead of the
   1 January renewal. The price is fixed in autumn; the March update tells the insurer how much joint risk it holds.
   Tulva is the index and pricing engine for whoever carries the risk.
-- *"Why now?"* From January 2027 Solvency II charges capital for Finnish flood, with 0 % correlation to SE/NO/DK
-  (EIOPA considered 25 % for snowmelt floods and rejected it), and insurers must include climate scenarios in ORSA.
+- *"Why now?"* From January 2027 Solvency II charges capital for Finnish flood with fixed correlations: 0 % to
+  SE/NO/DK (EIOPA considered 25 % for snowmelt floods and rejected it) and a fixed 19-zone matrix inside Finland (mean
+  ≈ 0.27). None of them react to this winter's snow. Insurers must also include climate scenarios in ORSA.
 
 ## New jury questions (research/18)
 
@@ -103,7 +106,8 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - **Toikka (OP as buyer): "Who sells us this, and why not just buy more treaty reinsurance?"** "A reinsurer or an
   ILS fund that wants Nordic diversification sells it at the 2.5–3.5× multiple we priced. It doesn't replace your
   treaty. It fills the gap the treaty can't: the correlated spring layer you retain, priced jointly in autumn and
-  paid in days off a public gauge. We are the index provider and calculation agent, paid per placed deal."
+  paid in days off a public gauge. We are the index provider and calculation agent, paid by licence: €25k pilot,
+  then ~€75k a year per insurer (assumption)."
 - **Anbarjafari: "The theme is AI × quantum. Where is the AI?"** "Honestly: the product's early-warning signal is
   statistical, snow index to risk shift, because an insurer has to defend the trigger to a regulator. We built it
   with AI coding agents (Claude Code). The next step is an ML seasonal forecaster: snow plus soil moisture plus
@@ -118,7 +122,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - **"How do your calibration twins scale?"** "Today they validate the noise model: circuits of the same shape with
   known answers, run in the same job. At scale we'd use twins that are classically trivial to compute, for example
   product states, so the known answer never needs the hard simulation."
-- **"What's the confidence interval on 0.148 %?"** "Bootstrap 90 %: IBM 0.149 % (0.140–0.157), IQM Garnet 0.164 %
+- **"What's the confidence interval on 0.149 %?"** "Bootstrap 90 %: IBM 0.149 % (0.140–0.157), IQM Garnet 0.164 %
   (0.147–0.180), exact 0.125 %. Both intervals exclude the exact value, so the remaining +17–31 % is a systematic
   bias, not shot noise. Across all our calibrated runs the error ranges from −42 % to +37 %; raw readings were 2–3×
   off."
@@ -135,7 +139,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 
 **Business (Vaishnav)**
 - **"Who signs as risk carrier?"** "A reinsurer. We are the index provider and calculation agent, like PERILS for
-  industry-loss indices, paid a fee per placed deal (€25k pilot)."
+  industry-loss indices, paid by licence: a €25k pilot, then ~€75k a year per insurer (team assumption)."
 - **"2005 was about €5M market-wide, below any retention. Why buy?"** "The value is not one river in one year. It's
   the multi-region spring that the treaty doesn't price by snow. The limit is sized from the insurer's own claims in
   the pilot, not from our illustration."
@@ -149,9 +153,10 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 ## Round 2 (Sat 10 Oct): the sharper questions
 
 - **"Against realistic correlation, how under-priced is it?"** (Toivo) "About 1.8× against the regulator's average
-  correlation of 0.27: 1.96 % vs 1.09 % for '≥2 of 5 North'. The 5× is only against independence. The bigger value is
+  correlation of 0.27: 1.96 % vs 1.11 % for '≥2 of 5 North' (round-3 recomputation; the earlier 1.09 % was an
+  unreproduced Monte Carlo). The 5× is only against independence. The bigger value is
   the snow repricing: a snowy March moves the same cover about ×3."
-- **"Your circuit's exact answer is 1.10 %, but you price 1.98 %?"** (Toivo) "Yes. The circuit uses a two-level
+- **"Your circuit's exact answer is 1.10 %, but you price 1.96 %?"** (Toivo) "Yes. The circuit uses a two-level
   version of the model, wet spring or not, and that loses 44 % at the 1-in-50 level. More latent qubits per factor fix
   it, at linear gate cost. The prices come from the continuous classical model, not from the chip."
 - **"How much of your estimate comes from amplification (k ≥ 1)?"** (Toivo) "Little, today. On Emerald the surviving signal
@@ -166,8 +171,9 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - **"Why pay 5–7 % rate on line with no standard-formula capital credit?"** (Vaishnav) "It protects earnings on the
   correlated spring layer below the treaty, and it's ORSA evidence on joint flood risk. Under an internal model, like
   If's, it can be credited. Per €1M of cover it's about €49–69k a year."
-- **"Vendor models already include snowmelt (RMS)."** (Toivo) "They average over simulated winters. None reprices from
-  this March's measured snow. Tulva does that, before the melt."
+- **"Vendor models already include snowmelt (RMS)."** (Toivo) "As far as we can see from public documentation, they
+  average over simulated winters; we couldn't check every vendor, so we don't claim none does. Tulva re-states the joint
+  risk from this March's measured snow, before the melt."
 
 ## "What did you do before the event?" (answer honestly, calmly, ~15 s)
 "Before the event we did research: we read up on Finnish floods, insurance and reinsurance, found the public data
@@ -188,3 +194,43 @@ history shows."
 - Never claim "EIOPA assumes 0 % in Finland". The 0 % is cross-border (FI–SE/NO/DK); inside Finland EIOPA uses
   a 19-zone matrix.
 - If you don't know: "Good question. We didn't test that this weekend; here's how we would."
+
+## Round 3 (Sat 10 Oct): what came off the slides, and the hardware juror's questions
+
+- **"Slide 2 says chance is 3.9 %, your hardware table says 4.4 %. Which?"** (Toivo) "Both are code, different
+  baselines. 35 gauge-years are missing, so in many years fewer than 14 gauges could flood. The like-for-like chance
+  for the observed 15.4 % uses each year's actual gauges: 3.9 %, so 3.9×. If all 14 reported every year it is 4.4 %
+  (3.5×); that is the circuit's independent case. 10 of 65 springs has a 90 % interval of 9–24 %, so even the low
+  end is 2.4× chance."
+- **"The video shows 2.8×, slide 2 shows 3.9×."** "Different questions. 2.8× is per pair: two rivers of one cluster
+  both over 1-in-10 in the same spring, vs chance. 3.9× is per spring: four or more of all 14 areas at once."
+- **"The shot grid shows 13 vs 31 red squares. Is that the 3×?"** "No. That grid is one 8,000-shot sample, raw.
+  Across all 240,000 shots per level the raw ratio is only 1.3×, because noise adds a floor of false 'both flood'
+  shots. After the calibration circuits remove that floor it is 3.05× (90 % CI 2.6–3.6) vs 2.75× exact."
+- **"Did deep amplitude estimation work?"** "No. We ran shallow amplitude estimation, Grover steps k = 0–3. The signal
+  fades with every step on today's chips (Emerald keeps 56–59 % at k = 1, 44 % at k = 2), so the estimate is mostly a
+  calibrated k = 0 reading. The 3-qubit Kittilä + Ivalo core ran it on IBM Marrakesh and IQM Garnet; the 14-river
+  loader only sampled, on IQM Emerald."
+- **"What are the intervals on slide 5?"** (now in the appendix) "IBM Marrakesh 0.149 % (0.140–0.157), IQM Garnet
+  0.164 % (0.147–0.180), exact 0.125 %; raw 0.262 % / 0.368 %. Both intervals exclude exact: +19 % / +31 %
+  systematic bias. The chart's chip is IQM Emerald; the table's are Marrakesh and Garnet."
+- **"~18 qubits and ~50 gates work?"** "At the 1-in-10 level: the 18-qubit, 44-gate 14-river loader read 13.8 % vs
+  10.9 % exact. At 1-in-50 the same circuit read 16 % vs 4.8 %: it fails. Rare events need error correction."
+- **"Where does the ~8,000 logical qubits figure come from?"** (removed from slide 6) "Not ours: it's Chakrabarti et
+  al. 2021's estimate for derivative pricing. We have no resource estimate for a hydrology oracle yet."
+- **"Why ≈1.8× and not 2×?"** "1.96 % vs 1.11 % = 1.77×. We round to 1.8×, not up to 2×."
+- **"Can anyone buy the cover at the snowy-March price (16–23 % rate on line)?"** "No, and the slide no longer shows
+  it as a price. The cover is fixed in autumn. In March the insurer acts on the number: a top-up or second-layer
+  cover if available, claims staffing, ORSA."
+- **"Two rivers or four in 2005?"** "Four Lapland areas passed their 1-in-10 level: Ivalo, Kittilä, Rovaniemi and
+  Tornio. Ivalo, Kittilä and Rovaniemi also passed 1-in-50. The 'snow warned us' line is an in-sample back-test: the
+  North's 1 March snow was at the 87th percentile."
+- **"Basis risk?"** (now on slide 7) "The index is not the insurer's own losses. It is mitigated because our trigger is
+  the same 1-in-50 test that all seven Finnish home insurers use in their flood terms (OP, If, LähiTapiola, Fennia,
+  Turva, Pohjantähti, POP), so the index and the policies switch on at the same water level. Turva's guide even
+  lists an ordinary spring flood as not covered. Still to be tested against claims in the pilot."
+- **"Revenue?"** "Assumption: €25k pilot, then ~€75k a year per insurer. 3–6 insurers × €75k = €0.2–0.45M a year by
+  year 3. Finland first (open data, seven home insurers), then snowmelt regions in Sweden and Norway."
+- **"No vendor model uses this winter's snow?"** (removed: we can't verify it) "We dropped that claim. What we can say:
+  the 2027 standard-formula correlations are fixed and don't react to the snow."
+

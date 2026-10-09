@@ -35,7 +35,7 @@ md = ["# Real quantum hardware results", "",
       "| Run | Instance | Copies | Shots | Exact | Raw | Corrected | First pass (k=0) | 2q gates by k | MC ± (same budget) |",
       "|---|---|---|---|---|---|---|---|---|---|"]
 for r in rows:
-    corr = r["per_copy"] if r["per_copy"] else r["aware"]
+    corr = r["aware"]  # pooled noise-aware MLAE, same estimator as scripts/bootstrap_ci.py (per-copy fits differ by ≤0.001 pp)
     label = "Kittilä + Ivalo both" if r["instance"].startswith("A3") else "≥2 of 3 Lapland"
     md.append(f"| {r['platform']} {r['device']} ({r['created'][:13]}){' best qubits' if r['best_qubits'] else ''} | {label} | "
               f"{r['copies']} | {r['shots']:,} | {pct(r['exact'])} | {pct(r['raw'])} | **{pct(corr)}** | {pct(r['k0'])} | "
@@ -112,7 +112,7 @@ labels = [f"{r['platform']} {r['device']}\n{('best qubits, ' if r['platform'] ==
           for r in a3]
 x = range(len(a3))
 ax.bar([i - 0.2 for i in x], [100 * r["raw"] for r in a3], 0.38, color="#c9d1d9", label="Raw hardware")
-ax.bar([i + 0.2 for i in x], [100 * (r["per_copy"] or r["aware"]) for r in a3], 0.38, color="#1f6feb",
+ax.bar([i + 0.2 for i in x], [100 * r["aware"] for r in a3], 0.38, color="#1f6feb",
        label="Hardware + calibration")
 ax.axhline(100 * a3[0]["exact"], color="#2da44e", lw=2.5, label=f"Exact {100 * a3[0]['exact']:.3f} %")
 ax.axhline(100 * 0.0004, color="#cf222e", lw=1.5, ls="--", label="If areas were independent 0.040 %")

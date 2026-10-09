@@ -211,7 +211,7 @@ def hardware_summary(runs: list[dict]) -> dict:
             s = r["instances"].get(inst)
             if r["src"] == "qae-sim-noisy" or not s:
                 continue
-            corr = s.get("noise_aware_per_copy_mlae") or s["noise_aware_mlae"]
+            corr = s["noise_aware_mlae"]  # pooled noise-aware MLAE = the bootstrap_ci.py estimator (deck: 0.149 % IBM, 0.164 % Garnet)
             rows[r["src"]] = {
                 "src": r["src"], "platform": {"qae-ibm": "IBM", "qae-iqm": "IQM", "qae-q20": "Aalto"}[r["src"]],
                 "device": r["device"] or r["backend"], "jobs": r["jobs"], "file": r["file"], "created_utc": r["created_utc"],

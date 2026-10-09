@@ -56,7 +56,7 @@ const Y = {
 console.log("scroll targets", Y);
 await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" })); await w(400);
 
-// Each caption stays up >= 5 s; cues match deck/PITCH.md slide 4 (0 / 5 / 12 / 18 / 24 / 31 s after the first caption).
+// Each caption stays up >= 5 s; cues match deck/PITCH.md slide 4 (0 / 5 / 12 / 18 / 24 / 29 s after the first caption).
 // (a) map with joint-flood lines
 await glide(Y.map); await w(300);
 const tCap = (Date.now() - t0) / 1000;
@@ -69,17 +69,17 @@ await clickText("#presets", "High snow"); await w(5000);
 // (c) "How it works": real IQM Emerald shots, low vs snowy March
 await page.evaluate(() => { const b = document.querySelector('.pl-snow button[data-k="low"]'); if (b) b.click(); });
 await glide(Y.shots); await w(800);
-await cap("Real IQM Emerald shots. Red = BOTH rivers flood. Low snow: little red"); await w(5800);
+await cap("Real IQM Emerald runs. Red = BOTH rivers flood. Low snow: little red"); await w(5800);
 await page.evaluate(() => { const b = document.querySelector('.pl-snow button[data-k="high"]'); if (b) b.click(); });
-await cap("Snowy March: more than twice the red"); await w(5600);
+await cap("Snowy March: more red. Corrected: about 3× the risk (exact 2.75×)"); await w(5600);
 // (d) simplified (two-level) 14-river model on one chip, 1-in-10 run
 await glide(Y.loader);
 await w(800);
-await cap("Simplified 14-river model on one chip: 18 qubits"); await w(6500);
+await cap("Simplified 14-river model on one chip: 18 qubits"); await w(4700);
 // (e) 2005 replay
 await glide(Y.replay); await w(600);
 await clickText("#year-chips", "2005");
-await cap("2005: Lapland floods together (March snow: top 15 %)"); await w(5500);
+await cap("2005: Lapland floods together (March snow: top 15 %)"); await w(7300);
 const tEnd = (Date.now() - t0) / 1000;
 const video = page.video();
 await ctx.close(); await browser.close();

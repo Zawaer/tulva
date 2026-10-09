@@ -35,3 +35,8 @@ Append one line per decision: date time · who · decision · why.
   the 1.35× technical price, and a staged variant (50 % at ≥2 gauges, 100 % at ≥3) per cluster and scenario
   (out/pricing.json `market_premium_eur`, `staged_ge2_half_ge3_full`). Web app and index_price.png lead with North. ·
   Market multiples from cat-bond/flood-ILS sources; staged payout reduces basis risk; Lapland risk stable to ~2050.
+- 2026-10-10 · Toivo (round-3 review) · One calibrated hardware estimator everywhere: the pooled noise-aware MLAE (the
+  bootstrap_ci.py estimator; IBM 0.149 %, Garnet 0.164 %), not the per-copy fit, in deck, app, QA and HARDWARE_RESULTS.
+  One fair price everywhere: exact quadrature (North ≥2 of 5: 1.96 %, snowy March 6.4 %; equicorrelation 0.27: 1.11 %,
+  scripts/round3_numbers.py). Slide 2 chance baseline = same gauge-years (3.9 %), all-14 binomial (4.4 %) explained in
+  QA. Deck gets an appendix slide 9 for hardware details. · Hardware juror flagged the inconsistencies.

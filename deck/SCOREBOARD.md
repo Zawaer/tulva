@@ -13,7 +13,7 @@ Criteria 1–5: Impact · Business plan · Progress · Innovativeness · Methodo
 | 2 | IQM/VTT/IBM (tech) | 4 | 3 | 5 | 4 | 4 | "whole model on one chip" overstated; vs 0.27 corr only 1.8×; CI excludes exact |
 | 2 | Pitch coach | 7.5/10 | | | | | runs ~3:10 when nervous; 3× vs 2.4× on screen; simpler lines |
 | 3 | OP/PwC (business) | 3.5 | 3 | 4.5 | 4 | 4 | March price nobody can transact at; regulator 0% overstated; basis risk never named |
-| 3 | IQM/VTT/IBM (tech) | – | – | – | – | – | pending (reviewer did not report) |
+| 3 | IQM/VTT/IBM (tech) | 3.5 | 3 | 4.5 | 3.5 | 4 | independence 3.9 % vs 4.42 % unexplained; 2.8× vs ≈4× unlabelled; IBM 0.149 vs 0.148 %; QAE depth and 1-in-50 limit overstated by omission |
 | 3 | Pitch coach | 7.5/10 | | | | | ~2:31, fits; S3 wording ambiguous; S7 money story weak; S5 too dense |
 
 ### Round 3 — merged fixes, ranked by expected score gain

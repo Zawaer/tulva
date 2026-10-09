@@ -242,11 +242,11 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   10.9 % vs 12.2 %. The circuit's model is a simplified version; prices come from the continuous classical model · exact
 
 ## Round-2 deck pass (Sat 10 Oct, early) · derived from the lines above unless marked
-- **Slide 3 "≈2× under-priced even vs regulator-style correlation"** = North "≥2 of 5 over 1-in-50" Tulva 1.96 % (exact)
+- *(SUPERSEDED by "Round-3 deck pass": ≈1.8×, 1.11 %)* **Slide 3 "≈2× under-priced even vs regulator-style correlation"** = North "≥2 of 5 over 1-in-50" Tulva 1.96 % (exact)
   / 1.09 % at equicorrelation 0.27 (monte-carlo, "Realistic baseline" above) = 1.80×, shown rounded as ≈2× (spoken "about
   TWICE"); the second line "≈5× if rivers priced independently" = 5.1× (pricing section). Cross-check: one-factor
   Gauss–Hermite quadrature at equicorrelation 0.27 gives 1.11 % (ratio 1.77×), same rounding · derived / exact
-- **Slide 3 chart, "Regulator-style correlation (0.27)" rate on line 2.7–3.8 %** = 1.09 % × €10M × 2.5–3.5 ÷ €10M
+- *(SUPERSEDED: 2.8–3.9 %, "Round-3 deck pass")* **Slide 3 chart, "Regulator-style correlation (0.27)" rate on line 2.7–3.8 %** = 1.09 % × €10M × 2.5–3.5 ÷ €10M
   (same method as the other bars: probability × payout × market multiple ÷ limit) · derived · scripts/pitch_charts.py
   (`P_REG_027`) → out/pitch_cost.png. Other bars unchanged: independent 1.0–1.3 %, Tulva 4.9–6.9 %, after a snowy March
   16–23 %
@@ -257,13 +257,13 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   0.164 % / 0.125 % = +31 % (bootstrap estimator, intervals exclude exact); raw 2.1× / 2.9× · qae-ibm / qae-iqm
 - Slide 5 block "a two-level version of the 14-area model: 18 qubits, 44 two-qubit gates on IQM Emerald (sampling)" =
   the full-scale loader line above; replaces "all 14 areas, one chip" / "whole model" wording in deck, app, video and QA
-- Demo video caption "Snowy March: more than twice the red" = raw both-flood shots on the app's IQM Emerald grid, 31 vs
+- *(SUPERSEDED: caption reworded in round 3)* Demo video caption "Snowy March: more than twice the red" = raw both-flood shots on the app's IQM Emerald grid, 31 vs
   13 of 8,000 (2.4×); spoken "about three times the risk" on slide 5 = calibrated 3.05× (CI 2.6–3.6) · qae-iqm
-- **Slide 7 "Year 3: Nordic snowmelt flood, 3–6 insurers ≈ €0.1–0.6M a year"**: ASSUMPTION, the business case's
+- *(SUPERSEDED: "3–6 × €75k = €0.2–0.45M", round 3)* **Slide 7 "Year 3: Nordic snowmelt flood, 3–6 insurers ≈ €0.1–0.6M a year"**: ASSUMPTION, the business case's
   illustrative year-3 SOM (business/reports/Tulva flood cover business case.md §5: "3–6 licences at €30–100k, so about
   €0.1–0.6M a year, plus structuring fees"); "€25k pilot, then fee per deal / ~€75k a year" = the licence assumption
   above · assumption
-- Slide 7 "regulator judged snowmelt correlation insignificant (one vendor model)" = EIOPA-BoS-24/462 §4.70 as summarised
+- *(SUPERSEDED: removed from slide 7 in round 3)* Slide 7 "regulator judged snowmelt correlation insignificant (one vendor model)" = EIOPA-BoS-24/462 §4.70 as summarised
   in the business case §3 · source. "65 years of evidence" = SYKE spring peaks 1961–2025 · data
 - QA 2024 back-test: Ostrobothnia's top-15 % snow flag was on in 2024 and the Ostrobothnia index did not pay (one of its
   six false alarms: 1962, 1981, 1982, 1988, 2022, 2024); only Alavieska–Ylivieska passed its empirical 1-in-10 (115 %),
@@ -277,3 +277,51 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   0.77 / 0.60; false-trigger offset at k = 1–2 2.0–6.3 % vs a 0.07–0.19 % signal · qae-ibm / qae-iqm ·
   out/runs/{ibm-ibm_marrakesh-20261008T174523Z, iqm-garnet-20261008T182534Z, product-iqm-emerald-20261009T075338Z}.analysis.json
 - QA "two-level circuit loses 44 % at 1-in-50" = 1.10 % vs 1.98 % (round-2 line above) · exact / monte-carlo
+
+## Round-3 deck pass (Sat 10 Oct) · scripts/round3_numbers.py → out/round3_numbers.json unless marked
+- **Regulator-style baseline, North "≥2 of 5 over 1-in-50" at one equicorrelation 0.27: 1.11 %** (one-factor
+  Gauss–Hermite quadrature, exact; Monte Carlo 2M samples 1.12 % ± 0.007 pp). Replaces the 1.09 % above, which no script
+  in the repo reproduces · exact / monte-carlo
+- **Slide 3 "Fair price ≈1.8× what the 2027 capital rule implies"** = Tulva 1.96 % (exact, out/pricing.json; the
+  one fair-price number everywhere; the 1.98 % above was a 2M Monte Carlo of the same model) / 1.11 % = **1.77×**,
+  shown as ≈1.8× · exact
+- Slide 3 chart "2027 rule's average link (0.27)" market rate on line **2.8–3.9 %** = 1.11 % × 2.5–3.5 · derived ·
+  scripts/pitch_charts.py. Other bars unchanged (independent 1.0–1.3 %, Tulva 4.9–6.9 %); the "after a snowy March
+  16–23 %" bar is removed (not a tradable price)
+- **Slide 3 "After a snowy March the fair risk triples (1.96 % → 6.4 %)"** = out/pricing.json North ge2
+  `tulva_high_outlook` 6.445 % / 1.963 % = 3.28× · exact (in-sample snow skill). One high-snow number everywhere: 6.4 %
+  (the 6.3 % above was Monte Carlo)
+- **Slide 2 "10 of 65 springs (90 %: 9–24 %)"**: Wilson 90 % interval 9.4–24.1 % · exact. **"3.9× as often as chance"** =
+  15.4 % / 3.9 % (chance = independence on the same gauge-years as observed, out/joint_counts.json
+  `independent_same_years`). With all 14 gauges every year (binomial) chance is 4.41 %, i.e. 3.5×; that is the
+  4.42 % in out/HARDWARE_RESULTS.md (the circuit's independent case). 35 gauge-years are missing, so the same-years
+  baseline is the like-for-like one. At the Wilson lower bound: 2.4× · exact
+- App/video stat "2.8×" relabelled: per pair, two areas of one cluster both over 1-in-10 in the same spring vs chance
+  (out/dependence.json); slide 2's 3.9× is per spring, ≥4 of 14 · exact
+- **Slide 1 "four Lapland rivers flooded together" (2005)**: over their empirical 1-in-10 level Ivalo, Kittilä,
+  Rovaniemi, Tornio (the map's four filled dots); over fitted 1-in-50 Ivalo, Kittilä, Rovaniemi; North 1 March snow
+  87th percentile (top 15 %), in-sample back-test · data · web/data/app.json replay
+- IBM/IQM calibrated values made consistent: deck, app, QA and out/HARDWARE_RESULTS.md now all use the pooled
+  noise-aware MLAE (the bootstrap's estimator): **IBM Marrakesh run 2 0.149 %, IQM Garnet run 2 0.164 %** (IBM run 1
+  0.146 %). The per-copy fits (0.148 % / 0.163 %) are no longer shown; scripts/hardware_summary.py and export_web.py
+  changed. The slide-6 scaling chart's hardware points still use the per-copy fits (≤0.001 pp difference, not visible)
+  · qae-ibm / qae-iqm
+- Slide 5 "Calibrated, still +19 % / +31 % high" = 0.149 / 0.125 and 0.164 / 0.125 · qae-ibm / qae-iqm. CIs, raw
+  readings and job IDs moved to appendix slide 9 (rows: CLAIMS lines above; snow ratio raw 0.388 / 0.296 = 1.3×,
+  calibrated 3.05× (2.6–3.6), exact 2.75×; 14-area loader 13.8 % vs 10.9 % (1-in-10), 16.0 % vs 4.8 % (1-in-50);
+  control run 9.7 % vs 4.4 %; Emerald signal gain 0.56–0.59 / 0.44)
+- Slide 5 "Grover steps k = 0–3": IBM run 1 k = 0..3, other runs k = 0..2 · qae-ibm / qae-iqm
+- Slide 6 "18 qubits, 44 two-qubit gates (IQM Emerald): works at 1-in-10, fails at 1-in-50 (16 % vs 4.8 % exact)" =
+  the full-scale loader lines above · qae-iqm. The "~8k logical qubits" footnote is removed from the slide (QA only,
+  Chakrabarti et al. 2021, derivative pricing, not our estimate)
+- Demo video (re-recorded 10 Oct): captions "Real IQM Emerald runs. Red = BOTH rivers flood. Low snow: little red";
+  "Snowy March: more red. Corrected: about 3× the risk (exact 2.75×)" = calibrated 3.05× vs exact 2.75× (the grid's
+  raw 13 vs 31 of 8,000 is one sample; raw over all 240k shots is 1.3×); 2005 caption now at ~29 s of 37 · qae-iqm
+- **Slide 7 revenue**: €25k pilot, then ~€75k per insurer a year (licence line above); **year 3: 3–6 insurers × €75k
+  = €225k–450k ≈ €0.2–0.45M a year**; Finland first, then SE/NO snowmelt regions · assumption
+- Slide 7 "Why now: 2027: Finland's first Solvency II flood charge uses fixed correlations" = 0 % FI–SE/NO/DK and the
+  fixed 19-zone matrix inside Finland (mean ≈ 0.27), Del. Reg. (EU) 2026/269 · source. "No vendor model uses this
+  winter's snow" removed (not verifiable)
+- Slide 7 "Basis risk: … the same 1-in-50 test as all 7 Finnish home insurers' flood terms" = docs/flood_terms_check.md
+  (OP Pohjola, If, LähiTapiola, Fennia, Turva, Pohjantähti, POP; "kerran 50 vuodessa tai harvemmin") · source
+
