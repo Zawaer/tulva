@@ -349,3 +349,10 @@ too few to confirm 'triples'. Run backwards, flagged springs paid 50 % versus 8 
   more shots, three times. Now the repeats agree, 0.27 to 0.38 %, so the earlier 5× spread was mostly too few
   shots on the calibration circuit. But they're still two to three times above the exact 0.125 %: on Q50 our
   calibration circuit doesn't catch all the error yet, unlike IBM and IQM where we got within 20 to 30 %."
+- **"Why was Q50 worse than IBM and IQM?"** "On the qubits we got, Q50 read a 0 as a 1 about 5 % of the time,
+  against about 0.7 % on IBM and 1.6 % on IQM Garnet (measured from our zero-answer calibration circuits). Our
+  answer is only 0.125 %, so a 5 % error floor has to be removed almost perfectly. Even a proper per-qubit readout
+  correction leaves 0.27–0.36 %, so part of the error is correlated between qubits or depends on the state, which
+  a simple calibration can't remove. Next: pick the best qubits from Q50's calibration data and use FiQCI's error
+  mitigation." (Numbers: Claude's check on out/runs/q50-20261009T172*, ibm-ibm_marrakesh-20261008T1745*,
+  iqm-garnet-20261008T182125Z; tensor-product readout inversion with p01 from the zero circuit, p10 0–3.4 %.)
