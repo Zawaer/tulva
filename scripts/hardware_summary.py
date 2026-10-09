@@ -84,8 +84,15 @@ if snow:
                "| March snow | Exact | Hardware raw | Hardware calibrated |", "|---|---|---|---|"]
         for lab, r in rows_s:
             md.append(f"| {lab} | {100*r['exact']:.3f} % | {100*r['raw_mlae']:.3f} % | **{100*r['noise_aware_mlae']:.3f} %** |")
-        md += ["", f"Snowy vs low-snow risk ratio: exact **{hi['exact']/lo['exact']:.1f}×**, on the chip "
-               f"**{hi['noise_aware_mlae']/lo['noise_aware_mlae']:.1f}×**. The early-warning signal survives on real hardware."]
+        bci = OUT / "bootstrap_ci.json"  # scripts/bootstrap_ci.py: ratio with a bootstrap 90 % interval
+        sr = json.loads(bci.read_text()).get("snow_ratio_high_over_low") if bci.exists() else None
+        if sr:
+            md += ["", f"Snowy vs low-snow risk ratio: on the chip **{sr['estimate']:.2f}×** (bootstrap 90 % CI "
+                   f"{sr['ci90'][0]:.1f}–{sr['ci90'][1]:.1f}) vs exact **{sr['exact']:.2f}×**. The interval contains the exact "
+                   "ratio: the early-warning signal survives on real hardware."]
+        else:
+            md += ["", f"Snowy vs low-snow risk ratio: exact **{hi['exact']/lo['exact']:.2f}×**, on the chip "
+                   f"**{hi['noise_aware_mlae']/lo['noise_aware_mlae']:.2f}×**. The early-warning signal survives on real hardware."]
 q = sorted(glob.glob(str(OUT / "runs" / "qrisp_qae_iqm_*.json")))
 if q:
     qr = json.loads(Path(q[-1]).read_text())

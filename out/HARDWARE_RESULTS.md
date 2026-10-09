@@ -57,7 +57,7 @@ Kittilä + Ivalo both over 1-in-50, 3 qubits, 10 side-by-side copies, 240,000 sh
 | Normal (no outlook) | 0.125 % | 0.340 % | **0.166 %** |
 | Snowy March (top 15 %) | 0.193 % | 0.388 % | **0.249 %** |
 
-Snowy vs low-snow risk ratio: exact **2.7×**, on the chip **3.1×**. The early-warning signal survives on real hardware.
+Snowy vs low-snow risk ratio: on the chip **3.05×** (bootstrap 90 % CI 2.6–3.6) vs exact **2.75×**. The interval contains the exact ratio: the early-warning signal survives on real hardware.
 
 ## Qrisp implementation on IQM Garnet
 Same 3-qubit joint-trigger circuit written natively in Qrisp (IQM's high-level framework), compiled with IQM's pass manager (4 / 23 / 45 CZ for k = 0 / 1 / 2), run on IQM Garnet without the calibration circuits: raw MLAE matches the raw Qiskit run on the same chip. File: `qrisp_qae_iqm_garnet20261008T184156Z.json`.
