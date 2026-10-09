@@ -2,7 +2,7 @@
 
 Vaishnav: slides, pitch script, demo-video script and Q&A notes go here.
 
-- `PITCH.md`: the spoken script, slide by slide with timing marks (≈2:38: 284 live words + the 37 s demo video,
+- `PITCH.md`: the spoken script, slide by slide with timing marks (≈2:43 at 135 wpm: 228 live words + the 37 s demo video,
   which the presenter narrates live). The `>` lines become each slide's speaker notes.
 - `build_deck.py`: builds `Tulva_QxF2026.pptx` (16:9, editable text boxes; charts are inserted from `out/*.png`, the demo video from `deck/video/`).
 - `Tulva_QxF2026.pdf`, `preview/slide-N.png`: exports for checking layout.

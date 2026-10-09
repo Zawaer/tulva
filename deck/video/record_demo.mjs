@@ -56,34 +56,30 @@ const Y = {
 console.log("scroll targets", Y);
 await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" })); await w(400);
 
-// (a) map with joint-flood lines, 5 s
+// Each caption stays up >= 5 s; cues match deck/PITCH.md slide 4 (0 / 5 / 12 / 18 / 24 / 31 s after the first caption).
+// (a) map with joint-flood lines
 await glide(Y.map); await w(300);
 const tCap = (Date.now() - t0) / 1000;
-await cap("Lines link river areas that flood together");
-await w(5000);
-// (b) March snow outlook → North price, 8 s
+await cap("Live app: lines join rivers that flood together");
+await w(5200);
+// (b) March snow outlook → North price
 await clickText("#presets", "No outlook"); await glide(Y.snow);
-await cap("March snow outlook: normal…"); await w(2500);
-await clickText("#presets", "High snow");
-await cap("High snow: North cover price jumps"); await w(5500);
-// (c) "How it works": real IQM Emerald shots, low vs snowy March, 10 s
+await cap("March snow set to HIGH: the northern price jumps"); await w(1000);
+await clickText("#presets", "High snow"); await w(5000);
+// (c) "How it works": real IQM Emerald shots, low vs snowy March
 await page.evaluate(() => { const b = document.querySelector('.pl-snow button[data-k="low"]'); if (b) b.click(); });
 await glide(Y.shots); await w(800);
-await cap("Real IQM Emerald shots: low-snow March"); await w(4000);
+await cap("Real IQM Emerald shots. Red = BOTH rivers flood. Low snow: little red"); await w(5800);
 await page.evaluate(() => { const b = document.querySelector('.pl-snow button[data-k="high"]'); if (b) b.click(); });
-await cap("Snowy March: about 3× the joint-flood risk"); await w(5000);
-// (d) all 14 areas on one chip, 1-in-10 run, 8 s
-await page.evaluate(() => {
-  const tr = [...document.querySelectorAll(".loader .ltable tr")].find((r) => r.cells[0] && r.cells[0].textContent.trim() === "≥4");
-  if (tr) tr.classList.add("demo-hl");
-});
+await cap("Snowy March: more red, about 3× the risk"); await w(5600);
+// (d) all 14 areas on one chip, 1-in-10 run
 await glide(Y.loader);
 await w(800);
-await cap("One chip, 14 areas: ≥4 flood 13.8 % (exact 10.9 %)"); await w(7200);
-// (e) 2005 replay, 6 s
+await cap("Our whole flood model on ONE chip: 14 areas, 18 qubits"); await w(6500);
+// (e) 2005 replay
 await glide(Y.replay); await w(600);
 await clickText("#year-chips", "2005");
-await cap("Replay 2005: Lapland floods together"); await w(5400);
+await cap("2005: Lapland floods together (March snow: top 15 %)"); await w(5500);
 const tEnd = (Date.now() - t0) / 1000;
 const video = page.video();
 await ctx.close(); await browser.close();

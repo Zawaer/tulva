@@ -37,9 +37,9 @@ Example: €3M limit (≈ one insurer's share of the 2005 Lapland loss) × 4.9�
 The video is silent; say each line when its caption appears (video time → line):
 
 > [0 s, map] This is our LIVE app. Lines join rivers that flood together.
-> [6 s, snow high] March snow set to HIGH… and the northern price JUMPS.
+> [5 s, snow high] March snow set to HIGH… and the northern price JUMPS.
 > [12 s, shots, low snow] REAL shots from an IQM quantum chip. Red means BOTH rivers flood. Low snow: little red.
-> [18 s, snowy] Snowy March: about THREE times more red.
+> [18 s, snowy] Snowy March: MORE red. About THREE times the risk.
 > [24 s, 14-area card] Our whole flood model on ONE chip.
 > [31 s, 2005] And 2005: Lapland floods TOGETHER.
 
