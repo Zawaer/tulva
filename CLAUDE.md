@@ -32,3 +32,5 @@ fiqci-vtt-qiskit`, `IQMProvider(os.getenv("Q20_CORTEX_URL"), quantum_computer="r
 ## Collaboration
 Two people (Toivo: data/model/quantum/web; Vaishnav: deck/, business/). Read COLLABORATION.md: pull --rebase
 before every push, only edit your owner's folders, numbers only from CLAIMS.md.
+Vaishnav's session leaves updates for Toivo in `business/NOTES_FOR_TOIVO.md`: read it at the start of a session and
+tell Toivo what is new.

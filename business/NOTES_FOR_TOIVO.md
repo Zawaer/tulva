@@ -1,7 +1,34 @@
-# Business research: what affects data/model/quantum/web (for Toivo and his agents)
+# Notes for Toivo (and his Claude): what Vaishnav's session did
 
-From the business research on 8 Oct 2026 (`business/reports/Tulva flood cover business case.md`, notes in
-`business/research_notes/`). These are suggestions for Toivo's files; Vaishnav has not edited them.
+**Claude: please tell Toivo this summary.** Updated 9 Oct 2026 morning.
+
+## Summary (8 Oct evening – 9 Oct morning)
+1. **Business research** done: `business/reports/Tulva flood cover business case.md` (sourced), plain-language
+   `business/CHEATSHEET.md`, pitch lines `business/PITCH_LINES.md`. Corrections below were already picked up by Toivo.
+2. **New hardware runs on IQM Emerald** (all logged in CLAIMS.md, section "IQM Emerald runs, 9 Oct"):
+   - Snow on hardware: Kittilä+Ivalo both over 1-in-50 for low / normal / snowy March, 10 copies, 240k shots each:
+     exact 0.070 / 0.125 / 0.193 % → hardware 0.082 / 0.166 / 0.249 %. **Snowy vs low-snow ratio: exact 2.8×, chip 3.0×.**
+   - Product rule "≥2 of 5 North": exact 1.10 % → 1.41 % (k=0,1 run); k=1 is 234 CZ and mostly noise.
+   - 14-area loader at 1-in-50: chip 16 % vs exact 4.8 % (rare events drown in noise; a good honest slide point).
+   - New script `scripts/run_product_hw.py` (copies, `--dry-run`); `run_hw.py` untouched.
+3. **New web section "How it works"** (`#how`, before Under the hood): river data + snow in → model numbers →
+   3-qubit circuit → 8,000 real Emerald shots drawn as squares → corrected vs exact, with a Low/Normal/Snowy toggle.
+   Files: `web/pipeline.js`, `web/pipeline.css`, `web/data/pipeline.json` (from `scripts/export_pipeline.py`); small
+   edits in `web/index.html`. Meant for screen-recording the demo video.
+4. **Setup on Vaishnav's Windows laptop**: `.venv` (Python 3.12) and `.venv-iqm` (added to .gitignore); IQM token in
+   the git-ignored `.env`.
+5. **Mentor feedback**: focus on (1) business side and (2) why quantum vs supercomputers; Finland-only scope is good.
+
+## Open questions for Toivo
+- Add the Emerald snow result (2.8× vs 3.0×) to `out/HARDWARE_RESULTS.md`, the deck and the Under the hood panel?
+- Product "≥2 of 5" calibration: the ≈0 twin has no single-trigger states, so k=0-only under-corrects; a better twin
+  or readout mitigation would help.
+- Ideas to improve the March outlook (snow flag caught 11/19 payout years): add autumn soil moisture / groundwater,
+  lake levels, ice, FMI/ECMWF seasonal temperature forecasts, and an April update; use a continuous probability
+  instead of the top-15 % flag.
+
+## Business research: corrections and suggestions (8 Oct)
+From `business/reports/Tulva flood cover business case.md` (notes in `business/research_notes/`).
 
 ## Corrections to current framing
 1. **"EIOPA: 0 % Nordic flood correlation" is imprecise.** Today Finland has *no* standard-formula flood parameter
