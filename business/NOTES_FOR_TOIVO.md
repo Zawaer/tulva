@@ -77,3 +77,5 @@ IQM venv on Windows: `.venv-iqm` (added to .gitignore).
 data `web/data/pipeline.json` from `scripts/export_pipeline.py` (Kittilä+Ivalo example: SYKE peaks, 1 March snow,
 the model's numbers, the 3-qubit circuit, 8,000 real Emerald shots drawn as squares, corrected vs exact; Low/Normal/
 Snowy toggle). index.html edits: one CSS link, one nav link, the section, one script tag. Intended for the demo video.
+- 9 Oct: added one plain-language paragraph under the "2 · March snow outlook" heading in web/index.html (what a
+  gauge and the 1-in-50 level are). Vaishnav found the section hard to follow; shorten or move it if you prefer.
