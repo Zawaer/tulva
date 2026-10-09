@@ -53,6 +53,14 @@ Read this top to bottom once. The words in **bold** are what to say out loud.
   - The correlation survives on Emerald but weakened; on Q50 noise dominates; rare 1-in-50 events drown in noise everywhere.
 - **Bottom line:** **"Classical computers still win today. The method is ready; the hardware isn't yet. We know exactly where it breaks, because we measured it on four machines."**
 
+## 4b. "Why now", explained
+- **Flood capital**: insurers must hold a safety buffer of money (capital) big enough to survive a very bad year. From 30 Jan 2027 Finland's rules add a flood part.
+- **Fixed correlations**: to size that buffer, the rule assumes how often floods in different Finnish zones happen *together*, from a fixed table (≈0.27 on average). Same numbers every year.
+- **That ignore the snow**: in reality "flooding together" changes every year, mainly with the snowpack. The table treats a record-snow year and a no-snow year the same.
+- **We give a snow-aware number**: Tulva reads the 1 March snow and updates the risk ("this spring, several northern rivers flooding together is ~3× likelier than normal"). The insurer has two months before the melt to act: extra protection, claims staff, plans.
+- **One sentence**: **"From 2027 the rules assume the same flood risk every year. We tell insurers what this year's snow actually means, two months before the melt."**
+- **Caution**: we don't change the capital the rule requires. If asked "does it cut our capital?": **"Not under the standard formula. The value is pricing and preparation, not capital relief."**
+
 ## 5. Business in one breath
 **"Our customers are Finnish home insurers like If Insurance and OP. A reinsurer carries the risk. We license the index and the pricing: 25k for a pilot, then 75k a year. From 2027 flood capital uses fixed correlations that ignore the snow; we give a snow-aware number. Our ask: one insurer's flood claims for eight weeks, to measure basis risk."**
 
