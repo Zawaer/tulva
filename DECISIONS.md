@@ -47,3 +47,6 @@ Append one line per decision: date time · who · decision · why.
   % of the limit a year) with year-bootstrap 90 % intervals (scripts/round4_numbers.py); market-price bars, €/€1M and
   ORSA move to QA. Shown hardware results are k = 0–2 (IBM run 1 with k = 3 is not on the slides). · Business and
   quantum jurors flagged the category error and the overclaim.
+- 2026-10-09 · Toivo · VTT Q50 is presented as a fourth chip we ran on, never as a headline success: every repeat is
+  shown (0.11–0.53 % vs exact 0.125 %, "calibration not yet stable"), its 14-river loader (31 % vs 10.9 %) is evidence
+  of where hardware stops, and the failed 4-copy job is mentioned only as a failed attempt. · Honesty for the VTT juror.

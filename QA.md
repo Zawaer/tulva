@@ -19,8 +19,18 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - *"How does your error mitigation work?"* In the same job, on the same qubits, we run two calibration copies
   of the circuit with known answers (one large, one ≈ 0). They give each step's surviving signal and false-positive
   offset, and we invert that. On IBM it moved 0.262 % → 0.149 % (exact 0.125 %).
-- *"Why not Q50?"* "We set it up: same code, one flag (`--backend q50`). Q50 had the cryostat issue on Thursday and
-  our LUMI account was still syncing, so we used IQM Garnet and Emerald, same architecture." One sentence, no blame.
+- *"How did Q50 do?"* (honest, ~25 s) "We ran it on Friday through LUMI, same code, one flag. Three repeats of the
+  two-river circuit gave 0.47, 0.53 and 0.11 % against an exact 0.125 %. So not reproducible yet: the one close to
+  exact was luck. The cause is our zero-calibration circuit: its offset moved between repeats, 0.002 to 0.006, and
+  with 2,000 shots that swings the answer. One Grover step kept only 0.12 to 0.19 of the signal; Emerald kept about
+  0.6, IBM and Garnet 0.6 to 0.8. Our 18-qubit, 14-river sampler read 31 % for four or more rivers, exact 10.9 %,
+  Emerald 13.8 %. Next we'd try: many more shots on the calibration circuits, the best-qubit layout with several
+  copies (our 4-copy job ran but we couldn't retrieve the result), and error mitigation through FiQCI's tools."
+  (Numbers: CLAIMS.md "VTT Q50", out/HARDWARE_RESULTS.md. Readout flips on that run: 2.1 % / 3.4 %.)
+  - Feedback for VTT, if asked: "Getting to Q50 needed `module use /appl/local/quantum/modulefiles/hackathon/`
+    before loading the modules; a line in the QuickStart would save the next team an hour."
+  - Earlier answer, now superseded: on Thursday Q50 had the cryostat issue and our LUMI account was still syncing,
+    so the first results are from IQM Garnet and Emerald.
 - *"State loading kills the speed-up."* Not for a factor model: one qubit per area, each needing one RY and one
   controlled RY, so it's linear in the number of areas. A two-level version of our 14-area model fits on 18 qubits
   with 44 two-qubit gates (sampled on Emerald).

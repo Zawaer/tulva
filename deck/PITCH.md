@@ -1,13 +1,13 @@
 # Tulva: 3-minute pitch script
 
-**Timing (round 4): 222 live words (was 245) + the 37 s silent video + 6 short pauses (~5 s).
+**Timing (round 4 + Q50 line): 225 live words (was 245) + the 37 s silent video + 6 short pauses (~5 s).
 At 135 wpm ≈ 2:21 (1 Hook 0:11 · 2 Gap 0:13 · 3 Product 0:15 · 4 Video 0:37 · 5 Quantum 0:13 · 6 Honest 0:09 ·
 7 Business 0:26 · 8 Close 0:11). At 120 wpm ≈ 2:33. Rehearsals of the 245-word version ran 2:45–2:55 on stage, so
 expect ≈2:35–2:45 now. Buzzer at 3:00. Pauses are one breath (~0.7 s); the long pause ~1.5 s.**
 
 Simple English, short sentences. **[pause]** = stop for one breath. CAPS = stress that word (say it, don't shout
 it). The demo video is **silent (37 s)**: the presenter narrates it **live** on the cues below; the slide-4
-narration (56 words, ~25 s at 135 wpm) fits inside the video and is not counted in the 222. Spoken lines are the `>` lines;
+narration (56 words, ~25 s at 135 wpm) fits inside the video and is not counted in the 225. Spoken lines are the `>` lines;
 `build_deck.py` copies them into each slide's speaker notes, so edit them here and rebuild. Every number is in
 `CLAIMS.md`.
 
@@ -57,12 +57,14 @@ The video is silent; say each line when its caption appears (video time → line
 
 ## 5 · Quantum, in practice (1:17–1:31)
 
-> We ran the two-river core on IBM and IQM; the 14-river model on IQM Emerald. [pause] The snow warning
+> We ran the two-river core on IBM, IQM and Finland's own VTT Q50; the 14-river model on Emerald. [pause] The snow warning
 > SURVIVES on the chip: 3.05 times, close to the exact 2.75.
 
 Q&A only (not spoken): the two-river core is a North-cluster pair with identical loadings and 1-in-50 trigger, not
 Kittilä and Ivalo specifically. Method: calibrated sampling plus shallow amplitude estimation (Grover steps k = 0–2);
 amplified circuits keep ≈0.5 of the signal on Emerald (0.6–0.8 IBM / Garnet), so the estimate is mostly calibrated k = 0.
+VTT Q50 (via LUMI): three repeats gave 0.11–0.53 % vs exact 0.125 %; calibration not yet stable, k = 1 keeps only
+0.12–0.19 of the signal. It is the fourth computer we ran on, not a headline result (QA.md).
 
 ## 6 · Quantum, honestly (1:31–1:41)
 

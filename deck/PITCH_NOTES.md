@@ -18,7 +18,7 @@ Sources: business/reports/Tulva flood cover business case.md (Verisk and RMS pro
 > on IBM Marrakesh and IQM Garnet and Emerald, in Qiskit and in IQM's Qrisp. It is all in one public GitHub repo,
 > commit by commit.
 
-Tools: Python (numpy, scipy, pandas), Qiskit + Aer, Qrisp, IQM Resonance, IBM Quantum, LUMI (Q50/Q20 prepared),
+Tools: Python (numpy, scipy, pandas), Qiskit + Aer, Qrisp, IQM Resonance, IBM Quantum, LUMI (VTT Q50 run; Q20 prepared),
 Leaflet web app, Claude Code.
 
 ## C. Q&A facts

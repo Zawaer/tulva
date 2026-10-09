@@ -363,3 +363,29 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
 - Demo video re-recorded (10 Oct, round 4), 37 s, same cue times; captions shortened: "IQM chip. Red: both flood. Low
   snow, little red." and "Snowy March: about three times the risk, close to exact." (= calibrated 3.05× vs exact 2.75×)
   · qae-iqm · deck/video/record_demo.mjs
+
+## VTT Q50 (Fri 9 Oct, via the LUMI hackathon module) · scripts/run_hw.py, scripts/run_loader_hw.py --backend q50 → out/runs/; summary scripts/hardware_summary.py → out/HARDWARE_RESULTS.md, intervals scripts/bootstrap_ci.py → out/bootstrap_ci.json
+Producer tag: qae-q50 (VTT Q50 hardware). Same two-level model and circuits as IBM / IQM.
+- **3-qubit two-river North-cluster pair, both over 1-in-50, three repeats** (1 copy, k = 0, 1, 2, 2,000 shots per
+  circuit, 6,000 per instance; two-qubit gates by k 4 / 27 / 46). Exact **0.125 %** (0.12497 %).
+  | Repeat | File | Job | k=0 rate | Raw MLAE | Calibrated (noise-aware MLAE) | Bootstrap 90 % CI | Gain k=0/1/2 | Zero offset k=0 |
+  |---|---|---|---|---|---|---|---|---|
+  | 1 | q50-20261009T145044Z | 7d20d8ac-1fad-4ecd-951d-6ae4b86055ca | 0.750 % | 1.479 % | **0.465 %** | 0.17–0.80 % | 1.06 / 0.19 / 0.05 | 0.002 |
+  | 2 | q50-20261009T145110Z | a6fb9d52-611a-4a6f-bd1c-b1ae18650287 | 0.800 % | 1.577 % | **0.534 %** | 0.20–0.86 % | 1.10 / 0.13 / 0.05 | 0.002 |
+  | 3 | q50-20261009T145135Z | 381179fb-a718-402c-afe4-e775300f2c4a | 0.800 % | 1.536 % | **0.107 %** | 0.00–0.48 % | 1.11 / 0.12 / 0.06 | 0.006 |
+  Calibrated mean 0.369 %, **range 0.107–0.534 % (deck: "0.11–0.53 %")** vs exact 0.125 %; raw 1.48–1.58 %
+  (~12× exact). **Not reproducible across repeats**: the ~5× spread is driven by the zero-calibration offset at k=0
+  (0.002 vs 0.006); repeat 3 landing near exact (−14 %) is luck, not precision. **Signal kept at k=1: 0.12–0.19**
+  (vs Emerald 0.56–0.59, IBM run 2 0.78, Garnet run 2 0.77 on the same circuit; all A3 runs on other chips 0.56–0.88),
+  at k=2 0.05–0.06. Classical MC at the same budget ±0.026 pp · qae-q50 · out/runs/q50-*.analysis.json
+- **Failed first attempt** q50-20261009T144440Z (4 copies on best-qubit triples [49,50,51] [43,42,48] [38,39,44]
+  [34,33,40], 4,000 shots, k = 0–2): job d02bd3b5-ca4a-48f1-9003-da506d4b7607 submitted, result retrieval failed with
+  BadRequestError; no counts, no numbers · out/runs/q50-20261009T144440Z.json
+- **14-area loader at 1-in-10 on Q50** (18 qubits, 49 two-qubit gates, 8,000 shots, job
+  9cdb0158-7574-4ed3-b077-c8a2d47a1186, readout flip p01 2.1 % / p10 3.4 %): P(≥4 areas) raw 34.2 %, readout-corrected
+  **31.2 %** (deck "31 %") vs exact **10.9 %**, independence 4.4 %; Emerald on the same circuit 13.8 %
+  (loader-iqm-emerald-20261008T184433Z). P(≥2) 75.2 % vs 37.9 % exact. Noise dominates on Q50 at this size ·
+  qae-q50 (sampling) · out/runs/loader-q50-q50-20261009T144517Z.json
+- Deck/script wording: "four real quantum computers" = IBM Marrakesh, IQM Garnet, IQM Emerald, VTT Q50 (Q50 counted as
+  run, not as a successful estimate). Slide 5 line "VTT Q50: 3 repeats 0.11–0.53 % (exact 0.125 %), calibration not
+  yet stable"; slide 6 "Q50 ≥4 of 14 over 1-in-10: 31 % vs 10.9 % exact (Emerald 13.8 %)" · from the lines above

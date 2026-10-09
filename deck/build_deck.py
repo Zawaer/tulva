@@ -271,7 +271,7 @@ def s4_demo(prs, n):
 
 def s5_quantum(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    header(s, n, "Quantum, in practice", "It runs on real quantum chips today")
+    header(s, n, "Quantum, in practice", "It runs on four real quantum computers today")
     text(s, MX, 1.55, 7.6, 0.4, "Two-river North-cluster pair on IQM Emerald", size=20,
          bold=True, color=NAVY)
     picture(s, OUT / "pitch_snow.png", MX, 2.0, 7.6, 4.6)  # scripts/pitch_charts.py
@@ -279,13 +279,14 @@ def s5_quantum(prs, n):
     text(s, x, 1.55, w, 0.7, "CALIBRATED SAMPLING + SHALLOW AMPLITUDE ESTIMATION", size=16, color=BLUE, bold=True)
     items = [("Two-river core", "IBM Marrakesh, IQM Garnet and Emerald: 3 qubits, Grover steps k = 0–2"),
              ("14-river model", "IQM Emerald: 18 qubits, sampling only"),
-             ("Amplification", "amplified circuits keep ≈0.5 of the signal on Emerald, 0.6–0.8 on IBM / Garnet")]
+             ("Amplification", "amplified circuits keep ≈0.5 of the signal on Emerald, 0.6–0.8 on IBM / Garnet"),
+             ("VTT Q50, Finland's own", "3 repeats: 0.11–0.53 % vs 0.125 % exact. Calibration not yet stable")]
     y = 2.4
     for k, v in items:
         text(s, x, y, w, 0.35, k, size=20, bold=True, color=NAVY)
-        text(s, x, y + 0.38, w, 0.7, v, size=16, color=GREY)
-        rect(s, x, y + 1.1, w, 0.012, LINE)
-        y += 1.22
+        text(s, x, y + 0.38, w, 0.62, v, size=16, color=GREY)
+        rect(s, x, y + 1.0, w, 0.012, LINE)
+        y += 1.08
     source(s, "Intervals, raw readings and job IDs: appendix")
     return s
 
@@ -303,10 +304,11 @@ def s6_honest(prs, n):
     text(s, x + 0.3, 2.35, w - 0.45, 1.5, "Today: rare floods drown in noise.", size=30, bold=True, color=NAVY,
          spacing=1.0)
     text(s, x, 4.05, w, 1.5,
-         [[("14 rivers, 18 qubits (IQM Emerald):", {"bold": True, "color": NAVY})],
-          [("correlation survives but attenuated: chip vs chip-control 1.4× (exact 2.5×)", {})],
-          [("1-in-50: 16 % vs 4.8 % exact", {})]], size=17, color=GREY)
-    text(s, x, 5.6, w, 0.9, "Prices are computed classically; quantum is the R&D track.", size=20, bold=True,
+         [[("14 rivers, 18 qubits:", {"bold": True, "color": NAVY})],
+          [("≥4 over 1-in-10: exact 10.9 %; IQM Emerald 13.8 %, VTT Q50 31 %", {})],
+          [("Emerald: correlation attenuated (1.4× vs exact 2.5×); 1-in-50: 16 % vs 4.8 % exact", {})]],
+         size=17, color=GREY)
+    text(s, x, 5.85, w, 0.9, "Prices are computed classically; quantum is the R&D track.", size=20, bold=True,
          color=NAVY)
     return s
 
@@ -376,8 +378,8 @@ def s8_close(prs, n):
             text(s, x, y, w, 0.4, c, size=13, color=WHITE, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
             x += w + 0.1
     chip_rows("BUILT THIS WEEKEND", ["SYKE data pipeline", "Joint flood model", "Index pricing", "Live app",
-                                     "QAE on IBM & IQM"], 3.55, RGBColor(0x1A, 0x36, 0x5F))
-    chip_rows("RESOURCES USED", ["SYKE open data", "IBM Marrakesh", "IQM Garnet & Emerald (Resonance)", "Qrisp",
+                                     "QAE on IBM, IQM & VTT Q50"], 3.55, RGBColor(0x1A, 0x36, 0x5F))
+    chip_rows("RESOURCES USED", ["SYKE open data", "IBM Marrakesh", "IQM Garnet & Emerald (Resonance)", "VTT Q50 (LUMI)", "Qrisp",
                                  "Qiskit", "AI coding agents"], 4.45, NAVY, line=PALE_BLUE)
     text(s, MX + 0.2, 5.85, 11, 0.8,
          [[("Toivo Kallio", {"bold": True}), ("  ·  ", {"color": PALE_BLUE}), ("Vaishnav Rane", {"bold": True})],
@@ -405,26 +407,30 @@ def s9_appendix(prs, n):
          "01a11f9b-c62a…"],
         ["IQM Emerald", "Control: independent circuit, ≥4 over 1-in-10", "4.4 %", "–", "9.7 % (noise fattens tails)",
          "…T135910Z"],
+        ["VTT Q50", "Same pair, 3 repeats: not stable", "0.125 %", "1.48–1.58 %",
+         "0.47 / 0.53 / 0.11 %", "7d20d8ac / a6fb9d52 / 381179fb"],
+        ["VTT Q50", "14 rivers ≥4 over 1-in-10, 18 q / 49 CZ", "10.9 %", "34.2 %", "31.2 % (readout-corr.)",
+         "9cdb0158-7574…"],
     ]
-    cols = [1.75, 4.05, 0.95, 0.9, 2.65, 1.95]
+    cols = [1.65, 4.05, 0.9, 1.3, 2.55, 1.8]
     widths = [c * (W - 2 * MX) / sum(cols) for c in cols]
     y = 1.6
     for r_i, row in enumerate([hdr] + rows):
         x = MX
         if r_i:
-            rect(s, MX, y + 0.58, W - 2 * MX, 0.012, LINE)
+            rect(s, MX, y + 0.5, W - 2 * MX, 0.012, LINE)
         for c_i, (cell, cw) in enumerate(zip(row, widths)):
-            text(s, x, y, cw - 0.1, 0.56, cell, size=(12 if c_i == 5 else 14) if r_i else 13, bold=(r_i == 0 or c_i == 4),
+            text(s, x, y, cw - 0.1, 0.5, cell, size=(12 if c_i == 5 else 14) if r_i else 13, bold=(r_i == 0 or c_i == 4),
                  color=BLUE if r_i == 0 else (GREY if c_i == 5 else NAVY), anchor=MSO_ANCHOR.MIDDLE)
             x += cw
-        y += 0.6
-    text(s, MX, y + 0.15, W - 2 * MX, 1.0,
-         ["Calibrated = noise-aware MLAE with two calibration circuits of known answer, same job, same qubits; "
-          "bootstrap 90 % intervals. The IBM / Garnet intervals exclude exact: a +19 % / +31 % systematic bias.",
-          "Pair = two rivers with identical North-cluster loadings and 1-in-50 trigger (not Kittilä and Ivalo specifically). "
-          "Signal kept after amplification on Emerald 0.56–0.59 (k = 1), 0.44 (k = 2): mostly a calibrated k = 0 "
-          "estimate. Classical Monte Carlo at the same budget is more precise (±0.004 pp)."],
-         size=13, color=GREY, space_after=6)
+        y += 0.52
+    text(s, MX, y + 0.05, W - 2 * MX, 1.2,
+         ["Calibrated = noise-aware MLAE, two known-answer calibration circuits in the same job; bootstrap 90 % intervals. "
+          "IBM / Garnet intervals exclude exact (+19 % / +31 % bias). Pair = two rivers with identical North-cluster "
+          "loadings and 1-in-50 trigger. Classical Monte Carlo at the same budget is more precise (±0.004 pp).",
+          "Signal kept by amplification (k = 1 / 2): Emerald 0.56–0.59 / 0.44; VTT Q50 0.12–0.19 / 0.05–0.06. "
+          "Q50 zero-calibration offset moved 0.002 → 0.006 between repeats, driving the 5× spread."],
+         size=12, color=GREY, space_after=4)
     footer(s, n)
     return s
 
