@@ -15,6 +15,9 @@ Criteria 1–5: Impact · Business plan · Progress · Innovativeness · Methodo
 | 3 | OP/PwC (business) | 3.5 | 3 | 4.5 | 4 | 4 | March price nobody can transact at; regulator 0% overstated; basis risk never named |
 | 3 | IQM/VTT/IBM (tech) | 3.5 | 3 | 4.5 | 3.5 | 4 | independence 3.9 % vs 4.42 % unexplained; 2.8× vs ≈4× unlabelled; IBM 0.149 vs 0.148 %; QAE depth and 1-in-50 limit overstated by omission |
 | 3 | Pitch coach | 7.5/10 | | | | | ~2:31, fits; S3 wording ambiguous; S7 money story weak; S5 too dense |
+| 4 | Business juror | 3.5 | 3 | 4.5 | 4 | 4 | matrix doesn't "imply a price"; why-now vs If (internal model) mismatch; size beyond licences; basis risk in numbers |
+| 4 | Quantum juror | 3.5 | 3 | 4.5 | 3.5 | 4 | "Kittilä + Ivalo" circuit is an identical-loading North pair; k = 0–2 not 0–3; amplification gain ≈0.5; "works at 1-in-10" overstated |
+| 4 | Pitch coach | 7.5/10 | | | | | runs 2:45–2:55 on stage; cut 20–25 words; captions too long for 6 s; "FOUR" vs 3.9× |
 
 ### Round 3 — merged fixes, ranked by expected score gain
 
@@ -26,3 +29,21 @@ Criteria 1–5: Impact · Business plan · Progress · Innovativeness · Methodo
 6. **Jargon** (coach). "shots" → "runs"; slide 2 "independence" → "chance"; explain "regulator's average correlation" (S3).
 
 ⚠ **Progress flag:** none of these cuts remove evidence. Keep S8 build list and job IDs (in the appendix if they come off S5).
+
+### Round 4 — merged fixes (applied 10 Oct)
+
+1. **S3 category error**: headline now "Fair price ≈1.8× a model using the 0.27 average correlation of the 2027
+   Finnish flood-zone matrix"; one measure only (expected loss) with year-bootstrap 90 % intervals (1.96 %: 1.6–2.2;
+   triples: 2.1–4.4×); market bars, €/€1M and ORSA moved to QA; 19-zone mean, not Lapland entries (not in repo).
+2. **S7 why-now vs buyer**: two-way line (standard-formula insurers: fixed correlations ignore the snow; internal-model
+   insurers like If Insurance: a snow-aware number for their own model); premium insurer → reinsurer (≈€0.5–0.7M per
+   €10M layer) vs licence → Tulva; year-3 revenue spoken; Nordic upside labelled assumption; OP only as a pilot wish (QA).
+3. **1-in-50 wording**: "same 1-in-50 idea", level at site vs discharge at gauge; QA "same water level" fixed.
+4. **Basis risk in numbers** (S7): paid 1966, 2005, 2018; missed Ostrobothnia 2012–13 and the 2024 false alarm.
+5. **Quantum honesty** (S5/S6/S9, script §5, app, video): "two-river North-cluster pair" everywhere; k = 0–2; calibrated
+   sampling + shallow AE, amplified circuits keep ≈0.5 of the signal on Emerald; S6 "correlation survives but
+   attenuated (1.4× vs 2.5× exact)"; S5 table moved off (appendix).
+6. **Number consistency**: "almost FOUR times"; app 2.8× labelled "per river pair" vs "per spring".
+7. **S1 hook**: "hit flood levels" (discharge over 1-in-10), in-sample note kept.
+8. **Video**: captions at 12 s / 18 s shortened, re-recorded, same cue times.
+9. **Script**: 245 → 222 live words.

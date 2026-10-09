@@ -128,7 +128,7 @@ json.dump({"hardware_points": [{"vendor": v, "queries": int(qq), "abs_error": e,
           open(OUT / "qae_scaling_hardware_points.json", "w"), indent=2)
 ax.set_xlabel("Model evaluations (oracle queries)", fontsize=12)
 ax.set_ylabel("Error in P(both flood), percentage points", fontsize=12)
-ax.set_title("When does quantum matter?  P(Kittilä and Ivalo both pass their 1-in-50 level)\n"
+ax.set_title("When does quantum matter?  P(two-river North-cluster pair both pass their 1-in-50 level)\n"
              f"exact {100*exact:.3f} %  ·  3 qubits  ·  simulator curves + real hardware points", fontsize=13, loc="left")
 ax.grid(True, which="both", alpha=0.25)
 ax.legend(fontsize=9, frameon=True, framealpha=0.92, loc="lower left")

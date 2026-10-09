@@ -5,7 +5,8 @@ Technical questions → Toivo. Business questions → Vaishnav. All numbers are 
 
 ## Explain the circuit without notes (Toivo, 30 seconds)
 "One qubit is this spring's hydrology: wet or normal. Its probability comes from the March snow. Two more
-qubits are Kittilä and Ivalo; each floods with a probability that depends on the hydrology qubit, and that shared
+qubits are two northern rivers (a North-cluster pair: both get the North cluster's average numbers, so it is not
+Kittilä and Ivalo specifically); each floods with a probability that depends on the hydrology qubit, and that shared
 dependence *is* the correlation. The event 'both flood' is marked with a single CZ gate. Amplitude estimation then
 repeats a 'reflect' step to amplify that event and reads out how fast it grows; the growth rate gives the
 probability. We run it at 0, 1 and 2 amplification steps and fit the answer by maximum likelihood."
@@ -34,7 +35,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   full hydrological simulation or multi-peril repricing every day, and rare joint events need many runs.
   Fault-tolerant hardware has to arrive first."
 - *"Did the snow signal survive on hardware?"* Yes. On IQM Emerald the snowy-vs-low-snow risk ratio was 3.05×
-  (bootstrap 90 % CI 2.6–3.6) against 2.75× exact (Kittilä + Ivalo, 240k shots each). The interval contains the
+  (bootstrap 90 % CI 2.6–3.6) against 2.75× exact (two-river North-cluster pair, 240k shots each). The interval contains the
   exact ratio.
 - *"What breaks?"* Rare events: the 14-area circuit at the 1-in-50 level read 16 % vs 4.8 % exact. Gate noise creates
   false triggers that swamp rare signals, which is exactly why this needs error correction.
@@ -92,7 +93,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - **Steinmann / Mehtola: "Your 14-area chip result is sampling. Did amplitude estimation run on the full model?"**
   "No, and that's deliberate. Emerald shows a two-level version of the 14-area loader fits: 18 qubits, 44 gates. Amplitude estimation adds
   two loader copies per step, which at 14 areas is far past today's ~50-gate budget. So we ran it on the 3-qubit
-  Kittilä–Ivalo piece on Marrakesh and Garnet. The loader is the part that has to scale, and it scales linearly."
+  two-river North-cluster pair on Marrakesh and Garnet. The loader is the part that has to scale, and it scales linearly."
 - **Mehtola: "Your calibration circuits have known answers. Isn't the mitigation tuned towards the result you
   wanted?"** "The calibration circuits have *different* known answers, one large and one near zero, never the
   target value. They measure how much signal survives each step and the false-trigger floor, in the same job and
@@ -131,7 +132,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   13.8 %. So noise alone roughly doubles the tail. But chip vs chip, the correlated model still gives 1.4× (≥4),
   2.4× (≥5) and 4× (≥6) more multi-area floods. The correlation survives, weakened by noise."
 - **"Doesn't this need 8,000 logical qubits?"** "That number is for derivative pricing (Chakrabarti et al. 2021).
-  Our circuits are few qubits but deep: 3 qubits for Kittilä + Ivalo. The bottleneck is a coherent hydrology oracle,
+  Our circuits are few qubits but deep: 3 qubits for the two-river pair. The bottleneck is a coherent hydrology oracle,
   a flood model evaluated inside the circuit, and the circuit depth that needs."
 - **"Two-level circuit vs your continuous model?"** "The circuits use a two-level version of the factor model (wet
   spring or not). For ≥4 of 14 areas over 1-in-10 it gives 10.9 % vs 12.2 % for the continuous model (observed
@@ -207,9 +208,9 @@ history shows."
 - **"The shot grid shows 13 vs 31 red squares. Is that the 3×?"** "No. That grid is one 8,000-shot sample, raw.
   Across all 240,000 shots per level the raw ratio is only 1.3×, because noise adds a floor of false 'both flood'
   shots. After the calibration circuits remove that floor it is 3.05× (90 % CI 2.6–3.6) vs 2.75× exact."
-- **"Did deep amplitude estimation work?"** "No. We ran shallow amplitude estimation, Grover steps k = 0–3. The signal
+- **"Did deep amplitude estimation work?"** "No. We ran shallow amplitude estimation, Grover steps k = 0–2 in the results we show (one early IBM run went to k = 3). The signal
   fades with every step on today's chips (Emerald keeps 56–59 % at k = 1, 44 % at k = 2), so the estimate is mostly a
-  calibrated k = 0 reading. The 3-qubit Kittilä + Ivalo core ran it on IBM Marrakesh and IQM Garnet; the 14-river
+  calibrated k = 0 reading. The 3-qubit two-river North-cluster core ran it on IBM Marrakesh and IQM Garnet; the 14-river
   loader only sampled, on IQM Emerald."
 - **"What are the intervals on slide 5?"** (now in the appendix) "IBM Marrakesh 0.149 % (0.140–0.157), IQM Garnet
   0.164 % (0.147–0.180), exact 0.125 %; raw 0.262 % / 0.368 %. Both intervals exclude exact: +19 % / +31 %
@@ -226,11 +227,54 @@ history shows."
   Tornio. Ivalo, Kittilä and Rovaniemi also passed 1-in-50. The 'snow warned us' line is an in-sample back-test: the
   North's 1 March snow was at the 87th percentile."
 - **"Basis risk?"** (now on slide 7) "The index is not the insurer's own losses. It is mitigated because our trigger is
-  the same 1-in-50 test that all seven Finnish home insurers use in their flood terms (OP, If, LähiTapiola, Fennia,
-  Turva, Pohjantähti, POP), so the index and the policies switch on at the same water level. Turva's guide even
-  lists an ordinary spring flood as not covered. Still to be tested against claims in the pilot."
+  the same 1-in-50 idea that all seven Finnish home insurers use in their flood terms (OP, If, LähiTapiola, Fennia,
+  Turva, Pohjantähti, POP). It is the same idea, not the same test: the policies look at the water LEVEL at the
+  insured site, certified by SYKE; we look at river DISCHARGE at a gauge against a fitted GEV 1-in-50 level. So the
+  index and the policies need not switch on together. Turva's guide even lists an ordinary spring flood as not
+  covered. Still to be tested against claims in the pilot."
 - **"Revenue?"** "Assumption: €25k pilot, then ~€75k a year per insurer. 3–6 insurers × €75k = €0.2–0.45M a year by
   year 3. Finland first (open data, seven home insurers), then snowmelt regions in Sweden and Norway."
 - **"No vendor model uses this winter's snow?"** (removed: we can't verify it) "We dropped that claim. What we can say:
   the 2027 standard-formula correlations are fixed and don't react to the snow."
 
+
+## Round 4 (Sat 10 Oct): what came off the slides, and why
+
+- **"A correlation matrix doesn't imply a price."** (Toivo) "Right, and the slide no longer says it does. We compare
+  two models: ours, fitted to SYKE data, and the same model with one correlation of 0.27, the average of the 2027
+  Finnish flood-zone matrix. Fair expected loss 1.96 % vs 1.11 % of the limit a year: 1.8×. The 0.27 is the mean of
+  all 19 zones. We did not use the Lapland zones' own entries: we don't have the zone-to-region mapping (Annex IX)
+  or the cell values in the repo, so we can't say whether they would move the ratio. If the Lapland zones are in a
+  0.75–1.00 block, the gap would be smaller."
+- **"How sure are the 1.96 % and the 'triples'?"** (Toivo) "Year-bootstrap, refitting the model and the snow skill on
+  resampled springs: 1.96 % has a 90 % interval of 1.6–2.2 %; the snowy-March risk 6.4 % has 3.6–9.1 %, so 'triples'
+  is 3.3× with 2.1–4.4×. In-sample snow skill, and we say so."
+- **"What would the market charge?"** (moved off slide 3) "At the cat-bond / flood-ILS multiple of 2.5–3.5× expected
+  loss: 4.9–6.9 % rate on line, ≈€49–69k a year per €1M of cover, ≈€0.5–0.7M a year for a €10M North layer. That
+  premium goes from the insurer to the reinsurer; our licence is separate."
+- **"What does the insurer do in March?"** (ORSA moved off slide 3) "Buys top-up or second-layer cover if available,
+  staffs claims in the regions at risk, and uses the snow-conditioned number as evidence in its ORSA."
+- **"Is the 3-qubit circuit really Kittilä and Ivalo?"** (Toivo) "No. Both rivers get the North cluster's average
+  loadings and the same 1-in-50 trigger, so it's a two-river North-cluster pair. The app shows Kittilä's and Ivalo's
+  real records as the story; the circuit is the cluster pair. Same for '≥2 of 3': three North-cluster rivers."
+- **"How much did amplification actually do?"** "Little: it's calibrated sampling plus shallow amplitude estimation.
+  Amplified circuits keep about half the signal on Emerald (0.56–0.59 at k = 1, 0.44 at k = 2), 0.6–0.8 on IBM and
+  Garnet. Most of the information comes from the calibrated k = 0 circuit."
+- **"Does correlation survive on the 14-river chip run?"** "Attenuated. Chip vs the identical independent circuit on
+  the same chip: 1.4× more ≥4-area springs; exact: 2.5×. Noise inflates both."
+- **"Why now, if If uses an internal model?"** (Vaishnav) "Two buyers, two reasons. Standard-formula insurers get fixed
+  2027 flood correlations that ignore this winter's snow: Tulva shows them the joint risk the rule doesn't see.
+  Internal-model insurers, like If Insurance (Sampo's partial internal model), get a snow-aware joint-flood number to
+  feed their own model, and can get capital credit for an index cover there. We don't know which other Finnish
+  insurers use the standard formula; their SFCRs would say."
+- **"Who are you talking to?"** "No one has signed anything. We'd like to pilot with OP, the largest writer; that is
+  an aspiration, not an agreement."
+- **"Basis risk, in numbers?"** "Back-test at the 1-in-10 level against the known flood-loss springs: the index paid in
+  1966, 2005 and 2018; at 1-in-50, in 1966 and 2005. It missed Ostrobothnia 2012–13 and 2024, and Lapland 2020
+  (Kemijoki at Rovaniemi is hydro-regulated; we use the Ounasjoki gauge). 2024 is the honest false alarm: the
+  Ostrobothnia snow flag was on, the region flooded, but only one of six gauges passed 1-in-10, so the index did not
+  pay."
+- **"Year 3 and beyond?"** "Assumption: 3–6 insurers × €75k = €225–450k a year. The Nordic snowmelt market (Sweden,
+  Norway, with their own 2027 flood factors) is the upside; we haven't sized it."
+- **"Slide 1 says rivers 'hit flood levels'. Damage?"** "Discharge, not damage: river flow over each gauge's 1-in-10
+  level. 2005 losses were about €5M house damage (Helminen; Yle reported ~€17M on a broader definition)."

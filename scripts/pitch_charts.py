@@ -65,35 +65,33 @@ P_REG_027 = json.loads((OUT / "round3_numbers.json").read_text())["north_ge2_of5
 
 
 def cost_chart():
-    """Slide 3: market price per year of the North '>=2 of 5 over 1-in-50' cover, as rate on line
-    (premium as % of the limit per year; the limit is sized to each insurer's retained 1-in-50 joint loss).
-    Market premium = probability x payout x market multiple (2.5-3.5); rate on line = premium / limit."""
+    """Slide 3: ONE measure only, the fair expected loss of the North '>=2 of 5 over 1-in-50' cover as % of the
+    limit per year: one 0.27 correlation (mean of the 2027 Finnish flood-zone matrix), Tulva, and Tulva after a
+    snowy (top-15 %) March. Whiskers = joint year-bootstrap 90 % intervals (scripts/round4_numbers.py)."""
     d = json.loads((OUT / "pricing.json").read_text())
-    t, limit, mm = d["clusters"]["North"]["triggers"]["ge2"], d["payout_eur"], d["market_multiples"]
-    reg = [P_REG_027 * limit * m for m in mm]
-    rows = [("Independent", t["independent"]["market_premium_eur"], RED),
-            ("2027 rule's average link (0.27)", reg, GREY),
-            ("Tulva (sold in autumn)", t["tulva"]["market_premium_eur"], BLUE)]
-
-    def rol(v):
-        return 100 * v / limit
-
-    def fmt(lo, hi):
-        f = (lambda x: f"{x:.1f}") if hi < 10 else (lambda x: f"{x:.0f}")
-        return f"{f(lo)}–{f(hi)} %"
-
+    t = d["clusters"]["North"]["triggers"]["ge2"]
+    b = json.loads((OUT / "round4_numbers.json").read_text())["north_ge2_of5_bootstrap"]
+    rows = [("0.27 average correlation", P_REG_027, None, GREY),
+            ("Tulva, priced in autumn", t["tulva"]["p_exact"], b["p_tulva_ci90"], BLUE),
+            ("Tulva after a snowy March", t["tulva_high_outlook"]["p_exact"], b["p_high_snow_ci90"], NAVY)]
     fig, ax = plt.subplots(figsize=(12.1, 2.0), dpi=DPI)
     ys = [2, 1, 0]
-    xmax = max(rol(r[1][1]) for r in rows)
-    for y, (lab, (lo, hi), c) in zip(ys, rows):
-        lo, hi = rol(lo), rol(hi)
-        w = max(hi - lo, xmax * 0.012)
-        ax.barh(y, w, left=lo, height=0.62, color=c)
-        ax.text(hi + xmax * 0.015, y, fmt(lo, hi), va="center", fontsize=24, fontweight="bold", color=c)
-    ax.set_yticks(ys, [r[0] for r in rows], fontsize=20)
-    ax.set_xlim(0, xmax * 1.3)
+    xmax = 100 * max(r[2][1] if r[2] else r[1] for r in rows)
+    for y, (lab, v, ci, c) in zip(ys, rows):
+        ax.barh(y, 100 * v, height=0.62, color=c)
+        right = 100 * v
+        if ci:
+            ax.errorbar(100 * v, y, xerr=[[100 * (v - ci[0])], [100 * (ci[1] - v)]], color=RED if c == NAVY else NAVY,
+                        lw=2.5, capsize=6, capthick=2.5)
+            right = 100 * ci[1]
+        txt = f"{100 * v:.2f} %" if v < 0.03 else f"{100 * v:.1f} %"
+        if ci:
+            txt += f"  ({100 * ci[0]:.1f}–{100 * ci[1]:.1f})"
+        ax.text(right + xmax * 0.015, y, txt, va="center", fontsize=22, fontweight="bold", color=c)
+    ax.set_yticks(ys, [r[0] for r in rows], fontsize=19)
+    ax.set_xlim(0, xmax * 1.45)
     ax.set_ylim(-0.55, 2.55)
-    ax.set_xticks([0, 2, 4, 6, 8], ["0 %", "2 %", "4 %", "6 %", "8 %"], fontsize=18, color=GREY)
+    ax.set_xticks([0, 2, 4, 6, 8], ["0 %", "2 %", "4 %", "6 %", "8 %"], fontsize=17, color=GREY)
     ax.grid(axis="x", color=LIGHTGREY, lw=1)
     ax.set_axisbelow(True)
     clean(ax)
@@ -128,7 +126,7 @@ def loader_chart():
 
 
 def snow_chart():
-    """Slide 5: snow signal on IQM Emerald, Kittilä + Ivalo both over 1-in-50, low / normal / high March snow:
+    """Slide 5: snow signal on IQM Emerald, a two-river North-cluster pair both over 1-in-50, low / normal / high March snow:
     exact vs calibrated chip estimate with bootstrap 90 % intervals (scripts/bootstrap_ci.py)."""
     b = json.loads((OUT / "bootstrap_ci.json").read_text())
     rows = [("Low snow", b["emerald snow low"]), ("Normal", b["emerald snow normal"]),
@@ -161,7 +159,7 @@ def snow_chart():
 
 
 def scaling_chart():
-    """Slide 6: estimation error vs model evaluations: classical MC, ideal QAE, real hardware (Kittilä+Ivalo)."""
+    """Slide 6: estimation error vs model evaluations: classical MC, ideal QAE, real hardware (two-river North-cluster pair)."""
     d = json.loads((OUT / "qae_scaling.json").read_text())
     hw = json.loads((OUT / "qae_scaling_hardware_points.json").read_text())["hardware_points"]
     mc, ideal = d["monte_carlo"], d["curves"]["ideal"]

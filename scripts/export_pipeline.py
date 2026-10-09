@@ -86,7 +86,7 @@ def main():
             entry["temp_c"] = {int(y): (None if pd.isna(v) else float(v)) for y, v in w.t_aprmay.items()}
             entry["rain_mm"] = {int(y): (None if pd.isna(v) else float(v)) for y, v in w.rain_aprmay.items()}
         clusters[cl] = entry
-    out = {"example": "Kittilä and Ivalo both pass their 1-in-50 spring level", "all_data": clusters,
+    out = {"example": "A two-river North-cluster pair (records shown: Kittilä and Ivalo) both pass their 1-in-50 spring level", "all_data": clusters,
            "rivers": rivers, "snow": snow, "independent": (1 / 50) ** 2, "snow_shift_sd": shift,
            "device": "IQM Emerald (54 qubits, IQM Resonance)", "runs": [RUN_K0, RUN_BEST], "cases": cases}
     WEB.mkdir(parents=True, exist_ok=True)

@@ -59,7 +59,7 @@
   }
 
   function circuitSvg(c) {
-    const W = 1000, rows = [["Wet spring?", c.p_wet], ["Kittilä floods?", null], ["Ivalo floods?", null]], y = (r) => 40 + r * 62;
+    const W = 1000, rows = [["Wet spring?", c.p_wet], ["River A floods?", null], ["River B floods?", null]], y = (r) => 40 + r * 62;
     let s = "";
     rows.forEach(([lab], r) => {
       s += `<text x="0" y="${y(r) + 5}" font-size="15" font-weight="600" fill="${C.ink}">${lab}</text>`;
@@ -98,7 +98,7 @@
       const x = (i % cols) * cell, y = Math.floor(i / cols) * cell;
       if (key === "11") ctx.fillRect(x - 1, y - 1, cell + 1, cell + 1); else ctx.fillRect(x, y, cell - 1, cell - 1);
     });
-    $("#pl-leg").innerHTML = [["00", "no flood", C.none], ["01", "Kittilä only", C.k], ["10", "Ivalo only", C.i], ["11", "both flood", C.both]]
+    $("#pl-leg").innerHTML = [["00", "no flood", C.none], ["01", "river A only", C.k], ["10", "river B only", C.i], ["11", "both flood", C.both]]
       .map(([b, t, cl]) => `<div><i style="background:${cl}"></i><span><code>${b}</code> ${t}</span><b>${n(k[b])}</b></div>`).join("")
       + `<div style="color:var(--muted);font-size:13px;grid-template-columns:1fr">Total ${n(tot)} shots on IQM Emerald</div>`;
   }

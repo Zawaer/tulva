@@ -28,8 +28,8 @@
       <p class="lead">The 14 river flood-risk areas fall into three clusters that share a snowpack. Lines join
         areas whose spring peaks move together (Spearman ρ ≥ <span id="edge-min"></span>, 1961–2025).</p>
       <div class="stats">
-        <div class="stat"><div class="big" id="st-within"></div><div class="cap">as often as chance: two rivers of one cluster both over 1-in-10 in the same spring (pairs) <span class="src" data-src="exact"></span></div></div>
-        <div class="stat"><div class="big" id="st-years"></div><div class="cap">springs with ≥4 of 14 areas over their 1-in-10 level (3.9× chance) <span class="src" data-src="exact"></span></div></div>
+        <div class="stat"><div class="big" id="st-within"></div><div class="cap"><b>per river pair:</b> as often as chance, two rivers of one cluster both over 1-in-10 in the same spring (pairs) <span class="src" data-src="exact"></span></div></div>
+        <div class="stat"><div class="big" id="st-years"></div><div class="cap"><b>per spring:</b> springs with ≥4 of 14 areas over their 1-in-10 level (3.9× chance) <span class="src" data-src="exact"></span></div></div>
       </div>
       <ul class="legend" id="legend"></ul>
     </div>
@@ -70,8 +70,9 @@
   <div class="wrap">
     <p class="eyebrow">How it works</p>
     <h2>From river data to a quantum answer</h2>
-    <p class="lead">One real example, start to finish: will Kittilä and Ivalo both pass their 1-in-50 flood level in the
-      same spring? Pick the kind of March and follow the numbers.</p>
+    <p class="lead">One example, start to finish: will two northern rivers both pass their 1-in-50 flood level in the same
+      spring? Steps 1–2 show Kittilä's and Ivalo's real records; from step 3 both rivers get the North cluster's average
+      numbers, so the circuit is a two-river North-cluster pair. Pick the kind of March and follow the numbers.</p>
     <details class="pl-all" open>
       <summary>Everything Tulva reads: 14 rivers, snow, spring temperature and rain, 1961–2025</summary>
       <p class="pl-say">Each row is one data series, one bar per year. Rivers: the spring's highest flow; dashed line =
@@ -95,7 +96,7 @@
       <div class="pl-step"><div class="pl-rail"><div class="pl-num">3</div><div class="pl-line"></div></div><div class="pl-body">
         <h3>The model boils 65 years down to a few numbers</h3>
         <p class="pl-say">Rivers in the north flood together because they share the same wet spring. The snow changes how
-          likely a wet spring is.</p>
+          likely a wet spring is. Both rivers get the North cluster's average numbers.</p>
         <div class="pl-nums" id="pl-nums"></div></div></div>
       <div class="pl-step"><div class="pl-rail"><div class="pl-num">4</div><div class="pl-line"></div></div><div class="pl-body">
         <h3>The numbers become a quantum circuit</h3>

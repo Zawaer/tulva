@@ -325,3 +325,41 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
 - Slide 7 "Basis risk: … the same 1-in-50 test as all 7 Finnish home insurers' flood terms" = docs/flood_terms_check.md
   (OP Pohjola, If, LähiTapiola, Fennia, Turva, Pohjantähti, POP; "kerran 50 vuodessa tai harvemmin") · source
 
+
+## Round-4 deck pass (Sat 10 Oct) · scripts/round4_numbers.py → out/round4_numbers.json unless marked
+- **Naming correction (applies to every "Kittilä + Ivalo" / "Kittilä AND Ivalo" / "≥2 of 3 Lapland" circuit line
+  above):** the A3/A4 circuits give every river the same North-cluster loadings (national 0.44, cluster 0.60) and the
+  same 1-in-50 trigger (np.full in scripts/run_hw.py `instance()` and scripts/run_product_hw.py). They are "a two-river
+  North-cluster pair" / "3 North-cluster rivers", not Kittilä and Ivalo specifically. Numbers unchanged · verified in code
+- **Slide 3 headline "Fair price ≈1.8× a model using the 0.27 average correlation of the 2027 Finnish flood-zone
+  matrix"** = 1.96 % / 1.11 % = 1.77× (round-3 lines). 0.27 = mean of all 19 zones; the Lapland zones' own entries and
+  the zone-to-region map are not in the repo, so not used · exact
+- **Year-bootstrap 90 % intervals (400 joint resamples of springs + 1 March SWE; loadings refit, North snow skill
+  re-estimated, exact pricing):** North "≥2 of 5 over 1-in-50" fair expected loss **1.96 % (1.63–2.15 %)**; after a
+  snowy (top-15 %) March **6.4 % (3.57–9.05 %)**; ratio **3.28× (2.12–4.41×)**, shown "triples (90 %: 2.1–4.4×)"; skill
+  0.47 (0.27–0.64). Point refit reproduces 1.964 % / 6.445 % · exact + bootstrap.
+  Slide 3 chart out/pitch_cost.png now shows only expected loss (0.27 correlation 1.11 %, Tulva 1.96 %, snowy March
+  6.4 %); the market-price bars (2.8–3.9 / 4.9–6.9 %) and "€49–69k per €1M" moved to QA
+- **Slide 6 "correlation survives but attenuated: chip vs chip-control 1.4× (exact 2.5×)"** = P(≥4 of 14 over 1-in-10),
+  IQM Emerald readout-corrected 13.83 % / control 9.69 % = 1.43×; exact 10.86 % / 4.41 % = 2.46× · qae-iqm / exact ·
+  loader-iqm-emerald-20261008T184433Z, loader-control-indep-iqm-emerald-20261009T135910Z
+- **Slide 5 / appendix "Grover steps k = 0–2"**: the shown results (IBM run 2 174523Z, Garnet run 2 182534Z, Emerald
+  075338Z) used k = 0, 1, 2; only IBM run 1 (170341Z, not shown) used k = 0–3 · verified in out/runs
+- Slide 5 "amplified circuits keep ≈0.5 of the signal on Emerald, 0.6–0.8 on IBM / Garnet" = signal gain k = 1 / 2:
+  Emerald 0.56–0.59 / 0.44, IBM run 2 0.78 / 0.69, Garnet run 2 0.77 / 0.60 (round-2 line) · qae-ibm / qae-iqm
+- **Slide 7 basis risk "paid in the 1966, 2005 and 2018 flood springs; missed Ostrobothnia 2012–13 and 2024"**: known
+  loss springs from the business case loss table (§1; outside source) vs the back-test trigger (≥2 of cluster over GEV
+  1-in-10): 1966 Satakunta–SE (and Ostrobothnia) paid, 2005 North paid, 2018 North paid; at GEV 1-in-50 only 1966 and
+  2005; 2012, 2013 Ostrobothnia no trigger; 2020 North no trigger (snow flag on); 2024 Ostrobothnia no trigger with the
+  snow flag on (false alarm; North paid that year) · exact (counts) · out/backtest.json
+- **Slide 7 "Premium, insurer → reinsurer: ≈€0.5–0.7M a year per €10M layer"** = North "≥2 of 5" market premium
+  €491k–€687k (pricing section, model × 2.5–3.5 market multiple) · exact × outside multiple
+- Slide 7 "3–6 insurers × €75k ≈ €0.2–0.45M/yr", spoken "up to 450 thousand"; "Upside: Nordic snowmelt" unsized ·
+  assumption. "If Insurance" uses a (Sampo group) partial internal model · source (business research
+  solvency_regulation.md); which other Finnish insurers use the standard formula is not documented in the repo, so none
+  are named. OP named only as "we'd like to pilot with" (QA), no agreement
+- Spoken "almost FOUR times" = 3.9× (slide 2). App stat 2.8× now labelled "per river pair" vs slide 2 "per spring" ·
+  exact
+- Demo video re-recorded (10 Oct, round 4), 37 s, same cue times; captions shortened: "IQM chip. Red: both flood. Low
+  snow, little red." and "Snowy March: about three times the risk, close to exact." (= calibrated 3.05× vs exact 2.75×)
+  · qae-iqm · deck/video/record_demo.mjs

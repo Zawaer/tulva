@@ -266,7 +266,7 @@ function renderHood() {
   const q = APP.qae;
   if (!q) { $("#hood-body").innerHTML = `<p>${tag("placeholder")} out/qae_sim.json not available.</p>`; return; }
   const HW = APP.hardware || { qae: {} };
-  const insts = [["kittila_ivalo_both", "Kittilä and Ivalo both pass 1-in-50"], ["lapland_atleast2of3", "≥2 of 3 Lapland areas pass 1-in-50"]];
+  const insts = [["kittila_ivalo_both", "Two-river North-cluster pair: both pass 1-in-50"], ["lapland_atleast2of3", "≥2 of 3 North-cluster rivers pass 1-in-50"]];
   const panels = insts.map(([key, title]) => {
     const c = q.instances[key + "/climatology"], h = q.instances[key + "/high_march_outlook"];
     if (!c) return "";
@@ -285,7 +285,7 @@ function renderHood() {
         ? `Calibration pulls both chips from 2–3× the exact value to within ${pp(Math.max(...hw.map((r) => Math.abs(r.corrected - r.exact))), 2)} of it. Classical Monte Carlo at the same budget is still more precise; no quantum advantage is claimed.`
         : "4-qubit circuits are deeper (up to " + Math.max(...hw.map((r) => Math.max(...Object.values(r.two_qubit_gates_by_k)))) + " two-qubit gates) and lose most of their signal: the measured limit of today's hardware. Monte Carlo is more precise."}</p>` : "";
     return `<div class="panel">
-      <h3>${title}</h3><div class="sub">Two-level factor model, ${c.qubits} qubits · ${q.trigger}</div>
+      <h3>${title}</h3><div class="sub">Two-level factor model, ${c.qubits} qubits, every river with the North cluster's average loadings · ${q.trigger}</div>
       <div class="chips">
         <div class="chip"><b>${c.qubits}</b>qubits</div>
         <div class="chip"><b>${(hw[0] ? Object.values(hw[0].two_qubit_gates_by_k) : c.cz_by_k_grid).join(" / ")}</b>two-qubit gates by Grover step</div>

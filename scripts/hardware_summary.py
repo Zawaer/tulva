@@ -36,7 +36,7 @@ md = ["# Real quantum hardware results", "",
       "|---|---|---|---|---|---|---|---|---|---|"]
 for r in rows:
     corr = r["aware"]  # pooled noise-aware MLAE, same estimator as scripts/bootstrap_ci.py (per-copy fits differ by ≤0.001 pp)
-    label = "Kittilä + Ivalo both" if r["instance"].startswith("A3") else "≥2 of 3 Lapland"
+    label = "North-cluster pair, both" if r["instance"].startswith("A3") else "≥2 of 3 North-cluster rivers"
     md.append(f"| {r['platform']} {r['device']} ({r['created'][:13]}){' best qubits' if r['best_qubits'] else ''} | {label} | "
               f"{r['copies']} | {r['shots']:,} | {pct(r['exact'])} | {pct(r['raw'])} | **{pct(corr)}** | {pct(r['k0'])} | "
               f"{'/'.join(str(v) for v in r['gates'].values())} | ±{100 * r['mc_same_queries']:.3f} pp |")
@@ -79,7 +79,7 @@ if snow:
     if all(r for _, r in rows_s):
         lo, hi = rows_s[0][1], rows_s[2][1]
         md += ["", "## The March snow signal, measured on IQM Emerald",
-               f"Kittilä + Ivalo both over 1-in-50, 3 qubits, {lo['copies']} side-by-side copies, {lo['shots']:,} shots "
+               f"Two-river North-cluster pair both over 1-in-50, 3 qubits, {lo['copies']} side-by-side copies, {lo['shots']:,} shots "
                f"per instance (run by Vaishnav, `{Path(snow[-1]).name.replace('.analysis.json', '')}`).", "",
                "| March snow | Exact | Hardware raw | Hardware calibrated |", "|---|---|---|---|"]
         for lab, r in rows_s:
@@ -117,7 +117,7 @@ ax.bar([i + 0.2 for i in x], [100 * r["aware"] for r in a3], 0.38, color="#1f6fe
 ax.axhline(100 * a3[0]["exact"], color="#2da44e", lw=2.5, label=f"Exact {100 * a3[0]['exact']:.3f} %")
 ax.axhline(100 * 0.0004, color="#cf222e", lw=1.5, ls="--", label="If areas were independent 0.040 %")
 ax.set_xticks(list(x), labels, fontsize=9)
-ax.set_ylabel("P(Kittilä and Ivalo both pass 1-in-50), %")
+ax.set_ylabel("P(North-cluster pair both pass 1-in-50), %")
 ax.set_title("Joint-flood probability on real quantum computers (3-qubit amplitude estimation)", loc="left")
 ax.legend(frameon=False, fontsize=9)
 ax.grid(axis="y", alpha=0.25)

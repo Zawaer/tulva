@@ -69,9 +69,9 @@ await clickText("#presets", "High snow"); await w(5000);
 // (c) "How it works": real IQM Emerald shots, low vs snowy March
 await page.evaluate(() => { const b = document.querySelector('.pl-snow button[data-k="low"]'); if (b) b.click(); });
 await glide(Y.shots); await w(800);
-await cap("Real IQM Emerald runs. Red = BOTH rivers flood. Low snow: little red"); await w(5800);
+await cap("IQM chip. Red: both flood. Low snow, little red."); await w(5800);
 await page.evaluate(() => { const b = document.querySelector('.pl-snow button[data-k="high"]'); if (b) b.click(); });
-await cap("Snowy March: more red. Corrected: about 3× the risk (exact 2.75×)"); await w(5600);
+await cap("Snowy March: about three times the risk, close to exact."); await w(5600);
 // (d) simplified (two-level) 14-river model on one chip, 1-in-10 run
 await glide(Y.loader);
 await w(800);

@@ -1,0 +1,126 @@
+{
+ "north_ge2_of5_bootstrap": {
+  "method": "400 joint year-bootstraps (peaks + 1 March SWE resampled together); loadings refit (common national loading) and North snow skill re-estimated per resample; exact pricing",
+  "point_refit": {
+   "p_tulva": 0.01964,
+   "p_high_snow": 0.06445,
+   "ratio": 3.281,
+   "skill": 0.472
+  },
+  "p_tulva_ci90": [
+   0.01632,
+   0.02152
+  ],
+  "p_high_snow_ci90": [
+   0.03571,
+   0.09052
+  ],
+  "ratio_high_over_tulva_ci90": [
+   2.12,
+   4.41
+  ],
+  "skill_ci90": [
+   0.267,
+   0.642
+  ]
+ },
+ "basis_risk_known_loss_years": {
+  "1966": {
+   "region": "south (snowpack ~2× normal)",
+   "cluster": "Satakunta–SE",
+   "trigger_ge2_over_gev_1in10": true,
+   "trigger_ge2_over_gev_1in50": true,
+   "snow_flag": true,
+   "any_cluster_triggered_1in10": [
+    "Ostrobothnia",
+    "Satakunta–SE"
+   ]
+  },
+  "2005": {
+   "region": "Lapland",
+   "cluster": "North",
+   "trigger_ge2_over_gev_1in10": true,
+   "trigger_ge2_over_gev_1in50": true,
+   "snow_flag": true,
+   "any_cluster_triggered_1in10": [
+    "North"
+   ]
+  },
+  "2012": {
+   "region": "Ostrobothnia",
+   "cluster": "Ostrobothnia",
+   "trigger_ge2_over_gev_1in10": false,
+   "trigger_ge2_over_gev_1in50": false,
+   "snow_flag": false,
+   "any_cluster_triggered_1in10": []
+  },
+  "2013": {
+   "region": "Ostrobothnia",
+   "cluster": "Ostrobothnia",
+   "trigger_ge2_over_gev_1in10": false,
+   "trigger_ge2_over_gev_1in50": false,
+   "snow_flag": false,
+   "any_cluster_triggered_1in10": []
+  },
+  "2018": {
+   "region": "Lapland, record snow",
+   "cluster": "North",
+   "trigger_ge2_over_gev_1in10": true,
+   "trigger_ge2_over_gev_1in50": false,
+   "snow_flag": true,
+   "any_cluster_triggered_1in10": [
+    "North"
+   ]
+  },
+  "2020": {
+   "region": "Lapland, Kemijoki at Rovaniemi",
+   "cluster": "North",
+   "trigger_ge2_over_gev_1in10": false,
+   "trigger_ge2_over_gev_1in50": false,
+   "snow_flag": true,
+   "any_cluster_triggered_1in10": []
+  },
+  "2024": {
+   "region": "Ostrobothnia worst",
+   "cluster": "Ostrobothnia",
+   "trigger_ge2_over_gev_1in10": false,
+   "trigger_ge2_over_gev_1in50": false,
+   "snow_flag": true,
+   "any_cluster_triggered_1in10": [
+    "North"
+   ]
+  }
+ },
+ "loader_chip_vs_control": {
+  "ge4_chip_corr": 0.1383,
+  "ge4_chip_control": 0.0969,
+  "ge4_exact_corr": 0.1086,
+  "ge4_exact_indep": 0.0441,
+  "ratio_chip": 1.43,
+  "ratio_exact": 2.46
+ },
+ "grover_k_in_shown_results": {
+  "ibm-ibm_marrakesh-20261008T174523Z.json": [
+   0,
+   1,
+   2
+  ],
+  "iqm-garnet-20261008T182534Z.json": [
+   0,
+   1,
+   2
+  ],
+  "product-iqm-emerald-20261009T075338Z.json": [
+   0,
+   1,
+   2
+  ],
+  "ibm-ibm_marrakesh-20261008T170341Z.json": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "note": "A3 instances (named kittila_ivalo in the code) use identical North-cluster loadings and trigger for both areas (np.full in scripts/run_hw.py instance() and run_product_hw.py): a two-river North-cluster pair, not Kittilä and Ivalo specifically"
+ }
+}

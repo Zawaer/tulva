@@ -40,3 +40,10 @@ Append one line per decision: date time · who · decision · why.
   One fair price everywhere: exact quadrature (North ≥2 of 5: 1.96 %, snowy March 6.4 %; equicorrelation 0.27: 1.11 %,
   scripts/round3_numbers.py). Slide 2 chance baseline = same gauge-years (3.9 %), all-14 binomial (4.4 %) explained in
   QA. Deck gets an appendix slide 9 for hardware details. · Hardware juror flagged the inconsistencies.
+- 2026-10-10 · Toivo (round-4 review) · The 3-qubit "Kittilä + Ivalo" circuit (A3_*) gives both areas the same
+  North-cluster loadings and trigger (np.full in run_hw.py instance() / run_product_hw.py), so deck, script, app, video,
+  CLAIMS and QA now call it "a two-river North-cluster pair" (the "≥2 of 3 Lapland" A4 circuit likewise "3 North-cluster
+  rivers"). Code instance names stay unchanged (run files depend on them). Slide 3 shows one measure only (expected loss,
+  % of the limit a year) with year-bootstrap 90 % intervals (scripts/round4_numbers.py); market-price bars, €/€1M and
+  ORSA move to QA. Shown hardware results are k = 0–2 (IBM run 1 with k = 3 is not on the slides). · Business and
+  quantum jurors flagged the category error and the overclaim.
