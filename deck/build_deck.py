@@ -4,7 +4,8 @@ Rerun after the charts in out/ change:
     .venv/bin/python deck/build_deck.py            # pptx only
     .venv/bin/python deck/build_deck.py --pdf      # + PDF and PNG previews (needs LibreOffice + pdftoppm)
 
-Every number on a slide comes from CLAIMS.md (outside sources are cited on the slide).
+Every number on a slide comes from CLAIMS.md. Slides 1-8 are the stage deck (one idea each, big type); caveats,
+intervals and sources are on the backup slides 9-11 (Q&A only) and in QA.md.
 Speaker notes are the `>` lines of deck/PITCH.md for the matching slide number.
 """
 from __future__ import annotations
@@ -170,16 +171,25 @@ def crops():
 
 
 # --------------------------------------------------------------------------- slides
+# Stage deck (slides 1-8): one idea per slide, title <= 8 words, body >= 28 pt, big numbers >= 60 pt.
+# Caveats, intervals and sources live on the backup slides (9-11) and in QA.md.
+TITLE_SIZE = 40
+BODY = 28
+PURPLE = RGBColor(0x82, 0x50, 0xDF)  # IQM chip, as in scripts/pitch_charts.py
+
+
+def title(slide, n, t, dark=False):
+    text(slide, MX, 0.5, W - 2 * MX, 0.8, t, size=TITLE_SIZE, bold=True, color=WHITE if dark else NAVY)
+    footer(slide, n, dark=dark)
+
+
 def s1_hook(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    text(s, MX, 0.5, 6, 0.5, [[("Tulva", {"bold": True, "color": NAVY}),
-                                ("   spring-flood risk, priced jointly", {"color": GREY, "size": 20})]],
-         size=24)
-    text(s, MX, 1.7, 5.6, 4.2,
-         [[("In May 2005, four Lapland rivers hit flood levels ", {}), ("together.", {"color": BLUE})],
-          [("Lapland's snow had warned us two months earlier.", {"size": 28, "bold": False, "color": GREY})],
-          [("Flow over 1-in-10 level · snow top 15 % · in-sample", {"size": 16, "bold": False, "color": GREY})]],
-         size=44, bold=True, spacing=1.05, space_after=24)
+    text(s, MX, 0.5, 6, 0.5, "Tulva", size=28, bold=True)
+    text(s, MX, 1.75, 5.6, 3.6,
+         [[("May 2005: four Lapland rivers flooded ", {}), ("together.", {"color": BLUE})]],
+         size=48, bold=True, spacing=1.05)
+    text(s, MX, 4.55, 5.6, 0.6, "The March snow warned us.", size=32, color=GREY)
     # map, scaled up; town labels are placed as fractions of the map so they follow its size
     mx, my, mw = 6.35, 0.45, 6.4
     pic = picture(s, ASSETS / "map_2005.png", mx, my, w=mw)
@@ -193,49 +203,51 @@ def s1_hook(prs, n):
         rect(s, bx, cy - 0.2, lw, 0.4, LIGHT)
         text(s, bx, cy - 0.2, lw, 0.4, name, size=18, bold=True, color=NAVY, align=PP_ALIGN.CENTER,
              anchor=MSO_ANCHOR.MIDDLE)
-    text(s, mx, my + mh + 0.08, mw, 0.35, "Tulva app, spring 2005: filled = over its 1-in-10 flood level", size=14,
-         color=GREY, align=PP_ALIGN.RIGHT)
-    source(s, "Source: SYKE discharge 1961–2025 and 1 March snow (SWE)")
     footer(s, n)
     return s
 
 
 def s2_gap(prs, n):
+    """Observed 15.4 % vs chance 3.9 % of springs with >=4 of 14 areas over 1-in-10 (CLAIMS.md, slide 2 lines)."""
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    header(s, n, "The gap", "Finland's rivers flood together, not one at a time")
-    text(s, MX, 1.5, W - 2 * MX, 0.4, "Springs when ≥4 of 14 river areas pass their 1-in-10 flood level",
-         size=20, color=GREY)
-    picture(s, OUT / "pitch_gap.png", MX, 1.95, W - 2 * MX, 4.2)  # scripts/pitch_charts.py
-    rect(s, MX, 6.3, 0.1, 0.55, BLUE)
-    text(s, MX + 0.3, 6.3, W - 2 * MX, 0.55, "Cover is bought in autumn. The snow signal comes in March.",
-         size=28, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
-    source(s, "Source: SYKE 1961–2025 (+ SMHI Torne); chance = rivers flood independently, same gauge-years as observed")
+    title(s, n, "Rivers flood together, not one at a time")
+    text(s, MX, 1.4, 9, 0.5, "Springs when ≥4 of 14 rivers flood", size=BODY, color=GREY)
+    base, scale, bw = 5.55, 2.55 / 15.4, 2.6  # inches per percentage point
+    for x, v, lab, c in [(1.2, 15.4, "Observed", NAVY), (4.6, 3.9, "By chance", GREY)]:
+        h = v * scale
+        rect(s, x, base - h, bw, h, c)
+        text(s, x - 0.3, base - h - 0.85, bw + 0.6, 0.8, f"{v:.1f} %", size=44, bold=True, color=c,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.BOTTOM)
+        text(s, x - 0.3, base + 0.1, bw + 0.6, 0.5, lab, size=BODY, color=NAVY, align=PP_ALIGN.CENTER)
+    rect(s, 0.9, base, 6.6, 0.02, LINE)
+    text(s, 8.0, 2.3, 4.7, 1.8, "≈4×", size=120, bold=True, color=RED, align=PP_ALIGN.CENTER,
+         anchor=MSO_ANCHOR.MIDDLE)
+    text(s, 8.0, 4.15, 4.7, 0.6, "as often as chance", size=BODY, color=GREY, align=PP_ALIGN.CENTER)
+    rect(s, MX, 6.3, 0.1, 0.6, BLUE)
+    text(s, MX + 0.3, 6.3, 10, 0.6, "Cover is bought in autumn, before the snow.", size=30, bold=True,
+         anchor=MSO_ANCHOR.MIDDLE)
     return s
 
 
 def s3_product(prs, n):
+    """North '>=2 of 5 over 1-in-50' expected loss: 0.27-correlation model 1.11 %, Tulva 1.96 %, snowy March 6.4 %."""
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    header(s, n, "The product", "Tulva Index: sold in autumn, updated in March")
-    rect(s, MX, 1.5, W - 2 * MX, 0.8, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
-    text(s, MX + 0.4, 1.5, W - 2 * MX - 0.8, 0.8,
-         "Pays the full limit if ≥2 of 5 northern rivers pass their 1-in-50 level",
-         size=26, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
-    text(s, MX, 2.42, W - 2 * MX, 0.95,
-         "Expected loss ≈1.8× a model with the 2027 matrix's average correlation (0.27)",
-         size=23, bold=True, color=RED, spacing=1.0)
-    text(s, MX, 3.42, 9, 0.3, "EXPECTED LOSS, % OF THE LIMIT PER YEAR (90 % INTERVALS)", size=14, bold=True,
-         color=BLUE)
-    picture(s, OUT / "pitch_cost.png", MX, 3.75, W - 2 * MX, 2.0)  # scripts/pitch_charts.py
-    rect(s, MX, 5.9, W - 2 * MX, 0.95, LIGHT)
-    rect(s, MX, 5.9, 0.1, 0.95, BLUE)
-    text(s, MX + 0.3, 5.9, W - 2 * MX - 0.45, 0.95,
-         [[("After a snowy March, expected loss triples vs autumn ", {"color": NAVY}),
-           ("(1.96 % → 6.4 %; 90 %: 2.1–4.4×)", {"color": GREY})],
-          [("Priced in autumn. In March the insurer acts on it: top-up cover, claims staff in the regions at risk.",
-            {"size": 17, "bold": False})]],
-         size=20, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
-    source(s, "Sources: SYKE 1961–2025, Tulva model, year-bootstrap intervals; 0.27 = mean of the 19-zone matrix, "
-              "Del. Reg. (EU) 2026/269")
+    title(s, n, "Tulva Index: pays if ≥2 northern rivers flood")
+    rows = [("0.27-correlation model", 1.11, "1.11 %", GREY), ("Tulva", 1.96, "1.96 %", BLUE),
+            ("Tulva, after a snowy March", 6.4, "6.4 %", NAVY)]
+    scale, y = 5.4 / 6.4, 1.65
+    for lab, v, vt, c in rows:
+        text(s, MX, y, 8, 0.5, lab, size=BODY, color=NAVY)
+        rect(s, MX, y + 0.55, v * scale, 0.6, c)
+        text(s, MX + v * scale + 0.2, y + 0.5, 2.2, 0.7, vt, size=36, bold=True, color=c,
+             anchor=MSO_ANCHOR.MIDDLE)
+        y += 1.4
+    text(s, MX, 5.9, 8, 0.5, "Expected loss, % of limit per year", size=24, color=GREY)
+    rect(s, 9.0, 1.65, 3.73, 4.4, LIGHT)
+    text(s, 9.0, 1.95, 3.73, 2.0, "×3", size=130, bold=True, color=RED, align=PP_ALIGN.CENTER,
+         anchor=MSO_ANCHOR.MIDDLE)
+    text(s, 9.2, 4.1, 3.33, 1.5, "expected loss after a snowy March", size=BODY, bold=True, color=NAVY,
+         align=PP_ALIGN.CENTER)
     return s
 
 
@@ -262,138 +274,165 @@ def s4_demo(prs, n):
         rect(s, fx, fy, fw, fh, RGBColor(0x14, 0x2B, 0x4D), line=PALE_BLUE)
         picture(s, ASSETS / "app_product.png", fx + 0.15, fy + 0.15, fw - 0.3, fh - 0.3)
         print(f"warning: {VIDEO.relative_to(ROOT)} missing, slide 4 has a placeholder")
-    text(s, 1.0, 6.55, W - 2.0, 0.4,
-         "Our app: joint-flood map → March snow → quantum chip → 2005 replay",
-         size=18, color=WHITE, align=PP_ALIGN.CENTER)
     footer(s, n, dark=True)
     return s
 
 
 def s5_quantum(prs, n):
+    """IQM Emerald, two-river North-cluster pair, both over 1-in-50: exact vs calibrated chip (out/bootstrap_ci.json)."""
+    import json
+    b = json.loads((OUT / "bootstrap_ci.json").read_text())
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    header(s, n, "Quantum, in practice", "It runs on four real quantum computers today")
-    text(s, MX, 1.5, 7.6, 0.45, "Snowy vs low-snow March: 3.05× on chip, 2.75× exact", size=21,
-         bold=True, color=NAVY)
-    text(s, MX, 1.98, 7.6, 0.35, "Two-river North-cluster pair, IQM Emerald", size=16, color=GREY)
-    picture(s, OUT / "pitch_snow.png", MX, 2.35, 7.6, 4.4)  # scripts/pitch_charts.py
-    x, w = 8.65, 4.1
-    text(s, x, 1.55, w, 0.7, "CALIBRATED SAMPLING + SHALLOW AMPLITUDE ESTIMATION", size=16, color=BLUE, bold=True)
-    items = [("Two-river core", "IBM Marrakesh, IQM Garnet and Emerald, VTT Q50: 3 qubits"),
-             ("Simplified 14-river model", "Two-level version, 18 qubits, sampling only: IQM Emerald and VTT Q50"),
-             ("VTT Q50, Finland's own", "3 repeats: 0.11–0.53 % vs 0.125 % exact. Calibration not yet stable")]
-    y = 2.5
-    for k, v in items:
-        text(s, x, y, w, 0.35, k, size=20, bold=True, color=NAVY)
-        text(s, x, y + 0.38, w, 0.62, v, size=16, color=GREY)
-        rect(s, x, y + 1.0, w, 0.012, LINE)
-        y += 1.08
-    source(s, "Intervals, amplification, raw readings and job IDs: appendix")
+    title(s, n, "Snow warning survives on real chips")
+    # legend
+    for i, (lab, c) in enumerate([("Exact", BLUE), ("IQM chip", PURPLE)]):
+        x = MX + i * 2.6
+        rect(s, x, 1.62, 0.32, 0.32, c)
+        text(s, x + 0.45, 1.5, 2.0, 0.55, lab, size=BODY, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
+    base, top, bw = 5.75, 2.35, 1.25
+    vmax = 100 * b["emerald snow high"]["estimate"]
+    for gx, lab, key in [(0.9, "Low snow", "emerald snow low"), (4.3, "Snowy", "emerald snow high")]:
+        for j, (v, c) in enumerate([(100 * b[key]["exact"], BLUE), (100 * b[key]["estimate"], PURPLE)]):
+            h = (base - top) * v / vmax
+            rect(s, gx + j * (bw + 0.08), base - h, bw, h, c)
+        text(s, gx - 0.3, base + 0.1, 2 * bw + 0.68, 0.5, lab, size=BODY, color=NAVY, align=PP_ALIGN.CENTER)
+    rect(s, 0.7, base, 6.6, 0.02, LINE)
+    x = 8.0
+    text(s, x, 1.6, 4.8, 0.5, "Snowy vs low-snow March", size=BODY, color=GREY)
+    for y, big, lab, c in [(2.25, "3.05×", "on chip", PURPLE), (3.55, "2.75×", "exact", BLUE)]:
+        text(s, x, y, 3.1, 1.1, big, size=72, bold=True, color=c, anchor=MSO_ANCHOR.MIDDLE)
+        text(s, x + 3.15, y, 1.7, 1.1, lab, size=BODY, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
+    rect(s, x, 5.05, 4.73, 0.02, LINE)
+    text(s, x, 5.2, 4.8, 0.5, "Ran on", size=BODY, color=GREY)
+    text(s, x, 5.7, 4.8, 0.5, "IBM · IQM · VTT Q50", size=BODY, bold=True, color=NAVY)
     return s
 
 
 def s6_honest(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    header(s, n, "Quantum, honestly", "Classical Monte Carlo still wins today")
-    picture(s, OUT / "pitch_scaling.png", MX, 1.6, 7.2, 4.35)  # scripts/pitch_charts.py
-    text(s, MX, 6.05, 7.2, 0.4, "Two-river North-cluster pair, both over 1-in-50: error vs effort", size=18,
-         color=GREY)
-    x, w = 8.2, 4.55
-    text(s, x, 1.6, w, 0.45, "Method ready, hardware not yet", size=20, bold=True, color=BLUE)
-    rect(s, x, 2.3, w, 1.9, LIGHT)
-    rect(s, x, 2.3, 0.08, 1.9, RED)
-    text(s, x + 0.3, 2.3, w - 0.45, 1.9, "Today: rare floods drown in noise.", size=32, bold=True, color=NAVY,
-         spacing=1.0, anchor=MSO_ANCHOR.MIDDLE)
-    text(s, x, 4.55, w, 1.2, "Prices are computed classically; quantum is the R&D track.", size=24, bold=True,
-         color=NAVY)
-    text(s, x, 5.85, w, 0.6, "14-river chip runs and the noise control: appendix", size=16, color=GREY)
+    title(s, n, "Classical still wins today")
+    picture(s, OUT / "stage_scaling.png", MX, 1.55, 8.2, 4.9)  # scripts/pitch_charts.py
+    x, w = 9.25, 3.5
+    rect(s, x - 0.3, 1.9, 0.1, 2.4, RED)
+    text(s, x, 1.9, w, 2.4, "Rare 1-in-50 floods drown in noise.", size=36, bold=True, color=NAVY,
+         anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
+    text(s, x, 4.7, w, 1.2, "Prices are computed classically.", size=BODY, color=GREY)
     return s
 
 
 def s7_business(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    header(s, n, "Business", "Who pays whom, and why now")
-    # money flows FROM the buyer in both directions: licence ← to Tulva, premium → to the reinsurer
-    steps = [
-        ("Tulva", "Index + pricing licence", "€25k pilot, then ~€75k a year per insurer", BLUE),
-        ("Buyer", "Finnish home insurers", "OP, If, LähiTapiola, …", BLUE),
-        ("Risk carrier", "A reinsurer", "≈€0.5–0.7M a year per €10M layer", BLUE),
-        ("Year 3", ["3–6 insurers", "× €75k ≈", "€0.2–0.45M/yr"], "Upside: Nordic snowmelt (assumption)",
-         NAVY),
-    ]
-    gaps = [0.95, 0.95, 0.35]
-    cw = (W - 2 * MX - sum(gaps)) / 4
-    y0, bh = 1.5, 2.6
-    x = MX
-    for i, (k, big, small, c) in enumerate(steps):
-        rect(s, x, y0, cw, bh, LIGHT)
-        rect(s, x, y0, cw, 0.07, c)
-        text(s, x + 0.2, y0 + 0.2, cw - 0.4, 0.35, k.upper(), size=16, bold=True, color=c)
-        text(s, x + 0.2, y0 + 0.58, cw - 0.4, 1.3, big, size=22, bold=True, color=NAVY, spacing=1.0)
-        if small:
-            text(s, x + 0.2, y0 + bh - 0.82, cw - 0.4, 0.72, small, size=14, color=GREY, anchor=MSO_ANCHOR.BOTTOM)
-        if i < 2:  # arrows start at the buyer: "←" licence to Tulva, "→" premium to the reinsurer
-            g = gaps[i]
-            text(s, x + cw, y0 + bh / 2 - 0.45, g, 0.55, "←" if i == 0 else "→", size=30, bold=True, color=BLUE,
-                 align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-            text(s, x + cw - 0.05, y0 + bh / 2 + 0.08, g + 0.1, 0.35, "licence" if i == 0 else "premium", size=13,
-                 bold=True, color=BLUE, align=PP_ALIGN.CENTER)
-        x += cw + (gaps[i] if i < 3 else 0)
-    rect(s, MX, 4.25, 0.1, 0.82, RED)
-    text(s, MX + 0.3, 4.25, W - 2 * MX - 0.3, 0.82,
-         [[("Why now  ", {"color": RED}),
-           ("From 2027 the regulator's standard formula fixes flood correlations that ignore the snow; insurers "
-            "with their own approved (internal) model, like If, can use a snow-aware joint-flood number.", {})]],
-         size=17, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
-    rect(s, MX, 5.17, 0.1, 0.82, BLUE)
-    text(s, MX + 0.3, 5.17, W - 2 * MX - 0.3, 0.82,
-         [[("Basis risk  ", {"color": BLUE}),
-           ("1-in-10 back-test: paid in loss springs 1966, 2005, 2018; missed Ostrobothnia 2012–13, 2024 and "
-            "Lapland 2020; since 2005 also paid in 3 North springs with no recorded loss (2015, 2023, 2024).", {})]],
-         size=17, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
-    rect(s, MX, 6.09, W - 2 * MX, 0.72, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
-    text(s, MX + 0.3, 6.09, W - 2 * MX - 0.4, 0.72,
-         [[("Ask  ", {"color": PALE_BLUE}),
-           ("One insurer's flood claims for 8 weeks → basis-risk map + firm quote for 1 Jan 2028.", {})]],
-         size=19, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
-    source(s, "Del. Reg. (EU) 2026/269 · at 1-in-50 the back-test paid 1966, 2005, not 2018 · "
-              "premium = model × 2.5–3.5 · prices: assumptions")
+    title(s, n, "Who pays")
+    # money flows FROM the insurer: licence to Tulva (left), premium to the reinsurer (right)
+    bw, bh, y = 3.0, 1.3, 1.65
+    xs = [MX, (W - bw) / 2, W - MX - bw]
+    for x, lab, fill, col in [(xs[0], "Tulva", BLUE, WHITE), (xs[1], "Insurer", NAVY, WHITE),
+                              (xs[2], "Reinsurer", LIGHT, NAVY)]:
+        rect(s, x, y, bw, bh, fill, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
+        text(s, x, y, bw, bh, lab, size=36, bold=True, color=col, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    for x0, x1, shape, lab in [(xs[0] + bw, xs[1], MSO_SHAPE.LEFT_ARROW, "licence"),
+                               (xs[1] + bw, xs[2], MSO_SHAPE.RIGHT_ARROW, "premium")]:
+        rect(s, x0 + 0.15, y + bh / 2 - 0.05, x1 - x0 - 0.3, 0.5, BLUE, shape=shape)
+        text(s, x0 - 0.2, y + bh / 2 - 0.62, x1 - x0 + 0.4, 0.5, lab, size=24, bold=True, color=BLUE,
+             align=PP_ALIGN.CENTER)
+    text(s, xs[0], y + bh + 0.15, 5.0, 0.5, "€25k pilot, then €75k / yr", size=BODY, bold=True, color=NAVY)
+    text(s, MX, 3.75, W - 2 * MX, 1.1, "Year 3: €0.2–0.45M / yr", size=64, bold=True, color=NAVY)
+    text(s, MX, 4.85, W - 2 * MX, 0.5, "3–6 Finnish insurers, then the Nordics", size=BODY, color=GREY)
+    rect(s, MX, 5.95, W - 2 * MX, 0.9, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
+    text(s, MX + 0.4, 5.95, W - 2 * MX - 0.6, 0.9,
+         [[("Ask:  ", {"color": PALE_BLUE}), ("one insurer's flood claims, 8 weeks.", {})]],
+         size=32, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
     return s
 
 
 def s8_close(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     rect(s, 0, 0, W, H, NAVY)
-    text(s, MX + 0.2, 0.55, 6, 0.6, "Tulva", size=28, bold=True, color=WHITE)
-    text(s, MX + 0.2, 1.4, 11.8, 2.0,
-         [[("Next March, the snow will warn us ", {}), ("again.", {"color": PALE_BLUE})],
-          [("This time, it will have a price.", {"size": 30, "bold": False, "color": PALE_BLUE})]],
-         size=40, bold=True, color=WHITE, spacing=1.05, space_after=14)
-    def chip_rows(label, chips, y, fill, line=None):
-        text(s, MX + 0.2, y, 11, 0.3, label, size=13, bold=True, color=PALE_BLUE)
-        x, y = MX + 0.2, y + 0.33
-        for c in chips:
-            w = 0.26 + text_width(c, 13)
-            if x + w > W - MX:
-                x, y = MX + 0.2, y + 0.5
-            rect(s, x, y, w, 0.4, fill, line=line, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.5)
-            text(s, x, y, w, 0.4, c, size=13, color=WHITE, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-            x += w + 0.1
-    chip_rows("BUILT THIS WEEKEND", ["SYKE data pipeline", "Joint flood model", "Index pricing", "Live app",
-                                     "QAE on IBM, IQM & VTT Q50"], 3.55, RGBColor(0x1A, 0x36, 0x5F))
-    chip_rows("RESOURCES USED", ["SYKE open data", "IBM Marrakesh", "IQM Garnet & Emerald (Resonance)", "VTT Q50 (LUMI)", "Qrisp",
-                                 "Qiskit", "AI coding agents"], 4.45, NAVY, line=PALE_BLUE)
-    text(s, MX + 0.2, 5.85, 11, 0.8,
+    title(s, n, "Built this weekend", dark=True)
+    x, y = MX, 1.55
+    for c in ["SYKE data pipeline", "Joint flood model", "Index pricing", "Live app", "Runs on 4 quantum chips"]:
+        w = 0.5 + text_width(c, 24)
+        if x + w > W - MX:
+            x, y = MX, y + 0.8
+        rect(s, x, y, w, 0.65, RGBColor(0x1A, 0x36, 0x5F), line=PALE_BLUE, shape=MSO_SHAPE.ROUNDED_RECTANGLE,
+             radius=0.5)
+        text(s, x, y, w, 0.65, c, size=24, color=WHITE, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        x += w + 0.2
+    text(s, MX, 3.45, W - 2 * MX, 1.0,
+         [[("Next March, the snow will warn us ", {}), ("again.", {"color": PALE_BLUE})]],
+         size=44, bold=True, color=WHITE)
+    text(s, MX, 4.4, W - 2 * MX, 0.6, "This time, it will have a price.", size=32, color=PALE_BLUE)
+    text(s, MX, 5.85, 11, 0.9,
          [[("Toivo Kallio", {"bold": True}), ("  ·  ", {"color": PALE_BLUE}), ("Vaishnav Rane", {"bold": True})],
-          [("Team 21 STUHI  ·  Quantum x Finance 2026, Hanken × Ultrahack", {"color": PALE_BLUE, "size": 16})]],
-         size=20, color=WHITE, space_after=4)
-    footer(s, n, dark=True)
+          [("Team 21 STUHI  ·  Quantum x Finance 2026", {"color": PALE_BLUE, "size": 18})]],
+         size=24, color=WHITE, space_after=4)
     return s
 
 
-def s9_appendix(prs, n):
-    """Hardware details moved off slide 5 (intervals, raw readings, job IDs) so the main slides stay readable."""
+# --------------------------------------------------------------------------- backup slides (Q&A only)
+def bullets(slide, x, y, w, h, items, size=16):
+    text(slide, x, y, w, h, [[("▪  ", {"color": BLUE, "bold": True}), (t, {})] if isinstance(t, str) else t
+                             for t in items], size=size, color=NAVY, space_after=9, spacing=1.05)
+
+
+def backup_header(slide, n, t):
+    text(slide, MX, 0.36, 9, 0.3, "BACKUP · Q&A ONLY", size=16, color=BLUE, bold=True)
+    text(slide, MX, 0.72, W - 2 * MX, 0.7, t, size=30, bold=True)
+    footer(slide, n)
+
+
+def s9_backup_product(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    header(s, n, "Appendix", "Hardware runs in detail", title_size=28)
+    backup_header(s, n, "Product and pricing in detail")
+    text(s, MX, 1.5, 9, 0.3, "EXPECTED LOSS, % OF THE LIMIT PER YEAR (YEAR-BOOTSTRAP 90 % INTERVALS)", size=14,
+         bold=True, color=BLUE)
+    picture(s, OUT / "pitch_cost.png", MX, 1.85, W - 2 * MX, 2.0)  # scripts/pitch_charts.py
+    bullets(s, MX, 4.05, W - 2 * MX, 3.0, [
+        "Index: pays the full limit if ≥2 of 5 northern rivers pass their 1-in-50 level (a staged payout is only a "
+        "variant). Priced in autumn; in March the insurer can buy top-up cover and staff claims in the regions at risk.",
+        "Tulva 1.96 % (1.6–2.2 %) vs 1.11 % for a model with one 0.27 correlation = 1.77× (≈1.8×). 0.27 = mean of the "
+        "2027 Finnish 19-zone flood matrix, Del. Reg. (EU) 2026/269. ≈5× only vs independence (0.38 %).",
+        "Snowy (top-15 %) March vs autumn (normal): 6.4 % (3.6–9.1 %) vs 1.96 % = 3.3× (90 %: 2.1–4.4×).",
+        "Market price = expected loss × 2.5–3.5: 4.9–6.9 % rate on line ≈ €49–69k a year per €1M of cover.",
+        "Slide 1: 'flooded' = flow over each gauge's 1-in-10 level; North's 1 March snow in its top 15 % (in-sample). "
+        "Slide 2: 10 of 65 springs (15.4 %, 90 %: 9–24 %) had ≥4 of 14 areas over 1-in-10; chance on the same "
+        "gauge-years 3.9 % (3.9×), 4.4 % if all gauges reported (3.5×). SYKE 1961–2025 (+ SMHI Torne).",
+    ], size=15)
+    return s
+
+
+def s10_backup_business(prs, n):
+    s = prs.slides.add_slide(prs.slide_layouts[6])
+    backup_header(s, n, "Basis risk and business in detail")
+    bullets(s, MX, 1.6, W - 2 * MX, 5.4, [
+        [("Basis risk (1-in-10 back-test).  ", {"bold": True}),
+         ("Paid in loss springs 1966, 2005, 2018; missed Ostrobothnia 2012–13 and 2024 and Lapland 2020; since 2005 "
+          "also paid in 3 North springs with no recorded loss (2015, 2023, 2024). At the 1-in-50 product level: paid "
+          "1966 and 2005 only.", {})],
+        [("Why now.  ", {"bold": True}),
+         ("From 2027 the Solvency II standard formula fixes flood correlations that ignore the snow (19-zone matrix "
+          "inside Finland, mean ≈ 0.27; 0 % to SE/NO/DK; Del. Reg. (EU) 2026/269). Insurers with an approved internal "
+          "model, like If, can use a snow-aware joint-flood number.", {})],
+        [("Money flows.  ", {"bold": True}),
+         ("Insurer → reinsurer: premium ≈ €0.5–0.7M a year per €10M North layer (model × 2.5–3.5 market multiple). "
+          "Insurer → Tulva: licence, €25k pilot, then ~€75k a year (assumption). The reinsurer pays Tulva nothing.",
+          {})],
+        [("Year 3.  ", {"bold": True}),
+         ("3–6 insurers × €75k ≈ €0.2–0.45M a year (assumption); Nordic snowmelt upside unsized (assumption). "
+          "Buyers: Finnish home insurers (OP, If, LähiTapiola, …); no pilot agreement yet.", {})],
+        [("Market size.  ", {"bold": True}),
+         ("Losses per event ≈ €5–20M; parametric insurance market $3.5bn to $18–21bn, 12–14 %/yr growth "
+          "(business case, outside sources, quoted as a range).", {})],
+        [("Ask.  ", {"bold": True}),
+         ("One insurer's flood claims for 8 weeks → basis-risk map + firm quote for 1 Jan 2028.", {})],
+    ], size=17)
+    return s
+
+
+def s11_backup_hardware(prs, n):
+    """Hardware details (intervals, raw readings, job IDs, amplification, resources)."""
+    s = prs.slides.add_slide(prs.slide_layouts[6])
+    backup_header(s, n, "Hardware runs in detail")
     hdr = ["Chip", "Circuit", "Exact", "Raw", "Calibrated (90 % CI)", "Job"]
     rows = [
         ["IBM Marrakesh", "North-cluster pair, 3 qubits, k = 0–2", "0.125 %", "0.262 %", "0.149 % (0.140–0.157)",
@@ -415,30 +454,35 @@ def s9_appendix(prs, n):
     ]
     cols = [1.65, 4.05, 0.9, 1.3, 2.55, 1.8]
     widths = [c * (W - 2 * MX) / sum(cols) for c in cols]
-    y = 1.5
+    y = 1.4
     for r_i, row in enumerate([hdr] + rows):
         x = MX
         if r_i:
-            rect(s, MX, y + 0.47, W - 2 * MX, 0.012, LINE)
+            rect(s, MX, y + 0.41, W - 2 * MX, 0.012, LINE)
         for c_i, (cell, cw) in enumerate(zip(row, widths)):
-            text(s, x, y, cw - 0.1, 0.5, cell, size=(12 if c_i == 5 else 14) if r_i else 13, bold=(r_i == 0 or c_i == 4),
-                 color=BLUE if r_i == 0 else (GREY if c_i == 5 else NAVY), anchor=MSO_ANCHOR.MIDDLE)
+            text(s, x, y, cw - 0.1, 0.42, cell, size=(12 if c_i == 5 else 14) if r_i else 13,
+                 bold=(r_i == 0 or c_i == 4), color=BLUE if r_i == 0 else (GREY if c_i == 5 else NAVY),
+                 anchor=MSO_ANCHOR.MIDDLE)
             x += cw
-        y += 0.48
-    text(s, MX, y + 0.05, W - 2 * MX, 1.2,
-         ["Calibrated = noise-aware MLAE, two known-answer calibration circuits in the same job; bootstrap 90 % intervals. "
-          "IBM / Garnet intervals exclude exact (+19 % / +31 % bias). Pair = two rivers with identical North-cluster "
-          "loadings and 1-in-50 trigger. Classical Monte Carlo at the same budget is more precise (±0.004 pp).",
+        y += 0.42
+    text(s, MX, y + 0.05, W - 2 * MX, 1.9,
+         ["Method: calibrated sampling + shallow amplitude estimation (noise-aware MLAE, Grover steps k = 0–2, two "
+          "known-answer calibration circuits in the same job; bootstrap 90 % intervals). Pair = two rivers with "
+          "identical North-cluster loadings and 1-in-50 trigger. Snowy vs normal on the same pair: 1.51× chip, 1.55× "
+          "exact. Simplified 14-river model = two-level version, 18 qubits, sampling only. IBM / Garnet intervals "
+          "exclude exact (+19 % / +31 % bias). Classical Monte Carlo at the same budget is more precise (±0.004 pp).",
           "Signal kept at k = 1 in the runs shown: Emerald 0.56–0.59, IBM / Garnet 0.77–0.78, VTT Q50 0.12–0.19 "
           "(earlier runs 0.65–0.88): the estimate is mostly the calibrated k = 0 circuit. Q50's zero-calibration offset "
           "moved 0.002 → 0.006 between repeats (the 5× spread). Not shown: first runs IBM 0.146 % (k = 0–3), "
-          "Garnet 0.073 % (1 copy)."],
+          "Garnet 0.073 % (1 copy).",
+          "Resources: SYKE open data · IBM Marrakesh · IQM Garnet & Emerald (Resonance) · VTT Q50 (LUMI) · Qrisp · "
+          "Qiskit · AI coding agents."],
          size=12, color=GREY, space_after=4)
-    footer(s, n)
     return s
 
 
-SLIDES = [s1_hook, s2_gap, s3_product, s4_demo, s5_quantum, s6_honest, s7_business, s8_close, s9_appendix]
+SLIDES = [s1_hook, s2_gap, s3_product, s4_demo, s5_quantum, s6_honest, s7_business, s8_close,
+          s9_backup_product, s10_backup_business, s11_backup_hardware]
 
 
 def build():
@@ -464,6 +508,8 @@ def export():
     shutil.rmtree(prev, ignore_errors=True)
     prev.mkdir()
     subprocess.run(["pdftoppm", "-png", "-r", "90", str(pdf), str(prev / "slide")], check=True)
+    for f in prev.glob("slide-*.png"):  # pdftoppm zero-pads past 9 pages; keep slide-N.png names
+        f.rename(prev / f"slide-{int(f.stem.split('-')[1])}.png")
     print(f"wrote {pdf.relative_to(ROOT)} and {len(list(prev.glob('*.png')))} previews in deck/preview/")
 
 

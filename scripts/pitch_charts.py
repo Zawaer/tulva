@@ -201,10 +201,43 @@ def scaling_chart():
     plt.close(fig)
 
 
+def scaling_chart_stage():
+    """Slide 6 (stage version): same data as scaling_chart, no tick clutter, three big labels. Full chart: backup."""
+    d = json.loads((OUT / "qae_scaling.json").read_text())
+    hw = json.loads((OUT / "qae_scaling_hardware_points.json").read_text())["hardware_points"]
+    mc, ideal = d["monte_carlo"], d["curves"]["ideal"]
+    for f in sorted((OUT / "runs").glob("q50-20261009T14*.analysis.json")):
+        a = json.loads(f.read_text())["A3_kittila_ivalo_both"]
+        hw.append({"vendor": "VTT", "queries": a["oracle_queries"], "abs_error": abs(a["noise_aware_mlae"] - a["exact"])})
+    fig, ax = plt.subplots(figsize=(8.2, 4.9), dpi=DPI)
+    ax.loglog([p["queries"] for p in mc], [100 * p["rmse"] for p in mc], color=NAVY, lw=5)
+    ax.loglog([p["queries"] for p in ideal], [100 * p["rmse"] for p in ideal], "-", color=BLUE, lw=4)
+    last, qmax = ideal[-1], mc[-1]["queries"]
+    xs = [last["queries"], qmax]
+    ax.loglog(xs, [100 * last["rmse"] * last["queries"] / x for x in xs], ":", color=BLUE, lw=4)
+    ax.loglog([p["queries"] for p in hw], [100 * p["abs_error"] for p in hw], "o", color=RED, ms=18, mec="white", mew=2)
+    ax.text(1.1e6, 2.6e-3, "Classical", fontsize=28, fontweight="bold", color=NAVY, ha="right", va="top")
+    ax.text(6e2, 1.5e-3, "Ideal quantum\n(future)", fontsize=28, fontweight="bold", color=BLUE, va="top")
+    ax.text(1.3e4, 0.42, "Real chips today", fontsize=28, fontweight="bold", color=RED, ha="right", va="center")
+    ax.set_xticks([1e3, 1e6], ["1k", "1M"], fontsize=24, color=GREY)
+    ax.set_yticks([])
+    ax.set_ylim(7e-5, 1.0)
+    ax.minorticks_off()
+    ax.set_xlabel("Effort (model runs)", fontsize=26, color=GREY)
+    ax.set_ylabel("Error  (lower is better)", fontsize=26, color=GREY)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    ax.tick_params(length=0)
+    fig.tight_layout(pad=0.3)
+    fig.savefig(OUT / "stage_scaling.png", dpi=DPI, facecolor="white")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     gap_chart()
     cost_chart()
     loader_chart()
     snow_chart()
     scaling_chart()
-    print("wrote out/pitch_gap.png, out/pitch_cost.png, out/pitch_loader.png, out/pitch_snow.png, out/pitch_scaling.png")
+    scaling_chart_stage()
+    print("wrote out/pitch_gap.png, out/pitch_cost.png, out/pitch_loader.png, out/pitch_snow.png, out/pitch_scaling.png, out/stage_scaling.png")

@@ -29,9 +29,10 @@ should start by itself, set Playback → Start: Automatically and save under a n
 `Tulva_QxF2026_final.pptx`) so a rebuild doesn't overwrite it. Google Slides does not autoplay (or reliably play)
 video embedded in an uploaded PPTX, so test in PowerPoint or Keynote. The PDF/PNG previews only show the poster.
 
-Slides 2 and 3 use big pitch charts `out/pitch_gap.png` and `out/pitch_cost.png` from
-`scripts/pitch_charts.py` (values read from `out/joint_counts.json` and `out/pricing.json`); rerun it before the
-deck if those numbers change.
+Slides 1–8 are the stage deck (one idea per slide, title ≤ 8 words, body ≥ 28 pt, no footnotes). Slides 2, 3 and 5
+draw their bars natively in `build_deck.py` (values from CLAIMS.md / `out/bootstrap_ci.json`); slide 6 uses
+`out/stage_scaling.png` from `scripts/pitch_charts.py`. Caveats, intervals, sources, back-test years and job ids
+live on backup slides 9–11 (Q&A only; slide 9 uses `out/pitch_cost.png`) and in QA.md.
 
 ## Demo video
 `deck/video/tulva_demo.mp4`: a 37-second scripted walkthrough of the demo app at 1920×1080, page zoom 1.5, short

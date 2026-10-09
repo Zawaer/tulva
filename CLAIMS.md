@@ -463,3 +463,21 @@ Model fitted on 1961–2025 only; 2026 snow (SYKE LumiAlue, 1 March) and Mar–J
   (average 2.56 / 1.96 / 0.62 %); expected areas over 1-in-10: 0.03 / 0.39 / 0.06 · exact
 - What happened: **0 of 14 areas passed their empirical 1-in-10 level; 0 passed 1-in-50; no payout.** Peaks were
   24–55 % of the 1-in-10 level (Rovaniemi 494 m³/s on 18 May = 37 %) · data (counts)
+
+## Stage-deck pass (Sat 10 Oct): slides 1–8 simplified, details to backup slides 9–11
+No new numbers; every on-slide number is one already logged above. Wording mapping:
+- Slide 1 "May 2005: four Lapland rivers flooded together" = Ivalo, Kittilä, Rovaniemi, Tornio over their 1-in-10
+  flow level; "The March snow warned us" = North 1 March snow in its top 15 %, in-sample (backup 9, QA).
+- Slide 2 "15.4 %" vs "3.9 %", "≈4× as often as chance" = ≥4 of 14 areas over 1-in-10, observed vs independence on
+  the same gauge-years (3.9×, round-3 lines) · exact.
+- Slide 3 bars 1.11 % / 1.96 % / 6.4 % = expected loss, North "≥2 of 5 over 1-in-50": one 0.27 correlation, Tulva,
+  after a snowy (top-15 %) March; "×3 expected loss after a snowy March" = 6.4 / 1.96 = 3.3× ("triples") · exact.
+  Intervals (1.6–2.2 %, 3.6–9.1 %, 2.1–4.4×) on backup 9.
+- Slide 5 "3.05× on chip, 2.75× exact, snowy vs low-snow March" = IQM Emerald calibrated vs exact (two-river pair);
+  bars = out/bootstrap_ci.json "emerald snow low/high"; "Ran on IBM · IQM · VTT Q50" = hardware runs above.
+  CI 2.6–3.6 and job ids on backup 11 · qae-iqm.
+- Slide 6 chart out/stage_scaling.png = out/pitch_scaling.png data with labels only (scripts/pitch_charts.py
+  scaling_chart_stage) · monte-carlo / qae-sim / qae-ibm / qae-iqm / qae-q50.
+- Slide 7 "€25k pilot, then €75k / yr", "Year 3: €0.2–0.45M / yr", "3–6 Finnish insurers, then the Nordics" =
+  slide-7 revenue line above · assumption. Premium per €10M layer, back-test years, why now, market size: backup 10.
+- Slide 8 "Runs on 4 quantum chips" = IBM Marrakesh, IQM Garnet, IQM Emerald, VTT Q50.

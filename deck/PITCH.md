@@ -1,5 +1,9 @@
 # Tulva: 3-minute pitch script
 
+**Slides 1–8 are the stage deck. Backup slides 9–11 (product & pricing, basis risk & business, hardware) are
+for Q&A only: never show them in the 3 minutes.** The slides carry one idea each; the details (intervals,
+sources, why now) are said or kept for Q&A.
+
 **Timing (round 5, frozen): 225 live words + the 37 s silent video + 6 short pauses (~5 s).
 At 135 wpm ≈ 2:22 (1 Hook 0:11 · 2 Gap 0:13 · 3 Product 0:15 · 4 Video 0:37 · 5 Quantum 0:15 · 6 Honest 0:09 ·
 7 Business 0:26 · 8 Close 0:11). At 120 wpm ≈ 2:35. Rehearsals of the 245-word version ran 2:45–2:55 on stage, so

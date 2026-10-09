@@ -109,7 +109,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - **Mehtola: "Your calibration circuits have known answers. Isn't the mitigation tuned towards the result you
   wanted?"** "The calibration circuits have *different* known answers, one large and one near zero, never the
   target value. They measure how much signal survives each step and the false-trigger floor, in the same job and
-  on the same qubits. We invert that, and only afterwards compare with exact. Raw numbers are on the slide next to
+  on the same qubits. We invert that, and only afterwards compare with exact. Raw numbers are on backup slide 11 next to
   the calibrated ones."
 - **Toikka: "Do 1961–2025 data hold as winters warm?"** "Not fully. Spring floods are shrinking and coming
   earlier, fastest in Ostrobothnia; Lapland is roughly stable to about 2050; rain and winter floods grow (SYKE/FMI,
@@ -227,7 +227,7 @@ history shows."
   0.77–0.78, VTT Q50 0.12–0.19; earlier runs 0.65–0.88), so the estimate is mostly a calibrated k = 0 reading. The
   3-qubit two-river North-cluster core ran it on IBM Marrakesh, IQM Garnet and Emerald, and VTT Q50; the simplified
   14-river loader only sampled, on IQM Emerald and VTT Q50."
-- **"What are the intervals on slide 5?"** (now in the appendix) "IBM Marrakesh 0.149 % (0.140–0.157), IQM Garnet
+- **"What are the intervals on slide 5?"** (backup slide 11) "IBM Marrakesh 0.149 % (0.140–0.157), IQM Garnet
   0.164 % (0.147–0.180), exact 0.125 %; raw 0.262 % / 0.368 %. Both intervals exclude exact: +19 % / +31 %
   systematic bias. The chart's chip is IQM Emerald; the table's are Marrakesh and Garnet."
 - **"~18 qubits and ~50 gates work?"** "At the 1-in-10 level: the 18-qubit, 44-gate 14-river loader read 13.8 % vs
@@ -241,7 +241,7 @@ history shows."
 - **"Two rivers or four in 2005?"** "Four Lapland areas passed their 1-in-10 level: Ivalo, Kittilä, Rovaniemi and
   Tornio. Ivalo, Kittilä and Rovaniemi also passed 1-in-50. The 'snow warned us' line is an in-sample back-test: the
   North's 1 March snow was at the 87th percentile."
-- **"Basis risk?"** (now on slide 7) "The index is not the insurer's own losses. It is mitigated because our trigger is
+- **"Basis risk?"** (backup slide 10; said, not shown, on slide 7) "The index is not the insurer's own losses. It is mitigated because our trigger is
   the same 1-in-50 idea that all seven Finnish home insurers use in their flood terms (OP, If, LähiTapiola, Fennia,
   Turva, Pohjantähti, POP). It is the same idea, not the same test: the policies look at the water LEVEL at the
   insured site, certified by SYKE; we look at river DISCHARGE at a gauge against a fitted GEV 1-in-50 level. So the
@@ -301,7 +301,7 @@ history shows."
   is the product, five northern rivers: after a snowy March the expected loss is 6.4 % vs 1.96 % priced in autumn,
   3.3×, snowy vs NORMAL. Slide 5 is the two-river pair on the chip, snowy vs LOW snow: 3.05× on Emerald, 2.75× exact.
   Snowy vs normal on that pair is only about 1.5× (1.51× chip, 1.55× exact): the pair is a smaller, rarer event and
-  low snow is a lower base. Each number on the slides names its baseline." (out/round5_numbers.json)
+  low snow is a lower base. Slide 3 says 'after a snowy March', slide 5 'snowy vs low-snow March'; backup slide 9 has both." (out/round5_numbers.json)
 - **"Who pays Tulva: the insurer or the reinsurer?"** (Vaishnav) "The insurer. It pays the premium to the reinsurer
   that carries the risk, and a separate licence to us for the index and pricing. The reinsurer pays us nothing in the
   pilot model."
