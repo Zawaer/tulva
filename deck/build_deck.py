@@ -28,6 +28,7 @@ OUT = ROOT / "out"
 DECK = ROOT / "deck"
 ASSETS = DECK / "assets"  # generated crops, rebuilt every run
 PPTX = DECK / "Tulva_QxF2026.pptx"
+VIDEO = DECK / "video" / "tulva_demo.mp4"  # embedded on slide 5; whatever is on disk at build time
 
 NAVY = RGBColor(0x0B, 0x1F, 0x3A)
 BLUE = RGBColor(0x1F, 0x6F, 0xEB)
@@ -174,7 +175,7 @@ def s1_hook(prs, n):
 def s2_gap(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     header(s, n, "The gap", "Finland's rivers flood together, not one at a time")
-    picture(s, OUT / "joint_floods.png", MX, 1.6, 7.9, 5.25)
+    picture(s, OUT / "pitch_gap.png", MX, 1.6, 7.9, 5.25)  # scripts/pitch_charts.py
     x = 8.95
     text(s, x, 1.65, 3.8, 0.6, "Springs when ≥4 of the 14 river areas flooded (own 1-in-10 level)",
          size=13, color=GREY)
@@ -200,7 +201,7 @@ def s3_cost(prs, n):
     text(s, 4.25, 2.05, 0.8, 0.6, "→", size=34, color=GREY)
     stat(s, 5.0, 2.0, 3.9, "€491k–687k", "Tulva joint risk  (technical €265k)", BLUE, 34, 13)
     stat(s, 9.4, 2.0, 3.4, "5.1×", "Tulva vs independence", NAVY, 34, 13)
-    picture(s, OUT / "index_price.png", MX, 3.2, W - 2 * MX, 3.75)
+    picture(s, OUT / "pitch_cost.png", MX, 3.2, W - 2 * MX, 3.75)  # scripts/pitch_charts.py
     source(s, "Source: SYKE 1961–2025, Tulva model (exact; MC 1M agrees). Market = 2.5–3.5× expected payout "
               "(AM Best cat bonds, flood ILS)")
     return s
@@ -241,19 +242,30 @@ def s4_product(prs, n):
     return s
 
 
+def poster_frame() -> Path:
+    """First-seconds still of the demo video, shown before playback starts."""
+    import imageio_ffmpeg
+    ASSETS.mkdir(exist_ok=True)
+    out = ASSETS / "video_poster.png"
+    subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-loglevel", "error", "-ss", "2", "-i", str(VIDEO),
+                    "-frames:v", "1", str(out)], check=True)
+    return out
+
+
 def s5_demo(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     rect(s, 0, 0, W, H, NAVY)
-    # Frame where the video goes; the still is a placeholder underneath it.
-    fx, fy, fw, fh = 1.0, 0.55, W - 2.0, 5.85
-    rect(s, fx, fy, fw, fh, RGBColor(0x14, 0x2B, 0x4D), line=PALE_BLUE)
-    picture(s, ASSETS / "app_product.png", fx + 0.15, fy + 0.15, fw - 0.3, fh - 0.3)
-    lab = rect(s, fx + fw / 2 - 3.6, fy + fh / 2 - 0.45, 7.2, 0.9, BLUE,
-               shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.2)
-    text(s, fx + fw / 2 - 3.6, fy + fh / 2 - 0.45, 7.2, 0.9,
-         "DEMO VIDEO (≈60 s) — insert recording here", size=22, bold=True, color=WHITE,
-         align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-    text(s, fx, 6.55, fw, 0.4,
+    fh = 5.85
+    fw = fh * 16 / 9
+    fx, fy = (W - fw) / 2, 0.55
+    if VIDEO.exists():
+        s.shapes.add_movie(str(VIDEO), Inches(fx), Inches(fy), Inches(fw), Inches(fh),
+                           poster_frame_image=str(poster_frame()), mime_type="video/mp4")
+    else:  # placeholder if the recording is missing
+        rect(s, fx, fy, fw, fh, RGBColor(0x14, 0x2B, 0x4D), line=PALE_BLUE)
+        picture(s, ASSETS / "app_product.png", fx + 0.15, fy + 0.15, fw - 0.3, fh - 0.3)
+        print(f"warning: {VIDEO.relative_to(ROOT)} missing, slide 5 has a placeholder")
+    text(s, 1.0, 6.55, W - 2.0, 0.4,
          "Live app: the joint-flood map → March snow outlook → index price → real quantum runs → 2005 replay",
          size=14, color=WHITE, align=PP_ALIGN.CENTER)
     footer(s, n, dark=True)

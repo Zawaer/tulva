@@ -4,7 +4,7 @@ Vaishnav: slides, pitch script, demo-video script and Q&A notes go here.
 
 - `PITCH.md`: the 3:00 spoken script, slide by slide with timing marks (~410 words incl. the ~60 s demo
   voice-over). The `>` lines become each slide's speaker notes.
-- `build_deck.py`: builds `Tulva_QxF2026.pptx` (16:9, editable text boxes; charts are inserted from `out/*.png`).
+- `build_deck.py`: builds `Tulva_QxF2026.pptx` (16:9, editable text boxes; charts are inserted from `out/*.png`, the demo video from `deck/video/`).
 - `Tulva_QxF2026.pdf`, `preview/slide-N.png`: exports for checking layout.
 
 ## Rebuild (after charts in `out/` or the script change)
@@ -20,14 +20,18 @@ Needs `python-pptx` and Pillow in the project venv
 Every number on a slide must come from `CLAIMS.md`; edit numbers in `build_deck.py`, not in the pptx, or they
 are lost on the next rebuild.
 
-## Inserting the demo video
+## Demo video (embedded)
 
-Slide 5 is the video slot: a still of the web app with the label "DEMO VIDEO (≈60 s) — insert recording here".
-After the final rebuild, open the pptx in PowerPoint (Insert → Video → This Device) or Keynote, drop the
-recording over the frame, delete the label and the still, and set the video to start automatically
-(Playback → Start: Automatically) so it plays on the organisers' computer without a click. Save the result
-under a new name (e.g. `Tulva_QxF2026_final.pptx`) so a rebuild doesn't overwrite it. Check the video file is
-embedded, not linked, before submitting.
+The PPTX now contains the demo video: `build_deck.py` embeds whatever `deck/video/tulva_demo.mp4` is on disk at
+build time into slide 5 (poster frame = a still from 2 s in, extracted with imageio-ffmpeg), so after re-recording
+just rebuild. The file is embedded, not linked. Playback in PowerPoint/Keynote starts on click by default; if it
+should start by itself, set Playback → Start: Automatically and save under a new name (e.g.
+`Tulva_QxF2026_final.pptx`) so a rebuild doesn't overwrite it. Google Slides does not autoplay (or reliably play)
+video embedded in an uploaded PPTX, so test in PowerPoint or Keynote. The PDF/PNG previews only show the poster.
+
+Slides 2 and 3 use big pitch charts `out/pitch_gap.png` and `out/pitch_cost.png` from
+`scripts/pitch_charts.py` (values read from `out/joint_counts.json` and `out/pricing.json`); rerun it before the
+deck if those numbers change.
 
 ## Demo video (draft)
 `deck/video/tulva_demo.mp4`: a 61-second scripted walkthrough of the demo app at 1920×1080 with burned-in captions
