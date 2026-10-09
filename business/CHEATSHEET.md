@@ -51,7 +51,7 @@ It is **not** a weather forecast. It is a risk price.
 ## Why quantum? (honest version)
 - Monte Carlo: **10× more precise needs 100× more samples.** QAE: **10× more precise needs ~10× more steps.**
   That quadratic gain matters most for **rare events**, like a 1-in-50 joint flood.
-- Our simulator test: at the same 16,000 queries, QAE error ±0.011 pp vs Monte Carlo ±0.027 pp.
+- Snow on the chip: exact 2.75×, IQM measured 3.05× (90 % interval 2.6–3.6). Our simulator test: at the same 16,000 queries, QAE error ±0.011 pp vs Monte Carlo ±0.027 pp.
 - **Today a laptop is faster.** Our whole problem runs classically in under a second (1M simulated springs, 14 areas: ~0.5 s on a laptop). Real quantum advantage needs error-corrected machines, expected in the 2030s (IBM, IQM roadmaps).
 - **Our claim:** we built the quantum method, ran it on real IQM and IBM machines, measured the noise, and compared it honestly with exact answers. It is ready for when the hardware catches up. **Never claim we are faster today.**
 

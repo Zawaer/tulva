@@ -26,7 +26,7 @@ Leaflet web app, Claude Code.
   ~15) and under ~50 two-qubit steps give the right answer today, raw or after calibration, for events no rarer
   than about 1-in-10. The 9-qubit snow + temperature + rain → 5 rivers circuit works (16.5 % vs 13.6 % exact).
   Add the 1-in-50 level (14 qubits, 54 steps) or the full 43-qubit model (237 steps) and noise takes over.
-- **Snow signal on the chip:** snowy vs low-snow March, exact 2.8×, IQM measured 3.0× (3 qubits, 240,000 shots).
+- **Snow signal on the chip:** snowy vs low-snow March, exact 2.75×, IQM measured 3.05× (90 % interval 2.6–3.6; 3 qubits, 240,000 shots).
 - **Better predictions:** adding April–May rain lifts the North's explained variation from 17 % to 28 %; the
   back-test warning goes from 9 to 12 of 19 payout years (with observed weather, so an upper bound). Roadmap item.
 

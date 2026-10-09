@@ -3,7 +3,7 @@
 Short lines to use in the pitch and Q&A. Numbers are logged in `CLAIMS.md`.
 
 ## Quantum
-- "A snowy March makes a joint flood 2.8× more likely. The IQM quantum computer measured 3.0×." (IQM Emerald, 9 Oct)
+- "A snowy March makes a joint flood about 2.75× more likely. The IQM quantum computer measured 3.05×." (IQM Emerald, 9 Oct)
 - "Today's machines let us build and test the method; tomorrow's error-corrected machines will run it at full scale."
 - "We ran it on real IQM and IBM machines, measured the noise, and checked it against the exact answer."
 - "Rare events are exactly where today's machines struggle, and why error correction matters." (1-in-50 for all 14
