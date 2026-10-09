@@ -9,6 +9,8 @@ Ideas for after the event. Nothing here is implemented or tested yet.
 - **Add the spring weather forecast.** How fast the snow melts depends on April–May temperatures and rain (FMI).
   A fast warm-up turns a big snowpack into a flood; a slow one doesn't.
 - **Add ground frost and soil moisture.** Frozen or wet ground can't absorb meltwater.
+- **Re-base the snow flag to recent winters.** Snowpacks shrank after 2000, so a cut-off fitted on 1961–2000 fired
+  only twice in 2001–2025 (out/OOS_SNOW_TEST.md). Use a rolling or recent-years cut-off and re-estimate flood levels.
 - **Out-of-sample checks on every addition** (fit on older years, test on newer ones), so improvements are real.
 
 ## Product and data
