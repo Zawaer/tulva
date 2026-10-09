@@ -342,3 +342,10 @@ too few to confirm 'triples'. Run backwards, flagged springs paid 50 % versus 8 
 - If pushed: "Weak spots: Satakunta–SE drops to 0.33 after 2000, and the North fails the backwards test. So the
   direction holds, the exact size is in-sample, and a real flag needs a cut-off re-based to today's snow."
   (out/OOS_SNOW_TEST.md)
+
+
+## Q50 follow-up (Fri evening)
+- **"Is the Q50 spread just noise from deep circuits?"** "Partly. We re-ran only the 4-gate circuit with ten times
+  more shots, three times. Now the repeats agree, 0.27 to 0.38 %, so the earlier 5× spread was mostly too few
+  shots on the calibration circuit. But they're still two to three times above the exact 0.125 %: on Q50 our
+  calibration circuit doesn't catch all the error yet, unlike IBM and IQM where we got within 20 to 30 %."

@@ -496,3 +496,14 @@ an existing claim, read by deck/video/anim/export_data.py (which asserts the spo
 - "We ran it on IBM, IQM and Finland's VTT Q50" = IBM Marrakesh, IQM Garnet, IQM Emerald, VTT Q50 (Q50 run, not a
   successful estimate; card fine print "checked against exact classical values · classical computers still win today ·
   no quantum advantage claimed") · VTT Q50 section above
+
+### VTT Q50 follow-up, 4-gate test with 10× shots (Fri 9 Oct ~17:26 UTC, run by Claude over SSH; mentor's suggestion)
+- Same two-river North-cluster pair, k = 0 only (4 two-qubit gates), 20,000 shots per circuit, 3 repeats ·
+  qae-q50 · out/runs/q50-20261009T172553Z / 172654Z / 172753Z (.json + .analysis.json) · jobs 78907767-09a3…,
+  d9f63642-5b84…, 62070116-faa9… · scripts/run_hw.py --ks 0 --shots 20000, scripts/analyse_run.py
+- Raw 0.659 / 0.680 / 0.715 %; zero-calibration offset 0.39 / 0.34 / 0.32 %; gain 0.99 / 1.07 / 1.04;
+  calibrated 0.273 / 0.317 / 0.380 % vs exact 0.125 %.
+- Reading: with 10× shots the repeats agree (spread 1.4×, was 5× at 2,000 shots, where the zero-calibration circuit
+  caught only 4–12 hits). But all three stay ~2–3× high: on Q50 the zero-calibration circuit does not capture all
+  of the error (raw 0.66–0.72 % vs calibration 0.32–0.39 %), unlike IBM (+19 %) and IQM Garnet (+31 %).
+  Not on the main slides (deck frozen); QA only.

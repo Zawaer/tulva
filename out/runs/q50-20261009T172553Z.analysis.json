@@ -1,0 +1,26 @@
+{
+  "A3_kittila_ivalo_both": {
+    "exact": 0.0012496992187709922,
+    "raw_mlae": 0.0065947637702754615,
+    "noise_aware_mlae": 0.002726360042367033,
+    "k0_only": 0.0066,
+    "noise_aware_per_copy_mlae": null,
+    "gain_by_k": {
+      "0": 0.9900573927852857
+    },
+    "offset_by_k": {
+      "0": 0.003899999669442098
+    },
+    "two_qubit_gates_by_k": {
+      "0": 4
+    },
+    "oracle_queries": 20000,
+    "mc_rmse_same_queries": 0.0002498136776313094,
+    "copies": 1,
+    "per_copy_k0_rate": [
+      0.0066
+    ],
+    "shots": 20000,
+    "mc_rmse_same_shots": 0.0002498136776313094
+  }
+}
