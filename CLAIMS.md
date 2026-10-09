@@ -166,3 +166,5 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   mid14-iqm-emerald-20261009T115403Z
 - Measured limit, all runs together: ≤ ~15 qubits, ≤ ~50 two-qubit gates, events no rarer than ~1-in-10 give the
   right numbers raw or after calibration; 1-in-50 events and ≥ ~200 gates do not · qae-iqm
+- Licence price on slide 7: "€25k pilot season, then ~€75k per insurer per year (indicative)": ASSUMPTION set by the
+  team from typical risk-model SaaS pricing (research estimate €50–150k/insurer/yr); to validate in a pilot · assumption

@@ -41,7 +41,7 @@ PALE_BLUE = RGBColor(0xA9, 0xC8, 0xF5)
 FONT = "Arial"
 
 # >>> TEAM DECISION: licence price shown on the Business slide, e.g. "€60k". None = no price shown.
-LICENCE_PRICE: str | None = None
+LICENCE_PRICE: str | None = "€25k pilot season, then ~€75k"   # indicative, see CLAIMS.md
 # <<<
 
 W, H = 13.333, 7.5
@@ -321,12 +321,12 @@ def s7_business(prs, n):
     cols = [
         ("Who buys", "Finnish non-life insurers", "For the flood risk they keep. "
          "Four groups write 91 % of the market. Then reinsurers and ILS investors."),
-        ("How we earn", "Engine licence", (f"{LICENCE_PRICE} per insurer per year. " if LICENCE_PRICE else "")
-         + "Pricing and trigger engine, licensed per insurer or reinsurer. Fee on placed covers."),
+        ("How we earn", "Engine licence", (f"{LICENCE_PRICE} per insurer per year (indicative). " if LICENCE_PRICE else "")
+         + "Pricing and trigger engine, licensed per insurer."),
         ("Why now", "30 Jan 2027", "Finland gets a Solvency II flood capital factor: insurers need a "
          "joint-flood view now. The engine is quantum-ready as hardware matures."),
         ("Scale", "Finland → Nordics → Europe", "Same engine, any snowmelt or river region. "
-         "Gävle 2021: SEK 1.9bn claims. Storm Boris 2024: €2.15bn insured."),
+         "Nordic floods are costly (Gävle 2021: SEK 1.9bn). Storm Boris 2024: €2.15bn insured."),
     ]
     cw, gap = 2.85, 0.193
     for i, (k, head, body) in enumerate(cols):
