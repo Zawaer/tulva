@@ -79,3 +79,12 @@ the model's numbers, the 3-qubit circuit, 8,000 real Emerald shots drawn as squa
 Snowy toggle). index.html edits: one CSS link, one nav link, the section, one script tag. Intended for the demo video.
 - 9 Oct: added one plain-language paragraph under the "2 · March snow outlook" heading in web/index.html (what a
   gauge and the 1-in-50 level are). Vaishnav found the section hard to follow; shorten or move it if you prefer.
+
+## Weather data + 43-qubit circuit (9 Oct, ~11:30)
+- `scripts/fetch_weather.py` → `data/weather_spring.csv`: FMI April–May temperature and rain per cluster
+  (Sodankylä / Kauhava / Pori), 1961–2025, cached in data/raw/fmi.
+- `scripts/weather_model.py` → `out/weather_model.json`: rain lifts North R² 0.17 → 0.28; back-test 9 → 12 of 19 payout
+  years with observed (perfect-forecast) weather. Simplification: no national flood factor beyond the weather
+  qubits, so ≥4 of 14 over 1-in-10 is 9.6 % vs your 12.2 % and 15 % observed.
+- `scripts/run_big_hw.py`: one 43-qubit circuit. MPS simulator matches exact; IQM Emerald (237 CZ) is noise-dominated
+  (26 % vs 1.09 %). All in CLAIMS.md. Possible roadmap/Q&A material; your call whether it goes anywhere.

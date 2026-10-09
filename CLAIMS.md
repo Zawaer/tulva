@@ -134,3 +134,23 @@ Two-level model (circuit's own model), North loadings, 8,000 shots per circuit, 
   false ≥2 counts) · qae-iqm (emerald) · product-iqm-emerald-20261009T075338Z
 - Snow ratio, recomputed from product-iqm-emerald-20261009T075338Z.analysis.json (use these): high-snow / low-snow
   exact 0.1933/0.0704 = **2.7×**, hardware calibrated 0.2494/0.0818 = **3.1×** (supersedes the rounded 2.8×/3.0× above)
+
+### Snow + spring temperature + rain (Vaishnav, 9 Oct) · scripts/fetch_weather.py, scripts/weather_model.py → out/weather_model.json
+FMI monthly observations (Sodankylä / Kauhava / Pori), April–May mean temperature and total rain, 1961–2025.
+In-sample, and uses the *observed* April–May weather, so it is a perfect-forecast upper bound.
+- Share of year-to-year flood variation explained (R² of cluster flood index): North **0.17 snow only → 0.28 with
+  temperature + rain** (rain matters, β = +0.34); Ostrobothnia 0.49 → 0.51; Satakunta–SE 0.40 → 0.43. April–May mean
+  temperature adds almost nothing · exact (least squares)
+- Back-test, top-15 % predicted years vs payout cluster-years (≥2 over GEV 1-in-10): snow only **9 of 19**, snow +
+  temperature + rain **12 of 19** (this script's snow index; Toivo's backtest_index.py gets 11 of 19 with snow) · exact (counts)
+- Two-level network, P(≥2 of 5 North over 1-in-50): 1.09 % overall; 0.62 % with low snow/temp/rain, 1.46 % snowy,
+  2.28 % snowy + warm + wet · exact (enumeration of 2^15 states)
+
+### 43-qubit weather circuit (Vaishnav, 9 Oct) · scripts/run_big_hw.py
+One connected circuit: national + regional snow/temp/rain, wet-spring per cluster, 14 areas at 1-in-10 and 1-in-50.
+- Classical check (Aer matrix-product-state simulator, 200,000 shots, ~2 min on a laptop): matches exact (1.11 % vs
+  1.09 %; ≥4 of 14 over 1-in-10 9.6 % vs 9.6 %) · monte-carlo (MPS sampling) · big-mps-20261009T112913Z
+- **IQM Emerald, 43 qubits, 237 CZ, 20,000 shots: noise dominates.** P(≥2 of 5 North over 1-in-50) 26 % vs exact 1.09 %;
+  ≥4 of 14 over 1-in-10 40 % vs 9.6 %. Weather qubits early in the circuit stay near their 30 % (25–39 %); area
+  qubits at the end read 1 about 21–23 % of the time instead of 2–10 %. Errors pile up along the circuit · qae-iqm
+  (sampling, raw) · big-iqm-emerald-20261009T113236Z
