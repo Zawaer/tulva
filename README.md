@@ -9,7 +9,6 @@ Built at the Quantum x Finance hackathon (Hanken × Ultrahack, 8–10 Oct 2026) 
 ## Layout
 - `src/tulva/`: data pipeline, joint flood model, index pricing, quantum circuits
 - `scripts/`: runnable steps (fetch data, fit model, run circuits)
-- `notebooks/`: LUMI / Q20 notebooks
 - `out/`: generated results and charts (every number in the deck comes from here)
 
 ## Pricing

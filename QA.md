@@ -62,15 +62,24 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   followed a low-snow March. That's in-sample with a small sample, and we say so.
 
 ## Business (Vaishnav)
-- *"Who buys, and why?"* A Finnish non-life insurer, for the flood losses it keeps under its reinsurance retention.
-  Reinsurance is bought on 1 January, before the spring signal exists; an index cover pays fast with no claims
-  adjustment.
-- *"What does it cost?"* North cluster, €10M if ≥2 gauges pass 1-in-50: market price €491k–€687k a
-  year (always quote market prices). If priced as independent, it would be €96k–€134k. The market currently has no price for this joint risk.
-- *"Isn't Finland too small?"* Finland is the pilot with the best open data. The same engine prices Sweden
-  (Gävle 2021, SEK 1.9bn), Norway and Central Europe (storm Boris, €2.15bn insured).
-- *"Won't sellers just raise the price after a snowy March?"* Yes, that's why it's bought in winter, and Tulva is the
-  pricing engine for whoever carries the risk.
+- *"Who buys, and why?"* Insurers first (pilot: a Finnish non-life insurer, for the joint flood loss it retains),
+  then reinsurers and brokers across Nordic and Central European flood. It's sold in autumn, ahead of the 1 January
+  renewal; the March snow update then tells the insurer how much joint risk sits on its own books (claims
+  readiness, capital, next season's price). An index cover pays fast, with no claims adjustment.
+- *"What does it cost?"* As rate on line (market premium as % of the limit per year), North "≥2 of 5 over
+  1-in-50": Tulva 4.9–6.9 %; priced as independent 1.0–1.3 %; the same cover is worth 16–23 % after a snowy March.
+  On an illustrative €10M limit that is €491k–€687k a year.
+- *"Your payout is bigger than Finnish flood losses."* "The €10M is only an illustration. The limit is sized to each
+  insurer's own retained 1-in-50 joint loss, so the price is a rate: 4.9–6.9 % of whatever limit fits its book."
+- *"Isn't the Finnish market tiny?"* "Yes, Finland is the pilot, because it has the best open data. The engine
+  sells to reinsurers and brokers across Nordic and Central European flood (for scale, rain-driven events there:
+  Gävle 2021 SEK 1.9bn, storm Boris €2.15bn insured)."
+- *"Do you get capital credit?"* "Under the Solvency II standard formula, an index cover likely gets no capital
+  credit (EIOPA Q&A 1597: basis risk can't be haircut there). The value is basis-risk-managed protection of the
+  retained loss, plus credit under internal models, where basis risk can be modelled."
+- *"Won't sellers just raise the price after a snowy March?"* Yes, that's why it's sold in autumn, ahead of the
+  1 January renewal. The March update tells the insurer how much joint risk it holds; Tulva is the pricing engine
+  for whoever carries the risk.
 - *"Why now?"* EIOPA adds a Finnish flood capital factor from January 2027, and insurers must include climate
   scenarios in ORSA.
 
@@ -108,6 +117,10 @@ here, from Thursday 18:00. Our commit history starts then."
   everything from scratch here with real data. Nothing from that was reused."
 - Don't apologise or over-explain. Research before a hackathon is normal and expected; the pitch-training slides
   even ask for "progress – pre-event and during the event".
+
+## "Your first commits are huge" (~10 s)
+"We build with AI coding agents; the first scaffolding and data download landed minutes after 18:00, as the
+history shows."
 
 ## Traps
 - Never say "quantum is faster" or "advantage".

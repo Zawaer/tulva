@@ -2,8 +2,8 @@
 
 Vaishnav: slides, pitch script, demo-video script and Q&A notes go here.
 
-- `PITCH.md`: the 3:00 spoken script, slide by slide with timing marks (253 live words + the 60 s demo
-  voice-over). The `>` lines become each slide's speaker notes.
+- `PITCH.md`: the spoken script, slide by slide with timing marks (≈2:38: 284 live words + the 37 s demo video,
+  which the presenter narrates live). The `>` lines become each slide's speaker notes.
 - `build_deck.py`: builds `Tulva_QxF2026.pptx` (16:9, editable text boxes; charts are inserted from `out/*.png`, the demo video from `deck/video/`).
 - `Tulva_QxF2026.pdf`, `preview/slide-N.png`: exports for checking layout.
 
@@ -33,10 +33,11 @@ Slides 2 and 3 use big pitch charts `out/pitch_gap.png` and `out/pitch_cost.png`
 `scripts/pitch_charts.py` (values read from `out/joint_counts.json` and `out/pricing.json`); rerun it before the
 deck if those numbers change.
 
-## Demo video (draft)
-`deck/video/tulva_demo.mp4`: a 61-second scripted walkthrough of the demo app at 1920×1080 with burned-in captions
-(map → snow outlook → index card → real quantum results → the 14-area Emerald chart → 2005 replay).
-Re-record after the app changes with:
-`source /data/chats/s_7z3ZoxoroN/env.sh; node deck/video/record_demo.mjs`, then convert the webm in
-deck/video/raw/ to MP4 (see the ffmpeg line in the git history). It's silent: add the voice-over from PITCH.md
-slide 4, or keep it captions-only.
+## Demo video
+`deck/video/tulva_demo.mp4`: a 37-second scripted walkthrough of the demo app at 1920×1080, page zoom 1.5, short
+burned-in captions: map → snow outlook set to high → real IQM Emerald shots (low vs snowy March) → all 14 areas on
+one chip (1-in-10 run, ≥4 row highlighted) → 2005 replay. It is silent: the presenter narrates it live (PITCH.md,
+slide 4). Re-record after the app changes (app served on :3141):
+`source /data/chats/s_7z3ZoxoroN/env.sh; PLAYWRIGHT_PKG=/data/chats/s_7z3ZoxoroN/talkoot/package.json node deck/video/record_demo.mjs`,
+then trim the lead-in it prints and convert: `ffmpeg -ss <first caption s> -i deck/video/raw/<newest>.webm -c:v libx264
+-crf 22 -pix_fmt yuv420p -movflags +faststart -an deck/video/tulva_demo.mp4` (ffmpeg from `imageio_ffmpeg`).

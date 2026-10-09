@@ -168,3 +168,27 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   right numbers raw or after calibration; 1-in-50 events and ≥ ~200 gates do not · qae-iqm
 - Licence price on slide 7: "€25k pilot season, then ~€75k per insurer per year (indicative)": ASSUMPTION set by the
   team from typical risk-model SaaS pricing (research estimate €50–150k/insurer/yr); to validate in a pilot · assumption
+
+### Pitch-derived numbers (10 Oct deck revision) · derived from the lines above, no new computation
+- **Rate on line** (market premium ÷ limit, per year), North "≥2 of 5 over 1-in-50": independence **1.0–1.3 %**,
+  Tulva **4.9–6.9 %**, after a high-snow March **16–23 %** (low-snow 0.4–0.6 %); Ostrobothnia 1.4–2.0 % / 6.4–9.0 % /
+  32–45 %; Satakunta–SE 0.3–0.4 % / 1.5–2.2 % / 7.2–10.1 % · exact × multiple ÷ limit · out/pricing.json
+  (`market_premium_eur` / `payout_eur`), chart scripts/pitch_charts.py → out/pitch_cost.png. Limit = each insurer's
+  retained 1-in-50 joint loss; €10M is illustrative only (business case §4 "size the limit", §9 row 10)
+- "About four times as often as independence": ≥4 of 14 over 1-in-10, observed 15.4 % vs independence 3.9 % = 3.9× ·
+  exact (counts) · out/joint_counts.json
+- Calibration in relative terms (Kittilä + Ivalo, exact 0.125 %): raw 0.262 % (IBM, 2.1×) / 0.368 % (Garnet, 2.9×) →
+  calibrated 0.148 % (+18 %) / 0.163 % (+30 %): "from 2–3× off to within ~20–30 % of exact" · qae-ibm / qae-iqm ·
+  out/HARDWARE_RESULTS.md
+- Measured limits line on slide 6: "~18 qubits / ~50 two-qubit gates work" = 14-area loader on Emerald (18 qubits,
+  44 CZ) right at 1-in-10, 3-qubit QAE (≤ 53 CZ) calibrates well, 4-qubit (67–164 CZ) and 43-qubit (237 CZ) circuits
+  scrambled; "1-in-50: 16 % vs 4.8 % exact" = same 18-qubit loader, P(≥2 of 14 over 1-in-50), readout-corrected ·
+  qae-iqm · out/HARDWARE_RESULTS.md
+- Slide 3 innovation line, outside sources (business/reports/Tulva flood cover business case.md §5, §1, §6): Verisk
+  Inland Flood Model for Central Europe covers FI/SE/NO and is precipitation-driven (Verisk docs); SYKE publishes
+  spring peak outlooks but nobody turns them into a priced joint-loss distribution; Swiss Re FLOW pays on a single
+  river gauge, for companies · source
+- QA capital credit: EIOPA Q&A 1597, basis risk cannot be haircut in the standard formula; index covers can be
+  credited under internal models · source (business case §3)
+- Demo video deck/video/tulva_demo.mp4: 37 s, shows the 1-in-10 Emerald loader run (job 01a11cd4…, ≥4: hardware
+  13.8 % vs exact 10.9 % vs independence 4.4 %) · qae-iqm

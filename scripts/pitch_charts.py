@@ -56,34 +56,38 @@ def gap_chart():
 
 
 def cost_chart():
-    """Slide 3: market price per year of the North '>=2 of 5 over 1-in-50' €10M cover."""
-    t = json.loads((OUT / "pricing.json").read_text())["clusters"]["North"]["triggers"]["ge2"]
-    rows = [("If independent", t["independent"]["market_premium_eur"], RED),
-            ("Tulva", t["tulva"]["market_premium_eur"], BLUE),
-            ("After a snowy March", t["tulva_high_outlook"]["market_premium_eur"], NAVY)]
+    """Slide 3: market price per year of the North '>=2 of 5 over 1-in-50' cover, as rate on line
+    (premium as % of the limit per year; the limit is sized to each insurer's retained 1-in-50 joint loss)."""
+    d = json.loads((OUT / "pricing.json").read_text())
+    t, limit = d["clusters"]["North"]["triggers"]["ge2"], d["payout_eur"]
+    rows = [("If priced as independent", t["independent"]["market_premium_eur"], RED),
+            ("Tulva (sold in autumn)", t["tulva"]["market_premium_eur"], BLUE),
+            ("Worth after a snowy March", t["tulva_high_outlook"]["market_premium_eur"], NAVY)]
 
-    def eur(v):
-        return f"€{v / 1e6:.2f}M" if v >= 1e6 else f"€{v / 1e3:.0f}k"
+    def rol(v):
+        return 100 * v / limit
+
+    def fmt(lo, hi):
+        f = (lambda x: f"{x:.1f}") if hi < 10 else (lambda x: f"{x:.0f}")
+        return f"{f(lo)}–{f(hi)} %"
 
     fig, ax = plt.subplots(figsize=(12.1, 2.85), dpi=DPI)
     ys = [2, 1, 0]
-    xmax = max(r[1][1] for r in rows) / 1e3
+    xmax = max(rol(r[1][1]) for r in rows)
     for y, (lab, (lo, hi), c) in zip(ys, rows):
-        lo, hi = lo / 1e3, hi / 1e3
+        lo, hi = rol(lo), rol(hi)
         w = max(hi - lo, xmax * 0.012)
         ax.barh(y, w, left=lo, height=0.55, color=c)
-        ax.text(hi + xmax * 0.015, y, f"{eur(lo * 1e3)}–{eur(hi * 1e3)}", va="center", fontsize=26,
-                fontweight="bold", color=c)
-    ax.set_yticks(ys, [r[0] for r in rows], fontsize=24)
+        ax.text(hi + xmax * 0.015, y, fmt(lo, hi), va="center", fontsize=26, fontweight="bold", color=c)
+    ax.set_yticks(ys, [r[0] for r in rows], fontsize=22)
     ax.set_xlim(0, xmax * 1.42)
     ax.set_ylim(-0.6, 2.6)
-    ax.set_xticks([0, 500, 1000, 1500, 2000], ["€0", "€0.5M", "€1M", "€1.5M", "€2M"], fontsize=18,
-                  color=GREY)
+    ax.set_xticks([0, 5, 10, 15, 20], ["0 %", "5 %", "10 %", "15 %", "20 %"], fontsize=18, color=GREY)
     ax.grid(axis="x", color=LIGHTGREY, lw=1)
     ax.set_axisbelow(True)
     clean(ax)
     ratio = t["tulva"]["premium_eur"] / t["independent"]["premium_eur"]
-    ax.text(xmax * 1.42, 2, f"≈{ratio:.0f}× too cheap", ha="right", va="center", fontsize=28,
+    ax.text(xmax * 1.42, 2, f"≈{ratio:.0f}× under-priced", ha="right", va="center", fontsize=24,
             fontweight="bold", color=RED)
     fig.tight_layout(pad=0.3)
     fig.savefig(OUT / "pitch_cost.png", dpi=DPI, facecolor="white")

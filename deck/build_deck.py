@@ -206,7 +206,7 @@ def s2_gap(prs, n):
     stat(s, x, 3.3, 3.8, "12.2 %", "Tulva joint model", BLUE, 38)
     stat(s, x, 4.3, 3.8, "3.9 %", "if areas were independent", RED, 38)
     rect(s, x, 5.4, 3.8, 0.02, LINE)
-    text(s, x, 5.55, 3.8, 1.2, "Reinsurance renews 1 January, before the snow signal arrives.",
+    text(s, x, 5.55, 3.8, 1.2, "Covers are bought before 1\u00a0January; the snow signal arrives in March.",
          size=18, bold=True, color=NAVY)
     source(s, "Source: SYKE 1961–2025 (+ SMHI Torne), Tulva model (exact); vesi.fi / OP (1-in-50 rule)")
     return s
@@ -214,23 +214,25 @@ def s2_gap(prs, n):
 
 def s3_product(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    header(s, n, "The product", "Tulva Index: bought in winter, pays in spring")
+    header(s, n, "The product", "Tulva Index: sold in autumn, updated in March")
     rect(s, MX, 1.55, W - 2 * MX, 0.95, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
     text(s, MX + 0.4, 1.55, W - 2 * MX - 0.8, 0.95,
-         [[("Pays €10M", {"color": WHITE}),
+         [[("Pays the limit", {"color": WHITE}),
            (" if ≥2 of 5 northern gauges pass their 1-in-50 level this spring", {"color": WHITE, "bold": False})]],
          size=24, bold=True, anchor=MSO_ANCHOR.MIDDLE)
-    text(s, MX, 2.62, 6, 0.3, "MARKET PRICE PER YEAR", size=16, bold=True, color=BLUE)
+    text(s, MX, 2.62, 9, 0.3, "MARKET PRICE, % OF THE LIMIT PER YEAR", size=16, bold=True, color=BLUE)
+    text(s, MX + 6.0, 2.64, W - 2 * MX - 6.0, 0.3,
+         "Limit sized to each insurer's retained 1-in-50 joint loss (€10M illustrative)",
+         size=12, color=GREY, align=PP_ALIGN.RIGHT)
     picture(s, OUT / "pitch_cost.png", MX, 2.95, W - 2 * MX, 2.85)  # scripts/pitch_charts.py
-    # innovativeness, said once
+    # innovativeness, said once, sourced (business/reports, competitors section)
     rect(s, MX, 5.92, 0.08, 0.72, BLUE)
     text(s, MX + 0.28, 5.88, W - 2 * MX - 0.3, 0.8,
-         [[("Today's cat models assume how areas flood together. ", {"color": GREY, "bold": False}),
-           ("Tulva measures it from 65 years of river data, ties it to this winter's snow, and prices it as a cover.",
-            {})]],
-         size=18, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
-    source(s, "Source: SYKE 1961–2025, Tulva model (exact). Market price = 2.5–3.5× expected payout "
-              "(AM Best, flood ILS)")
+         [[("Vendor flood models are pan-European and rainfall-driven; SYKE's spring outlook isn't priced; "
+            "Swiss Re FLOW covers one gauge. ", {"color": GREY, "bold": False}),
+           ("Tulva prices the joint, snow-driven risk.", {})]],
+         size=17, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
+    source(s, "Sources: SYKE 1961–2025, Tulva model; market 2.5–3.5× expected payout (AM Best); Verisk; Swiss Re FLOW")
     return s
 
 
@@ -258,7 +260,7 @@ def s4_demo(prs, n):
         picture(s, ASSETS / "app_product.png", fx + 0.15, fy + 0.15, fw - 0.3, fh - 0.3)
         print(f"warning: {VIDEO.relative_to(ROOT)} missing, slide 4 has a placeholder")
     text(s, 1.0, 6.55, W - 2.0, 0.4,
-         "Live app: joint-flood map → March snow → index price → quantum runs → 2005 replay",
+         "Live app (narrated live): joint-flood map → March snow → quantum chip → 2005 replay",
          size=16, color=WHITE, align=PP_ALIGN.CENTER)
     footer(s, n, dark=True)
     return s
@@ -285,8 +287,8 @@ def s5_quantum(prs, n):
         text(s, x + 2.6, y, 1.55, 0.5, cal, size=24, bold=True, color=c, align=PP_ALIGN.RIGHT)
         rect(s, x, y + 0.52, w, 0.012, LINE)
         y += 0.56
-    text(s, x, 5.9, w, 0.8, [[("Snow signal on the chip: ", {"bold": True}),
-                             ("snowy vs low March 3.1× (exact 2.7×)", {"color": BLUE, "bold": True})]],
+    text(s, x, 5.85, w, 0.8, [[("Calibration: ", {"bold": True}),
+                              ("from 2–3× off to within ~20–30 % of exact", {"color": BLUE, "bold": True})]],
          size=16, color=NAVY)
     source(s, "IQM Emerald job 01a11cd4…, readout-corrected; IBM / IQM values calibrated (20 / 4 side-by-side "
               "copies); snow: Emerald, 10 copies")
@@ -299,17 +301,20 @@ def s6_honest(prs, n):
     text(s, MX, 6.35, 7.6, 0.4, "Kittilä and Ivalo both pass 1-in-50: estimation error vs effort",
          size=16, color=GREY)
     x, w = 8.75, 4.0
-    text(s, x, 1.75, w, 0.4, "Where quantum could pay off", size=20, bold=True, color=BLUE)
+    text(s, x, 1.75, w, 0.4, "Method ready, hardware not yet", size=17, bold=True, color=BLUE)
     items = [("Fault-tolerant hardware", "~8k logical qubits needed"),
              ("Expensive models", "a hydrology model per scenario"),
              ("More work per price", "many perils, daily repricing")]
-    y = 2.45
+    y = 2.3
     for a, b in items:
-        rect(s, x, y + 0.08, 0.08, 0.8, BLUE)
-        text(s, x + 0.3, y, w - 0.3, 1.1, [[(a, {"bold": True})], [(b, {"color": GREY})]], size=18)
-        y += 1.2
-    rect(s, x, 6.0, w, 0.02, LINE)
-    text(s, x, 6.1, w, 0.5, "Error: QAE ∝ 1/N, Monte Carlo ∝ 1/√N", size=16, color=NAVY)
+        rect(s, x, y + 0.08, 0.08, 0.7, BLUE)
+        text(s, x + 0.3, y, w - 0.3, 0.9, [[(a, {"bold": True})], [(b, {"color": GREY})]], size=17)
+        y += 0.95
+    rect(s, x, 5.2, w, 0.02, LINE)
+    text(s, x, 5.3, w, 1.4,
+         [[("Measured today: ", {"bold": True, "color": RED}),
+           ("~18 qubits / ~50 two-qubit gates work; rarer than 1-in-10 events drown in noise "
+            "(1-in-50: 16 % vs 4.8 % exact)", {})]], size=15, color=NAVY, spacing=1.05)
     source(s, "Source: Tulva simulations (qae-sim) + IBM Marrakesh / IQM Garnet runs; Chakrabarti et al., "
               "Quantum 5, 463 (2021)")
     return s
@@ -319,14 +324,14 @@ def s7_business(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     header(s, n, "Business", "Who buys, why, and why now")
     cols = [
-        ("Who buys", "Finnish non-life insurers", "For the flood risk they keep. "
-         "Four groups write 91 % of the market. Then reinsurers and ILS investors."),
-        ("How we earn", "Engine licence", (f"{LICENCE_PRICE} per insurer per year (indicative). " if LICENCE_PRICE else "")
-         + "Pricing and trigger engine, licensed per insurer."),
-        ("Why now", "30 Jan 2027", "Finland gets a Solvency II flood capital factor: insurers need a "
-         "joint-flood view now. The engine is quantum-ready as hardware matures."),
-        ("Scale", "Finland → Nordics → Europe", "Same engine, any snowmelt or river region. "
-         "Nordic floods are costly (Gävle 2021: SEK 1.9bn). Storm Boris 2024: €2.15bn insured."),
+        ("Who buys", "Insurers, reinsurers, brokers", "Pilot: Finnish insurers (four groups, 91 % of the "
+         "market). Then Nordic and Central European flood."),
+        ("How we earn", "Engine licence", (f"{LICENCE_PRICE} per client per year (indicative). " if LICENCE_PRICE else "")
+         + "Pricing and trigger engine."),
+        ("Why now", "30 Jan 2027", "Finland gets a Solvency II flood capital factor. "
+         "Insurers need a joint-flood view."),
+        ("Scale", "Finland → Nordics → Europe", "Nordic/European flood losses (rain-driven): "
+         "Gävle 2021 SEK 1.9bn; storm Boris 2024 €2.15bn insured."),
     ]
     cw, gap = 2.85, 0.193
     for i, (k, head, body) in enumerate(cols):
@@ -340,7 +345,7 @@ def s7_business(prs, n):
     rect(s, MX, 6.1, 0.08, 0.45, BLUE)
     text(s, MX + 0.25, 6.1, W - 2 * MX, 0.45,
          [[("Ask  ", {"color": BLUE}),
-           ("First step: a paid pilot with one Finnish insurer this autumn, before the 1 January reinsurance buy.",
+           ("A paid pilot with one Finnish insurer this autumn, ahead of the 1\u00a0January renewal.",
             {})]],
          size=17, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
     source(s, "Sources: Finance Finland 2024; Del. Reg. (EU) 2026/269; Finansinspektionen 2023 (Gävle); "
