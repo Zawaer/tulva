@@ -32,7 +32,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from tulva import factor, quantum as q  # noqa: E402
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--backend", default="iqm-fake", choices=["iqm", "iqm-fake", "ibm", "sim"])
+ap.add_argument("--backend", default="iqm-fake", choices=["iqm", "iqm-fake", "ibm", "sim", "q50", "q20"])
 ap.add_argument("--iqm-name", default="emerald")
 ap.add_argument("--ibm-name", default="ibm_marrakesh")
 ap.add_argument("--shots", type=int, default=8000)
@@ -55,6 +55,11 @@ def backend_():
         os.environ["IQM_TOKEN"]
         return IQMProvider(os.getenv("IQM_SERVER_URL", "https://resonance.iqm.tech"),
                            quantum_computer=args.iqm_name).get_backend()
+    if args.backend in ("q50", "q20"):     # on LUMI with the fiqci-vtt-qiskit module and DEVICES set
+        from iqm.qiskit_iqm import IQMProvider
+        dev = "q50" if args.backend == "q50" else "radiance20"
+        url = os.getenv("Q50_CORTEX_URL" if args.backend == "q50" else "Q20_CORTEX_URL")
+        return IQMProvider(url, quantum_computer=dev).get_backend()
     if args.backend == "iqm-fake":
         from iqm.qiskit_iqm import IQMFakeAphrodite
         return IQMFakeAphrodite()

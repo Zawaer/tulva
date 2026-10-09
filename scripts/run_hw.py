@@ -91,7 +91,7 @@ def get_backend():
         return be
     if args.backend == "q20":
         from iqm.qiskit_iqm import IQMProvider
-        be = IQMProvider(os.getenv("Q20_CORTEX_URL"), quantum_computer="radiance20").get_backend()
+        be = IQMProvider(os.getenv("Q20_CORTEX_URL"), quantum_computer="radiance20").get_backend()   # per QxF QuickStart V2
         if args.ems:
             from fiqci.ems import FiQCIBackend   # API may differ by version: check help() on LUMI
             be = FiQCIBackend(be, mitigation_level=args.ems)
