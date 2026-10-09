@@ -1,0 +1,180 @@
+{
+  "backend": "q50",
+  "ems": 0,
+  "shots": 2000,
+  "ks": [
+    0,
+    1,
+    2
+  ],
+  "param_source": "out/model_params.json",
+  "created_utc": "20261009T145110Z",
+  "circuits": [
+    {
+      "name": "A3_kittila_ivalo_both|target|k0|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 0,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1746,
+        "01": 123,
+        "10": 115,
+        "11": 16
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k1|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 1,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 27,
+      "depth": 51,
+      "counts": {
+        "11": 398,
+        "01": 659,
+        "00": 684,
+        "10": 259
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|target|k2|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "target",
+      "k": 2,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.0012496992187709922,
+      "two_qubit_gates": 46,
+      "depth": 88,
+      "counts": {
+        "10": 348,
+        "11": 600,
+        "00": 449,
+        "01": 603
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k0|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 0,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1361,
+        "01": 272,
+        "10": 232,
+        "11": 135
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k1|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 1,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 27,
+      "depth": 51,
+      "counts": {
+        "10": 312,
+        "01": 617,
+        "00": 555,
+        "11": 516
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|twin|k2|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "twin",
+      "k": 2,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 0.059390496711648616,
+      "two_qubit_gates": 46,
+      "depth": 88,
+      "counts": {
+        "00": 416,
+        "11": 673,
+        "01": 539,
+        "10": 372
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k0|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 0,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 4,
+      "depth": 9,
+      "counts": {
+        "00": 1806,
+        "10": 85,
+        "01": 105,
+        "11": 4
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k1|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 1,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 27,
+      "depth": 51,
+      "counts": {
+        "01": 642,
+        "11": 398,
+        "00": 701,
+        "10": 259
+      }
+    },
+    {
+      "name": "A3_kittila_ivalo_both|zero|k2|r0",
+      "instance": "A3_kittila_ivalo_both",
+      "role": "zero",
+      "k": 2,
+      "rep": 0,
+      "event": "all",
+      "n_areas": 2,
+      "exact": 3.3387751499369893e-10,
+      "two_qubit_gates": 46,
+      "depth": 88,
+      "counts": {
+        "00": 501,
+        "01": 566,
+        "10": 356,
+        "11": 577
+      }
+    }
+  ],
+  "jobs": [
+    "a6fb9d52-611a-4a6f-bd1c-b1ae18650287"
+  ],
+  "device": "q50"
+}
