@@ -75,4 +75,10 @@ if snow:
                                        "exact": res["emerald snow high"]["exact"]/res["emerald snow low"]["exact"]}
     print("snow ratio high/low:", res["snow_ratio_high_over_low"])
     do(f, "A3_kittila_ivalo_both_clim", "emerald snow normal")  # last, so the intervals above keep their RNG stream
+for f in sorted(f for f in runs if f.startswith("q50-")):  # VTT Q50 repeats; after the rest so their RNG stream is unchanged
+    run = json.loads(Path(runs[f]).read_text())
+    if not any("counts" in c for c in run["circuits"]):
+        continue          # q50-20261009T144440Z: result retrieval failed, no counts
+    for inst in sorted({c["instance"] for c in run["circuits"]}):
+        do(f, inst, f"{f[:28]}|{inst[:14]}")
 (ROOT/"out"/"bootstrap_ci.json").write_text(json.dumps(res, indent=2, default=float))

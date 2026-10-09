@@ -1,4 +1,4 @@
-"""Summarise every real-hardware run in out/runs/ into out/HARDWARE_RESULTS.md and out/hardware_results.png."""
+"""Summarise every real-hardware run (IBM, IQM Garnet/Emerald, VTT Q50) in out/runs/ into out/HARDWARE_RESULTS.md and out/hardware_results.png."""
 
 from __future__ import annotations
 
@@ -17,13 +17,15 @@ for f in sorted(glob.glob(str(OUT / "runs" / "*.analysis.json"))):
     run = json.loads(Path(f.replace(".analysis.json", ".json")).read_text())
     for inst, s in json.loads(Path(f).read_text()).items():
         rows.append({
-            "file": name.replace(".analysis.json", ""), "device": run.get("device", run["backend"]),
-            "platform": "IBM" if run["backend"] == "ibm" else ("IQM" if run["backend"] == "iqm" else run["backend"].upper()),
+            "file": name.replace(".analysis.json", ""),
+            "device": "Q50" if run["backend"] == "q50" else run.get("device", run["backend"]),
+            "platform": {"ibm": "IBM", "iqm": "IQM", "q50": "VTT"}.get(run["backend"], run["backend"].upper()),
             "job": ", ".join(run.get("jobs", [])), "created": run["created_utc"], "instance": inst,
             "copies": s.get("copies", 1), "best_qubits": bool(run.get("layout_triples")), "ks": run["ks"],
             "shots": s["shots"], "exact": s["exact"], "raw": s["raw_mlae"], "aware": s["noise_aware_mlae"],
             "per_copy": s.get("noise_aware_per_copy_mlae"), "k0": s["k0_only"],
             "gates": s["two_qubit_gates_by_k"], "mc_same_queries": s["mc_rmse_same_queries"],
+            "gain": s.get("gain_by_k", {}), "offset": s.get("offset_by_k", {}),
         })
 
 pct = lambda x: "–" if x is None else f"{100 * x:.3f} %"  # noqa: E731
@@ -50,6 +52,8 @@ md += ["", "Job ids:", *[f"- {r['platform']} {r['device']} {r['created']}: `{r['
        "- Classical Monte Carlo at the same budget is still more precise. No quantum advantage is claimed.",
        "- 'Best qubits' on IBM uses today's calibration data; IQM publishes none through this API, so there the copies are "
        "only placed on well-separated qubits. The first IQM run had 1 copy (small sample, ±0.05 pp shot noise).",
+       "- VTT Q50 (three repeats, section below) is not there yet: raw readings ~12× exact, amplified circuits keep "
+       "little signal, and the calibrated estimate is not reproducible between repeats.",
        "- The independence line (0.040 %) is what P(both) would be if the two areas flooded independently: every run, "
        "even raw, is far above it, i.e. the hardware reproduces the co-flooding."]
 for f in sorted(glob.glob(str(OUT / "runs" / "loader-iqm-emerald-*.json")) + sorted(glob.glob(str(OUT / "runs" / "loader-ibm-*.json"))) + sorted(glob.glob(str(OUT / "runs" / "loader-q50-*.json")))):
@@ -58,10 +62,19 @@ for f in sorted(glob.glob(str(OUT / "runs" / "loader-iqm-emerald-*.json")) + sor
         continue
     lvl = r.get("level", 0.1)
     lvl_txt = "1-in-10" if abs(lvl - 0.1) < 1e-9 else ("1-in-50" if abs(lvl - 0.02) < 1e-9 else f"p={lvl}")
-    md += ["", f"## Full-scale loader at the {lvl_txt} level: all 14 areas on {r['device']} ({r['qubits']} qubits, {r['two_qubit_gates']} two-qubit gates)",
-           f"Job `{r['jobs'][0]}`, {r['shots']:,} shots, readout flip rates {100*r['readout_p01']:.1f} % / {100*r['readout_p10']:.1f} %. "
-           + ("Chart: `out/loader_emerald.png`." if lvl_txt == "1-in-10" else
-            "At this rare level, gate noise creates false triggers that swamp the true signal: the measured limit of today's hardware."), "",
+    is_q50 = r["backend"] == "q50"
+    if is_q50:
+        note = (f"Same circuit as the Emerald 1-in-10 run, on VTT Q50 (file `{Path(f).name}`). P(≥4 areas): raw "
+                f"{100*r['p_at_least_k_raw'][4]:.1f} %, readout-corrected {100*r['p_at_least_k_readout_corrected'][4]:.1f} % vs exact "
+                f"{100*r['p_at_least_k_exact'][4]:.1f} % (independence {100*r['p_at_least_k_independent'][4]:.1f} %). "
+                "Gate and readout noise dominate on Q50 at this size: the measured limit of this hardware today.")
+    elif lvl_txt == "1-in-10":
+        note = "Chart: `out/loader_emerald.png`."
+    else:
+        note = "At this rare level, gate noise creates false triggers that swamp the true signal: the measured limit of today's hardware."
+    dev = "VTT Q50" if is_q50 else r["device"]
+    md += ["", f"## Full-scale loader at the {lvl_txt} level: all 14 areas on {dev} ({r['qubits']} qubits, {r['two_qubit_gates']} two-qubit gates)",
+           f"Job `{r['jobs'][0]}`, {r['shots']:,} shots, readout flip rates {100*r['readout_p01']:.1f} % / {100*r['readout_p10']:.1f} %. " + note, "",
            (f"| k areas over {lvl_txt} | Hardware (readout-corrected) | Exact model | Independence | Observed 1961–2025 |"),
            "|---|---|---|---|---|"]
     obsd = {}
@@ -71,6 +84,37 @@ for f in sorted(glob.glob(str(OUT / "runs" / "loader-iqm-emerald-*.json")) + sor
     for k in range(2, 8):
         md.append(f"| ≥{k} | {100*r['p_at_least_k_readout_corrected'][k]:.1f} % | {100*r['p_at_least_k_exact'][k]:.1f} % | "
                   f"{100*r['p_at_least_k_independent'][k]:.2f} % | {('%.1f %%' % (100*obsd[k])) if k in obsd else '–'} |")
+q50 = [r for r in rows if r["platform"] == "VTT" and r["instance"].startswith("A3")]
+if q50:
+    est = [r["aware"] for r in q50]
+    g1 = [r["gain"].get("1") for r in q50]
+    offs = " / ".join(f"{r['offset'].get('0', 0):.3f}" for r in q50)
+    other_g1 = [s["gain_by_k"]["1"] for f in sorted(glob.glob(str(OUT / "runs" / "*.analysis.json")))
+                if Path(f).name.startswith(("ibm-ibm", "iqm-garnet", "product-iqm-emerald"))
+                for i, s in json.loads(Path(f).read_text()).items() if i.startswith("A3") and "1" in s.get("gain_by_k", {})]
+    md += ["", "## VTT Q50: three repeats of the 3-qubit pair circuit",
+           f"Run through the LUMI hackathon module. Same North-cluster pair circuit as above (exact {pct(q50[0]['exact'])}), "
+           f"1 copy, {q50[0]['shots'] // len(q50[0]['ks']):,} shots per circuit, k = {', '.join(map(str, q50[0]['ks']))}, "
+           "submitted three times in a row.", "",
+           "| Repeat | Job | k=0 rate | Raw | Calibrated | Bootstrap 90 % CI | Gain by k | Zero offset at k=0 |",
+           "|---|---|---|---|---|---|---|---|"]
+    bci = OUT / "bootstrap_ci.json"  # scripts/bootstrap_ci.py
+    bj = json.loads(bci.read_text()) if bci.exists() else {}
+    for i, r in enumerate(q50, 1):
+        ci = bj.get(f"{(r['file'] + '.json')[:28]}|{r['instance'][:14]}", {}).get("ci90")
+        ci_txt = f"{100*ci[0]:.2f}–{100*ci[1]:.2f} %" if ci else "–"
+        md.append(f"| {i} (`{r['file']}`) | `{r['job']}` | {pct(r['k0'])} | {pct(r['raw'])} | **{pct(r['aware'])}** | {ci_txt} | "
+                  f"{' / '.join(f'{v:.2f}' for v in r['gain'].values())} | {r['offset'].get('0', 0):.4f} |")
+    md += ["", f"Calibrated: mean **{pct(sum(est) / len(est))}**, range **{pct(min(est))} – {pct(max(est))}** vs exact "
+           f"{pct(q50[0]['exact'])}. Raw {pct(min(r['raw'] for r in q50))} – {pct(max(r['raw'] for r in q50))}.",
+           "- **Not reproducible yet.** The three calibrated estimates spread about 5×; the one close to exact is luck, not "
+           "precision. The driver is the zero-calibration offset at k=0, which moved between repeats "
+           f"({offs}).",
+           f"- **Amplification barely survives.** At k=1 (27 two-qubit gates) Q50 kept {min(g1):.2f}–{max(g1):.2f} of the signal; "
+           f"IBM, IQM Garnet and Emerald kept {min(other_g1):.2f}–{max(other_g1):.2f} on the same circuit. At k=2 almost nothing is left.",
+           "- An earlier 4-copy best-qubit attempt (`q50-20261009T144440Z`, job "
+           "`d02bd3b5-ca4a-48f1-9003-da506d4b7607`, 4,000 shots) was submitted but result retrieval failed "
+           "(BadRequestError): no data."]
 snow = sorted(glob.glob(str(OUT / "runs" / "product-iqm-emerald-*.analysis.json")))
 if snow:
     d = json.loads(Path(snow[-1]).read_text())
@@ -107,9 +151,12 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 a3 = [r for r in rows if r["instance"].startswith("A3")]
-fig, ax = plt.subplots(figsize=(10, 5.2))
-labels = [f"{r['platform']} {r['device']}\n{('best qubits, ' if r['platform'] == 'IBM' else 'separated qubits, ') if r['best_qubits'] else ''}{r['copies']} cop{'ies' if r['copies'] > 1 else 'y'}"
+fig, ax = plt.subplots(figsize=(11.5, 5.2))
+vtt = [x for x in a3 if x["platform"] == "VTT"]
+rep_txt = lambda r: f"repeat {vtt.index(r) + 1}, " if r in vtt else ""  # noqa: E731
+labels = [f"{r['platform']} {r['device']}\n{rep_txt(r)}{('best qubits, ' if r['platform'] == 'IBM' else 'separated qubits, ') if r['best_qubits'] else ''}{r['copies']} cop{'ies' if r['copies'] > 1 else 'y'}"
           for r in a3]
+labels = [lab.replace("ibm_marrakesh", "Marrakesh").replace("garnet", "Garnet") for lab in labels]
 x = range(len(a3))
 ax.bar([i - 0.2 for i in x], [100 * r["raw"] for r in a3], 0.38, color="#c9d1d9", label="Raw hardware")
 ax.bar([i + 0.2 for i in x], [100 * r["aware"] for r in a3], 0.38, color="#1f6feb",
