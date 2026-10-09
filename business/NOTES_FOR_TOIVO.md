@@ -98,3 +98,8 @@ Snowy toggle). index.html edits: one CSS link, one nav link, the section, one sc
   (CLUSTER_NAME map in app.js, label in pipeline.js); data keys, CLAIMS, charts and the deck still say Ostrobothnia.
   If you prefer one name everywhere, pick one; the video currently shows the old name.
 - QA.md: appended two answers (what the tool is for; trigger fires but no flood).
+- **New web section "This year" (`#season`, before How it works):** 1 March 2026 snow → model's chances per cluster
+  vs what the rivers did by June (0 of 14 over 1-in-10, no payout; snow 8th/45th/10th pct). Out of sample (fit is
+  1961–2025). Files: `web/season.js`, styles in `web/pipeline.css`, data `web/data/season2026.json` from
+  `scripts/season_2026.py` (fetches 2026 from SYKE/SMHI into data/raw/season2026). Logged in CLAIMS. Added after the
+  17:00 app freeze at Vaishnav's request; it does not touch your sections or the video.

@@ -14,7 +14,7 @@
     <div class="brand"><span class="logo" aria-hidden="true"></span>Tulva</div>
     <nav>
       <a href="#map">Joint risk</a><a href="#outlook">Snow outlook</a><a href="#product">Index cover</a>
-      <a href="#how">How it works</a><a href="#hood">Under the hood</a><a href="#replay">Year replay</a>
+      <a href="#season">This year</a><a href="#how">How it works</a><a href="#hood">Under the hood</a><a href="#replay">Year replay</a>
     </nav>
   </div>
 </header>
@@ -63,6 +63,18 @@
   <div class="wrap">
     <p class="eyebrow">3 · The product</p>
     <div class="card" id="card"></div>
+  </div>
+</section>
+
+<section id="season" class="sec alt">
+  <div class="wrap">
+    <p class="eyebrow">This year</p>
+    <h2>Spring 2026: what Tulva said on 1 March, and what the rivers did</h2>
+    <p class="lead">A real test on a year the model never saw. The snow measured on 1 March 2026 went in; by June,
+      SYKE's gauges showed what happened.</p>
+    <div class="stats se-sum" id="season-sum"></div>
+    <div class="se-grid" id="season-body"></div>
+    <p class="fine" id="season-foot"></p>
   </div>
 </section>
 
@@ -161,5 +173,6 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script src="app.js"></script>
 <script src="pipeline.js"></script>
+<script src="season.js"></script>
 </body>
 </html>

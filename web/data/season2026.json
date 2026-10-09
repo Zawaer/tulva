@@ -1,0 +1,273 @@
+{
+ "year": 2026,
+ "fitted_on": "1961–2025",
+ "clusters": {
+  "Ostrobothnia": {
+   "n": 6,
+   "snow_pct_2026": 8.3,
+   "snow_mm_2026_by_catchment": {
+    "131": 29.99,
+    "147": 40.83
+   },
+   "predicted": {
+    "p_ge2_1in50": 5.238710788389788e-05,
+    "p_ge2_1in50_average_year": 0.025634095530037163,
+    "p_ge2_1in10": 0.0037994056670933745,
+    "p_ge2_1in10_average_year": 0.1496603734552717,
+    "p_ge1_1in10": 0.029491959692386556,
+    "p_ge1_1in10_average_year": 0.29032909689188097,
+    "expected_areas_over_1in10": 0.03417413136631553,
+    "expected_areas_over_1in10_average_year": 0.5999999999999971,
+    "src": "exact",
+    "note": "factor model (1961–2025 fit) conditioned on the cluster's 1 March 2026 SWE percentile"
+   },
+   "result": {
+    "areas_over_1in10": 0,
+    "areas_over_1in50": 0,
+    "payout": false,
+    "src": "data"
+   },
+   "areas": [
+    {
+     "area": "Lapväärtti",
+     "gauge": "Lapväärtinjoki, Perus",
+     "peak_2026": 70.0,
+     "peak_date": "2026-03-17",
+     "days_with_data": 122,
+     "q10_empirical": 152.0,
+     "q50_gev": 245.3,
+     "ratio_to_q10": 0.46,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Ilmajoki–Seinäjoki",
+     "gauge": "Kyrönjoki, Hanhikoski",
+     "peak_2026": 118.4,
+     "peak_date": "2026-03-17",
+     "days_with_data": 122,
+     "q10_empirical": 342.8,
+     "q50_gev": 450.6,
+     "ratio_to_q10": 0.35,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Laihia",
+     "gauge": "Laihianjoki, Karkkimala",
+     "peak_2026": 11.8,
+     "peak_date": "2026-03-16",
+     "days_with_data": 122,
+     "q10_empirical": 43.0,
+     "q50_gev": 55.0,
+     "ratio_to_q10": 0.27,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Ylistaro–Koivulahti",
+     "gauge": "Kyrönjoki, Skatila",
+     "peak_2026": 125.0,
+     "peak_date": "2026-03-17",
+     "days_with_data": 122,
+     "q10_empirical": 389.8,
+     "q50_gev": 488.9,
+     "ratio_to_q10": 0.32,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Alavieska–Ylivieska",
+     "gauge": "Kalajoki, Niskakoski/Hihnalankoski",
+     "peak_2026": 106.0,
+     "peak_date": "2026-03-15",
+     "days_with_data": 122,
+     "q10_empirical": 313.2,
+     "q50_gev": 388.3,
+     "ratio_to_q10": 0.34,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Lower Pyhäjoki",
+     "gauge": "Pyhäjoki, Tolpankoski/Pyhänkoski",
+     "peak_2026": 132.0,
+     "peak_date": "2026-05-18",
+     "days_with_data": 122,
+     "q10_empirical": 389.0,
+     "q50_gev": 470.3,
+     "ratio_to_q10": 0.34,
+     "over_1in10": false,
+     "over_1in50": false
+    }
+   ]
+  },
+  "North": {
+   "n": 5,
+   "snow_pct_2026": 44.7,
+   "snow_mm_2026_by_catchment": {
+    "188": 98.76,
+    "216": 148.67,
+    "230": 136.6,
+    "236": 154.88
+   },
+   "predicted": {
+    "p_ge2_1in50": 0.00982531552207135,
+    "p_ge2_1in50_average_year": 0.019634663765794497,
+    "p_ge2_1in10": 0.09326662109604805,
+    "p_ge2_1in10_average_year": 0.12685099882335593,
+    "p_ge1_1in10": 0.2399924400049134,
+    "p_ge1_1in10_average_year": 0.27713984161936567,
+    "expected_areas_over_1in10": 0.3889095020425634,
+    "expected_areas_over_1in10_average_year": 0.49999999999999767,
+    "src": "exact",
+    "note": "factor model (1961–2025 fit) conditioned on the cluster's 1 March 2026 SWE percentile"
+   },
+   "result": {
+    "areas_over_1in10": 0,
+    "areas_over_1in50": 0,
+    "payout": false,
+    "src": "data"
+   },
+   "areas": [
+    {
+     "area": "Pudasjärvi",
+     "gauge": "Iijoki, Kurenalus",
+     "peak_2026": 188.0,
+     "peak_date": "2026-04-01",
+     "days_with_data": 122,
+     "q10_empirical": 573.0,
+     "q50_gev": 753.9,
+     "ratio_to_q10": 0.33,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Ivalo",
+     "gauge": "Ivalojoki, Pajakoski",
+     "peak_2026": 252.0,
+     "peak_date": "2026-05-13",
+     "days_with_data": 122,
+     "q10_empirical": 738.4,
+     "q50_gev": 984.4,
+     "ratio_to_q10": 0.34,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Kittilä",
+     "gauge": "Ounasjoki, Köngäs",
+     "peak_2026": 293.0,
+     "peak_date": "2026-05-17",
+     "days_with_data": 122,
+     "q10_empirical": 683.4,
+     "q50_gev": 789.2,
+     "ratio_to_q10": 0.43,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Rovaniemi",
+     "gauge": "Ounasjoki, Marraskoski",
+     "peak_2026": 494.0,
+     "peak_date": "2026-05-18",
+     "days_with_data": 122,
+     "q10_empirical": 1326.6,
+     "q50_gev": 1480.3,
+     "ratio_to_q10": 0.37,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Tornio",
+     "gauge": "Tornionjoki, Kukkolankoski (SMHI 16722)",
+     "peak_2026": 1361.0,
+     "peak_date": "2026-05-29",
+     "days_with_data": 100,
+     "q10_empirical": 2966.2,
+     "q50_gev": 3511.1,
+     "ratio_to_q10": 0.46,
+     "over_1in10": false,
+     "over_1in50": false
+    }
+   ]
+  },
+  "Satakunta–SE": {
+   "n": 3,
+   "snow_pct_2026": 9.8,
+   "snow_mm_2026_by_catchment": {
+    "55": 52.86,
+    "109": 22.54,
+    "112": 27.94
+   },
+   "predicted": {
+    "p_ge2_1in50": 9.09217243382326e-05,
+    "p_ge2_1in50_average_year": 0.006182693509499219,
+    "p_ge2_1in10": 0.004085098387494773,
+    "p_ge2_1in10_average_year": 0.05910471016358023,
+    "p_ge1_1in10": 0.05672212026972111,
+    "p_ge1_1in10_average_year": 0.2299063304339163,
+    "expected_areas_over_1in10": 0.06102845918701084,
+    "expected_areas_over_1in10_average_year": 0.2999999999999986,
+    "src": "exact",
+    "note": "factor model (1961–2025 fit) conditioned on the cluster's 1 March 2026 SWE percentile"
+   },
+   "result": {
+    "areas_over_1in10": 0,
+    "areas_over_1in50": 0,
+    "payout": false,
+    "src": "data"
+   },
+   "areas": [
+    {
+     "area": "Pori",
+     "gauge": "Kokemäenjoki, Harjavalta",
+     "peak_2026": 271.2,
+     "peak_date": "2026-03-05",
+     "days_with_data": 122,
+     "q10_empirical": 716.6,
+     "q50_gev": 865.2,
+     "ratio_to_q10": 0.38,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Huittinen",
+     "gauge": "Loimijoki, Maurialankoski",
+     "peak_2026": 57.0,
+     "peak_date": "2026-03-13",
+     "days_with_data": 122,
+     "q10_empirical": 242.2,
+     "q50_gev": 357.3,
+     "ratio_to_q10": 0.24,
+     "over_1in10": false,
+     "over_1in50": false
+    },
+    {
+     "area": "Lower Kymijoki",
+     "gauge": "Kymijoki, Anjala",
+     "peak_2026": 289.8,
+     "peak_date": "2026-03-14",
+     "days_with_data": 122,
+     "q10_empirical": 523.2,
+     "q50_gev": 612.3,
+     "ratio_to_q10": 0.55,
+     "over_1in10": false,
+     "over_1in50": false
+    }
+   ]
+  }
+ },
+ "snow_mm_2026": {
+  "55": 52.86,
+  "109": 22.54,
+  "112": 27.94,
+  "131": 29.99,
+  "147": 40.83,
+  "188": 98.76,
+  "216": 148.67,
+  "230": 136.6,
+  "236": 154.88
+ },
+ "sources": "SYKE Hydrologiarajapinta (Virtaama daily discharge, LumiAlue areal SWE), SMHI 16722 (Torne); values for 2026 are provisional"
+}

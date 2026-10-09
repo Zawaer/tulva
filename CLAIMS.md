@@ -453,3 +453,13 @@ training springs only, then frozen. Trigger = ≥2 of cluster over frozen GEV 1-
 - Reading: the snow→joint-flood ranking survives on unseen years in 4 of 6 cluster tests; the size of the effect
   ("triples") is not confirmed on recent years (too few flags); per-cluster skill is unstable (North 0.31 vs 0.70 by
   fit period); a fixed snow cut-off is not stationary. Pooled p-values optimistic (clusters share years).
+### Spring 2026 out-of-sample check (Vaishnav, 9 Oct) · scripts/season_2026.py → web/data/season2026.json
+Model fitted on 1961–2025 only; 2026 snow (SYKE LumiAlue, 1 March) and Mar–Jun 2026 discharge (SYKE Virtaama, SMHI
+16722) fetched 9 Oct 2026 (provisional values).
+- 1 March 2026 snow, cluster index percentile among 1961–2026: Ostrobothnia **8th**, North **45th**, Satakunta–SE
+  **10th** · data
+- Said on 1 March (exact, conditioned on that percentile): P(≥2 over 1-in-10) Ostrobothnia 0.4 % (average year
+  15 %), North 9.3 % (12.7 %), Satakunta–SE 0.4 % (5.9 %); payout chance (≥2 over 1-in-50) 0.01 % / 0.98 % / 0.01 %
+  (average 2.56 / 1.96 / 0.62 %); expected areas over 1-in-10: 0.03 / 0.39 / 0.06 · exact
+- What happened: **0 of 14 areas passed their empirical 1-in-10 level; 0 passed 1-in-50; no payout.** Peaks were
+  24–55 % of the 1-in-10 level (Rovaniemi 494 m³/s on 18 May = 37 %) · data (counts)
