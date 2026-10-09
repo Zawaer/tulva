@@ -1,0 +1,47 @@
+{
+ "text": "Tulva.",
+ "hash": "ad372aa0300c",
+ "voice": "AesrdOgpgZSXUSHb7gw3",
+ "model": "eleven_multilingual_v2",
+ "settings": {
+  "stability": 0.55,
+  "similarity_boost": 0.8,
+  "style": 0.25,
+  "speed": 1.12
+ },
+ "context": [
+  "We ran it on IBM, IQM, and Finland's VTT Q fifty.",
+  "The snow warns two months early."
+ ],
+ "duration": 0.612,
+ "alignment": {
+  "characters": [
+   "T",
+   "u",
+   "l",
+   "v",
+   "a",
+   "."
+  ],
+  "character_start_times_seconds": [
+   0.03999999999999998,
+   0.08600000000000002,
+   0.191,
+   0.295,
+   0.35300000000000004,
+   0.4920000000000001
+  ],
+  "character_end_times_seconds": [
+   0.08600000000000002,
+   0.191,
+   0.295,
+   0.35300000000000004,
+   0.49199999999999994,
+   0.5610000000000002
+  ]
+ },
+ "spliced": {
+  "word": "Tulva",
+  "from": "fi_tulva.mp3"
+ }
+}

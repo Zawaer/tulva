@@ -1,12 +1,12 @@
 # Demo video narration (slide 4, voiceover)
 
 Source of truth for the voiceover and the burned-in captions. `tts.py` reads this file, so edit it here and rerun
-`python3 tts.py` (then `npm run render`). Format: `## N · scene` starts a beat (one scene of the video); each `>` line
+`python3 tts.py lines`, listen, then `python3 tts.py build` and `npm run render`. Format: `## N · scene` starts a beat (one scene of the video); each `>` line
 is one caption. `say ‖ show` when the caption is written differently from how it is spoken (numbers, names); a
 line without `‖` is spoken and shown as written. The end card (beat 5) shows its words on screen instead of a caption.
 
-Every number is in CLAIMS.md (see "Numbers" at the bottom). Voice: ElevenLabs `eleven_multilingual_v2`, calm
-neutral English; the mp3 is `narration.mp3` next to this file.
+Every number is in CLAIMS.md (see "Numbers" at the bottom). Voice: ElevenLabs "Protégé narrator", `eleven_multilingual_v2`;
+one file per sentence in `lines/`, joined into `narration.mp3` next to this file.
 
 ## 1 · Map: spring 2005
 > First of March, two thousand five. ‖ 1 March 2005.

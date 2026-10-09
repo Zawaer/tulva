@@ -483,7 +483,7 @@ No new numbers; every on-slide number is one already logged above. Wording mappi
 - Slide 8 "Runs on 4 quantum chips" = IBM Marrakesh, IQM Garnet, IQM Emerald, VTT Q50.
 
 ## Animated demo video (Fri 9 Oct, candidate for slide 4, not yet in the deck) · deck/video/anim/ → deck/video/tulva_demo_anim.mp4
-43.97 s, ElevenLabs voiceover (deck/video/anim/narration.md) + burned-in captions. No new numbers; each one below is
+39.03 s, ElevenLabs voiceover (deck/video/anim/narration.md, voice "Protégé narrator (clone)") + burned-in captions. No new numbers; each one below is
 an existing claim, read by deck/video/anim/export_data.py (which asserts the spoken values) or shown live in the app.
 - Map, 2005: 4 of 14 areas over their empirical 1-in-10 level (Ivalo 142 %, Kittilä 124 %, Rovaniemi 112 %, Tornio
   101 % of it); North 1 March snow 87th percentile (top 15 %); fine print "back-test, not a forecast made in 2005";

@@ -1,0 +1,67 @@
+{
+ "text": "Tämä on tulva.",
+ "hash": "c2c0283b5380",
+ "voice": "AesrdOgpgZSXUSHb7gw3",
+ "model": "eleven_multilingual_v2",
+ "settings": {
+  "stability": 0.55,
+  "similarity_boost": 0.8,
+  "style": 0.25,
+  "speed": 1.12
+ },
+ "context": [
+  null,
+  null
+ ],
+ "duration": 1.161,
+ "alignment": {
+  "characters": [
+   "T",
+   "ä",
+   "m",
+   "ä",
+   " ",
+   "o",
+   "n",
+   " ",
+   "t",
+   "u",
+   "l",
+   "v",
+   "a",
+   "."
+  ],
+  "character_start_times_seconds": [
+   0.0,
+   0.139,
+   0.197,
+   0.255,
+   0.302,
+   0.348,
+   0.395,
+   0.43,
+   0.488,
+   0.534,
+   0.639,
+   0.743,
+   0.801,
+   0.94
+  ],
+  "character_end_times_seconds": [
+   0.139,
+   0.197,
+   0.255,
+   0.302,
+   0.348,
+   0.395,
+   0.43,
+   0.488,
+   0.534,
+   0.639,
+   0.743,
+   0.801,
+   0.94,
+   1.161
+  ]
+ }
+}

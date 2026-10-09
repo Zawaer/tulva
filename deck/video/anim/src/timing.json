@@ -1,48 +1,66 @@
 {
- "voice": "XrExE9yKIg1WjnnlVkGX",
+ "voice": "AesrdOgpgZSXUSHb7gw3",
  "model": "eleven_multilingual_v2",
- "take": "take-0b83c8c848eb.mp3",
- "total": 43.935,
+ "settings": {
+  "stability": 0.55,
+  "similarity_boost": 0.8,
+  "style": 0.25,
+  "speed": 1.12
+ },
+ "lines": [
+  "01_first-of-march-two.mp3",
+  "02_lapland-s-snowpack-is.mp3",
+  "03_two-months-later-four.mp3",
+  "04_our-app-turns-that.mp3",
+  "05_set-march-snow-to.mp3",
+  "06_each-square-is-one.mp3",
+  "07_red-both-rivers-flood.mp3",
+  "08_snowy-versus-low-snow.mp3",
+  "09_we-ran-it-on.mp3",
+  "10_tulva.fi.mp3",
+  "11_the-snow-warns-two.mp3"
+ ],
+ "total": 39.02,
  "beats": [
   {
    "n": 1,
    "title": "Map: spring 2005",
    "start": 0.0,
    "speech_start": 0.5,
-   "speech_end": 10.554,
-   "end": 11.161
+   "speech_end": 9.14,
+   "end": 9.802
   },
   {
    "n": 2,
    "title": "App: March snow outlook",
-   "start": 11.161,
-   "speech_start": 11.767,
-   "speech_end": 20.556,
-   "end": 21.104
+   "start": 9.802,
+   "speech_start": 10.302,
+   "speech_end": 17.965,
+   "end": 18.674
   },
   {
    "n": 3,
    "title": "Chip: IQM Emerald shots",
-   "start": 21.104,
-   "speech_start": 21.652,
-   "speech_end": 34.064,
-   "end": 34.641
+   "start": 18.674,
+   "speech_start": 19.174,
+   "speech_end": 29.264,
+   "end": 29.915
   },
   {
    "n": 4,
    "title": "Computers",
-   "start": 34.641,
-   "speech_start": 35.218,
-   "speech_end": 39.224,
-   "end": 39.575
+   "start": 29.915,
+   "speech_start": 30.415,
+   "speech_end": 34.072,
+   "end": 34.677
   },
   {
    "n": 5,
    "title": "End card",
-   "start": 39.575,
-   "speech_start": 39.925,
-   "speech_end": 42.433,
-   "end": 43.935
+   "start": 34.677,
+   "speech_start": 35.217,
+   "speech_end": 37.717,
+   "end": 39.022
   }
  ],
  "chunks": [
@@ -51,98 +69,98 @@
    "say": "First of March, two thousand five.",
    "show": "1 March 2005.",
    "start": 0.5,
-   "end": 2.52
+   "end": 2.125
   },
   {
    "beat": 0,
    "say": "Lapland's snowpack is in its top fifteen percent.",
    "show": "Lapland's snowpack is in its top 15 %.",
-   "start": 3.275,
-   "end": 6.154
+   "start": 2.765,
+   "end": 5.122
   },
   {
    "beat": 0,
    "say": "Two months later,",
    "show": "Two months later,",
-   "start": 6.874,
-   "end": 7.652
+   "start": 5.773,
+   "end": 6.621
   },
   {
    "beat": 0,
    "say": "four Lapland rivers pass their flood levels together.",
    "show": "four Lapland rivers pass their flood levels together.",
-   "start": 7.896,
-   "end": 10.554
+   "start": 6.783,
+   "end": 9.14
   },
   {
    "beat": 1,
    "say": "Our app turns that snow into a price.",
    "show": "Our app turns that snow into a price.",
-   "start": 11.767,
-   "end": 13.996
+   "start": 10.302,
+   "end": 12.299
   },
   {
    "beat": 1,
    "say": "Set March snow to high,",
    "show": "Set March snow to HIGH,",
-   "start": 14.751,
-   "end": 16.109
+   "start": 13.019,
+   "end": 14.354
   },
   {
    "beat": 1,
    "say": "and the chance our northern cover pays jumps from two to six point four percent.",
    "show": "and the chance our northern cover pays jumps from 2 % to 6.4 %.",
-   "start": 16.353,
-   "end": 20.556
+   "start": 14.412,
+   "end": 17.965
   },
   {
    "beat": 2,
    "say": "Each square is one shot on IQM's Emerald quantum computer.",
    "show": "Each square is one shot on IQM's Emerald quantum computer.",
-   "start": 21.652,
-   "end": 25.019
+   "start": 19.174,
+   "end": 22.251
   },
   {
    "beat": 2,
    "say": "Red: both rivers flood.",
    "show": "Red: both rivers flood.",
-   "start": 25.809,
-   "end": 27.736
+   "start": 22.878,
+   "end": 24.074
   },
   {
    "beat": 2,
    "say": "Snowy versus low snow:",
    "show": "Snowy versus low snow:",
-   "start": 28.432,
-   "end": 29.768
+   "start": 24.678,
+   "end": 26.036
   },
   {
    "beat": 2,
    "say": "about three times the risk on the chip, two point seven five exact.",
    "show": "about 3× the risk on the chip, 2.75× exact.",
-   "start": 30.232,
-   "end": 34.064
+   "start": 26.211,
+   "end": 29.264
   },
   {
    "beat": 3,
    "say": "We ran it on IBM, IQM, and Finland's VTT Q fifty.",
    "show": "We ran it on IBM, IQM and Finland's VTT Q50.",
-   "start": 35.218,
-   "end": 39.224
+   "start": 30.415,
+   "end": 34.072
   },
   {
    "beat": 4,
    "say": "Tulva.",
    "show": "Tulva.",
-   "start": 39.925,
-   "end": 40.367
+   "start": 35.217,
+   "end": 35.669
   },
   {
    "beat": 4,
    "say": "The snow warns two months early.",
    "show": "The snow warns two months early.",
-   "start": 40.924,
-   "end": 42.433
+   "start": 36.289,
+   "end": 37.717
   }
  ],
  "words": [
@@ -150,613 +168,613 @@
    "beat": 0,
    "w": "First",
    "start": 0.5,
-   "end": 0.848
+   "end": 0.779
   },
   {
    "beat": 0,
    "w": "of",
-   "start": 0.895,
-   "end": 0.953
+   "start": 0.813,
+   "end": 0.86
   },
   {
    "beat": 0,
    "w": "March,",
-   "start": 1.022,
-   "end": 1.417
+   "start": 0.906,
+   "end": 1.22
   },
   {
    "beat": 0,
    "w": "two",
-   "start": 1.475,
-   "end": 1.649
+   "start": 1.243,
+   "end": 1.371
   },
   {
    "beat": 0,
    "w": "thousand",
-   "start": 1.707,
-   "end": 2.033
+   "start": 1.417,
+   "end": 1.719
   },
   {
    "beat": 0,
    "w": "five.",
-   "start": 2.091,
-   "end": 2.625
+   "start": 1.765,
+   "end": 2.265
   },
   {
    "beat": 0,
    "w": "Lapland's",
-   "start": 3.275,
-   "end": 3.832
+   "start": 2.765,
+   "end": 3.218
   },
   {
    "beat": 0,
    "w": "snowpack",
-   "start": 3.855,
-   "end": 4.378
+   "start": 3.253,
+   "end": 3.694
   },
   {
    "beat": 0,
    "w": "is",
-   "start": 4.459,
-   "end": 4.598
+   "start": 3.752,
+   "end": 3.822
   },
   {
    "beat": 0,
    "w": "in",
-   "start": 4.645,
-   "end": 4.703
+   "start": 3.856,
+   "end": 3.914
   },
   {
    "beat": 0,
    "w": "its",
-   "start": 4.749,
-   "end": 4.877
+   "start": 3.949,
+   "end": 4.065
   },
   {
    "beat": 0,
    "w": "top",
-   "start": 4.935,
-   "end": 5.202
+   "start": 4.1,
+   "end": 4.286
   },
   {
    "beat": 0,
    "w": "fifteen",
-   "start": 5.272,
-   "end": 5.666
+   "start": 4.356,
+   "end": 4.657
   },
   {
    "beat": 0,
    "w": "percent.",
-   "start": 5.724,
-   "end": 6.317
+   "start": 4.704,
+   "end": 5.273
   },
   {
    "beat": 0,
    "w": "Two",
-   "start": 6.874,
-   "end": 7.036
+   "start": 5.773,
+   "end": 5.959
   },
   {
    "beat": 0,
    "w": "months",
-   "start": 7.106,
-   "end": 7.303
+   "start": 6.017,
+   "end": 6.249
   },
   {
    "beat": 0,
    "w": "later,",
-   "start": 7.35,
-   "end": 7.733
+   "start": 6.295,
+   "end": 6.679
   },
   {
    "beat": 0,
    "w": "four",
-   "start": 7.896,
-   "end": 8.139
+   "start": 6.783,
+   "end": 7.05
   },
   {
    "beat": 0,
    "w": "Lapland",
-   "start": 8.209,
-   "end": 8.604
+   "start": 7.12,
+   "end": 7.433
   },
   {
    "beat": 0,
    "w": "rivers",
-   "start": 8.673,
-   "end": 8.999
+   "start": 7.48,
+   "end": 7.735
   },
   {
    "beat": 0,
    "w": "pass",
-   "start": 9.068,
-   "end": 9.324
+   "start": 7.782,
+   "end": 8.002
   },
   {
    "beat": 0,
    "w": "their",
-   "start": 9.37,
-   "end": 9.509
+   "start": 8.049,
+   "end": 8.188
   },
   {
    "beat": 0,
    "w": "flood",
-   "start": 9.556,
-   "end": 9.765
+   "start": 8.234,
+   "end": 8.432
   },
   {
    "beat": 0,
    "w": "levels",
-   "start": 9.811,
-   "end": 10.09
+   "start": 8.478,
+   "end": 8.757
   },
   {
    "beat": 0,
    "w": "together.",
-   "start": 10.136,
-   "end": 10.717
+   "start": 8.803,
+   "end": 9.302
   },
   {
    "beat": 1,
    "w": "Our",
-   "start": 11.767,
-   "end": 11.918
+   "start": 10.302,
+   "end": 10.476
   },
   {
    "beat": 1,
    "w": "app",
-   "start": 11.988,
-   "end": 12.22
+   "start": 10.523,
+   "end": 10.732
   },
   {
    "beat": 1,
    "w": "turns",
-   "start": 12.278,
-   "end": 12.556
+   "start": 10.79,
+   "end": 11.057
   },
   {
    "beat": 1,
    "w": "that",
-   "start": 12.614,
-   "end": 12.777
+   "start": 11.103,
+   "end": 11.242
   },
   {
    "beat": 1,
    "w": "snow",
-   "start": 12.835,
-   "end": 13.114
+   "start": 11.289,
+   "end": 11.533
   },
   {
    "beat": 1,
    "w": "into",
-   "start": 13.195,
-   "end": 13.357
+   "start": 11.602,
+   "end": 11.753
   },
   {
    "beat": 1,
    "w": "a",
-   "start": 13.427,
-   "end": 13.45
+   "start": 11.811,
+   "end": 11.835
   },
   {
    "beat": 1,
    "w": "price.",
-   "start": 13.508,
-   "end": 14.101
+   "start": 11.881,
+   "end": 12.531
   },
   {
    "beat": 1,
    "w": "Set",
-   "start": 14.751,
-   "end": 14.971
+   "start": 13.019,
+   "end": 13.274
   },
   {
    "beat": 1,
    "w": "March",
-   "start": 15.041,
-   "end": 15.296
+   "start": 13.332,
+   "end": 13.611
   },
   {
    "beat": 1,
    "w": "snow",
-   "start": 15.354,
-   "end": 15.587
+   "start": 13.658,
+   "end": 13.855
   },
   {
    "beat": 1,
    "w": "to",
-   "start": 15.656,
-   "end": 15.726
+   "start": 13.901,
+   "end": 13.971
   },
   {
    "beat": 1,
    "w": "high,",
-   "start": 15.796,
-   "end": 16.214
+   "start": 14.041,
+   "end": 14.377
   },
   {
    "beat": 1,
    "w": "and",
-   "start": 16.353,
-   "end": 16.492
+   "start": 14.412,
+   "end": 14.54
   },
   {
    "beat": 1,
    "w": "the",
-   "start": 16.539,
-   "end": 16.608
+   "start": 14.575,
+   "end": 14.644
   },
   {
    "beat": 1,
    "w": "chance",
-   "start": 16.655,
-   "end": 16.957
+   "start": 14.679,
+   "end": 14.969
   },
   {
    "beat": 1,
    "w": "our",
-   "start": 16.991,
-   "end": 17.096
+   "start": 15.004,
+   "end": 15.12
   },
   {
    "beat": 1,
    "w": "northern",
-   "start": 17.165,
-   "end": 17.491
+   "start": 15.167,
+   "end": 15.434
   },
   {
    "beat": 1,
    "w": "cover",
-   "start": 17.549,
-   "end": 17.781
+   "start": 15.48,
+   "end": 15.689
   },
   {
    "beat": 1,
    "w": "pays",
-   "start": 17.839,
-   "end": 18.176
+   "start": 15.736,
+   "end": 16.003
   },
   {
    "beat": 1,
    "w": "jumps",
-   "start": 18.338,
-   "end": 18.617
+   "start": 16.049,
+   "end": 16.281
   },
   {
    "beat": 1,
    "w": "from",
-   "start": 18.663,
-   "end": 18.826
+   "start": 16.328,
+   "end": 16.456
   },
   {
    "beat": 1,
    "w": "two",
-   "start": 18.895,
-   "end": 19.116
+   "start": 16.502,
+   "end": 16.711
   },
   {
    "beat": 1,
    "w": "to",
-   "start": 19.22,
-   "end": 19.313
+   "start": 16.781,
+   "end": 16.85
   },
   {
    "beat": 1,
    "w": "six",
-   "start": 19.383,
-   "end": 19.569
+   "start": 16.897,
+   "end": 17.059
   },
   {
    "beat": 1,
    "w": "point",
-   "start": 19.638,
-   "end": 19.847
+   "start": 17.106,
+   "end": 17.291
   },
   {
    "beat": 1,
    "w": "four",
-   "start": 19.905,
-   "end": 20.091
+   "start": 17.338,
+   "end": 17.5
   },
   {
    "beat": 1,
    "w": "percent.",
-   "start": 20.149,
-   "end": 20.695
+   "start": 17.547,
+   "end": 18.174
   },
   {
    "beat": 2,
    "w": "Each",
-   "start": 21.652,
-   "end": 21.861
+   "start": 19.174,
+   "end": 19.371
   },
   {
    "beat": 2,
    "w": "square",
-   "start": 21.908,
-   "end": 22.244
+   "start": 19.406,
+   "end": 19.673
   },
   {
    "beat": 2,
    "w": "is",
-   "start": 22.291,
-   "end": 22.384
+   "start": 19.708,
+   "end": 19.778
   },
   {
    "beat": 2,
    "w": "one",
-   "start": 22.465,
-   "end": 22.651
+   "start": 19.824,
+   "end": 19.963
   },
   {
    "beat": 2,
    "w": "shot",
-   "start": 22.685,
-   "end": 22.964
+   "start": 19.998,
+   "end": 20.265
   },
   {
    "beat": 2,
    "w": "on",
-   "start": 23.034,
-   "end": 23.15
+   "start": 20.312,
+   "end": 20.405
   },
   {
    "beat": 2,
    "w": "IQM's",
-   "start": 23.22,
-   "end": 23.754
+   "start": 20.486,
+   "end": 21.043
   },
   {
    "beat": 2,
    "w": "Emerald",
-   "start": 23.823,
-   "end": 24.125
+   "start": 21.113,
+   "end": 21.426
   },
   {
    "beat": 2,
    "w": "quantum",
-   "start": 24.172,
-   "end": 24.508
+   "start": 21.473,
+   "end": 21.763
   },
   {
    "beat": 2,
    "w": "computer.",
-   "start": 24.555,
-   "end": 25.158
+   "start": 21.809,
+   "end": 22.378
   },
   {
    "beat": 2,
    "w": "Red:",
-   "start": 25.809,
-   "end": 26.215
+   "start": 22.878,
+   "end": 23.18
   },
   {
    "beat": 2,
    "w": "both",
-   "start": 26.691,
-   "end": 26.935
+   "start": 23.25,
+   "end": 23.458
   },
   {
    "beat": 2,
    "w": "rivers",
-   "start": 27.004,
-   "end": 27.306
+   "start": 23.517,
+   "end": 23.772
   },
   {
    "beat": 2,
    "w": "flood.",
-   "start": 27.364,
-   "end": 27.875
+   "start": 23.818,
+   "end": 24.178
   },
   {
    "beat": 2,
    "w": "Snowy",
-   "start": 28.432,
-   "end": 28.781
+   "start": 24.678,
+   "end": 25.108
   },
   {
    "beat": 2,
    "w": "versus",
-   "start": 28.862,
-   "end": 29.187
+   "start": 25.189,
+   "end": 25.467
   },
   {
    "beat": 2,
    "w": "low",
-   "start": 29.257,
-   "end": 29.408
+   "start": 25.526,
+   "end": 25.688
   },
   {
    "beat": 2,
    "w": "snow:",
-   "start": 29.477,
-   "end": 29.93
+   "start": 25.746,
+   "end": 26.141
   },
   {
    "beat": 2,
    "w": "about",
-   "start": 30.232,
-   "end": 30.487
+   "start": 26.211,
+   "end": 26.454
   },
   {
    "beat": 2,
    "w": "three",
-   "start": 30.522,
-   "end": 30.731
+   "start": 26.501,
+   "end": 26.71
   },
   {
    "beat": 2,
    "w": "times",
-   "start": 30.778,
-   "end": 31.068
+   "start": 26.756,
+   "end": 27.023
   },
   {
    "beat": 2,
    "w": "the",
-   "start": 31.114,
-   "end": 31.184
+   "start": 27.058,
+   "end": 27.128
   },
   {
    "beat": 2,
    "w": "risk",
-   "start": 31.242,
-   "end": 31.451
+   "start": 27.163,
+   "end": 27.337
   },
   {
    "beat": 2,
    "w": "on",
-   "start": 31.509,
-   "end": 31.579
+   "start": 27.383,
+   "end": 27.453
   },
   {
    "beat": 2,
    "w": "the",
-   "start": 31.614,
-   "end": 31.683
+   "start": 27.488,
+   "end": 27.557
   },
   {
    "beat": 2,
    "w": "chip,",
-   "start": 31.718,
-   "end": 32.124
+   "start": 27.592,
+   "end": 27.882
   },
   {
    "beat": 2,
    "w": "two",
-   "start": 32.264,
-   "end": 32.449
+   "start": 27.917,
+   "end": 28.057
   },
   {
    "beat": 2,
    "w": "point",
-   "start": 32.519,
-   "end": 32.74
+   "start": 28.103,
+   "end": 28.277
   },
   {
    "beat": 2,
    "w": "seven",
-   "start": 32.798,
-   "end": 33.042
+   "start": 28.312,
+   "end": 28.498
   },
   {
    "beat": 2,
    "w": "five",
-   "start": 33.1,
-   "end": 33.46
+   "start": 28.556,
+   "end": 28.823
   },
   {
    "beat": 2,
    "w": "exact.",
-   "start": 33.518,
-   "end": 34.168
+   "start": 28.858,
+   "end": 29.415
   },
   {
    "beat": 3,
    "w": "We",
-   "start": 35.218,
-   "end": 35.346
+   "start": 30.415,
+   "end": 30.554
   },
   {
    "beat": 3,
    "w": "ran",
-   "start": 35.416,
-   "end": 35.578
+   "start": 30.601,
+   "end": 30.728
   },
   {
    "beat": 3,
    "w": "it",
-   "start": 35.625,
-   "end": 35.694
+   "start": 30.775,
+   "end": 30.845
   },
   {
    "beat": 3,
    "w": "on",
-   "start": 35.752,
-   "end": 35.857
+   "start": 30.891,
+   "end": 30.984
   },
   {
    "beat": 3,
    "w": "IBM,",
-   "start": 35.938,
-   "end": 36.553
+   "start": 31.054,
+   "end": 31.611
   },
   {
    "beat": 3,
    "w": "IQM,",
-   "start": 36.716,
-   "end": 37.482
+   "start": 31.715,
+   "end": 32.354
   },
   {
    "beat": 3,
    "w": "and",
-   "start": 37.552,
-   "end": 37.703
+   "start": 32.4,
+   "end": 32.528
   },
   {
    "beat": 3,
    "w": "Finland's",
-   "start": 37.761,
-   "end": 38.132
+   "start": 32.574,
+   "end": 32.981
   },
   {
    "beat": 3,
    "w": "VTT",
-   "start": 38.179,
-   "end": 38.55
+   "start": 33.027,
+   "end": 33.364
   },
   {
    "beat": 3,
    "w": "Q",
-   "start": 38.655,
-   "end": 38.736
+   "start": 33.445,
+   "end": 33.55
   },
   {
    "beat": 3,
    "w": "fifty.",
-   "start": 38.852,
-   "end": 39.328
+   "start": 33.701,
+   "end": 34.177
   },
   {
    "beat": 4,
    "w": "Tulva.",
-   "start": 39.925,
-   "end": 40.448
+   "start": 35.217,
+   "end": 35.738
   },
   {
    "beat": 4,
    "w": "The",
-   "start": 40.924,
-   "end": 41.04
+   "start": 36.289,
+   "end": 36.405
   },
   {
    "beat": 4,
    "w": "snow",
-   "start": 41.086,
-   "end": 41.295
+   "start": 36.452,
+   "end": 36.661
   },
   {
    "beat": 4,
    "w": "warns",
-   "start": 41.354,
-   "end": 41.621
+   "start": 36.707,
+   "end": 36.962
   },
   {
    "beat": 4,
    "w": "two",
-   "start": 41.679,
-   "end": 41.83
+   "start": 37.009,
+   "end": 37.137
   },
   {
    "beat": 4,
    "w": "months",
-   "start": 41.888,
-   "end": 42.097
+   "start": 37.195,
+   "end": 37.415
   },
   {
    "beat": 4,
    "w": "early.",
-   "start": 42.131,
-   "end": 42.735
+   "start": 37.462,
+   "end": 37.822
   }
  ]
 }

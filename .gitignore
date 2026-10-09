@@ -12,3 +12,4 @@ deck/video/raw/
 # demo video (Remotion)
 node_modules/
 deck/video/anim/build/
+deck/video/anim/voice_clone/
