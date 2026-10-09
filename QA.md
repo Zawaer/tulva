@@ -22,8 +22,8 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - *"How did Q50 do?"* (honest, ~25 s) "We ran it on Friday through LUMI, same code, one flag. Three repeats of the
   two-river circuit gave 0.47, 0.53 and 0.11 % against an exact 0.125 %. So not reproducible yet: the one close to
   exact was luck. The cause is our zero-calibration circuit: its offset moved between repeats, 0.002 to 0.006, and
-  with 2,000 shots that swings the answer. One Grover step kept only 0.12 to 0.19 of the signal; Emerald kept about
-  0.6, IBM and Garnet 0.6 to 0.8. Our 18-qubit, 14-river sampler read 31 % for four or more rivers, exact 10.9 %,
+  with 2,000 shots that swings the answer. One Grover step kept only 0.12 to 0.19 of the signal; in the runs we show,
+  Emerald kept 0.56 to 0.59, IBM and Garnet 0.77 to 0.78. Our 18-qubit, 14-river sampler read 31 % for four or more rivers, exact 10.9 %,
   Emerald 13.8 %. Next we'd try: many more shots on the calibration circuits, the best-qubit layout with several
   copies (our 4-copy job ran but we couldn't retrieve the result), and error mitigation through FiQCI's tools."
   (Numbers: CLAIMS.md "VTT Q50", out/HARDWARE_RESULTS.md. Readout flips on that run: 2.1 % / 3.4 %.)
@@ -44,7 +44,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   quadratically fewer model runs for the same precision. That pays off when each scenario is expensive, such as a
   full hydrological simulation or multi-peril repricing every day, and rare joint events need many runs.
   Fault-tolerant hardware has to arrive first."
-- *"Did the snow signal survive on hardware?"* Yes. On IQM Emerald the snowy-vs-low-snow risk ratio was 3.05×
+- *"Did the snow signal survive on hardware?"* Yes. On IQM Emerald the snowy-vs-LOW-snow risk ratio was 3.05×
   (bootstrap 90 % CI 2.6–3.6) against 2.75× exact (two-river North-cluster pair, 240k shots each). The interval contains the
   exact ratio.
 - *"What breaks?"* Rare events: the 14-area circuit at the 1-in-50 level read 16 % vs 4.8 % exact. Gate noise creates
@@ -66,10 +66,11 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 **Shahab Anbarjafari (PwC, AI and explainability):**
 - *"Is it explainable?"* The trigger is a public SYKE gauge level anyone can check, and the model's parameters are
   physical (how strongly a region's rivers move together, how much the snow matters). No black box.
-- *"Basis risk?"* The cover pays on gauges, not on the insurer's claims. The back-test: a "≥2 gauges" trigger paid
-  in 2005 when Lapland flooded. We'd fit the gauge choice to each buyer's exposure; the staged payout
-  (50 % at 2, 100 % at 3) reduces it. Not yet tested against claims: that is step one of the pilot (postcode
-  claims for 2005, 2018, 2024; see the review-fixes section below).
+- *"Basis risk?"* The cover pays on gauges, not on the insurer's claims. The product pays the full limit at ≥2 gauges
+  (that is what slide 3 prices). The back-test: a "≥2 gauges" trigger paid in 2005 when Lapland flooded. We'd fit the
+  gauge choice to each buyer's exposure. A staged payout (50 % at 2, 100 % at 3) is a possible variant, not the
+  product: it costs 67 % of the full North cover; we have not tested whether it lowers basis risk. Not yet tested
+  against claims: that is step one of the pilot (postcode claims for 2005, 2018, 2024).
 - *"Does the snow signal work?"* At the 1-in-10 level, the 1 March snow flag caught 11 of 19 payout years in advance, and no payout
   followed a low-snow March. That's in-sample with a small sample, and we say so.
 
@@ -79,15 +80,16 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   how much joint risk sits on its own books (claims readiness, capital, next season's price). An index cover pays
   fast, with no claims adjustment.
 - *"What does it cost?"* As rate on line (market premium as % of the limit per year), North "≥2 of 5 over
-  1-in-50": Tulva 4.9–6.9 %; with the 2027 rule's average link (0.27) 2.8–3.9 %; priced as independent 1.0–1.3 %.
-  Per €1M of cover that is ~€49–69k a year. After a snowy March the fair risk triples (1.96 % → 6.4 %), but nobody
+  1-in-50": Tulva 4.9–6.9 %; with the 2027 matrix's average correlation (0.27) 2.8–3.9 %; priced as independent
+  1.0–1.3 %. Per €1M of cover that is ~€49–69k a year. After a snowy March the expected loss triples vs autumn
+  (1.96 % → 6.4 %), but nobody
   re-prices the autumn cover then: the insurer buys a top-up / second layer if it wants one, staffs claims and uses
   the number in its ORSA.
 - *"Your payout is bigger than Finnish flood losses."* "The €10M in the app is only an illustration. The limit is sized from the
   insurer's own claims in the pilot, so the price is a rate: 4.9–6.9 % of whatever limit fits its book."
-- *"Isn't the Finnish market tiny?"* "Yes, Finland is first because its data is open. The method fits any
-  snowmelt region: Sweden, Norway, the Alps, Canada. (For scale, rain-driven Nordic/European events: Gävle 2021
-  SEK 1.9bn, storm Boris €2.15bn insured.)"
+- *"Isn't the Finnish market tiny?"* See "Isn't the market tiny if each insurer pays €75k?" in the Round 5 section
+  (Finland is the proof market). For scale, rain-driven Nordic/European events: Gävle 2021 SEK 1.9bn, storm Boris
+  €2.15bn insured.
 - *"Do you get capital credit?"* "Under the Solvency II standard formula, an index cover likely gets no capital
   credit (EIOPA Q&A 1597: basis risk can't be haircut there). The value is basis-risk-managed protection of the
   retained loss, plus credit under internal models, where basis risk can be modelled."
@@ -103,7 +105,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - **Steinmann / Mehtola: "Your 14-area chip result is sampling. Did amplitude estimation run on the full model?"**
   "No, and that's deliberate. Emerald shows a two-level version of the 14-area loader fits: 18 qubits, 44 gates. Amplitude estimation adds
   two loader copies per step, which at 14 areas is far past today's ~50-gate budget. So we ran it on the 3-qubit
-  two-river North-cluster pair on Marrakesh and Garnet. The loader is the part that has to scale, and it scales linearly."
+  two-river North-cluster pair on IBM Marrakesh, IQM Garnet and Emerald, and VTT Q50. The loader is the part that has to scale, and it scales linearly."
 - **Mehtola: "Your calibration circuits have known answers. Isn't the mitigation tuned towards the result you
   wanted?"** "The calibration circuits have *different* known answers, one large and one near zero, never the
   target value. They measure how much signal survives each step and the false-trigger floor, in the same job and
@@ -128,8 +130,8 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 
 **Technical (Toivo)**
 - **"Which number did a QPU compute?"** "None of the prices. Every price we quote is computed classically, exactly.
-  The QPUs ran the pipeline end to end: a two-level version of our 14-area model on one IQM chip, amplitude estimation on IBM and IQM,
-  and the snow effect on Emerald. They show where today's hardware stops. Quantum is our R&D track."
+  The QPUs ran the pipeline end to end: a two-level version of our 14-area model on IQM Emerald and VTT
+  Q50, amplitude estimation on IBM Marrakesh, IQM Garnet and Emerald and VTT Q50, and the snow effect on Emerald. They show where today's hardware stops. Quantum is our R&D track."
 - **"How do your calibration twins scale?"** "Today they validate the noise model: circuits of the same shape with
   known answers, run in the same job. At scale we'd use twins that are classically trivial to compute, for example
   product states, so the known answer never needs the hard simulation."
@@ -163,21 +165,23 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 
 ## Round 2 (Sat 10 Oct): the sharper questions
 
-- **"Against realistic correlation, how under-priced is it?"** (Toivo) "About 1.8× against the regulator's average
-  correlation of 0.27: 1.96 % vs 1.11 % for '≥2 of 5 North' (round-3 recomputation; the earlier 1.09 % was an
+- **"Against realistic correlation, how under-priced is it?"** (Toivo) "Its expected loss is about 1.8× a model with
+  the regulator's average correlation of 0.27: 1.96 % vs 1.11 % for '≥2 of 5 North' (round-3 recomputation; the earlier 1.09 % was an
   unreproduced Monte Carlo). The 5× is only against independence. The bigger value is
-  the snow repricing: a snowy March moves the same cover about ×3."
+  the snow update: a snowy March moves the same cover's expected loss about ×3 vs autumn."
 - **"Your circuit's exact answer is 1.10 %, but you price 1.96 %?"** (Toivo) "Yes. The circuit uses a two-level
   version of the model, wet spring or not, and that loses 44 % at the 1-in-50 level. More latent qubits per factor fix
   it, at linear gate cost. The prices come from the continuous classical model, not from the chip."
-- **"How much of your estimate comes from amplification (k ≥ 1)?"** (Toivo) "Little, today. On Emerald the surviving signal
-  roughly halves at the first Grover step (gain 0.56–0.59, 0.44 at two steps; IBM/Garnet 0.77–0.78, 0.60–0.69), and
+- **"How much of your estimate comes from amplification (k ≥ 1)?"** (Toivo) "Little, today. Signal kept at k = 1 in the runs shown:
+  Emerald 0.56–0.59, IBM / Garnet 0.77–0.78, VTT Q50 0.12–0.19 (earlier runs 0.65–0.88); at k = 2 Emerald 0.44,
+  IBM / Garnet 0.60–0.69. And
   the false-trigger offset, 2–6 %, dwarfs the 0.1–0.2 % we measure. So it's mostly a calibrated k = 0 estimate. That
   is exactly the gap error correction has to close."
 - **"2024: Ostrobothnia flooded, the snow flag was on, the index didn't pay. Basis risk?"** (Vaishnav, Toivo backs up)
-  "Yes, that's the honest case. In 2024 only one of six Ostrobothnia gauges passed its 1-in-10 level; four peaked at
-  95–97 %. So on its gauges it was a false alarm, one of six for that cluster. The floods that did count were in the
-  North, which paid without a snow flag. That's why the pilot fits the gauge choice to each insurer's own claims. And no
+  "Yes, that's the honest case: a missed loss. In 2024 only one of six Ostrobothnia gauges passed its 1-in-10 level;
+  four peaked at 95–97 %. In back-test terms the snow flag was a false alarm (flag on, no trigger), one of six for
+  that cluster; for the insurer it is a miss. The same spring the North index paid without a snow flag, and Lapland
+  had no recorded loss (Ivalojoki stayed below the damage limit): a payout without a known loss. That's why the pilot fits the gauge choice to each insurer's own claims. And no
   payout has ever followed a low-snow March."
 - **"Why pay 5–7 % rate on line with no standard-formula capital credit?"** (Vaishnav) "It protects earnings on the
   correlated spring layer below the treaty, and it's ORSA evidence on joint flood risk. Under an internal model, like
@@ -219,9 +223,10 @@ history shows."
   Across all 240,000 shots per level the raw ratio is only 1.3×, because noise adds a floor of false 'both flood'
   shots. After the calibration circuits remove that floor it is 3.05× (90 % CI 2.6–3.6) vs 2.75× exact."
 - **"Did deep amplitude estimation work?"** "No. We ran shallow amplitude estimation, Grover steps k = 0–2 in the results we show (one early IBM run went to k = 3). The signal
-  fades with every step on today's chips (Emerald keeps 56–59 % at k = 1, 44 % at k = 2), so the estimate is mostly a
-  calibrated k = 0 reading. The 3-qubit two-river North-cluster core ran it on IBM Marrakesh and IQM Garnet; the 14-river
-  loader only sampled, on IQM Emerald."
+  fades with every step on today's chips (signal kept at k = 1 in the runs shown: Emerald 0.56–0.59, IBM / Garnet
+  0.77–0.78, VTT Q50 0.12–0.19; earlier runs 0.65–0.88), so the estimate is mostly a calibrated k = 0 reading. The
+  3-qubit two-river North-cluster core ran it on IBM Marrakesh, IQM Garnet and Emerald, and VTT Q50; the simplified
+  14-river loader only sampled, on IQM Emerald and VTT Q50."
 - **"What are the intervals on slide 5?"** (now in the appendix) "IBM Marrakesh 0.149 % (0.140–0.157), IQM Garnet
   0.164 % (0.147–0.180), exact 0.125 %; raw 0.262 % / 0.368 %. Both intervals exclude exact: +19 % / +31 %
   systematic bias. The chart's chip is IQM Emerald; the table's are Marrakesh and Garnet."
@@ -252,7 +257,7 @@ history shows."
 
 - **"A correlation matrix doesn't imply a price."** (Toivo) "Right, and the slide no longer says it does. We compare
   two models: ours, fitted to SYKE data, and the same model with one correlation of 0.27, the average of the 2027
-  Finnish flood-zone matrix. Fair expected loss 1.96 % vs 1.11 % of the limit a year: 1.8×. The 0.27 is the mean of
+  Finnish flood-zone matrix. Expected loss 1.96 % vs 1.11 % of the limit a year: 1.8×. The 0.27 is the mean of
   all 19 zones. We did not use the Lapland zones' own entries: we don't have the zone-to-region mapping (Annex IX)
   or the cell values in the repo, so we can't say whether they would move the ratio. If the Lapland zones are in a
   0.75–1.00 block, the gap would be smaller."
@@ -268,8 +273,8 @@ history shows."
   loadings and the same 1-in-50 trigger, so it's a two-river North-cluster pair. The app shows Kittilä's and Ivalo's
   real records as the story; the circuit is the cluster pair. Same for '≥2 of 3': three North-cluster rivers."
 - **"How much did amplification actually do?"** "Little: it's calibrated sampling plus shallow amplitude estimation.
-  Amplified circuits keep about half the signal on Emerald (0.56–0.59 at k = 1, 0.44 at k = 2), 0.6–0.8 on IBM and
-  Garnet. Most of the information comes from the calibrated k = 0 circuit."
+  Signal kept at k = 1 in the runs shown: Emerald 0.56–0.59, IBM / Garnet 0.77–0.78, VTT Q50 0.12–0.19 (earlier runs
+  0.65–0.88). Most of the information comes from the calibrated k = 0 circuit."
 - **"Does correlation survive on the 14-river chip run?"** "Attenuated. Chip vs the identical independent circuit on
   the same chip: 1.4× more ≥4-area springs; exact: 2.5×. Noise inflates both."
 - **"Why now, if If uses an internal model?"** (Vaishnav) "Two buyers, two reasons. Standard-formula insurers get fixed
@@ -280,11 +285,40 @@ history shows."
 - **"Who are you talking to?"** "No one has signed anything. We'd like to pilot with OP, the largest writer; that is
   an aspiration, not an agreement."
 - **"Basis risk, in numbers?"** "Back-test at the 1-in-10 level against the known flood-loss springs: the index paid in
-  1966, 2005 and 2018; at 1-in-50, in 1966 and 2005. It missed Ostrobothnia 2012–13 and 2024, and Lapland 2020
-  (Kemijoki at Rovaniemi is hydro-regulated; we use the Ounasjoki gauge). 2024 is the honest false alarm: the
-  Ostrobothnia snow flag was on, the region flooded, but only one of six gauges passed 1-in-10, so the index did not
-  pay."
+  1966, 2005 and 2018; at 1-in-50 (the product level), in 1966 and 2005 only. It missed Ostrobothnia 2012–13 and 2024,
+  and Lapland 2020 (Kemijoki at Rovaniemi is hydro-regulated; we use the Ounasjoki gauge). 2024 Ostrobothnia is a
+  miss: the snow flag was on, the region flooded, but only one of six gauges passed 1-in-10. The other way round:
+  since 2005 the North index also paid in 2015, 2023 and 2024 with no recorded Lapland loss. Over 1961–2025 the
+  1-in-10 triggers fired in 14 springs with no recorded loss in that cluster, but loss records before 2005 are sparse;
+  at 1-in-50, two (Ostrobothnia 1984, 2000)."
 - **"Year 3 and beyond?"** "Assumption: 3–6 insurers × €75k = €225–450k a year. The Nordic snowmelt market (Sweden,
   Norway, with their own 2027 flood factors) is the upside; we haven't sized it."
 - **"Slide 1 says rivers 'hit flood levels'. Damage?"** "Discharge, not damage: river flow over each gauge's 1-in-10
   level. 2005 losses were about €5M house damage (Helminen; Yle reported ~€17M on a broader definition)."
+
+
+## Round 5 (Sat 10 Oct, deck freeze): two snow ratios, licence flow, market size
+
+- **"Slide 3 says a snowy March triples the risk, slide 5 says 3.05×. Same thing?"** (Toivo) "No, two baselines. Slide 3
+  is the product, five northern rivers: after a snowy March the expected loss is 6.4 % vs 1.96 % priced in autumn,
+  3.3×, snowy vs NORMAL. Slide 5 is the two-river pair on the chip, snowy vs LOW snow: 3.05× on Emerald, 2.75× exact.
+  Snowy vs normal on that pair is only about 1.5× (1.51× chip, 1.55× exact): the pair is a smaller, rarer event and
+  low snow is a lower base. Each number on the slides names its baseline." (out/round5_numbers.json)
+- **"Who pays Tulva: the insurer or the reinsurer?"** (Vaishnav) "The insurer. It pays the premium to the reinsurer
+  that carries the risk, and a separate licence to us for the index and pricing. The reinsurer pays us nothing in the
+  pilot model."
+- **"Isn't the market tiny if each insurer pays €75k?"** (Vaishnav, full answer) "In Finland, yes: about six insurers
+  × €75k is under €0.5M a year, and Finnish spring-flood losses are single-digit to low-double-digit €M per event
+  (business case §1: 1966 ≈ €10M, 2005 ≈ €5M house damage, 2012–13 ≈ €20M total). Finland is the proof market: open
+  data and a new 2027 rule. Expansion: Sweden and Norway first (same snowmelt rivers, their own
+  new 2027 flood factors, and the 0 % cross-border correlation is a blind spot for Nordic groups like If / Sampo);
+  then other snowmelt basins such as the Alps, Canada and the Red River (direction, not sized). At scale the revenue
+  is a per-deal fee from reinsurers and brokers on covers that carry about €0.5–0.7M a year of premium per €10M layer
+  (CLAIMS), in a parametric market estimated at $3.5bn to $18–21bn, growing 12–14 % a year (estimates differ about
+  six-fold; business case §Market size)."
+  - Spoken version (~20 s): "Finland alone is small, under half a million a year. We know that. Finland is our proof
+    market: open data and a new rule in 2027. The engine works on any snowmelt basin: Sweden and Norway next, then the
+    Alps and Canada. At scale we'd earn per deal from reinsurers, not just licences."
+- **"Is the payout staged?"** "No. The product pays the full limit when ≥2 of 5 northern gauges pass 1-in-50; that is
+  what slide 3 prices. A staged version (50 % at 2, 100 % at 3) costs 67 % of it; it is a variant we could offer."
+

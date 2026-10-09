@@ -1,0 +1,191 @@
+{
+ "snow_ratio_baselines": {
+  "snowy_vs_low": {
+   "chip": 3.05,
+   "exact": 2.747,
+   "chip_ci90": [
+    2.59,
+    3.63
+   ]
+  },
+  "snowy_vs_normal": {
+   "chip": 1.507,
+   "exact": 1.547
+  },
+  "note": "two-river North-cluster pair, both over 1-in-50, calibrated (noise-aware MLAE), run product-iqm-emerald-20261009T075338Z. Slide 3's 'triples' (3.3x) is a different measure: North >=2 of 5 cover, snowy (top-15 %) March vs the autumn price, continuous classical model."
+ },
+ "basis_risk": {
+  "1in10": {
+   "paid_in_known_loss_springs": [
+    "1966 Satakunta–SE",
+    "2005 North",
+    "2018 North"
+   ],
+   "missed_known_loss_springs": [
+    "2012 Ostrobothnia",
+    "2013 Ostrobothnia",
+    "2020 North",
+    "2024 Ostrobothnia"
+   ],
+   "paid_no_recorded_loss": [
+    "1965 Ostrobothnia",
+    "1966 Ostrobothnia",
+    "1971 Ostrobothnia",
+    "1972 Ostrobothnia",
+    "1974 Ostrobothnia",
+    "1977 Ostrobothnia",
+    "1981 North",
+    "1984 Ostrobothnia",
+    "1984 Satakunta–SE",
+    "1988 Satakunta–SE",
+    "1993 North",
+    "2000 North",
+    "2000 Ostrobothnia",
+    "2015 North",
+    "2023 North",
+    "2024 North"
+   ],
+   "paid_no_recorded_loss_n_springs": 14,
+   "paid_no_recorded_loss_since_2005": [
+    "2015 North",
+    "2023 North",
+    "2024 North"
+   ]
+  },
+  "1in50": {
+   "paid_in_known_loss_springs": [
+    "1966 Satakunta–SE",
+    "2005 North"
+   ],
+   "missed_known_loss_springs": [
+    "2012 Ostrobothnia",
+    "2013 Ostrobothnia",
+    "2018 North",
+    "2020 North",
+    "2024 Ostrobothnia"
+   ],
+   "paid_no_recorded_loss": [
+    "1984 Ostrobothnia",
+    "2000 Ostrobothnia"
+   ],
+   "paid_no_recorded_loss_n_springs": 2,
+   "paid_no_recorded_loss_since_2005": []
+  },
+  "note": "Known loss springs = business case §1 loss table (outside source; records before 2005 are sparse and Finance Finland stopped tracking flood claims after 2015), so 'no recorded loss' is not 'no loss'."
+ },
+ "amplification_gain": {
+  "shown": {
+   "IBM Marrakesh run 2": {
+    "A3_kittila_ivalo_both": {
+     "1": 0.78,
+     "2": 0.69
+    }
+   },
+   "IQM Garnet run 2": {
+    "A3_kittila_ivalo_both": {
+     "1": 0.77,
+     "2": 0.6
+    }
+   },
+   "IQM Emerald (snow run)": {
+    "A3_kittila_ivalo_both_clim": {
+     "1": 0.57,
+     "2": 0.44
+    },
+    "A3_kittila_ivalo_both_high": {
+     "1": 0.56,
+     "2": 0.44
+    },
+    "A3_kittila_ivalo_both_low": {
+     "1": 0.59,
+     "2": 0.43
+    }
+   },
+   "VTT Q50 repeat 1": {
+    "A3_kittila_ivalo_both": {
+     "1": 0.19,
+     "2": 0.05
+    }
+   },
+   "VTT Q50 repeat 2": {
+    "A3_kittila_ivalo_both": {
+     "1": 0.13,
+     "2": 0.05
+    }
+   },
+   "VTT Q50 repeat 3": {
+    "A3_kittila_ivalo_both": {
+     "1": 0.12,
+     "2": 0.06
+    }
+   }
+  },
+  "earlier": {
+   "IBM Marrakesh run 1": {
+    "A3_kittila_ivalo_both": {
+     "1": 0.65,
+     "2": 0.53
+    }
+   },
+   "IQM Garnet run 1": {
+    "A3_kittila_ivalo_both": {
+     "1": 0.66,
+     "2": 0.54
+    }
+   },
+   "IQM Emerald first snow run": {
+    "A3_kittila_ivalo_both_clim": {
+     "1": 0.77,
+     "2": 0.59
+    },
+    "A3_kittila_ivalo_both_high": {
+     "1": 0.77,
+     "2": 0.6
+    },
+    "A3_kittila_ivalo_both_low": {
+     "1": 0.88,
+     "2": 0.62
+    }
+   }
+  }
+ },
+ "appendix": {
+  "jobs": {
+   "product-iqm-emerald-20261009T075338Z": [
+    "01a11fa8-65a9-74bf-bb38-95a59537f9fc"
+   ],
+   "loader-control-indep-iqm-emerald-20261009T135910Z": [
+    "01a120f5-ece7-73ff-bcf9-f4e4ba3069d3"
+   ],
+   "ibm-ibm_marrakesh-20261008T170341Z": [
+    "db3sssqmb58s7388bb00"
+   ],
+   "iqm-garnet-20261008T182125Z": [
+    "01a11cbf-bb06-7672-a667-c85255613143"
+   ]
+  },
+  "first_runs_not_shown": {
+   "IBM run 1": {
+    "calibrated_pct": 0.146,
+    "exact_pct": 0.125,
+    "copies": 25,
+    "ks": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "Garnet run 1": {
+    "calibrated_pct": 0.073,
+    "exact_pct": 0.125,
+    "copies": 1,
+    "ks": [
+     0,
+     1,
+     2
+    ]
+   }
+  }
+ }
+}

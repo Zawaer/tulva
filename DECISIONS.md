@@ -50,3 +50,10 @@ Append one line per decision: date time · who · decision · why.
 - 2026-10-09 · Toivo · VTT Q50 is presented as a fourth chip we ran on, never as a headline success: every repeat is
   shown (0.11–0.53 % vs exact 0.125 %, "calibration not yet stable"), its 14-river loader (31 % vs 10.9 %) is evidence
   of where hardware stops, and the failed 4-copy job is mentioned only as a failed attempt. · Honesty for the VTT juror.
+- 2026-10-10 · Toivo · Round 5, deck frozen after this pass. Every snow ratio names its baseline: slide 3 "triples" =
+  snowy March vs autumn (5-river cover, 3.3×); slide 5 / video / §5 = snowy vs LOW snow (two-river pair, 3.05× chip,
+  2.75× exact); snowy vs normal on the pair is 1.51× / 1.55× (chart, QA). "Fair price" → "expected loss" (model
+  comparison). The product pays the full limit at ≥2; staged payout is only a variant. Slide 7 money flows both start
+  at the insurer (licence ← Tulva, premium → reinsurer); buyers listed OP first; If named only for the internal model.
+  Basis-risk line counts payouts without a recorded loss too. One amplification statement everywhere (round5_numbers).
+  · Round-5 business, quantum and coach reviews.

@@ -218,22 +218,22 @@ def s3_product(prs, n):
     header(s, n, "The product", "Tulva Index: sold in autumn, updated in March")
     rect(s, MX, 1.5, W - 2 * MX, 0.8, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
     text(s, MX + 0.4, 1.5, W - 2 * MX - 0.8, 0.8,
-         "Pays if ≥2 of 5 northern rivers pass their 1-in-50 flood level",
+         "Pays the full limit if ≥2 of 5 northern rivers pass their 1-in-50 level",
          size=26, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
     text(s, MX, 2.42, W - 2 * MX, 0.95,
-         "Fair price ≈1.8× a model using the 0.27 average correlation of the 2027 Finnish flood-zone matrix",
-         size=26, bold=True, color=RED, spacing=1.0)
+         "Expected loss ≈1.8× a model with the 2027 matrix's average correlation (0.27)",
+         size=23, bold=True, color=RED, spacing=1.0)
     text(s, MX, 3.42, 9, 0.3, "EXPECTED LOSS, % OF THE LIMIT PER YEAR (90 % INTERVALS)", size=14, bold=True,
          color=BLUE)
     picture(s, OUT / "pitch_cost.png", MX, 3.75, W - 2 * MX, 2.0)  # scripts/pitch_charts.py
     rect(s, MX, 5.9, W - 2 * MX, 0.95, LIGHT)
     rect(s, MX, 5.9, 0.1, 0.95, BLUE)
     text(s, MX + 0.3, 5.9, W - 2 * MX - 0.45, 0.95,
-         [[("After a snowy March the risk triples ", {"color": NAVY}),
+         [[("After a snowy March, expected loss triples vs autumn ", {"color": NAVY}),
            ("(1.96 % → 6.4 %; 90 %: 2.1–4.4×)", {"color": GREY})],
           [("Priced in autumn. In March the insurer acts on it: top-up cover, claims staff in the regions at risk.",
             {"size": 17, "bold": False})]],
-         size=21, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
+         size=20, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
     source(s, "Sources: SYKE 1961–2025, Tulva model, year-bootstrap intervals; 0.27 = mean of the 19-zone matrix, "
               "Del. Reg. (EU) 2026/269")
     return s
@@ -263,7 +263,7 @@ def s4_demo(prs, n):
         picture(s, ASSETS / "app_product.png", fx + 0.15, fy + 0.15, fw - 0.3, fh - 0.3)
         print(f"warning: {VIDEO.relative_to(ROOT)} missing, slide 4 has a placeholder")
     text(s, 1.0, 6.55, W - 2.0, 0.4,
-         "Live app: joint-flood map → March snow → quantum chip → 2005 replay",
+         "Our app: joint-flood map → March snow → quantum chip → 2005 replay",
          size=18, color=WHITE, align=PP_ALIGN.CENTER)
     footer(s, n, dark=True)
     return s
@@ -272,22 +272,22 @@ def s4_demo(prs, n):
 def s5_quantum(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     header(s, n, "Quantum, in practice", "It runs on four real quantum computers today")
-    text(s, MX, 1.55, 7.6, 0.4, "Two-river North-cluster pair on IQM Emerald", size=20,
+    text(s, MX, 1.5, 7.6, 0.45, "Snowy vs low-snow March: 3.05× on chip, 2.75× exact", size=21,
          bold=True, color=NAVY)
-    picture(s, OUT / "pitch_snow.png", MX, 2.0, 7.6, 4.6)  # scripts/pitch_charts.py
+    text(s, MX, 1.98, 7.6, 0.35, "Two-river North-cluster pair, IQM Emerald", size=16, color=GREY)
+    picture(s, OUT / "pitch_snow.png", MX, 2.35, 7.6, 4.4)  # scripts/pitch_charts.py
     x, w = 8.65, 4.1
     text(s, x, 1.55, w, 0.7, "CALIBRATED SAMPLING + SHALLOW AMPLITUDE ESTIMATION", size=16, color=BLUE, bold=True)
-    items = [("Two-river core", "IBM Marrakesh, IQM Garnet and Emerald: 3 qubits, Grover steps k = 0–2"),
-             ("14-river model", "IQM Emerald: 18 qubits, sampling only"),
-             ("Amplification", "amplified circuits keep ≈0.5 of the signal on Emerald, 0.6–0.8 on IBM / Garnet"),
+    items = [("Two-river core", "IBM Marrakesh, IQM Garnet and Emerald, VTT Q50: 3 qubits"),
+             ("Simplified 14-river model", "Two-level version, 18 qubits, sampling only: IQM Emerald and VTT Q50"),
              ("VTT Q50, Finland's own", "3 repeats: 0.11–0.53 % vs 0.125 % exact. Calibration not yet stable")]
-    y = 2.4
+    y = 2.5
     for k, v in items:
         text(s, x, y, w, 0.35, k, size=20, bold=True, color=NAVY)
         text(s, x, y + 0.38, w, 0.62, v, size=16, color=GREY)
         rect(s, x, y + 1.0, w, 0.012, LINE)
         y += 1.08
-    source(s, "Intervals, raw readings and job IDs: appendix")
+    source(s, "Intervals, amplification, raw readings and job IDs: appendix")
     return s
 
 
@@ -299,63 +299,64 @@ def s6_honest(prs, n):
          color=GREY)
     x, w = 8.2, 4.55
     text(s, x, 1.6, w, 0.45, "Method ready, hardware not yet", size=20, bold=True, color=BLUE)
-    rect(s, x, 2.2, w, 1.7, LIGHT)
-    rect(s, x, 2.2, 0.08, 1.7, RED)
-    text(s, x + 0.3, 2.35, w - 0.45, 1.5, "Today: rare floods drown in noise.", size=30, bold=True, color=NAVY,
-         spacing=1.0)
-    text(s, x, 4.05, w, 1.5,
-         [[("14 rivers, 18 qubits:", {"bold": True, "color": NAVY})],
-          [("≥4 over 1-in-10: exact 10.9 %; IQM Emerald 13.8 %, VTT Q50 31 %", {})],
-          [("Emerald: correlation attenuated (1.4× vs exact 2.5×); 1-in-50: 16 % vs 4.8 % exact", {})]],
-         size=17, color=GREY)
-    text(s, x, 5.85, w, 0.9, "Prices are computed classically; quantum is the R&D track.", size=20, bold=True,
+    rect(s, x, 2.3, w, 1.9, LIGHT)
+    rect(s, x, 2.3, 0.08, 1.9, RED)
+    text(s, x + 0.3, 2.3, w - 0.45, 1.9, "Today: rare floods drown in noise.", size=32, bold=True, color=NAVY,
+         spacing=1.0, anchor=MSO_ANCHOR.MIDDLE)
+    text(s, x, 4.55, w, 1.2, "Prices are computed classically; quantum is the R&D track.", size=24, bold=True,
          color=NAVY)
+    text(s, x, 5.85, w, 0.6, "14-river chip runs and the noise control: appendix", size=16, color=GREY)
     return s
 
 
 def s7_business(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     header(s, n, "Business", "Who pays whom, and why now")
+    # money flows FROM the buyer in both directions: licence ← to Tulva, premium → to the reinsurer
     steps = [
-        ("Buyer", "Finnish home insurers", "e.g. If Insurance", BLUE),
-        ("Risk carrier", "A reinsurer", "Premium, insurer → reinsurer: ≈€0.5–0.7M a year per €10M layer", BLUE),
-        ("Tulva", "Index + pricing licence", "Licence → Tulva: €25k pilot, then ~€75k a year", BLUE),
+        ("Tulva", "Index + pricing licence", "€25k pilot, then ~€75k a year per insurer", BLUE),
+        ("Buyer", "Finnish home insurers", "OP, If, LähiTapiola, …", BLUE),
+        ("Risk carrier", "A reinsurer", "≈€0.5–0.7M a year per €10M layer", BLUE),
         ("Year 3", ["3–6 insurers", "× €75k ≈", "€0.2–0.45M/yr"], "Upside: Nordic snowmelt (assumption)",
          NAVY),
     ]
-    gap = 0.45
-    cw = (W - 2 * MX - 3 * gap) / 4
+    gaps = [0.95, 0.95, 0.35]
+    cw = (W - 2 * MX - sum(gaps)) / 4
     y0, bh = 1.5, 2.6
+    x = MX
     for i, (k, big, small, c) in enumerate(steps):
-        x = MX + i * (cw + gap)
         rect(s, x, y0, cw, bh, LIGHT)
         rect(s, x, y0, cw, 0.07, c)
         text(s, x + 0.2, y0 + 0.2, cw - 0.4, 0.35, k.upper(), size=16, bold=True, color=c)
         text(s, x + 0.2, y0 + 0.58, cw - 0.4, 1.3, big, size=22, bold=True, color=NAVY, spacing=1.0)
         if small:
             text(s, x + 0.2, y0 + bh - 0.82, cw - 0.4, 0.72, small, size=14, color=GREY, anchor=MSO_ANCHOR.BOTTOM)
-        if i < 3:
-            text(s, x + cw, y0 + bh / 2 - 0.3, gap, 0.6, "→", size=30, bold=True, color=BLUE, align=PP_ALIGN.CENTER,
-                 anchor=MSO_ANCHOR.MIDDLE)
+        if i < 2:  # arrows start at the buyer: "←" licence to Tulva, "→" premium to the reinsurer
+            g = gaps[i]
+            text(s, x + cw, y0 + bh / 2 - 0.45, g, 0.55, "←" if i == 0 else "→", size=30, bold=True, color=BLUE,
+                 align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+            text(s, x + cw - 0.05, y0 + bh / 2 + 0.08, g + 0.1, 0.35, "licence" if i == 0 else "premium", size=13,
+                 bold=True, color=BLUE, align=PP_ALIGN.CENTER)
+        x += cw + (gaps[i] if i < 3 else 0)
     rect(s, MX, 4.25, 0.1, 0.82, RED)
     text(s, MX + 0.3, 4.25, W - 2 * MX - 0.3, 0.82,
          [[("Why now  ", {"color": RED}),
-           ("From 2027 standard-formula insurers get fixed flood correlations that ignore the snow; internal-model "
-            "insurers like If Insurance get a snow-aware joint-flood number for their own model.", {})]],
+           ("From 2027 the regulator's standard formula fixes flood correlations that ignore the snow; insurers "
+            "with their own approved (internal) model, like If, can use a snow-aware joint-flood number.", {})]],
          size=17, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
     rect(s, MX, 5.17, 0.1, 0.82, BLUE)
     text(s, MX + 0.3, 5.17, W - 2 * MX - 0.3, 0.82,
          [[("Basis risk  ", {"color": BLUE}),
-           ("same 1-in-50 idea Finnish home policies use, but on river flow. Back-test: paid in the 1966, 2005 and 2018 "
-            "flood springs; missed Ostrobothnia 2012–13 and 2024 (snow flag on: a false alarm).", {})]],
+           ("1-in-10 back-test: paid in loss springs 1966, 2005, 2018; missed Ostrobothnia 2012–13, 2024 and "
+            "Lapland 2020; since 2005 also paid in 3 North springs with no recorded loss (2015, 2023, 2024).", {})]],
          size=17, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
     rect(s, MX, 6.09, W - 2 * MX, 0.72, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
     text(s, MX + 0.3, 6.09, W - 2 * MX - 0.4, 0.72,
          [[("Ask  ", {"color": PALE_BLUE}),
            ("One insurer's flood claims for 8 weeks → basis-risk map + firm quote for 1 Jan 2028.", {})]],
          size=19, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
-    source(s, "Del. Reg. (EU) 2026/269 · back-test at 1-in-10 (at 1-in-50: 1966, 2005) · premium = model × 2.5–3.5 "
-              "· prices: assumptions")
+    source(s, "Del. Reg. (EU) 2026/269 · at 1-in-50 the back-test paid 1966, 2005, not 2018 · "
+              "premium = model × 2.5–3.5 · prices: assumptions")
     return s
 
 
@@ -399,14 +400,14 @@ def s9_appendix(prs, n):
          "db3tddsvf2bc73ctoprg"],
         ["IQM Garnet", "North-cluster pair, 3 qubits, k = 0–2", "0.125 %", "0.368 %", "0.164 % (0.147–0.180)",
          "01a11cc3-7f6c…"],
-        ["IQM Emerald", "Snowy / low March ratio, same pair, k = 0–2", "2.75×", "1.3×", "3.05× (2.6–3.6)",
-         "product-…075338Z"],
+        ["IQM Emerald", "Snowy / low-snow ratio, same pair, k = 0–2", "2.75×", "1.3×", "3.05× (2.6–3.6)",
+         "01a11fa8-65a9…"],
         ["IQM Emerald", "14 rivers ≥4 over 1-in-10, 18 q / 44 CZ", "10.9 %", "–", "13.8 % (readout-corr.)",
          "01a11cd4-da38…"],
         ["IQM Emerald", "14 rivers ≥2 over 1-in-50, same circuit", "4.8 %", "–", "16.0 % (fails)",
          "01a11f9b-c62a…"],
         ["IQM Emerald", "Control: independent circuit, ≥4 over 1-in-10", "4.4 %", "–", "9.7 % (noise fattens tails)",
-         "…T135910Z"],
+         "01a120f5-ece7…"],
         ["VTT Q50", "Same pair, 3 repeats: not stable", "0.125 %", "1.48–1.58 %",
          "0.47 / 0.53 / 0.11 %", "7d20d8ac / a6fb9d52 / 381179fb"],
         ["VTT Q50", "14 rivers ≥4 over 1-in-10, 18 q / 49 CZ", "10.9 %", "34.2 %", "31.2 % (readout-corr.)",
@@ -414,22 +415,24 @@ def s9_appendix(prs, n):
     ]
     cols = [1.65, 4.05, 0.9, 1.3, 2.55, 1.8]
     widths = [c * (W - 2 * MX) / sum(cols) for c in cols]
-    y = 1.6
+    y = 1.5
     for r_i, row in enumerate([hdr] + rows):
         x = MX
         if r_i:
-            rect(s, MX, y + 0.5, W - 2 * MX, 0.012, LINE)
+            rect(s, MX, y + 0.47, W - 2 * MX, 0.012, LINE)
         for c_i, (cell, cw) in enumerate(zip(row, widths)):
             text(s, x, y, cw - 0.1, 0.5, cell, size=(12 if c_i == 5 else 14) if r_i else 13, bold=(r_i == 0 or c_i == 4),
                  color=BLUE if r_i == 0 else (GREY if c_i == 5 else NAVY), anchor=MSO_ANCHOR.MIDDLE)
             x += cw
-        y += 0.52
+        y += 0.48
     text(s, MX, y + 0.05, W - 2 * MX, 1.2,
          ["Calibrated = noise-aware MLAE, two known-answer calibration circuits in the same job; bootstrap 90 % intervals. "
           "IBM / Garnet intervals exclude exact (+19 % / +31 % bias). Pair = two rivers with identical North-cluster "
           "loadings and 1-in-50 trigger. Classical Monte Carlo at the same budget is more precise (±0.004 pp).",
-          "Signal kept by amplification (k = 1 / 2): Emerald 0.56–0.59 / 0.44; VTT Q50 0.12–0.19 / 0.05–0.06. "
-          "Q50 zero-calibration offset moved 0.002 → 0.006 between repeats, driving the 5× spread."],
+          "Signal kept at k = 1 in the runs shown: Emerald 0.56–0.59, IBM / Garnet 0.77–0.78, VTT Q50 0.12–0.19 "
+          "(earlier runs 0.65–0.88): the estimate is mostly the calibrated k = 0 circuit. Q50's zero-calibration offset "
+          "moved 0.002 → 0.006 between repeats (the 5× spread). Not shown: first runs IBM 0.146 % (k = 0–3), "
+          "Garnet 0.073 % (1 copy)."],
          size=12, color=GREY, space_after=4)
     footer(s, n)
     return s

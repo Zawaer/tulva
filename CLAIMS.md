@@ -186,7 +186,7 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   44 CZ) right at 1-in-10, 3-qubit QAE (≤ 53 CZ) calibrates well, 4-qubit (67–164 CZ) and 43-qubit (237 CZ) circuits
   scrambled; "1-in-50: 16 % vs 4.8 % exact" = same 18-qubit loader, P(≥2 of 14 over 1-in-50), readout-corrected ·
   qae-iqm · out/HARDWARE_RESULTS.md
-- Slide 3 innovation line, outside sources (business/reports/Tulva flood cover business case.md §5, §1, §6): Verisk
+- *(SUPERSEDED: no innovation line on slide 3 since round 3)* Slide 3 innovation line, outside sources (business/reports/Tulva flood cover business case.md §5, §1, §6): Verisk
   Inland Flood Model for Central Europe covers FI/SE/NO and is precipitation-driven (Verisk docs); SYKE publishes
   spring peak outlooks but nobody turns them into a priced joint-loss distribution; Swiss Re FLOW pays on a single
   river gauge, for companies · source
@@ -217,11 +217,11 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   with these intervals
 - Slide 5 table: IBM run 2 0.149 % (0.140–0.157), IQM Garnet run 2 0.164 % (0.147–0.180), exact 0.125 % (noise-aware
   MLAE, the bootstrap's estimator; the per-copy values 0.148 / 0.163 % above are the same runs) · qae-ibm / qae-iqm
-- Slide 6 "an independent control run reads 2× high": ≥4 of 14 over 1-in-10, chip-independent 9.7 % vs exact
+- *(SUPERSEDED: slide 6 no longer has this line; control run is on slide 9)* Slide 6 "an independent control run reads 2× high": ≥4 of 14 over 1-in-10, chip-independent 9.7 % vs exact
   independent 4.4 % = 2.2× · qae-iqm · loader-control-indep-iqm-emerald-20261009T135910Z
 - Slide 2 "≈4×" = 15.4 % / 3.9 % (line "About four times as often" above); slide 3 "≈5× under-priced" = North "≥2 of 5"
   Tulva / independence premium 5.1× (pricing section) · exact
-- Slide 3 "Example: €3M limit ≈ €150–210k / year" = the €147k–207k line above, rounded · derived
+- *(SUPERSEDED: replaced by "per €1M of cover", now QA only)* Slide 3 "Example: €3M limit ≈ €150–210k / year" = the €147k–207k line above, rounded · derived
 - Web app 2005 replay: North cluster 1 March snow index = **87th percentile (top 15 %)**; national index 62nd · data ·
   scripts/export_web.py. (The app previously showed the national 59th: export_web ranked missing SWE years as the
   snowiest; fixed to match fit_dependence.py, so its top-15 % years now equal out/snow_skill.json. Same fix moves the
@@ -232,7 +232,7 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
 - Demo video (re-recorded 9 Oct evening), 37 s, captions ≥ 5 s each: map → snow high → IQM Emerald shots low/snowy
   ("about 3× the risk" = the 3.05× calibrated ratio; the raw shot grid shows 13 vs 31 both-flood shots of 8,000) →
   14-area loader (18 qubits) → 2005 replay (North snow top 15 %) · deck/video/record_demo.mjs
-- Slide 7 "fee per deal (€25k pilot)": the €25k pilot is the team assumption in the licence line above; the per-deal
+- *(SUPERSEDED: slide 7 shows the per-insurer licence; per-deal fee is only the at-scale QA answer)* Slide 7 "fee per deal (€25k pilot)": the €25k pilot is the team assumption in the licence line above; the per-deal
   fee model replaces the per-insurer licence on the slide · assumption
 - **Realistic baseline (round 2 review, verified):** North "≥2 of 5 over 1-in-50", 2M-sample Monte Carlo of the Gaussian
   copula: independence 0.38 %; **equicorrelation 0.27 (≈ mean of the regulator's 19-zone matrix inside Finland) 1.09 %**;
@@ -389,3 +389,46 @@ Producer tag: qae-q50 (VTT Q50 hardware). Same two-level model and circuits as I
 - Deck/script wording: "four real quantum computers" = IBM Marrakesh, IQM Garnet, IQM Emerald, VTT Q50 (Q50 counted as
   run, not as a successful estimate). Slide 5 line "VTT Q50: 3 repeats 0.11–0.53 % (exact 0.125 %), calibration not
   yet stable"; slide 6 "Q50 ≥4 of 14 over 1-in-10: 31 % vs 10.9 % exact (Emerald 13.8 %)" · from the lines above
+
+## Round-5 deck pass (Sat 10 Oct, deck freeze) · scripts/round5_numbers.py → out/round5_numbers.json unless marked
+- **Snow ratio baselines.** Slide 5 / video / script §5 "snowy vs low snow: 3.05× on chip, 2.75× exact" = two-river
+  North-cluster pair both over 1-in-50, calibrated 0.2494 / 0.0818 % vs exact 0.1933 / 0.0704 % (bootstrap 90 %
+  2.59–3.63) · qae-iqm / exact · product-iqm-emerald-20261009T075338Z (job 01a11fa8-65a9-74bf-bb38-95a59537f9fc).
+  **Snowy vs normal on the same pair: chip 1.51×, exact 1.55×** (slide 5 chart title, QA) · qae-iqm / exact.
+  Slide 3 / script §3 "triples" is a different measure: North ≥2 of 5 cover, snowy (top-15 %) March 6.4 % vs the
+  autumn (normal) 1.96 % = 3.3× (90 % 2.1–4.4×) · exact (round-4 bootstrap)
+- **Slide 3 headline "Expected loss ≈1.8× a model with the 2027 matrix's average correlation (0.27)"** = 1.96 % / 1.11 %
+  (round-3 line), a model comparison; "fair price" wording dropped · exact
+- **Slide 7 basis risk "1-in-10 back-test: paid in loss springs 1966, 2005, 2018; missed Ostrobothnia 2012–13, 2024 and
+  Lapland 2020; since 2005 also paid in 3 North springs with no recorded loss (2015, 2023, 2024)"**: known loss
+  springs = business case §1 table (outside source). 1-in-10 triggers in a cluster with no recorded loss there:
+  Ostrobothnia 1965, 1966, 1971, 1972, 1974, 1977, 1984, 2000; North 1981, 1993, 2000, 2015, 2023, 2024;
+  Satakunta–SE 1984, 1988 (14 springs; pre-2005 loss records are sparse). Footnote "at 1-in-50 the back-test paid
+  1966, 2005, not 2018"; at 1-in-50 also Ostrobothnia 1984, 2000 with no recorded loss. Replaces the round-4 "2024
+  (snow flag on: a false alarm)" wording: 2024 Ostrobothnia is a missed loss (snow flag on, no trigger); 2024 North
+  paid with no recorded Lapland loss · exact (counts) · out/backtest.json
+- **Amplification, one statement (slide 9, PITCH, QA, out/HARDWARE_RESULTS.md):** signal kept at k = 1 in the runs
+  shown: Emerald 0.56–0.59 (075338Z), IBM / Garnet 0.77–0.78 (run 2: 174523Z / 182534Z), VTT Q50 0.12–0.19 (three
+  repeats); earlier runs 0.65–0.88 (IBM run 1 0.65, Garnet run 1 0.66, Emerald 073815Z 0.77–0.88). Supersedes "≈0.5 on
+  Emerald, 0.6–0.8 on IBM / Garnet" · qae-ibm / qae-iqm / qae-q50 · out/runs/*.analysis.json
+- **Slide 9 job IDs:** Emerald snow ratio 01a11fa8-65a9-74bf-bb38-95a59537f9fc; Emerald control
+  01a120f5-ece7-73ff-bcf9-f4e4ba3069d3. Footnote "not shown: first runs IBM 0.146 % (k = 0–3), Garnet 0.073 % (1 copy)"
+  = noise-aware MLAE of ibm-ibm_marrakesh-20261008T170341Z (job db3sssqmb58s7388bb00, 25 copies) and
+  iqm-garnet-20261008T182125Z (job 01a11cbf-bb06-7672-a667-c85255613143, 1 copy); exact 0.125 % · qae-ibm / qae-iqm
+- **Slide 6 chart out/pitch_scaling.png** now also plots the three VTT Q50 repeats (18,000 model evaluations each; abs.
+  error 0.34 / 0.41 / 0.018 pp, the last one near exact by luck) from out/runs/q50-*.analysis.json; label "IBM, IQM &
+  VTT chips today"; y-axis extended to 1 pp · qae-q50
+- Slide 7 buyer "Finnish home insurers: OP, If, LähiTapiola, …" = docs/flood_terms_check.md (seven home insurers).
+  "Insurers with their own approved (internal) model, like If" = Sampo partial internal model (business case);
+  OP's model type not documented, so not claimed. Licence arrow: insurer → Tulva; premium arrow: insurer → reinsurer
+  · source
+- QA "Isn't the market tiny if each insurer pays €75k?": ~6 insurers × €75k < €0.5M/yr (assumption); losses per event
+  ≈ €5–20M (business case §1 table); premium ≈ €0.5–0.7M/yr per €10M North layer (pricing section above); parametric
+  market $3.5bn to $18–21bn, 12–14 %/yr growth (business case §Market size, outside sources, quoted as a range);
+  expansion to SE/NO/Alps/Canada/Red River unsized · assumption / source
+- QA staged payout: reframed as a variant (costs 67 % of the full North "≥2" cover, pricing section above), not the
+  product; the "reduces basis risk" claim is dropped (untested)
+- Demo video re-recorded (round 5), 36.7 s, same cue times: 0 s caption "Our app: lines join rivers that flood
+  together"; 18 s "Snowy vs low snow: about three times the risk, close to exact." (= 3.05× vs 2.75×) · qae-iqm ·
+  deck/video/record_demo.mjs
+

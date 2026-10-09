@@ -60,7 +60,7 @@ await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" })); awa
 // (a) map with joint-flood lines
 await glide(Y.map); await w(300);
 const tCap = (Date.now() - t0) / 1000;
-await cap("Live app: lines join rivers that flood together");
+await cap("Our app: lines join rivers that flood together");
 await w(5200);
 // (b) March snow outlook → North price
 await clickText("#presets", "No outlook"); await glide(Y.snow);
@@ -71,7 +71,7 @@ await page.evaluate(() => { const b = document.querySelector('.pl-snow button[da
 await glide(Y.shots); await w(800);
 await cap("IQM chip. Red: both flood. Low snow, little red."); await w(5800);
 await page.evaluate(() => { const b = document.querySelector('.pl-snow button[data-k="high"]'); if (b) b.click(); });
-await cap("Snowy March: about three times the risk, close to exact."); await w(5600);
+await cap("Snowy vs low snow: about three times the risk, close to exact."); await w(5600);
 // (d) simplified (two-level) 14-river model on one chip, 1-in-10 run
 await glide(Y.loader);
 await w(800);

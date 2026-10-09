@@ -130,7 +130,7 @@ def snow_chart():
     exact vs calibrated chip estimate with bootstrap 90 % intervals (scripts/bootstrap_ci.py)."""
     b = json.loads((OUT / "bootstrap_ci.json").read_text())
     rows = [("Low snow", b["emerald snow low"]), ("Normal", b["emerald snow normal"]),
-            ("High snow", b["emerald snow high"])]
+            ("Snowy", b["emerald snow high"])]
     r = b["snow_ratio_high_over_low"]
     fig, ax = plt.subplots(figsize=(7.6, 4.6), dpi=DPI)
     w = 0.36
@@ -147,9 +147,11 @@ def snow_chart():
     ax.grid(axis="y", color=LIGHTGREY, lw=1)
     ax.set_axisbelow(True)
     clean(ax)
-    ax.text(-0.45, 0.345, f"{r['estimate']:.2f}× on chip vs {r['exact']:.2f}× exact", fontsize=28,
-            fontweight="bold", color=NAVY, va="top")
-    ax.text(-0.45, 0.295, "risk, high vs low March snow", fontsize=17, color=GREY, va="top")
+    # the slide title carries the headline ratio (snowy vs LOW snow); the chart adds snowy vs NORMAL so both baselines are named
+    hi, no = b["emerald snow high"], b["emerald snow normal"]
+    ax.text(-0.45, 0.345, f"Snowy vs normal: {hi['estimate'] / no['estimate']:.2f}× chip, "
+            f"{hi['exact'] / no['exact']:.2f}× exact", fontsize=21, fontweight="bold", color=NAVY, va="top")
+    ax.text(-0.45, 0.300, "% chance both rivers pass 1-in-50", fontsize=17, color=GREY, va="top")
     from matplotlib.patches import Patch
     ax.legend(handles=[Patch(color=BLUE, label="Exact"), Patch(color=PURPLE, label="IQM Emerald (90 % CI)")],
               frameon=False, fontsize=16, loc="upper left", bbox_to_anchor=(0.0, 0.8))
@@ -169,17 +171,26 @@ def scaling_chart():
     last, qmax = ideal[-1], mc[-1]["queries"]
     xs = [last["queries"], qmax]
     ax.loglog(xs, [100 * last["rmse"] * last["queries"] / x for x in xs], ":", color=BLUE, lw=3)
-    for vendor, mk, col in (("IBM", "D", "#0f62fe"), ("IQM", "P", "#00a19a")):
+    # VTT Q50: the three repeats of the same circuit, read from their saved analyses (no new computation)
+    for f in sorted((OUT / "runs").glob("q50-20261009T14*.analysis.json")):
+        a = json.loads(f.read_text())["A3_kittila_ivalo_both"]
+        hw.append({"vendor": "VTT", "queries": a["oracle_queries"], "abs_error": abs(a["noise_aware_mlae"] - a["exact"])})
+    for vendor, mk, col in (("IBM", "D", "#0f62fe"), ("IQM", "P", "#00a19a"), ("VTT", "^", "#d4731c")):
         pts = [p for p in hw if p["vendor"] == vendor]
         ax.loglog([p["queries"] for p in pts], [100 * p["abs_error"] for p in pts], mk, color=col, ms=16,
                   mec="black", mew=1)
+    q = [p for p in hw if p["vendor"] == "VTT"]
+    ax.text(q[0]["queries"] / 1.5, 100 * max(p["abs_error"] for p in q), "VTT Q50,\n3 repeats", fontsize=15,
+            color="#d4731c", fontweight="bold", va="center", ha="right")
     ax.text(1.2e6, 2.6e-3, "Classical\nMonte Carlo", fontsize=20, fontweight="bold", color=NAVY, ha="right",
             va="top")
     ax.text(5.5e2, 1.3e-3, "Ideal quantum\n(needs fault tolerance)", fontsize=20, fontweight="bold", color=BLUE,
             va="top")
-    ax.text(1.2e6, 0.1, "IBM & IQM chips today", fontsize=20, fontweight="bold", color="#0f62fe", ha="right")
+    ax.text(1.2e6, 0.2, "IBM, IQM & VTT\nchips today", fontsize=20, fontweight="bold", color="#0f62fe", ha="right",
+            va="bottom")
     ax.set_xticks([1e3, 1e4, 1e5, 1e6], ["1k", "10k", "100k", "1M"], fontsize=21)
-    ax.set_yticks([1e-1, 1e-2, 1e-3, 1e-4], ["0.1", "0.01", "0.001", "0.0001"], fontsize=21)
+    ax.set_yticks([1, 1e-1, 1e-2, 1e-3, 1e-4], ["1", "0.1", "0.01", "0.001", "0.0001"], fontsize=21)
+    ax.set_ylim(7e-5, 1.0)
     ax.minorticks_off()
     ax.set_xlabel("Model evaluations", fontsize=21)
     ax.set_ylabel("Error (percentage points)", fontsize=21)

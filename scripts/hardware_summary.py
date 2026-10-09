@@ -111,7 +111,9 @@ if q50:
            "precision. The driver is the zero-calibration offset at k=0, which moved between repeats "
            f"({offs}).",
            f"- **Amplification barely survives.** At k=1 (27 two-qubit gates) Q50 kept {min(g1):.2f}–{max(g1):.2f} of the signal; "
-           f"IBM, IQM Garnet and Emerald kept {min(other_g1):.2f}–{max(other_g1):.2f} on the same circuit. At k=2 almost nothing is left.",
+           "at k=2 almost nothing is left. One statement for all chips (deck slide 9, PITCH, QA; scripts/round5_numbers.py): "
+           "signal kept at k = 1 in the runs shown: Emerald 0.56–0.59, IBM / Garnet 0.77–0.78, Q50 0.12–0.19 "
+           f"(earlier runs 0.65–0.88; all non-Q50 runs {min(other_g1):.2f}–{max(other_g1):.2f}).",
            "- An earlier 4-copy best-qubit attempt (`q50-20261009T144440Z`, job "
            "`d02bd3b5-ca4a-48f1-9003-da506d4b7607`, 4,000 shots) was submitted but result retrieval failed "
            "(BadRequestError): no data."]
@@ -133,7 +135,9 @@ if snow:
         if sr:
             md += ["", f"Snowy vs low-snow risk ratio: on the chip **{sr['estimate']:.2f}×** (bootstrap 90 % CI "
                    f"{sr['ci90'][0]:.1f}–{sr['ci90'][1]:.1f}) vs exact **{sr['exact']:.2f}×**. The interval contains the exact "
-                   "ratio: the early-warning signal survives on real hardware."]
+                   "ratio: the early-warning signal survives on real hardware. Snowy vs NORMAL: chip "
+                   f"{hi['noise_aware_mlae']/rows_s[1][1]['noise_aware_mlae']:.2f}×, exact {hi['exact']/rows_s[1][1]['exact']:.2f}× "
+                   "(slide 3's 'triples' is a different measure: the 5-river cover, snowy vs autumn/normal)."]
         else:
             md += ["", f"Snowy vs low-snow risk ratio: exact **{hi['exact']/lo['exact']:.2f}×**, on the chip "
                    f"**{hi['noise_aware_mlae']/lo['noise_aware_mlae']:.2f}×**. The early-warning signal survives on real hardware."]

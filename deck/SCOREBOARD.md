@@ -47,3 +47,23 @@ Criteria 1–5: Impact · Business plan · Progress · Innovativeness · Methodo
 7. **S1 hook**: "hit flood levels" (discharge over 1-in-10), in-sample note kept.
 8. **Video**: captions at 12 s / 18 s shortened, re-recorded, same cue times.
 9. **Script**: 245 → 222 live words.
+
+| Round | Reviewer | Impact | Business | Progress | Innov. | Method | Key finding |
+|---|---|---|---|---|---|---|---|
+| 5 | Business juror | 3.5 | 3 | 4.5 | 4 | 4.5 | "triples" vs 3.05× use different baselines; arrows read as reinsurer → Tulva; If-only buyer; basis-risk 2024 mix-up |
+| 5 | Quantum juror | 3.5 | 3 | 4.5 | 3.5 | 4.5 | "simplified" missing on 14-river claim; amplification numbers differ across slide 9 / QA / results; filenames not job IDs |
+| 5 | Pitch coach | 8/10 | | | | | name each ratio's baseline; "fair price" vs expected loss; de-clutter slides 5–6; jargon in §7 |
+
+### Round 5 — merged fixes (applied 10 Oct, deck frozen)
+
+1. **Snow-ratio baselines** (all three): slide 3 = snowy vs autumn (3.3×); slide 5 headline, video 18 s caption and
+   §5 = snowy vs low snow (3.05× vs 2.75×); snowy vs normal 1.51× / 1.55× on the chart and in QA.
+2. **"Simplified" 14-river model** on slide 5 and §5 (IQM's Emerald and Q50).
+3. **"Expected loss", not "fair price"** on slide 3 and §3 (model comparison with the 2027 matrix's 0.27).
+4. **Slide 7**: licence arrow insurer → Tulva, premium arrow insurer → reinsurer; buyers "OP, If, LähiTapiola, …";
+   regulator's formula / own approved model glossed; basis risk with payouts without recorded loss; 1-in-50 footnote.
+5. **Product consistency**: full payout at ≥2; staged payout only a variant in QA.
+6. **De-clutter**: slide 5 loses k = 0–2 and the amplification block; slide 6 loses the 14-river block (slide 9 has
+   it); slide 6 chart adds VTT Q50.
+7. **One amplification statement** and **real job IDs** on slide 9; first runs footnoted.
+8. Small: "This is our app"; stale QA chip lists; stale CLAIMS entries superseded; market-size QA answer.

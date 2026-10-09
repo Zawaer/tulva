@@ -78,7 +78,7 @@ Run through the LUMI hackathon module. Same North-cluster pair circuit as above 
 
 Calibrated: mean **0.369 %**, range **0.107 % – 0.534 %** vs exact 0.125 %. Raw 1.479 % – 1.577 %.
 - **Not reproducible yet.** The three calibrated estimates spread about 5×; the one close to exact is luck, not precision. The driver is the zero-calibration offset at k=0, which moved between repeats (0.002 / 0.002 / 0.006).
-- **Amplification barely survives.** At k=1 (27 two-qubit gates) Q50 kept 0.12–0.19 of the signal; IBM, IQM Garnet and Emerald kept 0.56–0.88 on the same circuit. At k=2 almost nothing is left.
+- **Amplification barely survives.** At k=1 (27 two-qubit gates) Q50 kept 0.12–0.19 of the signal; at k=2 almost nothing is left. One statement for all chips (deck slide 9, PITCH, QA; scripts/round5_numbers.py): signal kept at k = 1 in the runs shown: Emerald 0.56–0.59, IBM / Garnet 0.77–0.78, Q50 0.12–0.19 (earlier runs 0.65–0.88; all non-Q50 runs 0.56–0.88).
 - An earlier 4-copy best-qubit attempt (`q50-20261009T144440Z`, job `d02bd3b5-ca4a-48f1-9003-da506d4b7607`, 4,000 shots) was submitted but result retrieval failed (BadRequestError): no data.
 
 ## The March snow signal, measured on IQM Emerald
@@ -90,7 +90,7 @@ Two-river North-cluster pair both over 1-in-50, 3 qubits, 10 side-by-side copies
 | Normal (no outlook) | 0.125 % | 0.340 % | **0.166 %** |
 | Snowy March (top 15 %) | 0.193 % | 0.388 % | **0.249 %** |
 
-Snowy vs low-snow risk ratio: on the chip **3.05×** (bootstrap 90 % CI 2.6–3.6) vs exact **2.75×**. The interval contains the exact ratio: the early-warning signal survives on real hardware.
+Snowy vs low-snow risk ratio: on the chip **3.05×** (bootstrap 90 % CI 2.6–3.6) vs exact **2.75×**. The interval contains the exact ratio: the early-warning signal survives on real hardware. Snowy vs NORMAL: chip 1.51×, exact 1.55× (slide 3's 'triples' is a different measure: the 5-river cover, snowy vs autumn/normal).
 
 ## Qrisp implementation on IQM Garnet
 Same 3-qubit joint-trigger circuit written natively in Qrisp (IQM's high-level framework), compiled with IQM's pass manager (4 / 23 / 45 CZ for k = 0 / 1 / 2), run on IQM Garnet without the calibration circuits: raw MLAE matches the raw Qiskit run on the same chip. File: `qrisp_qae_iqm_garnet20261008T184156Z.json`.
