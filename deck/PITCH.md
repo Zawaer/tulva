@@ -81,10 +81,10 @@ VTT Q50 (via LUMI): three repeats gave 0.11–0.53 % vs exact 0.125 %; calibrati
 
 ## 7 · Business (1:42–2:09)
 
-> Insurers like OP and If pay a reinsurer the premium, and US a licence: 25 thousand to pilot, then 75
-> thousand a year. Year three: up to 450 thousand. From 2027, the regulator's formula FIXES flood correlations, blind
-> to snow. Insurers with their own model can use our snow-aware number. Our ask: one insurer's flood claims, eight
-> weeks.
+> Our customers: insurers like OP and If. In March, two months before the melt, our index tells them how risky
+> this spring is, so they can buy extra cover from their reinsurer IN TIME, paid out automatically on the index.
+> They pay US a licence: 25 thousand to pilot, then 75 thousand a year. From 2027 the regulator's formula FIXES flood
+> correlations, blind to snow. Our ask: one insurer's flood claims, eight weeks.
 
 Q&A only (not spoken): premium per €10M North layer ≈ €0.5–0.7M a year (model × 2.5–3.5 market multiple) goes insurer →
 reinsurer; the licence goes insurer → Tulva (the reinsurer pays Tulva nothing). "The regulator's formula" = the 2027

@@ -356,3 +356,29 @@ too few to confirm 'triples'. Run backwards, flagged springs paid 50 % versus 8 
   a simple calibration can't remove. Next: pick the best qubits from Q50's calibration data and use FiQCI's error
   mitigation." (Numbers: Claude's check on out/runs/q50-20261009T172*, ibm-ibm_marrakesh-20261008T1745*,
   iqm-garnet-20261008T182125Z; tensor-product readout inversion with p01 from the zero circuit, p10 0–3.4 %.)
+
+
+## After the OP mentor talk (Fri evening)
+Mentor (OP, quantum/AI) feedback: lead the business case with "buy extra cover in time"; home-insurance pricing in
+March is weak (policies are bought all year round); be able to say what "preparing" means and how the automatic
+(parametric) payout differs from ordinary reinsurance; quantify the quantum gain.
+
+- **"What does 'preparing' actually mean for an insurer?"** "Four concrete things, before the melt: (1) buy extra
+  reinsurance cover for this spring; (2) line up claims capacity in the risky regions: adjusters, drying and
+  repair contractors; (3) warn customers by text to move belongings up and protect basements, which cuts claims;
+  (4) set aside reserves and tell management early, instead of finding out when the claims arrive."
+- **"How is your automatic payout different from ordinary reinsurance?"** "Ordinary reinsurance pays the insurer's
+  actual losses, after every claim is assessed: that takes months and needs loss data. Ours pays on the river
+  gauges: when the index triggers, the money comes in days, with no loss assessment and nothing to argue about. The
+  catch is basis risk: the index can differ from the real losses. That's what the 8-week pilot measures."
+- **"Why would a reinsurer sell top-up cover in March if it can see the snow too?"** "It will charge more after a
+  snowy March, and that's fine: our index makes the price fair and transparent for both. The insurer's gain is
+  getting cover in place before the melt instead of being caught unprotected."
+- **"Don't customers just buy home insurance in March?"** "No, policies renew all year round, so we don't sell a
+  March price to homeowners. The March number is for the insurer: extra cover and preparation."
+- **"Quantify the quantum advantage."** "Classical Monte Carlo needs four times the samples for twice the accuracy;
+  amplitude estimation needs only twice. On the ideal simulator, at the same 16,000 model evaluations, QAE's error
+  was 0.011 percentage points against Monte Carlo's 0.027, about 2.5 times more accurate. On today's noisy chips
+  that gain is lost; it needs error-corrected hardware." (CLAIMS: qae-sim, scripts/qae_sim.py)
+- **"Does the model forecast years ahead?"** "No, one spring at a time: the 1 March snow forecasts the coming spring's
+  melt, March to June."
