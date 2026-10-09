@@ -481,3 +481,18 @@ No new numbers; every on-slide number is one already logged above. Wording mappi
 - Slide 7 "€25k pilot, then €75k / yr", "Year 3: €0.2–0.45M / yr", "3–6 Finnish insurers, then the Nordics" =
   slide-7 revenue line above · assumption. Premium per €10M layer, back-test years, why now, market size: backup 10.
 - Slide 8 "Runs on 4 quantum chips" = IBM Marrakesh, IQM Garnet, IQM Emerald, VTT Q50.
+
+## Animated demo video (Fri 9 Oct, candidate for slide 4, not yet in the deck) · deck/video/anim/ → deck/video/tulva_demo_anim.mp4
+43.97 s, ElevenLabs voiceover (deck/video/anim/narration.md) + burned-in captions. No new numbers; each one below is
+an existing claim, read by deck/video/anim/export_data.py (which asserts the spoken values) or shown live in the app.
+- Map, 2005: 4 of 14 areas over their empirical 1-in-10 level (Ivalo 142 %, Kittilä 124 %, Rovaniemi 112 %, Tornio
+  101 % of it); North 1 March snow 87th percentile (top 15 %); fine print "back-test, not a forecast made in 2005";
+  "two months later" = 1 March → May peak · data · web/data/app.json (slide-1 / "Pitch hook" / 2005-replay lines above)
+- App recording: North "≥2 of 5 over 1-in-50", no outlook 2.0 % (1.96 %) → high-snow March 6.4 %; spoken "from two to
+  six point four percent" · exact · the live app (pricing / round-3 lines above)
+- Chip: IQM Emerald shot grid, both-flood 13 (low snow) → 31 (snowy) of 8,000; "about three times the risk on the chip,
+  2.75 exact" = calibrated 3.05× (90 % CI 2.6–3.6, 240,000 shots per case) vs exact 2.75× · qae-iqm / exact ·
+  web/data/pipeline.json, out/bootstrap_ci.json (round-5 line above)
+- "We ran it on IBM, IQM and Finland's VTT Q50" = IBM Marrakesh, IQM Garnet, IQM Emerald, VTT Q50 (Q50 run, not a
+  successful estimate; card fine print "checked against exact classical values · classical computers still win today ·
+  no quantum advantage claimed") · VTT Q50 section above

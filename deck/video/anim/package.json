@@ -1,0 +1,22 @@
+{
+  "name": "tulva-demo-anim",
+  "private": true,
+  "type": "module",
+  "description": "Animated demo video with voiceover for slide 4 (Remotion). See README.md.",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts TulvaDemo ../tulva_demo_anim.mp4 --codec h264 --crf 18 --audio-bitrate 192k"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.525",
+    "@remotion/transitions": "4.0.525",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "remotion": "4.0.525"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.12",
+    "playwright": "1.63.0",
+    "typescript": "5.9.2"
+  }
+}

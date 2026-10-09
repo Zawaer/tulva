@@ -8,3 +8,7 @@ data/raw/
 !.env.example
 deck/video/raw/
 .venv-iqm/
+
+# demo video (Remotion)
+node_modules/
+deck/video/anim/build/
