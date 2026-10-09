@@ -8,7 +8,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-f = sorted(glob.glob(str(ROOT / "out" / "runs" / "loader-iqm-emerald-*.json")))[-1]
+f = [g for g in sorted(glob.glob(str(ROOT / "out" / "runs" / "loader-iqm-emerald-*.json")))
+     if abs(json.loads(Path(g).read_text()).get("level", 0) - 0.1) < 1e-9][-1]   # 1-in-10 run only
 r = json.loads(Path(f).read_text())
 obs = json.loads((ROOT / "out" / "joint_counts.json").read_text())
 ks = list(range(2, 9))

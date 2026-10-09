@@ -56,14 +56,17 @@ for f in sorted(glob.glob(str(OUT / "runs" / "loader-iqm-emerald-*.json")) + sor
     r = json.loads(Path(f).read_text())
     if "p_at_least_k_exact" not in r:
         continue
-    md += ["", f"## Full-scale loader: all 14 areas on {r['device']} ({r['qubits']} qubits, {r['two_qubit_gates']} two-qubit gates)",
+    lvl = r.get("level", 0.1)
+    lvl_txt = "1-in-10" if abs(lvl - 0.1) < 1e-9 else ("1-in-50" if abs(lvl - 0.02) < 1e-9 else f"p={lvl}")
+    md += ["", f"## Full-scale loader at the {lvl_txt} level: all 14 areas on {r['device']} ({r['qubits']} qubits, {r['two_qubit_gates']} two-qubit gates)",
            f"Job `{r['jobs'][0]}`, {r['shots']:,} shots, readout flip rates {100*r['readout_p01']:.1f} % / {100*r['readout_p10']:.1f} %. "
-           "Chart: `out/loader_emerald.png`.", "",
-           "| k areas over 1-in-10 | Hardware (readout-corrected) | Exact model | Independence | Observed 1961–2025 |",
+           + ("Chart: `out/loader_emerald.png`." if lvl_txt == "1-in-10" else
+            "At this rare level, gate noise creates false triggers that swamp the true signal: the measured limit of today's hardware."), "",
+           (f"| k areas over {lvl_txt} | Hardware (readout-corrected) | Exact model | Independence | Observed 1961–2025 |"),
            "|---|---|---|---|---|"]
     obsd = {}
     oj = r.get("observed_reference") or {}
-    if "k" in oj:
+    if "k" in oj and lvl_txt == "1-in-10":      # observed years exist only at the 1-in-10 level
         obsd = dict(zip(oj["k"], oj["observed"]))
     for k in range(2, 8):
         md.append(f"| ≥{k} | {100*r['p_at_least_k_readout_corrected'][k]:.1f} % | {100*r['p_at_least_k_exact'][k]:.1f} % | "

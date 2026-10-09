@@ -24,7 +24,7 @@ Job ids:
 - 'Best qubits' on IBM uses today's calibration data; IQM publishes none through this API, so there the copies are only placed on well-separated qubits. The first IQM run had 1 copy (small sample, ±0.05 pp shot noise).
 - The independence line (0.040 %) is what P(both) would be if the two areas flooded independently: every run, even raw, is far above it, i.e. the hardware reproduces the co-flooding.
 
-## Full-scale loader: all 14 areas on emerald (18 qubits, 44 two-qubit gates)
+## Full-scale loader at the 1-in-10 level: all 14 areas on emerald (18 qubits, 44 two-qubit gates)
 Job `01a11cd4-da38-718b-80c9-7e259c6e4452`, 8,000 shots, readout flip rates 0.5 % / 0.6 %. Chart: `out/loader_emerald.png`.
 
 | k areas over 1-in-10 | Hardware (readout-corrected) | Exact model | Independence | Observed 1961–2025 |
@@ -36,17 +36,17 @@ Job `01a11cd4-da38-718b-80c9-7e259c6e4452`, 8,000 shots, readout flip rates 0.5 
 | ≥6 | 2.4 % | 1.9 % | 0.15 % | 1.5 % |
 | ≥7 | 0.9 % | 0.6 % | 0.02 % | 0.0 % |
 
-## Full-scale loader: all 14 areas on emerald (18 qubits, 44 two-qubit gates)
-Job `01a11f9b-c62a-7026-a22d-67b26167cf26`, 20,000 shots, readout flip rates 0.4 % / 0.5 %. Chart: `out/loader_emerald.png`.
+## Full-scale loader at the 1-in-50 level: all 14 areas on emerald (18 qubits, 44 two-qubit gates)
+Job `01a11f9b-c62a-7026-a22d-67b26167cf26`, 20,000 shots, readout flip rates 0.4 % / 0.5 %. At this rare level, gate noise creates false triggers that swamp the true signal: the measured limit of today's hardware.
 
-| k areas over 1-in-10 | Hardware (readout-corrected) | Exact model | Independence | Observed 1961–2025 |
+| k areas over 1-in-50 | Hardware (readout-corrected) | Exact model | Independence | Observed 1961–2025 |
 |---|---|---|---|---|
-| ≥2 | 16.0 % | 4.8 % | 3.11 % | 41.5 % |
-| ≥3 | 4.6 % | 0.8 % | 0.25 % | 18.5 % |
-| ≥4 | 1.1 % | 0.1 % | 0.01 % | 15.4 % |
-| ≥5 | 0.2 % | 0.0 % | 0.00 % | 7.7 % |
-| ≥6 | 0.0 % | 0.0 % | 0.00 % | 1.5 % |
-| ≥7 | 0.0 % | 0.0 % | 0.00 % | 0.0 % |
+| ≥2 | 16.0 % | 4.8 % | 3.11 % | – |
+| ≥3 | 4.6 % | 0.8 % | 0.25 % | – |
+| ≥4 | 1.1 % | 0.1 % | 0.01 % | – |
+| ≥5 | 0.2 % | 0.0 % | 0.00 % | – |
+| ≥6 | 0.0 % | 0.0 % | 0.00 % | – |
+| ≥7 | 0.0 % | 0.0 % | 0.00 % | – |
 
 ## The March snow signal, measured on IQM Emerald
 Kittilä + Ivalo both over 1-in-50, 3 qubits, 10 side-by-side copies, 240,000 shots per instance (run by Vaishnav, `product-iqm-emerald-20261009T075338Z`).

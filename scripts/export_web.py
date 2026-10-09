@@ -223,7 +223,8 @@ def hardware_summary(runs: list[dict]) -> dict:
         qae[key] = [rows[k] for k in ("qae-ibm", "qae-iqm", "qae-q20") if k in rows]
 
     loader = None
-    lf = sorted((OUT / "runs").glob("loader-iqm-emerald-*.json"))
+    # only the 1-in-10 run is comparable with the observed years; the 1-in-50 run is a separate "noise limit" result
+    lf = [f for f in sorted((OUT / "runs").glob("loader-iqm-emerald-*.json")) if abs(load(f).get("level", 0) - 0.1) < 1e-9]
     if lf:
         r = load(lf[-1])
         obs = (r.get("observed_reference") or {}).get("observed") or load(OUT / "joint_counts.json")["observed"]
