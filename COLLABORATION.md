@@ -47,7 +47,8 @@ Don't edit the other person's files without saying so first. Shared files: appen
 | Fri 17:00 | Checkpoint 3: deck v1 ready, demo app frozen except fixes |
 | Fri evening | Record the demo video, write the submission text |
 | Sat 06:30 | Freeze: no new features. Rehearse 3× |
-| Sat 08:30 | Submit deck + video (deadline 09:30) |
+| Sat 08:30 | Submit deck + video (deadline 09:30 — check it did not move earlier) |
+| Sat 09:30 | At the venue. Pitching starts 10:00 (moved from 10:30, Slack Fri). Team 21 ≈ 12:00 |
 
 Quick sync (5 min, in person) whenever one of us changes something the other depends on, e.g. a number in
 CLAIMS.md changes, or the product definition changes.
