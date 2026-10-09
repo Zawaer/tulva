@@ -18,10 +18,8 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - *"How does your error mitigation work?"* In the same job, on the same qubits, we run two calibration copies
   of the circuit with known answers (one large, one ≈ 0). They give each step's surviving signal and false-positive
   offset, and we invert that. On IBM it moved 0.262 % → 0.148 % (exact 0.125 %).
-- *"Why not Q50?"* It was down (cryostat) and our CSC access is still being fixed; we ran IQM Garnet and Emerald,
-  which use the same architecture.
-
-**Lauri Toikka (OP, physicist):**
+- *"Why not Q50?"* "We set it up: same code, one flag (`--backend q50`). Q50 had the cryostat issue on Thursday and
+  our LUMI account was still syncing, so we used IQM Garnet and Emerald, same architecture." One sentence, no blame.
 - *"State loading kills the speed-up."* Not for a factor model: one qubit per area, each needing one RY and one
   controlled RY, so it's linear in the number of areas. All 14 areas fit on 18 qubits with 44 two-qubit gates (run
   on Emerald).
