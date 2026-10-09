@@ -39,4 +39,4 @@ deck if those numbers change.
 Re-record after the app changes with:
 `source /data/chats/s_7z3ZoxoroN/env.sh; node deck/video/record_demo.mjs`, then convert the webm in
 deck/video/raw/ to MP4 (see the ffmpeg line in the git history). It's silent: add the voice-over from PITCH.md
-slide 5, or keep it captions-only.
+slide 4, or keep it captions-only.
