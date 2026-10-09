@@ -404,3 +404,14 @@ March is weak (policies are bought all year round); be able to say what "prepari
 - **"What is the 'standard assumption' on slide 3?"** "The 2027 Solvency II formula links Finnish flood zones with a
   correlation matrix; its average is 0.27. We priced our cover with that one average link: 1.11 %. Our snow-aware
   model gives 1.96 %, 1.8 times more."
+
+
+## Late Friday additions
+- **"Isn't this just Swiss Re FLOW?"** "FLOW pays a single company per day one river gauge is high. Ours protects
+  an insurer against many customers flooding at once: several rivers in a region together, priced from 65 years of
+  data, and updated from the March snow."
+- **"€75k flat seems small. Why not a share of the premium?"** "The flat licence is the simple starting point for a
+  pilot. At scale we'd add a small share of the premium on every cover written on our index, the way financial
+  index providers earn. We haven't priced that share yet." (Assumption, not researched.)
+- **"Who else could use the index?"** "Reinsurers directly, and later investors through a flood cat bond with our
+  index as the trigger, like the UK's Flood Re did in 2025 (£140M)."
