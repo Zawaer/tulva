@@ -78,7 +78,7 @@ Monte Carlo ±0.027 pp at the same 16,000 oracle queries (≈2.5× tighter). "On
 
 ## 6 · Quantum, in practice (1:28–1:37)
 
-> On IBM, IQM and Finland's VTT Q50 chips, the snow effect SHOWS: snowy versus low snow,
+> We ran on IBM, IQM and Finland's VTT Q50. On IQM's chip, the snow effect SHOWS: snowy versus low snow,
 > 3.05 times; exact, 2.75.
 
 Q&A only (not spoken): the two-river core is a North-cluster pair with identical loadings and 1-in-50 trigger, not
