@@ -272,3 +272,8 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
 - App badges: snow-conditioned probabilities and prices are now labelled "model" (in-sample snow skill), market ranges
   "model + market multiple" (the 2.5–3.5× multiple is an outside source); unconditional model values stay "exact".
   App co-flooding multipliers now round half up (Ostrobothnia 3.15 → 3.2×, as above; it showed 3.1×) · web/app.js
+- QA "how much comes from amplification": Kittilä + Ivalo signal gain by Grover step k = 1 / 2 (fitted from the two
+  calibration twins): IQM Emerald 0.56–0.59 / 0.44 (low / normal / high snow), IBM run 2 0.78 / 0.69, Garnet run 2
+  0.77 / 0.60; false-trigger offset at k = 1–2 2.0–6.3 % vs a 0.07–0.19 % signal · qae-ibm / qae-iqm ·
+  out/runs/{ibm-ibm_marrakesh-20261008T174523Z, iqm-garnet-20261008T182534Z, product-iqm-emerald-20261009T075338Z}.analysis.json
+- QA "two-level circuit loses 44 % at 1-in-50" = 1.10 % vs 1.98 % (round-2 line above) · exact / monte-carlo

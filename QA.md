@@ -21,8 +21,8 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - *"Why not Q50?"* "We set it up: same code, one flag (`--backend q50`). Q50 had the cryostat issue on Thursday and
   our LUMI account was still syncing, so we used IQM Garnet and Emerald, same architecture." One sentence, no blame.
 - *"State loading kills the speed-up."* Not for a factor model: one qubit per area, each needing one RY and one
-  controlled RY, so it's linear in the number of areas. All 14 areas fit on 18 qubits with 44 two-qubit gates (run
-  on Emerald).
+  controlled RY, so it's linear in the number of areas. A two-level version of our 14-area model fits on 18 qubits
+  with 44 two-qubit gates (sampled on Emerald).
 - *"When would this beat Monte Carlo?"* On ideal hardware the error falls like 1/N vs 1/√N (our simulation
   shows it). It needs fault tolerance, and an expensive model per scenario (a hydrological simulation, many
   perils), not our nanosecond toy. (The ~8k logical qubits figure is for derivative pricing, see below.)
@@ -68,9 +68,9 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   how much joint risk sits on its own books (claims readiness, capital, next season's price). An index cover pays
   fast, with no claims adjustment.
 - *"What does it cost?"* As rate on line (market premium as % of the limit per year), North "≥2 of 5 over
-  1-in-50": Tulva 4.9–6.9 %; priced as independent 1.0–1.3 %; the same cover is worth 16–23 % after a snowy March.
-  On an illustrative €3M limit (about one insurer's share of the 2005 Lapland loss) that is ~€150–210k a year.
-- *"Your payout is bigger than Finnish flood losses."* "The €3M is only an illustration. The limit is sized from the
+  1-in-50": Tulva 4.9–6.9 %; with the regulator's average correlation 2.7–3.8 %; priced as independent 1.0–1.3 %; the
+  same cover is worth 16–23 % after a snowy March. Per €1M of cover that is ~€49–69k a year.
+- *"Your payout is bigger than Finnish flood losses."* "The €10M in the app is only an illustration. The limit is sized from the
   insurer's own claims in the pilot, so the price is a rate: 4.9–6.9 % of whatever limit fits its book."
 - *"Isn't the Finnish market tiny?"* "Yes, Finland is first because its data is open. The method fits any
   snowmelt region: Sweden, Norway, the Alps, Canada. (For scale, rain-driven Nordic/European events: Gävle 2021
@@ -87,7 +87,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 ## New jury questions (research/18)
 
 - **Steinmann / Mehtola: "Your 14-area chip result is sampling. Did amplitude estimation run on the full model?"**
-  "No, and that's deliberate. Emerald shows the full loader fits: 18 qubits, 44 gates. Amplitude estimation adds
+  "No, and that's deliberate. Emerald shows a two-level version of the 14-area loader fits: 18 qubits, 44 gates. Amplitude estimation adds
   two loader copies per step, which at 14 areas is far past today's ~50-gate budget. So we ran it on the 3-qubit
   Kittilä–Ivalo piece on Marrakesh and Garnet. The loader is the part that has to scale, and it scales linearly."
 - **Mehtola: "Your calibration circuits have known answers. Isn't the mitigation tuned towards the result you
@@ -113,7 +113,7 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 
 **Technical (Toivo)**
 - **"Which number did a QPU compute?"** "None of the prices. Every price we quote is computed classically, exactly.
-  The QPUs ran the pipeline end to end: the whole 14-area model on one IQM chip, amplitude estimation on IBM and IQM,
+  The QPUs ran the pipeline end to end: a two-level version of our 14-area model on one IQM chip, amplitude estimation on IBM and IQM,
   and the snow effect on Emerald. They show where today's hardware stops. Quantum is our R&D track."
 - **"How do your calibration twins scale?"** "Today they validate the noise model: circuits of the same shape with
   known answers, run in the same job. At scale we'd use twins that are classically trivial to compute, for example
@@ -145,6 +145,29 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   on agricultural and mortgage collateral there; and a top-up quote for extra cover if they want it."
 - **"Regulated rivers, Kemijoki or Kokemäenjoki?"** "Hydropower regulation changes discharge. The index would use
   gauges on unregulated tributaries, or water levels instead of flow. That is to be tested in the pilot."
+
+## Round 2 (Sat 10 Oct): the sharper questions
+
+- **"Against realistic correlation, how under-priced is it?"** (Toivo) "About 1.8× against the regulator's average
+  correlation of 0.27: 1.96 % vs 1.09 % for '≥2 of 5 North'. The 5× is only against independence. The bigger value is
+  the snow repricing: a snowy March moves the same cover about ×3."
+- **"Your circuit's exact answer is 1.10 %, but you price 1.98 %?"** (Toivo) "Yes. The circuit uses a two-level
+  version of the model, wet spring or not, and that loses 44 % at the 1-in-50 level. More latent qubits per factor fix
+  it, at linear gate cost. The prices come from the continuous classical model, not from the chip."
+- **"How much of your estimate comes from amplification (k ≥ 1)?"** (Toivo) "Little, today. On Emerald the surviving signal
+  roughly halves at the first Grover step (gain 0.56–0.59, 0.44 at two steps; IBM/Garnet 0.77–0.78, 0.60–0.69), and
+  the false-trigger offset, 2–6 %, dwarfs the 0.1–0.2 % we measure. So it's mostly a calibrated k = 0 estimate. That
+  is exactly the gap error correction has to close."
+- **"2024: Ostrobothnia flooded, the snow flag was on, the index didn't pay. Basis risk?"** (Vaishnav, Toivo backs up)
+  "Yes, that's the honest case. In 2024 only one of six Ostrobothnia gauges passed its 1-in-10 level; four peaked at
+  95–97 %. So on its gauges it was a false alarm, one of six for that cluster. The floods that did count were in the
+  North, which paid without a snow flag. That's why the pilot fits the gauge choice to each insurer's own claims. And no
+  payout has ever followed a low-snow March."
+- **"Why pay 5–7 % rate on line with no standard-formula capital credit?"** (Vaishnav) "It protects earnings on the
+  correlated spring layer below the treaty, and it's ORSA evidence on joint flood risk. Under an internal model, like
+  If's, it can be credited. Per €1M of cover it's about €49–69k a year."
+- **"Vendor models already include snowmelt (RMS)."** (Toivo) "They average over simulated winters. None reprices from
+  this March's measured snow. Tulva does that, before the melt."
 
 ## "What did you do before the event?" (answer honestly, calmly, ~15 s)
 "Before the event we did research: we read up on Finnish floods, insurance and reinsurance, found the public data
