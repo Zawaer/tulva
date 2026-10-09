@@ -7,3 +7,4 @@ data/raw/
 .env.*
 !.env.example
 deck/video/raw/
+.venv-iqm/

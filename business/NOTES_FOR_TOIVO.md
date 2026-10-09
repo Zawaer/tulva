@@ -32,3 +32,12 @@ From the business research on 8 Oct 2026 (`business/reports/Tulva flood cover bu
 - Resource threshold for advantage in pricing: Chakrabarti et al., Quantum 2021: ~8k logical qubits, T-depth ~54M.
 - Classical timing on Vaishnav's laptop: Monte Carlo of the North factor model, 1M springs × 14 areas ≈ 0.45 s;
   96k samples × 2 areas ≈ 11 ms. Never claim speed advantage.
+
+## Vaishnav's IQM Emerald runs (9 Oct morning)
+New script `scripts/run_product_hw.py` (did not touch run_hw.py): the product trigger "≥2 of 5 North" (6 qubits,
+≥2-of-5 marker as a DiagonalGate) and the 3-qubit Kittilä+Ivalo instance under low / normal / high March snow
+(same circuit shape, only angles change). Same twin/zero calibration roles, so `analyse_run.py` works on it.
+Results logged in CLAIMS.md (section "IQM Emerald runs, 9 Oct"). Also ran `run_loader_hw.py --level 0.02` on emerald:
+at 1-in-50 the loader is swamped by noise (16 % vs 4.8 % exact for ≥2) — a clear "rare events need error correction"
+data point. Not yet in out/HARDWARE_RESULTS.md / charts; your call whether to add them.
+IQM venv on Windows: `.venv-iqm` (added to .gitignore).

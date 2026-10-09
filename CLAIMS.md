@@ -114,3 +114,15 @@ the continuous model is the classical reference. The outlook shift uses the in-s
   0.021–0.052 pp (IBM best 0.021, IQM 4-copy 0.038), so ~5–10× worse than classical today. Ideal QAE extrapolated
   (1/N) would be ~0.0002 pp at 10⁶, i.e. ~25× better than Monte Carlo · qae-sim / qae-ibm / qae-iqm ·
   scripts/qae_scaling.py, out/qae_scaling_hardware_points.json
+
+### IQM Emerald runs, 9 Oct (Vaishnav) · scripts/run_product_hw.py, scripts/run_loader_hw.py → out/runs/
+Two-level model (circuit's own model), North loadings, 8,000 shots per circuit, noise-aware = two calibration twins.
+- **Product trigger "≥2 of 5 North gauges over 1-in-50"** (6 qubits): exact 1.10 % → hardware noise-aware **1.41 %**
+  (raw 9.42 %); after a top-15 % snow March exact 1.70 % → **2.08 %** (raw 9.61 %). k=0 13 CZ, k=1 234 CZ (k=1 mostly
+  noise) · qae-iqm (emerald) · product-iqm-emerald-20261009T073815Z
+- **Snow on hardware, Kittilä + Ivalo both over 1-in-50** (3 qubits, 4/27/46 CZ): low-snow / normal / high-snow March
+  exact 0.070 % / 0.125 % / 0.193 % → hardware noise-aware **0.097 % / 0.197 % / 0.269 %**. Order and roughly the
+  size of the snow effect survive; level biased high by ~0.03–0.07 pp · qae-iqm (emerald)
+- 14-area loader at 1-in-50 (18 qubits, 44 CZ, 20,000 shots): P(≥2 areas) readout-corrected 16.0 % vs exact 4.8 %
+  (independence 3.1 %); P(≥3) 4.6 % vs 0.8 %. At rare levels gate noise creates false triggers that swamp the true
+  signal (at 1-in-10 the same circuit was close, see above) · qae-iqm (sampling) · loader-iqm-emerald-20261009T074104Z

@@ -1,0 +1,146 @@
+{
+  "A3_kittila_ivalo_both_clim": {
+    "exact": 0.0012496992187709922,
+    "raw_mlae": 0.0025968818488685402,
+    "noise_aware_mlae": 0.001968684471426082,
+    "k0_only": 0.00325,
+    "noise_aware_per_copy_mlae": null,
+    "gain_by_k": {
+      "0": 0.9850060795567892,
+      "1": 0.768678871556474,
+      "2": 0.5868512106987452
+    },
+    "offset_by_k": {
+      "0": 0.00012499967112861792,
+      "1": 0.017624997690198676,
+      "2": 0.029499995101589415
+    },
+    "two_qubit_gates_by_k": {
+      "0": 4,
+      "1": 27,
+      "2": 46
+    },
+    "oracle_queries": 72000,
+    "mc_rmse_same_queries": 0.00013166336866299913,
+    "copies": 1,
+    "per_copy_k0_rate": [
+      0.00325
+    ],
+    "shots": 24000,
+    "mc_rmse_same_shots": 0.00022804764401998648
+  },
+  "A3_kittila_ivalo_both_high": {
+    "exact": 0.0019328133815970402,
+    "raw_mlae": 0.003204263316954797,
+    "noise_aware_mlae": 0.0026855606591196226,
+    "k0_only": 0.003875,
+    "noise_aware_per_copy_mlae": null,
+    "gain_by_k": {
+      "0": 0.9932406397885485,
+      "1": 0.7660077821155016,
+      "2": 0.5951041361344145
+    },
+    "offset_by_k": {
+      "0": 0.00024999948697953443,
+      "1": 0.017374996439131794,
+      "2": 0.03287499231554299
+    },
+    "two_qubit_gates_by_k": {
+      "0": 4,
+      "1": 27,
+      "2": 46
+    },
+    "oracle_queries": 72000,
+    "mc_rmse_same_queries": 0.00016368489435281163,
+    "copies": 1,
+    "per_copy_k0_rate": [
+      0.003875
+    ],
+    "shots": 24000,
+    "mc_rmse_same_shots": 0.00028351055345061374
+  },
+  "A3_kittila_ivalo_both_low": {
+    "exact": 0.000703690350986917,
+    "raw_mlae": 0.002205141717631044,
+    "noise_aware_mlae": 0.0009724950787243061,
+    "k0_only": 0.001625,
+    "noise_aware_per_copy_mlae": null,
+    "gain_by_k": {
+      "0": 1.0,
+      "1": 0.8767771020821113,
+      "2": 0.6228585872427761
+    },
+    "offset_by_k": {
+      "0": 0.0004999998121008877,
+      "1": 0.018249998517289246,
+      "2": 0.03399999707413562
+    },
+    "two_qubit_gates_by_k": {
+      "0": 4,
+      "1": 27,
+      "2": 46
+    },
+    "oracle_queries": 72000,
+    "mc_rmse_same_queries": 9.882610786382178e-05,
+    "copies": 1,
+    "per_copy_k0_rate": [
+      0.001625
+    ],
+    "shots": 24000,
+    "mc_rmse_same_shots": 0.00017117183993442146
+  },
+  "N5_north_atleast2of5_clim": {
+    "exact": 0.01096188194430641,
+    "raw_mlae": 0.09420633390010054,
+    "noise_aware_mlae": 0.014093410739358233,
+    "k0_only": 0.020875,
+    "noise_aware_per_copy_mlae": null,
+    "gain_by_k": {
+      "0": 0.7745548499451889,
+      "1": 0.1226424187829629
+    },
+    "offset_by_k": {
+      "0": 0.010499997414108033,
+      "1": 0.6689999963149668
+    },
+    "two_qubit_gates_by_k": {
+      "0": 13,
+      "1": 234
+    },
+    "oracle_queries": 32000,
+    "mc_rmse_same_queries": 0.0005820684852464071,
+    "copies": 1,
+    "per_copy_k0_rate": [
+      0.020875
+    ],
+    "shots": 16000,
+    "mc_rmse_same_shots": 0.0008231691460654328
+  },
+  "N5_north_atleast2of5_high": {
+    "exact": 0.016953312460568127,
+    "raw_mlae": 0.09604972446667008,
+    "noise_aware_mlae": 0.02083107112223954,
+    "k0_only": 0.028375,
+    "noise_aware_per_copy_mlae": null,
+    "gain_by_k": {
+      "0": 0.8172271692643491,
+      "1": 0.1472090676498805
+    },
+    "offset_by_k": {
+      "0": 0.010624995779207199,
+      "1": 0.6713749931572874
+    },
+    "two_qubit_gates_by_k": {
+      "0": 13,
+      "1": 234
+    },
+    "oracle_queries": 32000,
+    "mc_rmse_same_queries": 0.0007216711867512463,
+    "copies": 1,
+    "per_copy_k0_rate": [
+      0.028375
+    ],
+    "shots": 16000,
+    "mc_rmse_same_shots": 0.0010205971798774992
+  }
+}
