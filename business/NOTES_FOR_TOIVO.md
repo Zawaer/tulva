@@ -91,3 +91,6 @@ Snowy toggle). index.html edits: one CSS link, one nav link, the section, one sc
 - `scripts/run_mid_hw.py` (9 and 14 qubits, North snow+temp+rain → 5 rivers): 9q/22 CZ works raw on Emerald
   (16.5 % vs 13.6 %, scenarios within a few points); 14q/54 CZ with the 1-in-50 layer is noise (5.3 % vs 1.09 %).
   Logged in CLAIMS under "Where today's hardware stops". IQM Resonance max is 20,000 shots per job.
+- `deck/PITCH_NOTES.md` (Vaishnav, Fri evening): two spoken additions the workshop asked for (how we differ from
+  existing solutions; hackathon journey + tools), Q&A facts (hardware sweet spot, snow 2.8× vs 3.0×, rain), and the
+  who-pays-whom explanation. Suggest taking the ~27 s from slides 5–6. PITCH.md itself untouched.
