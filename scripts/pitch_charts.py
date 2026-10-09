@@ -1,7 +1,8 @@
 """Big, simple pitch charts for deck slides 2 and 3 (readable from a jury table).
 
 Inputs: out/joint_counts.json (fit_dependence.py), out/pricing.json (price_index.py).
-Outputs: out/pitch_gap.png (slide 2), out/pitch_cost.png (slide 3), out/pitch_loader.png (slide 5),
+Outputs: out/pitch_gap.png (slide 2), out/pitch_cost.png (slide 3), out/pitch_snow.png (slide 5; pitch_loader.png is no
+longer on a slide),
 out/pitch_scaling.png (slide 6). Slides 5 and 6 redraw out/loader_emerald.png and out/qae_scaling.png from their
 saved results with deck-size fonts (no new computation).
 Figure sizes equal the slot sizes on the slide (inches), so font sizes are true slide points.
@@ -16,6 +17,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "out"
 NAVY, BLUE, RED, GREY, LIGHTGREY = "#0b1f3a", "#1f6feb", "#cf222e", "#6b7280", "#dde3ea"
+PURPLE = "#8250df"  # IQM chip, as on the loader chart
 plt.rcParams.update({"font.family": "sans-serif",
                      "font.sans-serif": ["Liberation Sans", "Arial", "Helvetica", "DejaVu Sans"], "font.size": 22,
                      "text.color": NAVY, "axes.edgecolor": LIGHTGREY})
@@ -29,27 +31,25 @@ def clean(ax):
 
 
 def gap_chart():
-    """Slide 2: P(>=4 of 14 areas over their own 1-in-10 in the same spring)."""
+    """Slide 2: P(>=4 of 14 areas over their own 1-in-10 in the same spring), observed vs independence."""
     j = json.loads((OUT / "joint_counts.json").read_text())
     i = j["k"].index(4)
     n_obs, n_years = j["observed_n_years"][i], j["n_years"]
-    bars = [("Observed\n1961–2025", j["observed"][i], NAVY),
-            ("Tulva\nmodel", j["model_same_years"][i], BLUE),
-            ("If\nindependent", j["independent_same_years"][i], RED)]
-    fig, ax = plt.subplots(figsize=(7.9, 5.25), dpi=DPI)
-    xs = range(len(bars))
-    ax.bar(xs, [b[1] for b in bars], width=0.62, color=[b[2] for b in bars])
-    for x, (_, v, c) in zip(xs, bars):
-        ax.text(x, v + 0.006, f"{100 * v:.1f} %", ha="center", va="bottom", fontsize=34, fontweight="bold",
-                color=c)
-    ax.text(0, j["observed"][i] / 2, f"{n_obs} of {n_years}\nsprings", ha="center", va="center",
-            fontsize=18, color="white")
-    ax.set_xticks(list(xs), [b[0] for b in bars], fontsize=22)
+    obs, ind = j["observed"][i], j["independent_same_years"][i]
+    fig, ax = plt.subplots(figsize=(12.1, 4.35), dpi=DPI)
+    xs = [0, 2]
+    ax.bar(xs, [obs, ind], width=0.9, color=[NAVY, RED])
+    for x, v, c in zip(xs, [obs, ind], [NAVY, RED]):
+        ax.text(x, v + 0.005, f"{100 * v:.1f} %", ha="center", va="bottom", fontsize=40, fontweight="bold", color=c)
+    ax.text(0, obs / 2, f"{n_obs} of {n_years}\nsprings", ha="center", va="center", fontsize=22, color="white")
+    ax.text(1.0, obs * 0.62, f"≈{obs / ind:.0f}×", ha="center", va="center", fontsize=72, fontweight="bold",
+            color=RED)
+    ax.text(1.0, obs * 0.36, "as often as\nindependence says", ha="center", va="center", fontsize=20, color=GREY)
+    ax.set_xticks(xs, ["Observed 1961–2025", "If rivers were independent"], fontsize=24)
+    ax.set_xlim(-0.8, 2.8)
     ax.set_yticks([])
-    ax.set_ylim(0, max(b[1] for b in bars) * 1.28)
+    ax.set_ylim(0, obs * 1.3)
     clean(ax)
-    ax.set_title("How often do ≥4 of 14 river areas\nflood in the same spring?", loc="left", fontsize=24,
-                 fontweight="bold", pad=14)
     fig.tight_layout(pad=0.3)
     fig.savefig(OUT / "pitch_gap.png", dpi=DPI, facecolor="white")
     plt.close(fig)
@@ -87,7 +87,7 @@ def cost_chart():
     ax.set_axisbelow(True)
     clean(ax)
     ratio = t["tulva"]["premium_eur"] / t["independent"]["premium_eur"]
-    ax.text(xmax * 1.42, 2, f"≈{ratio:.0f}× under-priced", ha="right", va="center", fontsize=24,
+    ax.text(xmax * 1.42, 1.55, f"≈{ratio:.0f}× under-priced", ha="right", va="center", fontsize=40,
             fontweight="bold", color=RED)
     fig.tight_layout(pad=0.3)
     fig.savefig(OUT / "pitch_cost.png", dpi=DPI, facecolor="white")
@@ -116,6 +116,39 @@ def loader_chart():
     ax.legend(frameon=False, fontsize=17, loc="lower left", handlelength=1.6, borderaxespad=0.2)
     fig.tight_layout(pad=0.3)
     fig.savefig(OUT / "pitch_loader.png", dpi=DPI, facecolor="white")
+    plt.close(fig)
+
+
+def snow_chart():
+    """Slide 5: snow signal on IQM Emerald, Kittilä + Ivalo both over 1-in-50, low / normal / high March snow:
+    exact vs calibrated chip estimate with bootstrap 90 % intervals (scripts/bootstrap_ci.py)."""
+    b = json.loads((OUT / "bootstrap_ci.json").read_text())
+    rows = [("Low snow", b["emerald snow low"]), ("Normal", b["emerald snow normal"]),
+            ("High snow", b["emerald snow high"])]
+    r = b["snow_ratio_high_over_low"]
+    fig, ax = plt.subplots(figsize=(7.6, 4.6), dpi=DPI)
+    w = 0.36
+    for i, (lab, d) in enumerate(rows):
+        e, c, lo, hi = (100 * d["exact"], 100 * d["estimate"], 100 * d["ci90"][0], 100 * d["ci90"][1])
+        ax.bar(i - w / 2 - 0.02, e, w, color=BLUE)
+        ax.bar(i + w / 2 + 0.02, c, w, color=PURPLE)
+        ax.errorbar(i + w / 2 + 0.02, c, yerr=[[c - lo], [hi - c]], color=NAVY, lw=2.5, capsize=7, capthick=2.5)
+        ax.text(i - w / 2 - 0.02, e + 0.006, f"{e:.3f}", ha="center", va="bottom", fontsize=15, color=NAVY)
+        ax.text(i + w / 2 + 0.02, hi + 0.006, f"{c:.3f}", ha="center", va="bottom", fontsize=15, color=NAVY)
+    ax.set_xticks(range(3), [x[0] for x in rows], fontsize=20)
+    ax.set_yticks([0, 0.1, 0.2], ["0", "0.1 %", "0.2 %"], fontsize=16, color=GREY)
+    ax.set_ylim(0, 0.36)
+    ax.grid(axis="y", color=LIGHTGREY, lw=1)
+    ax.set_axisbelow(True)
+    clean(ax)
+    ax.text(-0.45, 0.345, f"{r['estimate']:.2f}× on chip vs {r['exact']:.2f}× exact", fontsize=28,
+            fontweight="bold", color=NAVY, va="top")
+    ax.text(-0.45, 0.295, "risk, high vs low March snow", fontsize=17, color=GREY, va="top")
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color=BLUE, label="Exact"), Patch(color=PURPLE, label="IQM Emerald (90 % CI)")],
+              frameon=False, fontsize=16, loc="upper left", bbox_to_anchor=(0.0, 0.8))
+    fig.tight_layout(pad=0.3)
+    fig.savefig(OUT / "pitch_snow.png", dpi=DPI, facecolor="white")
     plt.close(fig)
 
 
@@ -155,5 +188,6 @@ if __name__ == "__main__":
     gap_chart()
     cost_chart()
     loader_chart()
+    snow_chart()
     scaling_chart()
-    print("wrote out/pitch_gap.png, out/pitch_cost.png, out/pitch_loader.png, out/pitch_scaling.png")
+    print("wrote out/pitch_gap.png, out/pitch_cost.png, out/pitch_loader.png, out/pitch_snow.png, out/pitch_scaling.png")

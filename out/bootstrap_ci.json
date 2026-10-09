@@ -76,5 +76,15 @@
       3.6279839572065598
     ],
     "exact": 2.7466816603159234
+  },
+  "emerald snow normal": {
+    "run": "product-iqm-emerald-20261009T075338Z.json",
+    "instance": "A3_kittila_ivalo_both_clim",
+    "exact": 0.0012496992187709922,
+    "estimate": 0.0016550151144716788,
+    "ci90": [
+      0.0015114144602862377,
+      0.0017987918075361507
+    ]
   }
 }

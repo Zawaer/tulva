@@ -74,4 +74,5 @@ if snow:
     res["snow_ratio_high_over_low"] = {"estimate": float(res["emerald snow high"]["estimate"]/res["emerald snow low"]["estimate"]), "ci90": [float(r5), float(r95)],
                                        "exact": res["emerald snow high"]["exact"]/res["emerald snow low"]["exact"]}
     print("snow ratio high/low:", res["snow_ratio_high_over_low"])
+    do(f, "A3_kittila_ivalo_both_clim", "emerald snow normal")  # last, so the intervals above keep their RNG stream
 (ROOT/"out"/"bootstrap_ci.json").write_text(json.dumps(res, indent=2, default=float))
