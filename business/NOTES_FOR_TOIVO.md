@@ -88,3 +88,6 @@ Snowy toggle). index.html edits: one CSS link, one nav link, the section, one sc
   qubits, so ≥4 of 14 over 1-in-10 is 9.6 % vs your 12.2 % and 15 % observed.
 - `scripts/run_big_hw.py`: one 43-qubit circuit. MPS simulator matches exact; IQM Emerald (237 CZ) is noise-dominated
   (26 % vs 1.09 %). All in CLAIMS.md. Possible roadmap/Q&A material; your call whether it goes anywhere.
+- `scripts/run_mid_hw.py` (9 and 14 qubits, North snow+temp+rain → 5 rivers): 9q/22 CZ works raw on Emerald
+  (16.5 % vs 13.6 %, scenarios within a few points); 14q/54 CZ with the 1-in-50 layer is noise (5.3 % vs 1.09 %).
+  Logged in CLAIMS under "Where today's hardware stops". IQM Resonance max is 20,000 shots per job.

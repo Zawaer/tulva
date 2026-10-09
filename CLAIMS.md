@@ -154,3 +154,15 @@ One connected circuit: national + regional snow/temp/rain, wet-spring per cluste
   ≥4 of 14 over 1-in-10 40 % vs 9.6 %. Weather qubits early in the circuit stay near their 30 % (25–39 %); area
   qubits at the end read 1 about 21–23 % of the time instead of 2–10 %. Errors pile up along the circuit · qae-iqm
   (sampling, raw) · big-iqm-emerald-20261009T113236Z
+
+### Where today's hardware stops: weather → rivers samplers on IQM Emerald (Vaishnav, 9 Oct) · scripts/run_mid_hw.py
+North cluster only; snow / April–May temperature / rain as three "high = top 30 %" qubits (independent, within-cluster
+correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area qubits. 20,000 shots, raw (no calibration).
+- **9 qubits, 22 CZ, areas over 1-in-10: works.** P(≥2 of 5) 16.5 % vs exact 13.6 %; by scenario, snowy + rainy
+  30.0 % vs 29.1 %, all three high 27.5 % vs 28.0 %, snowy only 20.9 % vs 18.0 %, nothing high 12.5 % vs 7.8 %
+  (noise adds fake floods mostly in the quiet scenario) · qae-iqm (sampling, raw) · mid9-iqm-emerald-20261009T115325Z
+- **14 qubits, 54 CZ, areas at 1-in-10 and 1-in-50: noise-dominated.** ≥2 over 1-in-10 23.2 % vs 13.6 %; ≥2 over
+  1-in-50 5.3 % vs 1.09 % (quiet scenario 4.3 % vs 0.62 %). Scenario order survives, levels do not · qae-iqm ·
+  mid14-iqm-emerald-20261009T115403Z
+- Measured limit, all runs together: ≤ ~15 qubits, ≤ ~50 two-qubit gates, events no rarer than ~1-in-10 give the
+  right numbers raw or after calibration; 1-in-50 events and ≥ ~200 gates do not · qae-iqm
