@@ -67,7 +67,26 @@ def main():
             "shots_total": best[inst]["shots"], "copies": best[inst].get("copies", 10),
             "two_qubit_gates_by_k": gates,
         }
-    out = {"example": "Kittilä and Ivalo both pass their 1-in-50 spring level",
+    # everything that goes in: all 14 rivers, snow per cluster, April–May temperature and rain per cluster
+    wx = pd.read_csv(DATA / "weather_spring.csv") if (DATA / "weather_spring.csv").exists() else None
+    clusters = {}
+    for cl in ["Ostrobothnia", "North", "Satakunta–SE"]:
+        areas = [a for a in sm.columns if a != "year" and g.loc[a, "cluster"] == cl]
+        cats = sorted({str(int(g.loc[a, "swe_catchment"])) for a in areas if not pd.isna(g.loc[a, "swe_catchment"])})
+        snow_cl = sw.set_index("year")[[c for c in cats if c in sw.columns]].mean(axis=1)
+        entry = {"areas": [{"area": a, "gauge": g.loc[a, "gauge"], "source": g.loc[a, "source"],
+                            "q10": float(g.loc[a, "q10_gev"]), "q50": float(g.loc[a, "q50_gev"]),
+                            "peaks": {int(y): (None if pd.isna(v) else round(float(v))) for y, v in zip(sm.year, sm[a])}}
+                           for a in areas],
+                 "snow_mm": {int(y): (None if pd.isna(v) else round(float(v))) for y, v in snow_cl.items()},
+                 "snow_catchments": cats}
+        if wx is not None:
+            w = wx[wx.cluster == cl].set_index("year")
+            entry["station"] = w.station.iloc[0]
+            entry["temp_c"] = {int(y): (None if pd.isna(v) else float(v)) for y, v in w.t_aprmay.items()}
+            entry["rain_mm"] = {int(y): (None if pd.isna(v) else float(v)) for y, v in w.rain_aprmay.items()}
+        clusters[cl] = entry
+    out = {"example": "Kittilä and Ivalo both pass their 1-in-50 spring level", "all_data": clusters,
            "rivers": rivers, "snow": snow, "independent": (1 / 50) ** 2, "snow_shift_sd": shift,
            "device": "IQM Emerald (54 qubits, IQM Resonance)", "runs": [RUN_K0, RUN_BEST], "cases": cases}
     WEB.mkdir(parents=True, exist_ok=True)

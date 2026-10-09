@@ -46,3 +46,8 @@
   .pl-ans .row .bar { grid-column: 1 / -1; grid-row: 2; }
   .pl-step { grid-template-columns: 40px minmax(0, 1fr); gap: 12px; }
 }
+
+.pl-all { margin: 18px 0 30px; }
+.pl-all summary { cursor: pointer; font-size: 18px; font-weight: 600; color: var(--navy); padding: 6px 0; }
+.pl-all .pl-say { margin: 6px 0 12px; }
+.pl-h3 { font-size: 21px; color: var(--navy); margin: 0 0 4px; }

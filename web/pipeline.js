@@ -131,9 +131,47 @@
     answer(c);
   }
 
+  function allDataSvg() {
+    const CLC = { "Ostrobothnia": "#2f6fde", "North": "#0f9e94", "Satakunta–SE": "#d4902a" };
+    const yrs = []; for (let y = 1961; y <= 2025; y++) yrs.push(y);
+    const W = 1000, x0 = 230, bw = (W - x0 - 10) / yrs.length, rowH = 26, gapH = 8;
+    let y = 8, s = "";
+    const row = (label, sub, vals, color, thresh, markHi) => {
+      const v = yrs.map((yy) => vals[yy]), nums = v.filter((a) => a != null);
+      const lo = Math.min(0, ...nums), hi = Math.max(...nums, thresh || 0) * 1.05 || 1, sc = (a) => ((a - lo) / (hi - lo)) * (rowH - 4);
+      s += `<text x="0" y="${y + 15}" font-size="12.5" font-weight="600" fill="${C.ink}">${label}</text>`;
+      if (sub) s += `<text x="118" y="${y + 15}" font-size="11" fill="${C.muted}">${sub}</text>`;
+      yrs.forEach((yy, i) => {
+        const a = vals[yy]; if (a == null) return;
+        const over = thresh != null && a > thresh, big = markHi && a >= markHi;
+        s += `<rect x="${x0 + i * bw + 0.6}" y="${y + rowH - 2 - sc(a)}" width="${bw - 1.2}" height="${Math.max(0.8, sc(a))}" fill="${over || big ? C.both : color}" opacity="${over || big ? 1 : 0.6}"><title>${yy}: ${Number.isInteger(a) ? a : a.toFixed(1)}</title></rect>`;
+      });
+      if (thresh != null) { const yl = y + rowH - 2 - sc(thresh); s += `<line x1="${x0}" x2="${W - 10}" y1="${yl}" y2="${yl}" stroke="${C.navy}" stroke-width="1" stroke-dasharray="3 3"/>`; }
+      y += rowH;
+    };
+    for (const [cl, E] of Object.entries(D.all_data)) {
+      s += `<text x="0" y="${y + 14}" font-size="13" font-weight="700" fill="${CLC[cl]}" letter-spacing=".06em">${cl.toUpperCase()}</text>`;
+      y += 22;
+      E.areas.forEach((A) => row(A.area, "river flow, m³/s", A.peaks, CLC[cl], A.q50));
+      const snowVals = Object.values(E.snow_mm).filter((a) => a != null).sort((a, b) => a - b);
+      row("Snow 1 March", "mm water", E.snow_mm, C.snow, null, snowVals[Math.floor(snowVals.length * 0.85)]);
+      if (E.temp_c) {
+        row("Apr–May temp", "°C, " + E.station, E.temp_c, "#c98a3a", null);
+        row("Apr–May rain", "mm, " + E.station, E.rain_mm, "#6f8fb0", null);
+      }
+      y += gapH;
+    }
+    [1961, 1980, 2000, 2005, 2025].forEach((yy) => {
+      const i = yrs.indexOf(yy);
+      s += `<text x="${x0 + (i + 0.5) * bw}" y="${y + 12}" font-size="12" text-anchor="middle" fill="${yy === 2005 ? C.both : C.muted}" font-weight="${yy === 2005 ? 700 : 400}">${yy}</text>`;
+    });
+    return `<svg viewBox="0 0 ${W} ${y + 20}" role="img" aria-label="All input data: spring peaks of 14 rivers, snow, temperature and rain, 1961 to 2025">${s}</svg>`;
+  }
+
   async function boot() {
     try { D = await fetch("data/pipeline.json?v=" + Date.now()).then((r) => r.json()); } catch (e) { return; }
     $("#pl-rivers").innerHTML = riverSvg();
+    if (D.all_data && $("#pl-all")) $("#pl-all").innerHTML = allDataSvg();
     document.querySelectorAll(".pl-snow button").forEach((b) => b.addEventListener("click", () => { mode = b.dataset.k; render(); }));
     render();
   }
