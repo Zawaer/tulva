@@ -287,13 +287,10 @@ def s5_circuit(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     title(s, n, "Our circuit: quantum amplitude estimation")
     picture(s, OUT / "stage_qae_circuit.png", MX, 1.35, W - 2 * MX, 3.6)
-    text(s, MX, 5.05, W - 2 * MX, 1.75,
+    text(s, MX, 5.15, W - 2 * MX, 1.4,
          [[("Qubits = wet spring + rivers. Gates = our flood model.", {})],
-          [("Why quantum?  ", {"bold": True, "color": RED}), ("2× accuracy: sampling needs 4× the runs, QAE 2×.", {})],
-          [("Perfect simulator: exact 0.125 %, ≈2.5× tighter than Monte Carlo", {})]],
-         size=BODY, color=NAVY, space_after=6)
-    source(s, "MLAE, Grover steps k = 0, 1, 2 · simulator ±0.011 vs Monte Carlo ±0.027 pp, 16,000 runs each · "
-              "2× vs 4× = ideal scaling")
+          [("Why quantum?  ", {"bold": True, "color": RED}), ("2× accuracy: sampling needs 4× the runs, QAE 2×.", {})]],
+         size=BODY, color=NAVY, space_after=8)
     return s
 
 
@@ -500,8 +497,8 @@ def s12_backup_hardware(prs, n):
     return s
 
 
-SLIDES = [s1_hook, s2_gap, s3_product, s4_demo, s5_circuit, s6_quantum, s7_honest, s8_business, s9_close,
-          s10_backup_product, s11_backup_business, s12_backup_hardware]
+# Stage deck only. The backup slides (s10-s12) are kept as functions but not built: their details are in QA.md.
+SLIDES = [s1_hook, s2_gap, s3_product, s4_demo, s5_circuit, s6_quantum, s7_honest, s8_business, s9_close]
 
 
 def build():

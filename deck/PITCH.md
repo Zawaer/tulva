@@ -1,7 +1,7 @@
 # Tulva: 3-minute pitch script
 
-**Slides 1–9 are the stage deck. Backup slides 10–12 (product & pricing, basis risk & business, hardware) are
-for Q&A only: never show them in the 3 minutes.** The slides carry one idea each; the details (intervals,
+**Slides 1–9 are the whole deck (backup slides removed; details for Q&A are in QA.md and docs/QA_DRILL.md).**
+The slides carry one idea each; the details (intervals,
 sources, why now) are said or kept for Q&A.
 
 **Timing (final, voiceover video): 230 live words + the 44.5 s demo video, which speaks for itself + 4 short
