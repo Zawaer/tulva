@@ -44,3 +44,9 @@ IQM venv on Windows: `.venv-iqm` (added to .gitignore).
 - Rerun 07:53Z with `--copies-a3 10 --copies-n5 6` (2q per copy unchanged, no SWAP overhead): A3 snow errors halved;
   hardware high/low snow ratio 3.0× vs exact 2.8×. N5 k=0-only calibration is biased (zero twin has no 1-trigger
   states); a twin with realistic single-trigger rates or readout mitigation would fix it. `--dry-run` prints gate counts.
+
+## New web section "How it works" (9 Oct, Vaishnav)
+`#how`, placed before Under the hood, nav link added. Self-contained: `web/pipeline.js`, `web/pipeline.css`,
+data `web/data/pipeline.json` from `scripts/export_pipeline.py` (Kittilä+Ivalo example: SYKE peaks, 1 March snow,
+the model's numbers, the 3-qubit circuit, 8,000 real Emerald shots drawn as squares, corrected vs exact; Low/Normal/
+Snowy toggle). index.html edits: one CSS link, one nav link, the section, one script tag. Intended for the demo video.

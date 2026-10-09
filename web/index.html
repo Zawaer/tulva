@@ -6,6 +6,7 @@
 <title>Tulva · Finland's spring floods, priced as a joint risk</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="pipeline.css">
 </head>
 <body>
 <header class="top">
@@ -13,7 +14,7 @@
     <div class="brand"><span class="logo" aria-hidden="true"></span>Tulva</div>
     <nav>
       <a href="#map">Joint risk</a><a href="#outlook">Snow outlook</a><a href="#product">Index cover</a>
-      <a href="#hood">Under the hood</a><a href="#replay">Year replay</a>
+      <a href="#how">How it works</a><a href="#hood">Under the hood</a><a href="#replay">Year replay</a>
     </nav>
   </div>
 </header>
@@ -61,6 +62,53 @@
   </div>
 </section>
 
+<section id="how" class="sec">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2>From river data to a quantum answer</h2>
+    <p class="lead">One real example, start to finish: will Kittilä and Ivalo both pass their 1-in-50 flood level in the
+      same spring? Pick the kind of March and follow the numbers.</p>
+    <div class="pl-snow"><span>This March:</span><button data-k="low">Low snow</button><button data-k="clim">Normal</button><button data-k="high">Snowy</button></div>
+    <div class="pl-flow">
+      <div class="pl-step"><div class="pl-rail"><div class="pl-num">1</div><div class="pl-line"></div></div><div class="pl-body">
+        <h3>River records go in</h3>
+        <p class="pl-say">The highest river flow of every spring since 1961, from SYKE gauges. The dashed line is the
+          1-in-50 level, a flood that comes once in 50 years. Red: 2005, when both rivers passed it together.</p>
+        <div class="pl-box" id="pl-rivers"></div></div></div>
+      <div class="pl-step"><div class="pl-rail"><div class="pl-num">2</div><div class="pl-line"></div></div><div class="pl-body">
+        <h3>Snow on 1 March goes in</h3>
+        <p class="pl-say">How much water is stored in the snow two months before the melt. More snow means more meltwater.
+          2005 was one of the snowiest Marches.</p>
+        <div class="pl-box" id="pl-snowsvg"></div></div></div>
+      <div class="pl-step"><div class="pl-rail"><div class="pl-num">3</div><div class="pl-line"></div></div><div class="pl-body">
+        <h3>The model boils 65 years down to a few numbers</h3>
+        <p class="pl-say">Rivers in the north flood together because they share the same wet spring. The snow changes how
+          likely a wet spring is.</p>
+        <div class="pl-nums" id="pl-nums"></div></div></div>
+      <div class="pl-step"><div class="pl-rail"><div class="pl-num">4</div><div class="pl-line"></div></div><div class="pl-body">
+        <h3>The numbers become a quantum circuit</h3>
+        <p class="pl-say">A circuit is a recipe of steps for the qubits. One qubit decides "wet spring?", and it steers the
+          two river qubits, so they tend to flood together, just like the real rivers.</p>
+        <div class="pl-box" id="pl-circ"></div><p class="pl-cap" id="pl-circcap"></p></div></div>
+      <div class="pl-step out"><div class="pl-rail"><div class="pl-num">5</div><div class="pl-line"></div></div><div class="pl-body">
+        <h3>The quantum computer answers in shots</h3>
+        <p class="pl-say">One shot = run the recipe once and read every qubit: 1 = flood, 0 = no flood. Each square below is
+          one shot on the real IQM Emerald quantum computer, like one simulated spring.</p>
+        <div class="pl-box pl-shots"><canvas id="pl-canvas" aria-label="8,000 shots from IQM Emerald"></canvas><div class="pl-leg" id="pl-leg"></div></div></div></div>
+      <div class="pl-step out"><div class="pl-rail"><div class="pl-num">6</div></div><div class="pl-body">
+        <h3>Count, correct, compare</h3>
+        <p class="pl-say">Count the red squares. Noise makes the chip see some fake floods, so we also run test circuits with
+          known answers and use them to correct. Then we check against the exact answer.</p>
+        <div class="pl-box pl-ans" id="pl-ans"></div>
+        <div class="pl-gloss">
+          <div><b>Shot</b>One run of the circuit, read once. Like rolling the dice once.</div>
+          <div><b>Noise</b>Tiny errors in the hardware. More steps, more errors.</div>
+          <div><b>Test circuit</b>Same recipe with made-up numbers whose answer we know, to measure the noise.</div>
+        </div></div></div>
+    </div>
+  </div>
+</section>
+
 <section id="hood" class="sec alt">
   <div class="wrap">
     <p class="eyebrow">4 · Under the hood</p>
@@ -99,5 +147,6 @@
 <div id="tip" class="tip" hidden></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script src="app.js"></script>
+<script src="pipeline.js"></script>
 </body>
 </html>

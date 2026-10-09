@@ -1,0 +1,48 @@
+/* "How it works" section: data in -> model -> circuit -> shots -> answer (web/pipeline.js) */
+.pl-snow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0 26px; }
+.pl-snow span { font-size: 14px; color: var(--muted); margin-right: 6px; }
+.pl-snow button { font: inherit; font-size: 14px; font-weight: 600; border: 1px solid var(--line); background: #fff; color: var(--ink);
+  padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+.pl-snow button.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+.pl-flow { display: grid; gap: 0; }
+.pl-step { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 18px; }
+.pl-rail { display: flex; flex-direction: column; align-items: center; }
+.pl-num { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 750; font-size: 17px;
+  background: var(--accent-soft); color: var(--accent); flex: none; }
+.pl-step.out .pl-num { background: #fbe7f0; color: #a0306a; }
+.pl-line { width: 2px; flex: 1; background: var(--line); margin: 6px 0; min-height: 24px; }
+.pl-body { padding-bottom: 34px; min-width: 0; }
+.pl-body h3 { margin: 6px 0 4px; font-size: 21px; color: var(--navy); }
+.pl-body p.pl-say { margin: 0 0 14px; color: var(--muted); font-size: 16px; max-width: 760px; }
+.pl-box { border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 16px 18px; }
+.pl-box svg { display: block; width: 100%; height: auto; }
+.pl-cap { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.pl-nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.pl-num-tile { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: #fff; }
+.pl-num-tile .v { font-size: 34px; font-weight: 750; color: var(--navy); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.pl-num-tile .v.ch { color: var(--accent); }
+.pl-num-tile .k { font-size: 14px; color: var(--muted); margin-top: 2px; }
+.pl-shots { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 22px; align-items: center; }
+.pl-shots canvas { width: 100%; height: auto; border-radius: 8px; image-rendering: pixelated; }
+.pl-leg { display: grid; gap: 10px; font-size: 15px; }
+.pl-leg div { display: grid; grid-template-columns: 16px 1fr auto; gap: 10px; align-items: center; }
+.pl-leg i { width: 14px; height: 14px; border-radius: 3px; display: block; }
+.pl-leg b { font-variant-numeric: tabular-nums; }
+.pl-ans { display: grid; gap: 10px; }
+.pl-ans .row { display: grid; grid-template-columns: 250px minmax(0, 1fr) 90px; gap: 14px; align-items: center; font-size: 15px; }
+.pl-ans .bar { height: 18px; border-radius: 4px; background: var(--line); }
+.pl-ans .row.hw .bar { background: #a0306a; }
+.pl-ans .row.ex .bar { background: #2a6a3f; }
+.pl-ans .row.raw .bar { background: #d9a7bf; }
+.pl-ans .row b { font-variant-numeric: tabular-nums; text-align: right; }
+.pl-ans .row.hw b { font-size: 20px; color: #a0306a; }
+.pl-gloss { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 8px; }
+.pl-gloss div { background: var(--bg2); border-radius: 12px; padding: 12px 14px; font-size: 14px; color: var(--ink); }
+.pl-gloss b { display: block; color: var(--navy); margin-bottom: 2px; }
+@media (max-width: 760px) {
+  .pl-nums, .pl-gloss { grid-template-columns: 1fr; }
+  .pl-shots { grid-template-columns: 1fr; }
+  .pl-ans .row { grid-template-columns: 1fr 70px; }
+  .pl-ans .row .bar { grid-column: 1 / -1; grid-row: 2; }
+  .pl-step { grid-template-columns: 40px minmax(0, 1fr); gap: 12px; }
+}
