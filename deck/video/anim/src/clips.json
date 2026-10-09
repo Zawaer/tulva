@@ -1,8 +1,8 @@
 {
  "app_snow": {
   "file": "app_snow.mp4",
-  "start": 9.302,
-  "end": 19.174,
+  "start": 9.696,
+  "end": 20.886,
   "fps": 30,
   "viewport": [
    1280,
@@ -11,16 +11,16 @@
   "dsf": 2.5,
   "cues": {
    "scroll": [
-    11.189,
-    12.231
+    11.933,
+    12.975
    ],
-   "cursorIn": 12.869,
+   "cursorIn": 13.813,
    "move": [
-    13.069,
-    13.841
+    14.013,
+    14.75
    ],
-   "click": 13.991,
-   "cursorOut": 14.791
+   "click": 14.9,
+   "cursorOut": 15.7
   },
   "high_button": {
    "x": 388.890625,

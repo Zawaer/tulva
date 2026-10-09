@@ -29,7 +29,9 @@ OUT = ROOT / "out"
 DECK = ROOT / "deck"
 ASSETS = DECK / "assets"  # generated crops, rebuilt every run
 PPTX = DECK / "Tulva_QxF2026.pptx"
-VIDEO = DECK / "video" / "tulva_demo.mp4"  # embedded on slide 4; whatever is on disk at build time
+VIDEO = DECK / "video" / "tulva_demo_anim.mp4"  # slide 4: 44.5 s demo with voiceover (deck/video/anim/);
+#                                               deck/video/tulva_demo.mp4 (silent, 37 s) is kept as a backup
+POSTER_AT = 9.6  # s into the video: 2005 map with the four flooded rivers and the March snow meter
 
 NAVY = RGBColor(0x0B, 0x1F, 0x3A)
 BLUE = RGBColor(0x1F, 0x6F, 0xEB)
@@ -253,11 +255,11 @@ def s3_product(prs, n):
 
 
 def poster_frame() -> Path:
-    """First-seconds still of the demo video, shown before playback starts."""
+    """Still of the demo video at POSTER_AT, shown before playback starts."""
     import imageio_ffmpeg
     ASSETS.mkdir(exist_ok=True)
     out = ASSETS / "video_poster.png"
-    subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-loglevel", "error", "-ss", "2", "-i", str(VIDEO),
+    subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-loglevel", "error", "-ss", str(POSTER_AT), "-i", str(VIDEO),
                     "-frames:v", "1", str(out)], check=True)
     return out
 

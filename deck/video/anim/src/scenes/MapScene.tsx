@@ -2,8 +2,8 @@ import React from "react";
 import data from "../data.json";
 import { C, clamp01, mix, ramp, word } from "../theme";
 
-// Beat 1: 1 March 2005, Lapland's snowpack in its top 15 %; two months later four Lapland rivers pass their 1-in-10
-// level together. Map = Natural Earth, dots = the 14 SYKE gauges, values from web/data/app.json.
+// Beat 1: May 2005, four Lapland rivers over their 1-in-10 level together; two months earlier the March snow was in
+// its top 15 %. Map = Natural Earth, dots = the 14 SYKE gauges, values from web/data/app.json.
 const LIT = data.areas.filter((a) => a.over_1in10);
 const LABEL_SIDE: Record<string, 1 | -1> = { Ivalo: 1, Kittilä: -1, Rovaniemi: 1, Tornio: -1 };
 const FI = data.land.find((l) => l.name === "Finland")!.d;
@@ -16,19 +16,16 @@ const FLAKES = Array.from({ length: 160 }, (_, i) => {
 });
 
 export const MapScene: React.FC<{ t: number }> = ({ t }) => {
-  const tMarch = word(1, "first"), tSnow = word(1, "lapland"), tTop = word(1, "top"), tLater = word(1, "two", 1);
-  const tRivers = [word(1, "four"), word(1, "lapland", 1), word(1, "rivers"), word(1, "pass")];
+  const tMay = word(1, "may"), tEarlier = word(1, "two", 1), tTop = word(1, "top");
+  const tRivers = [word(1, "four"), word(1, "lapland"), word(1, "rivers"), word(1, "hit")];
   const tTogether = word(1, "together");
-  const snowIn = ramp(t, tMarch + 0.2, tMarch + 1.6);
-  const melt = ramp(t, tLater, tLater + 1.4);
-  const snow = snowIn * (1 - melt);
-  const meter = ramp(t, tSnow + 0.3, tTop + 0.2);
+  const snow = 0.8 * ramp(t, tEarlier, tEarlier + 1.2);      // the March snow, shown under the flooded rivers
+  const meter = ramp(t, tEarlier + 0.4, tTop + 0.2);
   const pct = data.snow_north_pct * meter;
   const lit = LIT.map((_, k) => ramp(t, tRivers[k], tRivers[k] + 0.35, "out"));
   const count = lit.filter((p) => p > 0.5).length;
   const floodBlock = ramp(t, tRivers[0] - 0.4, tRivers[0] + 0.1);
   const lines = ramp(t, tTogether - 0.05, tTogether + 0.6);
-  const date = ramp(t, tLater, tLater + 0.6);
   return (
     <div style={{ position: "absolute", inset: 0 }}>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
@@ -83,9 +80,10 @@ export const MapScene: React.FC<{ t: number }> = ({ t }) => {
       {LIT.map((a, k) => {
         const p = lit[k], side = LABEL_SIDE[a.area] ?? 1;
         return (
-          <div key={a.area} style={{ position: "absolute", top: a.y - 25, left: side > 0 ? a.x + 26 : undefined,
-            right: side < 0 ? 1920 - a.x + 26 : undefined, opacity: p, transform: `translateX(${(1 - p) * 14 * side}px)`,
-            textAlign: side > 0 ? "left" : "right", whiteSpace: "nowrap", textShadow: "0 2px 8px rgba(11,31,58,.9)" }}>
+          <div key={a.area} style={{ position: "absolute", top: a.y - 31, left: side > 0 ? a.x + 22 : undefined,
+            right: side < 0 ? 1920 - a.x + 22 : undefined, opacity: p, transform: `translateX(${(1 - p) * 14 * side}px)`,
+            textAlign: side > 0 ? "left" : "right", whiteSpace: "nowrap", background: "rgba(11,31,58,.88)",
+            padding: "4px 12px 6px", borderRadius: 10, boxShadow: "0 4px 14px rgba(0,0,0,.3)" }}>
             <div style={{ fontSize: 30, fontWeight: 700, lineHeight: 1.05 }}>{a.area}</div>
             <div style={{ fontSize: 22, color: "#ffb4ab", fontWeight: 600 }}>{a.pct_of_1in10} % of 1-in-10</div>
           </div>
@@ -96,15 +94,21 @@ export const MapScene: React.FC<{ t: number }> = ({ t }) => {
         <div style={{ fontSize: 22, letterSpacing: "0.16em", color: C.pale, fontWeight: 600, opacity: ramp(t, 0.2, 0.8) }}>
           FINLAND · 14 RIVER FLOOD-RISK AREAS
         </div>
-        <div style={{ position: "relative", height: 130, marginTop: 14 }}>
-          <div style={{ position: "absolute", fontSize: 104, fontWeight: 800, letterSpacing: "-0.02em",
-            opacity: ramp(t, tMarch - 0.1, tMarch + 0.4) * (1 - date), transform: `translateY(${-30 * date}px)` }}>1 March 2005</div>
-          <div style={{ position: "absolute", fontSize: 104, fontWeight: 800, letterSpacing: "-0.02em", opacity: date,
-            transform: `translateY(${30 * (1 - date)}px)` }}>May 2005</div>
+        <div style={{ height: 130, marginTop: 14, fontSize: 104, fontWeight: 800, letterSpacing: "-0.02em",
+          opacity: ramp(t, tMay - 0.1, tMay + 0.4), transform: `translateY(${(1 - ramp(t, tMay - 0.1, tMay + 0.4)) * 20}px)` }}>
+          May 2005
         </div>
 
-        <div style={{ marginTop: 44, opacity: ramp(t, tSnow - 0.2, tSnow + 0.3) }}>
-          <div style={{ fontSize: 30, fontWeight: 600 }}>Lapland's snowpack on 1 March</div>
+        <div style={{ marginTop: 30, opacity: floodBlock, transform: `translateY(${(1 - floodBlock) * 20}px)` }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 18 }}>
+            <span style={{ fontSize: 120, fontWeight: 800, color: "#ff5a4d", lineHeight: 1 }}>{count}</span>
+            <span style={{ fontSize: 46, fontWeight: 700 }}>of 14 areas</span>
+          </div>
+          <div style={{ fontSize: 28, color: "#dbe5f3", marginTop: 6 }}>over their 1-in-10 flood level, together</div>
+        </div>
+
+        <div style={{ marginTop: 50, opacity: ramp(t, tEarlier - 0.2, tEarlier + 0.3) }}>
+          <div style={{ fontSize: 30, fontWeight: 600 }}>Two months earlier: Lapland's snow on 1 March</div>
           <div style={{ position: "relative", width: 640, height: 20, marginTop: 58, borderRadius: 10, background: C.navy3 }}>
             <div style={{ position: "absolute", left: "85%", width: "15%", top: -8, bottom: -8, borderRadius: 8,
               border: `2px dashed ${C.pale}`, opacity: 0.8 }} />
@@ -123,13 +127,6 @@ export const MapScene: React.FC<{ t: number }> = ({ t }) => {
           </div>
         </div>
 
-        <div style={{ marginTop: 46, opacity: floodBlock, transform: `translateY(${(1 - floodBlock) * 20}px)` }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 18 }}>
-            <span style={{ fontSize: 120, fontWeight: 800, color: "#ff5a4d", lineHeight: 1 }}>{count}</span>
-            <span style={{ fontSize: 46, fontWeight: 700 }}>of 14 areas</span>
-          </div>
-          <div style={{ fontSize: 28, color: "#dbe5f3", marginTop: 6 }}>over their 1-in-10 flood level, together</div>
-        </div>
       </div>
       <div style={{ position: "absolute", left: 140, top: 878, fontSize: 18, color: C.muted, opacity: ramp(t, 1, 2) }}>
         SYKE river and snow data · peak spring flow vs each gauge's 1-in-10 level · back-test, not a forecast made in 2005

@@ -59,3 +59,7 @@ Append one line per decision: date time · who · decision · why.
   · Round-5 business, quantum and coach reviews.
 - 2026-10-10 · Toivo · Snow warning tested out of sample (scripts/oos_snow_test.py, both splits): ranking holds, "triples" untestable on 2001–25 (flag fired twice), North unstable; deck untouched, "triples" stays labelled in-sample; QA answer added. · Honesty check.
 - 2026-10-10 · Toivo · Round 6 deck: new stage slide 5 "Our circuit: quantum amplitude estimation" (Qiskit drawing of the hardware circuit + one why-quantum line); old 5–8 → 6–9, backups → 10–12. Slide 3 bar "0.27-correlation model" → "Standard assumption (regulator's average link)"; slide 6 retitled "On real chips, the snow effect still shows". Live script re-trimmed to 240 words. · Mentor feedback + mentors' "why quantum?".
+- 2026-10-10 · Toivo · Slide 4 plays deck/video/tulva_demo_anim.mp4 (44.5 s, ElevenLabs voiceover + captions);
+  the presenter is silent during it (PITCH §4). PITCH §6 cut to "On the IQM chip, the snow signal SURVIVES the noise."
+  because the video now says the 3.05× / 2.75× and the four computers. Total ≈2:44 at 120 wpm. The silent
+  deck/video/tulva_demo.mp4 stays as a backup. · The video should tell the demo on its own; keep under 2:50.

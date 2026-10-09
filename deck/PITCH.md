@@ -4,23 +4,24 @@
 for Q&A only: never show them in the 3 minutes.** The slides carry one idea each; the details (intervals,
 sources, why now) are said or kept for Q&A.
 
-**Timing (round 6, new circuit slide 5, same length): 240 live words + the 37 s silent
-video + 5 short pauses and 1 long (~5 s). Word count = `>` lines outside §4, cues and [pause] removed (the round-5
-"225" was counted differently; the same count gives 251 for round 5). At 135 wpm ≈ 2:29 (1 Hook 0:11 · 2 Gap 0:12 ·
-3 Product 0:13 · 4 Video 0:37 · 5 Circuit 0:13 · 6 Chips 0:09 · 7 Honest 0:09 · 8 Business 0:30 · 9 Close 0:11). At
-120 wpm ≈ 2:42. Rehearsals of a 245-word version ran 2:45–2:55 on stage. Buzzer at 3:00. Pauses are one breath
+**Timing (final, voiceover video): 230 live words + the 44.5 s demo video, which speaks for itself + 4 short
+pauses and 1 long (~4–5 s). Word count = `>` lines outside §4, [pause] cues removed. At 135 wpm ≈ 2:31 (1 Hook 0:12 ·
+2 Gap 0:12 · 3 Product 0:14 · 4 Video 0:44 · 5 Circuit 0:13 · 6 Chips 0:04 · 7 Honest 0:09 · 8 Business 0:30 ·
+9 Close 0:13). At 120 wpm ≈ 2:44 (2:45 with a 5 s pause budget). §6 is cut from 20 to 10 words: the video now says
+its numbers and the four computers. Rehearsals of a 245-word version with the old 37 s video ran 2:45–2:55 on stage;
+the shorter script and the longer video roughly cancel, so keep the pace. Buzzer at 3:00. Pauses are one breath
 (~0.7 s); the long pause ~1.5 s.**
 
 Simple English, short sentences. **[pause]** = stop for one breath. CAPS = stress that word (say it, don't shout
-it). The demo video is **silent (37 s)**: the presenter narrates it **live** on the cues below; the slide-4
-narration (55 words, ~25 s at 135 wpm) fits inside the video and is not counted in the 240. Spoken lines are the `>` lines;
+it). The demo video (slide 4, 44.5 s) **has its own voiceover and burned-in captions**: the presenter says nothing
+during it. Spoken lines are the `>` lines;
 `build_deck.py` copies them into each slide's speaker notes, so edit them here and rebuild. Every number is in
 `CLAIMS.md`.
 
 **One timing story, everywhere:** the cover is sold in autumn, before the snow falls. In March the snow update
 tells the insurer how much joint risk it holds. The price is set in autumn, not after the snow is known.
 
-## 1 · Hook (0:00–0:11)
+## 1 · Hook (0:00–0:12)
 
 > In May 2005, four Lapland rivers hit flood levels TOGETHER. The snow had warned us two months EARLIER.
 > Tulva turns that warning into a PRICE. [pause]
@@ -29,7 +30,7 @@ Q&A only (not spoken): "flood levels" = river flow (discharge) over each gauge's
 Kittilä and Rovaniemi also passed their 1-in-50 level. "Warned us" = the North's 1 March snow was in its top 15 %
 (87th percentile): an in-sample back-test, not a forecast we made at the time.
 
-## 2 · The gap (0:11–0:24)
+## 2 · The gap (0:12–0:24)
 
 > Rivers in one region share ONE snowpack, so they flood TOGETHER: almost FOUR times more often than chance.
 > [pause] Insurers buy cover in autumn, BEFORE the snow.
@@ -52,18 +53,14 @@ cover is priced in autumn; in March the insurer buys a top-up / second-layer cov
 the regions at risk and uses the number in its ORSA. Market price (2.5–3.5× expected loss): 4.9–6.9 % rate on line,
 ≈ €49–69k a year per €1M of cover.
 
-## 4 · Demo video (0:38–1:15), narrated live
+## 4 · Demo video (0:38–1:22), plays with voiceover
 
-The video is silent; say each line when its caption appears (video time → line):
+(video plays with voiceover, ~45 s) Say nothing; click to start it. The video has its own voice and burned-in
+captions (deck/video/anim/narration.md): 2005 map and the March snow → the app, March snow set to high, the North
+cover's chance from about 2 % to 6.4 % → IQM Emerald shots, snowy vs low-snow March 3× on chip, 2.75× exact → IBM,
+IQM and VTT Q50 → "Tulva. The snow warns two months early." If the hall sound fails, the captions carry it.
 
-> [0 s, map] This is our app. Lines join rivers that flood together.
-> [5 s, snow high] March snow set to HIGH… and the northern price JUMPS.
-> [12 s, low snow] IQM chip. Red: BOTH rivers flood. Low snow, little red.
-> [18 s, snowy] Snowy versus low snow: about THREE times the risk, close to exact.
-> [24 s, 14-area card] A simplified version of our 14-river model, on ONE chip.
-> [29 s, 2005] And 2005: Lapland floods TOGETHER.
-
-## 5 · Our circuit (1:15–1:28)
+## 5 · Our circuit (1:22–1:35)
 
 > Each qubit is the wet spring or a river; the gates ARE our model. Why quantum? Twice the
 > accuracy costs sampling four times the runs; amplitude estimation, only twice.
@@ -76,10 +73,12 @@ flood"; one Grover step = A† · reflect about |000⟩ · A. On an ideal simula
 Monte Carlo ±0.027 pp at the same 16,000 oracle queries (≈2.5× tighter). "Only twice" is the ideal scaling (error ∝
 1/N vs 1/√N); our shallow k = 0–2 runs do not reach it on today's chips (slide 7).
 
-## 6 · Quantum, in practice (1:28–1:37)
+## 6 · Quantum, in practice (1:35–1:39)
 
-> We ran on IBM, IQM and Finland's VTT Q50. On IQM's chip, the snow effect SHOWS: snowy versus low snow,
-> 3.05 times; exact, 2.75.
+> On the IQM chip, the snow signal SURVIVES the noise.
+
+The numbers (3.05× on chip, 2.75× exact) and the four computers are on the slide and in the video, so they are
+not repeated here.
 
 Q&A only (not spoken): the two-river core is a North-cluster pair with identical loadings and 1-in-50 trigger, not
 Kittilä and Ivalo specifically. The 3.05× is IQM Emerald (calibrated, 90 %: 2.6–3.6). The simplified 14-river model
@@ -90,12 +89,12 @@ calibrated k = 0 circuit.
 VTT Q50 (via LUMI): three repeats gave 0.11–0.53 % vs exact 0.125 %; calibration not yet stable, k = 1 keeps only
 0.12–0.19 of the signal. It is the fourth computer we ran on, not a headline result (QA.md).
 
-## 7 · Quantum, honestly (1:37–1:46)
+## 7 · Quantum, honestly (1:39–1:48)
 
 > Classical computers still WIN today: rare floods drown in chip noise. The method is READY. The hardware is
 > not, YET.
 
-## 8 · Business (1:46–2:16)
+## 8 · Business (1:48–2:18)
 
 > Our customers: insurers like OP and If. In March, two months before the melt, our index tells them how risky
 > this spring is, so they can buy extra cover IN TIME, paid automatically on the index. They pay US a licence:
@@ -110,7 +109,7 @@ like to pilot with OP; there is no agreement. Basis risk (1-in-10 back-test): pa
 missed Ostrobothnia 2012–13 and 2024 (snow flag on, index silent) and Lapland 2020; since 2005 also paid in 2015, 2023
 and 2024 in the North with no recorded Lapland loss. At the 1-in-50 product level: paid 1966 and 2005 only.
 
-## 9 · Close (2:16–2:29)
+## 9 · Close (2:18–2:31)
 
 > Everything you saw, we built THIS weekend. [pause] Next March, the snow will warn us AGAIN. [long pause] This
 > time, it will have a PRICE. Thank you.

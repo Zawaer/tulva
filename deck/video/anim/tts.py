@@ -42,7 +42,7 @@ SPLICE = {"Tulva": ("fi", "Tämä on tulva.")}   # word -> (language tag, native
 #                                                capitalised "Tulva" is read as the name "Tuula")
 USE_SPLICE: set[int] = {10}                    # line numbers whose spliced version goes into the build
 #                                                (10 "Tulva.": STT hears the English take as "Tolva")
-LEAD, SENT_GAP, BEAT_GAP, TAIL = 0.5, 0.5, 1.0, 1.2   # s of silence: start, between sentences, between beats, end
+LEAD, SENT_GAP, BEAT_GAP, TAIL = 0.7, 0.7, 1.7, 2.5   # s of silence: start, between sentences, between beats, end
 PRE, POST = 0.06, 0.22          # s kept before the first / after the last sound of a line when joining
 
 
