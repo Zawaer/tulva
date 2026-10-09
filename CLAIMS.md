@@ -106,7 +106,7 @@ the continuous model is the classical reference. The outlook shift uses the in-s
   1998, 2000, 2005, 2016, 2018, 2020) · out/snow_skill.json, out/backtest.json
 - 1 March → the May peak ≈ 2–2.5 months. Damage ~€5M (SYKE/FMI, research notes); see business/CHEATSHEET.md for
   the €5–17M range and its sources.
-- Web app line "5 areas at once 7× likelier than independence says": P(≥5 of 14 over 1-in-10) on IQM Emerald
+- *(SUPERSEDED by the control-run comparison in "Review fixes"; the app no longer shows this line)* Web app line "5 areas at once 7× likelier than independence says": P(≥5 of 14 over 1-in-10) on IQM Emerald
   6.3 % vs independence 0.93 % = 6.8× (exact model 4.8 % = 5.2×; observed 7.7 % = 8.3×) · qae-iqm / exact ·
   out/runs/loader-iqm-emerald-*.json
 - "When does quantum matter" chart (out/qae_scaling.png): at the hardware runs' budgets (5×10⁴–8×10⁵ model
@@ -129,11 +129,12 @@ Two-level model (circuit's own model), North loadings, 8,000 shots per circuit, 
 - **Rerun with side-by-side copies** (IQM Emerald, 10 copies of the 3-qubit circuit = 240,000 shots per instance; 6
   copies of the 6-qubit k=0 circuit = 48,000): Kittilä + Ivalo low / normal / high snow, exact 0.070 / 0.125 /
   0.193 % → noise-aware **0.082 / 0.166 / 0.249 %** (errors 0.012–0.056 pp, about half of the 1-copy run). **High-snow
-  vs low-snow risk ratio: exact 2.8×, hardware 3.0×.** Product "≥2 of 5 North", k=0 only: exact 1.10 % / 1.70 % →
+  vs low-snow risk ratio: exact 2.8×, hardware 3.0×.** *(SUPERSEDED by 3.05× vs 2.75×, "Review fixes" below)* Product "≥2 of 5 North", k=0 only: exact 1.10 % / 1.70 % →
   1.84 % / 2.68 % (worse than the k=0,1 run: the ≈0 twin has no single-trigger states, so it under-calibrates the
   false ≥2 counts) · qae-iqm (emerald) · product-iqm-emerald-20261009T075338Z
 - Snow ratio, recomputed from product-iqm-emerald-20261009T075338Z.analysis.json (use these): high-snow / low-snow
-  exact 0.1933/0.0704 = **2.7×**, hardware calibrated 0.2494/0.0818 = **3.1×** (supersedes the rounded 2.8×/3.0× above)
+  exact 0.1933/0.0704 = **2.7×**, hardware calibrated 0.2494/0.0818 = **3.1×** (supersedes the rounded 2.8×/3.0× above) *(SUPERSEDED: use 3.05×,
+  90 % CI 2.6–3.6, vs 2.75× exact, "Review fixes" below)*
 
 ### Snow + spring temperature + rain (Vaishnav, 9 Oct) · scripts/fetch_weather.py, scripts/weather_model.py → out/weather_model.json
 FMI monthly observations (Sodankylä / Kauhava / Pori), April–May mean temperature and total rain, 1961–2025.
@@ -178,7 +179,8 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
 - "About four times as often as independence": ≥4 of 14 over 1-in-10, observed 15.4 % vs independence 3.9 % = 3.9× ·
   exact (counts) · out/joint_counts.json
 - Calibration in relative terms (Kittilä + Ivalo, exact 0.125 %): raw 0.262 % (IBM, 2.1×) / 0.368 % (Garnet, 2.9×) →
-  calibrated 0.148 % (+18 %) / 0.163 % (+30 %): "from 2–3× off to within ~20–30 % of exact" · qae-ibm / qae-iqm ·
+  calibrated 0.148 % (+18 %) / 0.163 % (+30 %): "from 2–3× off to within ~20–30 % of exact" *(SUPERSEDED: "within
+  20–30 %" dropped; slide 5 shows bootstrap CIs and "raw readings were 2–3× off")* · qae-ibm / qae-iqm ·
   out/HARDWARE_RESULTS.md
 - Measured limits line on slide 6: "~18 qubits / ~50 two-qubit gates work" = 14-area loader on Emerald (18 qubits,
   44 CZ) right at 1-in-10, 3-qubit QAE (≤ 53 CZ) calibrates well, 4-qubit (67–164 CZ) and 43-qubit (237 CZ) circuits
@@ -190,7 +192,7 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   river gauge, for companies · source
 - QA capital credit: EIOPA Q&A 1597, basis risk cannot be haircut in the standard formula; index covers can be
   credited under internal models · source (business case §3)
-- Demo video deck/video/tulva_demo.mp4: 37 s, shows the 1-in-10 Emerald loader run (job 01a11cd4…, ≥4: hardware
+- *(Replaced 9 Oct evening, see below)* Demo video deck/video/tulva_demo.mp4: 37 s, shows the 1-in-10 Emerald loader run (job 01a11cd4…, ≥4: hardware
   13.8 % vs exact 10.9 % vs independence 4.4 %) · qae-iqm
 
 ## Review fixes (Fri 9 Oct evening)
@@ -209,3 +211,26 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   ratio, so the snow signal survives on hardware · qae-iqm · out/bootstrap_ci.json
 - Illustrative limit for the pitch: €3M (≈ one insurer's share of the 2005 Lapland insured loss, market ~€5–17M per the
   business report) × market rate 4.9–6.9 % = **€147k–207k per year** (North ≥2 of 5) · derived
+- Normal-snow March on IQM Emerald (same run): 0.166 % (90 % CI 0.151–0.180 %) vs exact 0.125 % · qae-iqm ·
+  out/bootstrap_ci.json ("emerald snow normal"; appended after the others, so their intervals are unchanged).
+  Slide 5 chart out/pitch_snow.png: low / normal / high exact 0.070 / 0.125 / 0.193 %, chip 0.082 / 0.166 / 0.249 %
+  with these intervals
+- Slide 5 table: IBM run 2 0.149 % (0.140–0.157), IQM Garnet run 2 0.164 % (0.147–0.180), exact 0.125 % (noise-aware
+  MLAE, the bootstrap's estimator; the per-copy values 0.148 / 0.163 % above are the same runs) · qae-ibm / qae-iqm
+- Slide 6 "an independent control run reads 2× high": ≥4 of 14 over 1-in-10, chip-independent 9.7 % vs exact
+  independent 4.4 % = 2.2× · qae-iqm · loader-control-indep-iqm-emerald-20261009T135910Z
+- Slide 2 "≈4×" = 15.4 % / 3.9 % (line "About four times as often" above); slide 3 "≈5× under-priced" = North "≥2 of 5"
+  Tulva / independence premium 5.1× (pricing section) · exact
+- Slide 3 "Example: €3M limit ≈ €150–210k / year" = the €147k–207k line above, rounded · derived
+- Web app 2005 replay: North cluster 1 March snow index = **87th percentile (top 15 %)**; national index 62nd · data ·
+  scripts/export_web.py. (The app previously showed the national 59th: export_web ranked missing SWE years as the
+  snowiest; fixed to match fit_dependence.py, so its top-15 % years now equal out/snow_skill.json. Same fix moves the
+  app's "Observed March 2025" North percentile from 27th to 32nd.)
+- Web app loader card: dashed "chip, independent circuit" series = the control run above (readout-corrected); the
+  sentence "1.4×–4× more multi-area floods than an identical independent circuit (≥4 to ≥6)" is computed from the
+  two runs in web/app.js · qae-iqm
+- Demo video (re-recorded 9 Oct evening), 37 s, captions ≥ 5 s each: map → snow high → IQM Emerald shots low/snowy
+  ("about 3× the risk" = the 3.05× calibrated ratio; the raw shot grid shows 13 vs 31 both-flood shots of 8,000) →
+  14-area loader (18 qubits) → 2005 replay (North snow top 15 %) · deck/video/record_demo.mjs
+- Slide 7 "fee per deal (€25k pilot)": the €25k pilot is the team assumption in the licence line above; the per-deal
+  fee model replaces the per-insurer licence on the slide · assumption
