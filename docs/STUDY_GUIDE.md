@@ -64,11 +64,19 @@ Read this top to bottom once. The words in **bold** are what to say out loud.
 ## 5. Business in one breath
 **"Our customers are Finnish home insurers like If Insurance and OP. A reinsurer carries the risk. We license the index and the pricing: 25k for a pilot, then 75k a year. From 2027 flood capital uses fixed correlations that ignore the snow; we give a snow-aware number. Our ask: one insurer's flood claims for eight weeks, to measure basis risk."**
 
-Known weak spots (have the answer ready):
-- **Small market?** Finland is the wedge; the snowmelt problem is Nordic and Alpine. The licence is a foot in the door to the reinsurance pricing.
-- **Index ≠ losses?** Yes, basis risk. Back-test paid in 1966, 2005, 2018; false alarm in Ostrobothnia 2024. The pilot measures it with real claims.
-- **Capital relief?** Under the standard formula an index cover gets no capital credit (EIOPA Q&A 1597). The value is pricing, reinsurance buying and the March warning, not a capital trick.
-- **The snow skill is in-sample.** We fitted and tested on the same years; a pilot would test it out of sample.
+Four tough questions, with simple answers:
+
+**1. "Isn't the market tiny?"**
+→ "Yes, Finland alone is small. It's where we prove it works. Sweden, Norway and other snowy regions have the same problem."
+
+**2. "What if the index pays but the insurer had no damage, or the other way round?"**
+→ "That can happen. Looking back, it paid in the big flood years 2005 and 2018, but it also missed some. That's why our first step is to test it on a real insurer's claims."
+
+**3. "Does it lower the money the insurer must hold by law?"**
+→ "No. It helps them price better and prepare earlier. It's not a trick to lower their capital."
+
+**4. "Did you test the snow warning on years you didn't use to build it?"**
+→ "Not yet. We built and checked it on the same 65 years. The pilot is where we test it on new years."
 
 ## 6. Mentor questions to ask
 **Insurance mentor (OP)**
