@@ -35,6 +35,19 @@ Read this top to bottom once. The words in **bold** are what to say out loud.
 | Our licence | €25k pilot, then ~€75k/yr per insurer |
 | Year 3 (assumption) | 3–6 insurers → €0.2–0.45M/yr, then Nordics |
 
+## 4a. Amplitude estimation (QAE) in plain words
+- **What it does:** estimates a probability, here "how likely is it that both rivers flood in the same spring?"
+- **How the data goes in:** each qubit is a river or the weather state. Rotation gates set each one's chance of
+  flooding from our model, and controlled rotations link them, so rivers flood together on wet springs. The
+  circuit is our flood model, written as a quantum state.
+- **How it gets the answer:** a "boost" step (Grover) repeatedly amplifies the outcome "both flood", and measuring
+  how fast it grows reveals the probability. On perfect hardware this needs about the square root of the runs
+  classical Monte Carlo needs, which helps most for rare events.
+- **Proof the circuit is right:** on Qiskit's ideal (noise-free) Aer simulator it gives the exact answer, 0.125 %.
+  On real chips the gaps are noise; the boost steps (27–46 two-qubit gates) are where noise wins.
+- **Why it fits this problem:** pricing rare joint floods means estimating small probabilities, which is exactly
+  where QAE's advantage would be largest once hardware is good enough.
+
 ## 4. The quantum part, honestly
 - **Small circuit** (two northern rivers, 3 qubits; chance both flood = 0.125 %):
 

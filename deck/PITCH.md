@@ -76,8 +76,8 @@ VTT Q50 (via LUMI): three repeats gave 0.11–0.53 % vs exact 0.125 %; calibrati
 
 ## 6 · Quantum, honestly (1:32–1:42)
 
-> Classical computers still WIN today. At 1-in-50, rare floods drown in noise. The method is READY. The
-> hardware is not, YET.
+> Classical computers still WIN today. On a perfect simulator our circuit gives the EXACT answer; on real chips,
+> rare floods drown in noise. The method is READY. The hardware is not, YET.
 
 ## 7 · Business (1:42–2:09)
 
