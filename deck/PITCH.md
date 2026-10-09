@@ -1,28 +1,31 @@
 # Tulva: 3-minute pitch script
 
-Total 3:00 including the demo video (≈60 s, its voice-over is recorded in the video). Spoken lines are the `>`
-lines; `build_deck.py` copies them into each slide's speaker notes, so edit them here and rebuild.
-Every number is from `CLAIMS.md` (or a cited outside source on slide 7). About 140 words per minute: 270 live words ≈ 1:56 + 60 s video ≈ 2:56.
-All prices are **market prices** (expected payout × 2.5–3.5), never the technical price.
+**Timing: 1 Hook 0:09 · 2 Gap 0:18 · 3 Product 0:25 · 4 Video 1:00 · 5 Quantum 0:17 · 6 Honest 0:07 · 7 Business 0:20 · 8 Close 0:12. Buzzer-safe target: finish at 2:50 (buzzer at 3:00).**
+
+253 live words at 140 wpm ≈ 1:48 + the 60 s demo video (its voice-over is recorded in the video) ≈ 2:48.
+Spoken lines are the `>` lines; `build_deck.py` copies them into each slide's speaker notes, so edit them here and
+rebuild. Every number is from `CLAIMS.md` (or a cited outside source on slide 7). All prices are **market prices**
+(expected payout × 2.5–3.5), never the technical price.
 
 ## 1 · Hook (0:00–0:09)
 
 > In May 2005, Kittilä and Ivalo flooded together. The snow had warned us two months earlier.
 > Nobody priced that warning. Tulva does.
 
-## 2 · The gap (0:09–0:30)
+## 2 · The gap (0:09–0:27)
 
-> Finnish rivers share one snowpack, so they flood together. In 65 years of SYKE data, four or more of fourteen
-> river areas passed their 1-in-10 level in the same spring 15 percent of the time. Independence says 3.9.
-> And reinsurance renews on 1 January, before the snow arrives.
+> Finnish rivers share one snowpack, so they flood together. In 65 years, four or more of fourteen river
+> areas flooded in the same spring 15 percent of the time. Independence says 3.9. And reinsurance renews
+> in January, before the snow arrives.
 
-## 3 · The product (0:30–0:50)
+## 3 · The product (0:27–0:52)
 
 > The Tulva Index pays ten million euros if two of five northern gauges pass their 1-in-50 level this spring.
-> Priced as if rivers were independent: about 100 thousand a year. Priced jointly: 500 to 700 thousand, five
-> times more. Bought in winter, triggered by a public gauge.
+> Priced as independent: about 100 thousand a year; jointly, 500 to 700 thousand.
+> Today's cat models assume how areas flood together; Tulva measures it from 65 years of river data, tied to
+> this winter's snow, and prices it as a cover.
 
-## 4 · Demo video (0:50–1:50)
+## 4 · Demo video (0:52–1:52)
 
 Voice-over recorded in the video (not spoken live):
 
@@ -34,24 +37,24 @@ Voice-over recorded in the video (not spoken live):
 > joint model runs on real quantum chips, IBM Marrakesh and IQM Garnet and Emerald, next to the exact answer and
 > classical Monte Carlo. Finally, replay 2005: the Lapland cluster lights up, Kittilä and Ivalo together.
 
-## 5 · Quantum, in practice (1:50–2:11)
+## 5 · Quantum, in practice (1:52–2:09)
 
-> All fourteen areas load onto IQM Emerald: 18 qubits, 44 two-qubit gates, and at the 1-in-10 level it
-> reproduces the joint tail. Amplitude estimation runs on a 3-qubit piece, Kittilä and Ivalo, on IBM and IQM:
-> within 0.04 points of exact, and the snow warning survives: 3.1 times versus 2.7.
+> All fourteen areas load onto IQM Emerald, 18 qubits, and reproduce the joint tail. Amplitude estimation on
+> Kittilä and Ivalo, on IBM and IQM, lands within 0.04 points of exact, and the snow warning survives: 3.1 times
+> versus 2.7.
 
-## 6 · Quantum, honestly (2:11–2:23)
+## 6 · Quantum, honestly (2:09–2:16)
 
 > Honestly: classical Monte Carlo still wins today. Quantum could pay off with fault-tolerant hardware and
-> expensive models: a full hydrological simulation per scenario, many perils, daily repricing.
+> expensive models.
 
-## 7 · Business (2:23–2:49)
+## 7 · Business (2:16–2:36)
 
-> Who buys? Finland's non-life insurers, for the flood risk they keep, and the reinsurers behind them. We license
-> the pricing and trigger engine. Why now? From 2027, Solvency II gives Finland a flood factor with zero
-> correlation to its neighbours. Our first step: a paid pilot with one Finnish insurer this autumn, feeding the
-> 1 January reinsurance buy and ORSA.
+> We license the pricing engine to Finnish insurers and reinsurers. Why now? Finland gets a
+> Solvency II flood capital factor from 30 January 2027, so insurers need a joint-flood view now, and the same
+> engine is quantum-ready as hardware matures. First step: a paid pilot this autumn.
 
-## 8 · Close (2:49–2:56)
+## 8 · Close (2:36–2:48)
 
-> Tulva prices Finland's spring floods as a joint risk, and runs it on real quantum hardware.
+> Everything you saw was built this weekend: data pipeline, joint model, pricing, and runs on three quantum
+> chips. Tulva prices Finland's spring floods as a joint risk.
