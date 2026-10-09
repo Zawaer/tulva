@@ -252,7 +252,6 @@ history shows."
 - **"No vendor model uses this winter's snow?"** (removed: we can't verify it) "We dropped that claim. What we can say:
   the 2027 standard-formula correlations are fixed and don't react to the snow."
 
-
 ## Round 4 (Sat 10 Oct): what came off the slides, and why
 
 - **"A correlation matrix doesn't imply a price."** (Toivo) "Right, and the slide no longer says it does. We compare
@@ -296,7 +295,6 @@ history shows."
 - **"Slide 1 says rivers 'hit flood levels'. Damage?"** "Discharge, not damage: river flow over each gauge's 1-in-10
   level. 2005 losses were about €5M house damage (Helminen; Yle reported ~€17M on a broader definition)."
 
-
 ## Round 5 (Sat 10 Oct, deck freeze): two snow ratios, licence flow, market size
 
 - **"Slide 3 says a snowy March triples the risk, slide 5 says 3.05×. Same thing?"** (Toivo) "No, two baselines. Slide 3
@@ -336,3 +334,11 @@ history shows."
   empty; then the insurer is paid without a loss, the reinsurer bears it, and that is priced into the premium. The
   reverse, damage without a trigger, is the insurer's basis risk; we reduce it with a multi-gauge trigger
   (≥2 of 5), the staged payout, and by testing the trigger against the insurer's own claims in the pilot."
+
+## "Did you test the snow warning out of sample?" (Toivo, ~15 s) · CLAIMS.md "Out-of-sample snow test"
+"Yes, both ways. Fit on 1961 to 2000, tested on the 25 springs since: March snow still ranks the flood years,
+correlation about 0.7 in Ostrobothnia and the North. But snowpacks shrank, so the old top-15 % flag fired only twice,
+too few to confirm 'triples'. Run backwards, flagged springs paid 50 % versus 8 %."
+- If pushed: "Weak spots: Satakunta–SE drops to 0.33 after 2000, and the North fails the backwards test. So the
+  direction holds, the exact size is in-sample, and a real flag needs a cut-off re-based to today's snow."
+  (out/OOS_SNOW_TEST.md)

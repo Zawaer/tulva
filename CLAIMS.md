@@ -432,3 +432,24 @@ Producer tag: qae-q50 (VTT Q50 hardware). Same two-level model and circuits as I
   together"; 18 s "Snowy vs low snow: about three times the risk, close to exact." (= 3.05× vs 2.75×) · qae-iqm ·
   deck/video/record_demo.mjs
 
+
+## Out-of-sample snow test · scripts/oos_snow_test.py → out/oos_snow_test.json, out/OOS_SNOW_TEST.md
+Everything fitted (GEV 1-in-10 levels, normal-score transforms, loadings, snow skill, top-15 % cut-off) on the
+training springs only, then frozen. Trigger = ≥2 of cluster over frozen GEV 1-in-10. Both splits reported.
+- **Fit 1961–2000, test 2001–2025: Spearman(March snow, cluster flood index) out of sample Ostrobothnia 0.69
+  (90 % 0.42–0.84; in-sample 0.65), North 0.75 (0.53–0.87; in-sample 0.24), Satakunta–SE 0.33 (−0.05–0.65; in-sample
+  0.62)** · exact (rank correlation) + year bootstrap
+- Same split, flag vs trigger: the 1961–2000 cut-off fired only **2 of 75** cluster-years after 2000 (snow lower);
+  pooled **1 of 2 flagged vs 7 of 73 unflagged springs paid** (Fisher p 0.20) → the snow risk ratio is **not testable**
+  on 2001–2025. Ostrobothnia and Satakunta–SE had no trigger at all (Ostrobothnia gauge-years over old 1-in-10: 0.7 %).
+  Frozen-model expectation 0.7 / 5.6 payouts · exact (counts) + Clopper-Pearson
+- Predicted flagged-vs-unflagged ratio from the 1961–2000 fit: Ostrobothnia 5.2×, North 2.1×, Satakunta–SE 7.8×;
+  North "triples" analogue (≥2 of 5 over 1-in-50, snowy vs normal) **2.3×** (full-record fit 3.3×), North skill 0.31
+  (full record 0.47) · exact (quadrature)
+- **Reverse split (fit 1986–2025, test 1961–1985): pooled 12 of 24 flagged (50 %) vs 4 of 51 unflagged (8 %) springs
+  paid, ratio 6.4×, Fisher p 0.0001** (model expected 8.1 / 3.6); Ostrobothnia 8/10 vs 3/15 (p 0.005), Satakunta–SE
+  4/11 vs 0/14 (p 0.026), **North fails: 0/3, Spearman −0.14** · exact (counts)
+- Sensitivity (trailing-30-spring cut-off): main 2/11 vs 6/64 (p 0.33), reverse 9/20 vs 7/55 (p 0.005) · exact
+- Reading: the snow→joint-flood ranking survives on unseen years in 4 of 6 cluster tests; the size of the effect
+  ("triples") is not confirmed on recent years (too few flags); per-cluster skill is unstable (North 0.31 vs 0.70 by
+  fit period); a fixed snow cut-off is not stationary. Pooled p-values optimistic (clusters share years).

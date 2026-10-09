@@ -57,3 +57,4 @@ Append one line per decision: date time · who · decision · why.
   at the insurer (licence ← Tulva, premium → reinsurer); buyers listed OP first; If named only for the internal model.
   Basis-risk line counts payouts without a recorded loss too. One amplification statement everywhere (round5_numbers).
   · Round-5 business, quantum and coach reviews.
+- 2026-10-10 · Toivo · Snow warning tested out of sample (scripts/oos_snow_test.py, both splits): ranking holds, "triples" untestable on 2001–25 (flag fired twice), North unstable; deck untouched, "triples" stays labelled in-sample; QA answer added. · Honesty check.

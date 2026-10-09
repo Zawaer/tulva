@@ -1,0 +1,1305 @@
+{
+ "description": "Out-of-sample test of the 1 March snow warning.",
+ "definitions": {
+  "flag": "cluster SWE index (mean training-ECDF normal score of 1 March SWE over the cluster's catchments) >= training 85th percentile",
+  "trigger": ">= 2 of the cluster's gauges over the training-fitted GEV 1-in-10 level",
+  "flood_index": "mean training-ECDF normal score of the cluster's spring peaks",
+  "pred_ratio": "exact P(trigger | top-15 % outlook) / P(trigger | rest) from the training loadings and skill (pricing.p_trigger_exact)",
+  "intervals": "90 %: Clopper-Pearson for frequencies, year-bootstrap (4000) for ratio and Spearman"
+ },
+ "splits": {
+  "main": {
+   "train": "1961–2000",
+   "test": "2001–2025",
+   "fit": {
+    "national_loading": 0.394,
+    "cluster_loading": {
+     "Ostrobothnia": 0.564,
+     "North": 0.62,
+     "Satakunta–SE": 0.533
+    },
+    "q10_gev": {
+     "Lapväärtti": 182.1,
+     "Ilmajoki–Seinäjoki": 372.1,
+     "Laihia": 45.2,
+     "Ylistaro–Koivulahti": 411.1,
+     "Alavieska–Ylivieska": 342.3,
+     "Lower Pyhäjoki": 412.9,
+     "Pudasjärvi": 643.0,
+     "Ivalo": 740.7,
+     "Kittilä": 659.4,
+     "Rovaniemi": 1265.7,
+     "Tornio": 2861.3,
+     "Pori": 764.0,
+     "Huittinen": 289.7,
+     "Lower Kymijoki": 533.8
+    },
+    "clusters": {
+     "Ostrobothnia": {
+      "swe_catchments": [
+       131,
+       147
+      ],
+      "h": 0.6881,
+      "skill": 0.7372,
+      "snow_cutoff_swe_index": 0.9296,
+      "pred_p_trigger_1in10_flag": 0.4774,
+      "pred_p_trigger_1in10_noflag": 0.0924,
+      "pred_p_trigger_1in10_climatology": 0.1502,
+      "pred_ratio_flag_vs_noflag": 5.1657,
+      "pred_ratio_flag_vs_climatology": 3.1792,
+      "pred_1in50_ge2_climatology": 0.0224,
+      "pred_1in50_ge2_flag": 0.1078,
+      "pred_1in50_ratio_flag_vs_climatology": 4.8211
+     },
+     "North": {
+      "swe_catchments": [
+       188,
+       216,
+       230,
+       236
+      ],
+      "h": 0.7342,
+      "skill": 0.3111,
+      "snow_cutoff_swe_index": 0.7471,
+      "pred_p_trigger_1in10_flag": 0.23,
+      "pred_p_trigger_1in10_noflag": 0.108,
+      "pred_p_trigger_1in10_climatology": 0.1263,
+      "pred_ratio_flag_vs_noflag": 2.1289,
+      "pred_ratio_flag_vs_climatology": 1.8206,
+      "pred_1in50_ge2_climatology": 0.0191,
+      "pred_1in50_ge2_flag": 0.0447,
+      "pred_1in50_ratio_flag_vs_climatology": 2.3444
+     },
+     "Satakunta–SE": {
+      "swe_catchments": [
+       55,
+       109,
+       112
+      ],
+      "h": 0.6625,
+      "skill": 0.7672,
+      "snow_cutoff_swe_index": 1.0534,
+      "pred_p_trigger_1in10_flag": 0.2378,
+      "pred_p_trigger_1in10_noflag": 0.0304,
+      "pred_p_trigger_1in10_climatology": 0.0615,
+      "pred_ratio_flag_vs_noflag": 7.8265,
+      "pred_ratio_flag_vs_climatology": 3.8669,
+      "pred_1in50_ge2_climatology": 0.0068,
+      "pred_1in50_ge2_flag": 0.0358,
+      "pred_1in50_ratio_flag_vs_climatology": 5.292
+     }
+    }
+   },
+   "in_sample": {
+    "Ostrobothnia": {
+     "years": 40,
+     "spearman_swe_vs_flood_index": 0.651,
+     "spearman_p_one_sided": 0.0,
+     "spearman_ci90_bootstrap": [
+      0.454,
+      0.775
+     ],
+     "flag_years": [
+      1966,
+      1974,
+      1981,
+      1982,
+      1984,
+      1988
+     ],
+     "trigger_years": [
+      1965,
+      1966,
+      1971,
+      1974,
+      1977,
+      1984,
+      2000
+     ],
+     "hits": [
+      1966,
+      1974,
+      1984
+     ],
+     "false_alarms": [
+      1981,
+      1982,
+      1988
+     ],
+     "misses": [
+      1965,
+      1971,
+      1977,
+      2000
+     ],
+     "table": {
+      "flag_trigger": 3,
+      "flag_no_trigger": 3,
+      "noflag_trigger": 4,
+      "noflag_no_trigger": 30
+     },
+     "p_trigger_flag": 0.5,
+     "p_trigger_flag_ci90": [
+      0.153,
+      0.847
+     ],
+     "p_trigger_noflag": 0.118,
+     "p_trigger_noflag_ci90": [
+      0.041,
+      0.249
+     ],
+     "observed_ratio": 4.25,
+     "observed_ratio_ci90_bootstrap": [
+      0.94,
+      15.82
+     ],
+     "bootstrap_valid": 3991,
+     "fisher_p_one_sided": 0.0547,
+     "trigger_rate_all": 0.175,
+     "pred_trigger_rate_all": 0.15,
+     "expected_triggers_flag": 2.86,
+     "expected_triggers_noflag": 3.14,
+     "gauge_exceed_rate_1in10": 0.089,
+     "mean_swe_index": 0.06,
+     "mean_flood_index": 0.1,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       1962,
+       1965,
+       1966,
+       1974,
+       1981,
+       1982,
+       1984,
+       1988
+      ],
+      "table": {
+       "flag_trigger": 4,
+       "flag_no_trigger": 4,
+       "noflag_trigger": 3,
+       "noflag_no_trigger": 29
+      },
+      "fisher_p_one_sided": 0.0202
+     }
+    },
+    "North": {
+     "years": 40,
+     "spearman_swe_vs_flood_index": 0.236,
+     "spearman_p_one_sided": 0.0713,
+     "spearman_ci90_bootstrap": [
+      -0.08,
+      0.509
+     ],
+     "flag_years": [
+      1969,
+      1973,
+      1974,
+      1993,
+      1998,
+      2000
+     ],
+     "trigger_years": [
+      1973,
+      1981,
+      1982,
+      1995,
+      2000
+     ],
+     "hits": [
+      1973,
+      2000
+     ],
+     "false_alarms": [
+      1969,
+      1974,
+      1993,
+      1998
+     ],
+     "misses": [
+      1981,
+      1982,
+      1995
+     ],
+     "table": {
+      "flag_trigger": 2,
+      "flag_no_trigger": 4,
+      "noflag_trigger": 3,
+      "noflag_no_trigger": 31
+     },
+     "p_trigger_flag": 0.333,
+     "p_trigger_flag_ci90": [
+      0.063,
+      0.729
+     ],
+     "p_trigger_noflag": 0.088,
+     "p_trigger_noflag_ci90": [
+      0.024,
+      0.213
+     ],
+     "observed_ratio": 3.78,
+     "observed_ratio_ci90_bootstrap": [
+      0.0,
+      21.0
+     ],
+     "bootstrap_valid": 3968,
+     "fisher_p_one_sided": 0.1542,
+     "trigger_rate_all": 0.125,
+     "pred_trigger_rate_all": 0.126,
+     "expected_triggers_flag": 1.38,
+     "expected_triggers_noflag": 3.67,
+     "gauge_exceed_rate_1in10": 0.094,
+     "mean_swe_index": 0.07,
+     "mean_flood_index": 0.06,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       1962,
+       1965,
+       1967,
+       1969,
+       1973,
+       1974,
+       1989,
+       1993,
+       1998,
+       2000
+      ],
+      "table": {
+       "flag_trigger": 2,
+       "flag_no_trigger": 8,
+       "noflag_trigger": 3,
+       "noflag_no_trigger": 27
+      },
+      "fisher_p_one_sided": 0.3669
+     }
+    },
+    "Satakunta–SE": {
+     "years": 40,
+     "spearman_swe_vs_flood_index": 0.62,
+     "spearman_p_one_sided": 0.0,
+     "spearman_ci90_bootstrap": [
+      0.417,
+      0.766
+     ],
+     "flag_years": [
+      1966,
+      1967,
+      1974,
+      1981,
+      1982,
+      1984
+     ],
+     "trigger_years": [
+      1966,
+      1984,
+      1988
+     ],
+     "hits": [
+      1966,
+      1984
+     ],
+     "false_alarms": [
+      1967,
+      1974,
+      1981,
+      1982
+     ],
+     "misses": [
+      1988
+     ],
+     "table": {
+      "flag_trigger": 2,
+      "flag_no_trigger": 4,
+      "noflag_trigger": 1,
+      "noflag_no_trigger": 33
+     },
+     "p_trigger_flag": 0.333,
+     "p_trigger_flag_ci90": [
+      0.063,
+      0.729
+     ],
+     "p_trigger_noflag": 0.029,
+     "p_trigger_noflag_ci90": [
+      0.002,
+      0.132
+     ],
+     "observed_ratio": 11.33,
+     "observed_ratio_ci90_bootstrap": [
+      0.0,
+      "inf"
+     ],
+     "bootstrap_valid": 3818,
+     "fisher_p_one_sided": 0.0536,
+     "trigger_rate_all": 0.075,
+     "pred_trigger_rate_all": 0.062,
+     "expected_triggers_flag": 1.43,
+     "expected_triggers_noflag": 1.03,
+     "gauge_exceed_rate_1in10": 0.067,
+     "mean_swe_index": 0.07,
+     "mean_flood_index": 0.06,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       1962,
+       1966,
+       1974,
+       1981,
+       1984
+      ],
+      "table": {
+       "flag_trigger": 2,
+       "flag_no_trigger": 3,
+       "noflag_trigger": 1,
+       "noflag_no_trigger": 34
+      },
+      "fisher_p_one_sided": 0.0364
+     }
+    }
+   },
+   "out_of_sample": {
+    "Ostrobothnia": {
+     "years": 25,
+     "spearman_swe_vs_flood_index": 0.689,
+     "spearman_p_one_sided": 0.0001,
+     "spearman_ci90_bootstrap": [
+      0.421,
+      0.843
+     ],
+     "flag_years": [
+      2024
+     ],
+     "trigger_years": [],
+     "hits": [],
+     "false_alarms": [
+      2024
+     ],
+     "misses": [],
+     "table": {
+      "flag_trigger": 0,
+      "flag_no_trigger": 1,
+      "noflag_trigger": 0,
+      "noflag_no_trigger": 24
+     },
+     "p_trigger_flag": 0.0,
+     "p_trigger_flag_ci90": [
+      0.0,
+      0.95
+     ],
+     "p_trigger_noflag": 0.0,
+     "p_trigger_noflag_ci90": [
+      0.0,
+      0.117
+     ],
+     "observed_ratio": null,
+     "observed_ratio_ci90_bootstrap": [
+      null,
+      null
+     ],
+     "bootstrap_valid": 0,
+     "fisher_p_one_sided": 1.0,
+     "trigger_rate_all": 0.0,
+     "pred_trigger_rate_all": 0.15,
+     "expected_triggers_flag": 0.48,
+     "expected_triggers_noflag": 2.22,
+     "gauge_exceed_rate_1in10": 0.007,
+     "mean_swe_index": -0.42,
+     "mean_flood_index": -0.42,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       2011,
+       2018,
+       2021,
+       2022,
+       2024
+      ],
+      "table": {
+       "flag_trigger": 0,
+       "flag_no_trigger": 5,
+       "noflag_trigger": 0,
+       "noflag_no_trigger": 20
+      },
+      "fisher_p_one_sided": 1.0
+     }
+    },
+    "North": {
+     "years": 25,
+     "spearman_swe_vs_flood_index": 0.748,
+     "spearman_p_one_sided": 0.0,
+     "spearman_ci90_bootstrap": [
+      0.526,
+      0.87
+     ],
+     "flag_years": [
+      2020
+     ],
+     "trigger_years": [
+      2005,
+      2007,
+      2012,
+      2018,
+      2020,
+      2021,
+      2023,
+      2024
+     ],
+     "hits": [
+      2020
+     ],
+     "false_alarms": [],
+     "misses": [
+      2005,
+      2007,
+      2012,
+      2018,
+      2021,
+      2023,
+      2024
+     ],
+     "table": {
+      "flag_trigger": 1,
+      "flag_no_trigger": 0,
+      "noflag_trigger": 7,
+      "noflag_no_trigger": 17
+     },
+     "p_trigger_flag": 1.0,
+     "p_trigger_flag_ci90": [
+      0.05,
+      1.0
+     ],
+     "p_trigger_noflag": 0.292,
+     "p_trigger_noflag_ci90": [
+      0.146,
+      0.479
+     ],
+     "observed_ratio": 3.43,
+     "observed_ratio_ci90_bootstrap": [
+      null,
+      null
+     ],
+     "bootstrap_valid": 0,
+     "fisher_p_one_sided": 0.32,
+     "trigger_rate_all": 0.32,
+     "pred_trigger_rate_all": 0.126,
+     "expected_triggers_flag": 0.23,
+     "expected_triggers_noflag": 2.59,
+     "gauge_exceed_rate_1in10": 0.185,
+     "mean_swe_index": 0.03,
+     "mean_flood_index": 0.01,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       2005,
+       2016,
+       2020
+      ],
+      "table": {
+       "flag_trigger": 2,
+       "flag_no_trigger": 1,
+       "noflag_trigger": 6,
+       "noflag_no_trigger": 16
+      },
+      "fisher_p_one_sided": 0.2313
+     }
+    },
+    "Satakunta–SE": {
+     "years": 25,
+     "spearman_swe_vs_flood_index": 0.33,
+     "spearman_p_one_sided": 0.0538,
+     "spearman_ci90_bootstrap": [
+      -0.046,
+      0.65
+     ],
+     "flag_years": [],
+     "trigger_years": [],
+     "hits": [],
+     "false_alarms": [],
+     "misses": [],
+     "table": {
+      "flag_trigger": 0,
+      "flag_no_trigger": 0,
+      "noflag_trigger": 0,
+      "noflag_no_trigger": 25
+     },
+     "p_trigger_flag": null,
+     "p_trigger_flag_ci90": [
+      null,
+      null
+     ],
+     "p_trigger_noflag": 0.0,
+     "p_trigger_noflag_ci90": [
+      0.0,
+      0.113
+     ],
+     "observed_ratio": null,
+     "observed_ratio_ci90_bootstrap": [
+      null,
+      null
+     ],
+     "bootstrap_valid": 0,
+     "fisher_p_one_sided": 1.0,
+     "trigger_rate_all": 0.0,
+     "pred_trigger_rate_all": 0.062,
+     "expected_triggers_flag": 0.0,
+     "expected_triggers_noflag": 0.76,
+     "gauge_exceed_rate_1in10": 0.067,
+     "mean_swe_index": -0.59,
+     "mean_flood_index": -0.33,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       2011,
+       2022,
+       2024
+      ],
+      "table": {
+       "flag_trigger": 0,
+       "flag_no_trigger": 3,
+       "noflag_trigger": 0,
+       "noflag_no_trigger": 22
+      },
+      "fisher_p_one_sided": 1.0
+     }
+    }
+   },
+   "pooled_in_sample": {
+    "table": {
+     "flag_trigger": 7,
+     "flag_no_trigger": 11,
+     "noflag_trigger": 8,
+     "noflag_no_trigger": 94
+    },
+    "p_trigger_flag": 0.389,
+    "p_trigger_flag_ci90": [
+     0.199,
+     0.608
+    ],
+    "p_trigger_noflag": 0.078,
+    "p_trigger_noflag_ci90": [
+     0.04,
+     0.137
+    ],
+    "observed_ratio": 4.96,
+    "hit_rate": 0.467,
+    "fisher_p_one_sided": 0.0017,
+    "model_expected_triggers_flag": 5.67,
+    "model_expected_triggers_noflag": 7.84,
+    "sensitivity_trailing30_cutoff": {
+     "table": {
+      "flag_trigger": 8,
+      "flag_no_trigger": 15,
+      "noflag_trigger": 7,
+      "noflag_no_trigger": 90
+     },
+     "fisher_p_one_sided": 0.0015
+    },
+    "note": "pooled over the 3 clusters (cluster-years); clusters share years, so not independent"
+   },
+   "pooled_out_of_sample": {
+    "table": {
+     "flag_trigger": 1,
+     "flag_no_trigger": 1,
+     "noflag_trigger": 7,
+     "noflag_no_trigger": 66
+    },
+    "p_trigger_flag": 0.5,
+    "p_trigger_flag_ci90": [
+     0.025,
+     0.975
+    ],
+    "p_trigger_noflag": 0.096,
+    "p_trigger_noflag_ci90": [
+     0.046,
+     0.173
+    ],
+    "observed_ratio": 5.21,
+    "hit_rate": 0.125,
+    "fisher_p_one_sided": 0.2032,
+    "model_expected_triggers_flag": 0.71,
+    "model_expected_triggers_noflag": 5.57,
+    "sensitivity_trailing30_cutoff": {
+     "table": {
+      "flag_trigger": 2,
+      "flag_no_trigger": 9,
+      "noflag_trigger": 6,
+      "noflag_no_trigger": 58
+     },
+     "fisher_p_one_sided": 0.3326
+    },
+    "note": "pooled over the 3 clusters (cluster-years); clusters share years, so not independent"
+   }
+  },
+  "reverse": {
+   "train": "1986–2025",
+   "test": "1961–1985",
+   "fit": {
+    "national_loading": 0.453,
+    "cluster_loading": {
+     "Ostrobothnia": 0.671,
+     "North": 0.668,
+     "Satakunta–SE": 0.482
+    },
+    "q10_gev": {
+     "Lapväärtti": 122.5,
+     "Ilmajoki–Seinäjoki": 316.7,
+     "Laihia": 39.9,
+     "Ylistaro–Koivulahti": 384.9,
+     "Alavieska–Ylivieska": 309.2,
+     "Lower Pyhäjoki": 357.3,
+     "Pudasjärvi": 523.1,
+     "Ivalo": 782.3,
+     "Kittilä": 712.7,
+     "Rovaniemi": 1356.8,
+     "Tornio": 3062.8,
+     "Pori": 683.6,
+     "Huittinen": 224.1,
+     "Lower Kymijoki": 552.9
+    },
+    "clusters": {
+     "Ostrobothnia": {
+      "swe_catchments": [
+       131,
+       147
+      ],
+      "h": 0.8101,
+      "skill": 0.7357,
+      "snow_cutoff_swe_index": 0.838,
+      "pred_p_trigger_1in10_flag": 0.5066,
+      "pred_p_trigger_1in10_noflag": 0.0851,
+      "pred_p_trigger_1in10_climatology": 0.1483,
+      "pred_ratio_flag_vs_noflag": 5.955,
+      "pred_ratio_flag_vs_climatology": 3.416,
+      "pred_1in50_ge2_climatology": 0.0267,
+      "pred_1in50_ge2_flag": 0.1356,
+      "pred_1in50_ratio_flag_vs_climatology": 5.0712
+     },
+     "North": {
+      "swe_catchments": [
+       188,
+       216,
+       230,
+       236
+      ],
+      "h": 0.8075,
+      "skill": 0.7027,
+      "snow_cutoff_swe_index": 0.8525,
+      "pred_p_trigger_1in10_flag": 0.435,
+      "pred_p_trigger_1in10_noflag": 0.0741,
+      "pred_p_trigger_1in10_climatology": 0.1283,
+      "pred_ratio_flag_vs_noflag": 5.8681,
+      "pred_ratio_flag_vs_climatology": 3.3915,
+      "pred_1in50_ge2_climatology": 0.0218,
+      "pred_1in50_ge2_flag": 0.1077,
+      "pred_1in50_ratio_flag_vs_climatology": 4.9308
+     },
+     "Satakunta–SE": {
+      "swe_catchments": [
+       55,
+       109,
+       112
+      ],
+      "h": 0.6616,
+      "skill": 0.4641,
+      "snow_cutoff_swe_index": 0.8404,
+      "pred_p_trigger_1in10_flag": 0.1522,
+      "pred_p_trigger_1in10_noflag": 0.0454,
+      "pred_p_trigger_1in10_climatology": 0.0614,
+      "pred_ratio_flag_vs_noflag": 3.3539,
+      "pred_ratio_flag_vs_climatology": 2.4787,
+      "pred_1in50_ge2_climatology": 0.0067,
+      "pred_1in50_ge2_flag": 0.0223,
+      "pred_1in50_ratio_flag_vs_climatology": 3.316
+     }
+    }
+   },
+   "in_sample": {
+    "Ostrobothnia": {
+     "years": 40,
+     "spearman_swe_vs_flood_index": 0.695,
+     "spearman_p_one_sided": 0.0,
+     "spearman_ci90_bootstrap": [
+      0.517,
+      0.818
+     ],
+     "flag_years": [
+      1988,
+      2003,
+      2011,
+      2021,
+      2022,
+      2024
+     ],
+     "trigger_years": [
+      1988,
+      1998,
+      2000,
+      2001,
+      2010,
+      2013,
+      2018,
+      2024
+     ],
+     "hits": [
+      1988,
+      2024
+     ],
+     "false_alarms": [
+      2003,
+      2011,
+      2021,
+      2022
+     ],
+     "misses": [
+      1998,
+      2000,
+      2001,
+      2010,
+      2013,
+      2018
+     ],
+     "table": {
+      "flag_trigger": 2,
+      "flag_no_trigger": 4,
+      "noflag_trigger": 6,
+      "noflag_no_trigger": 28
+     },
+     "p_trigger_flag": 0.333,
+     "p_trigger_flag_ci90": [
+      0.063,
+      0.729
+     ],
+     "p_trigger_noflag": 0.176,
+     "p_trigger_noflag_ci90": [
+      0.08,
+      0.319
+     ],
+     "observed_ratio": 1.89,
+     "observed_ratio_ci90_bootstrap": [
+      0.0,
+      6.0
+     ],
+     "bootstrap_valid": 3994,
+     "fisher_p_one_sided": 0.3442,
+     "trigger_rate_all": 0.2,
+     "pred_trigger_rate_all": 0.148,
+     "expected_triggers_flag": 3.04,
+     "expected_triggers_noflag": 2.89,
+     "gauge_exceed_rate_1in10": 0.121,
+     "mean_swe_index": 0.06,
+     "mean_flood_index": 0.07,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       1988,
+       2011,
+       2018,
+       2021,
+       2022,
+       2024
+      ],
+      "table": {
+       "flag_trigger": 3,
+       "flag_no_trigger": 3,
+       "noflag_trigger": 5,
+       "noflag_no_trigger": 29
+      },
+      "fisher_p_one_sided": 0.0819
+     }
+    },
+    "North": {
+     "years": 40,
+     "spearman_swe_vs_flood_index": 0.663,
+     "spearman_p_one_sided": 0.0,
+     "spearman_ci90_bootstrap": [
+      0.483,
+      0.786
+     ],
+     "flag_years": [
+      1993,
+      1998,
+      2000,
+      2005,
+      2016,
+      2020
+     ],
+     "trigger_years": [
+      1993,
+      2000,
+      2005,
+      2023,
+      2024
+     ],
+     "hits": [
+      1993,
+      2000,
+      2005
+     ],
+     "false_alarms": [
+      1998,
+      2016,
+      2020
+     ],
+     "misses": [
+      2023,
+      2024
+     ],
+     "table": {
+      "flag_trigger": 3,
+      "flag_no_trigger": 3,
+      "noflag_trigger": 2,
+      "noflag_no_trigger": 32
+     },
+     "p_trigger_flag": 0.5,
+     "p_trigger_flag_ci90": [
+      0.153,
+      0.847
+     ],
+     "p_trigger_noflag": 0.059,
+     "p_trigger_noflag_ci90": [
+      0.011,
+      0.174
+     ],
+     "observed_ratio": 8.5,
+     "observed_ratio_ci90_bootstrap": [
+      1.57,
+      "inf"
+     ],
+     "bootstrap_valid": 3974,
+     "fisher_p_one_sided": 0.0178,
+     "trigger_rate_all": 0.125,
+     "pred_trigger_rate_all": 0.128,
+     "expected_triggers_flag": 2.61,
+     "expected_triggers_noflag": 2.52,
+     "gauge_exceed_rate_1in10": 0.085,
+     "mean_swe_index": 0.06,
+     "mean_flood_index": 0.06,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       1989,
+       1993,
+       1994,
+       1997,
+       1998,
+       2000,
+       2005,
+       2016,
+       2020
+      ],
+      "table": {
+       "flag_trigger": 3,
+       "flag_no_trigger": 6,
+       "noflag_trigger": 2,
+       "noflag_no_trigger": 29
+      },
+      "fisher_p_one_sided": 0.0655
+     }
+    },
+    "Satakunta–SE": {
+     "years": 40,
+     "spearman_swe_vs_flood_index": 0.357,
+     "spearman_p_one_sided": 0.0119,
+     "spearman_ci90_bootstrap": [
+      0.064,
+      0.612
+     ],
+     "flag_years": [
+      1988,
+      1999,
+      2011,
+      2012,
+      2022,
+      2024
+     ],
+     "trigger_years": [
+      1988
+     ],
+     "hits": [
+      1988
+     ],
+     "false_alarms": [
+      1999,
+      2011,
+      2012,
+      2022,
+      2024
+     ],
+     "misses": [],
+     "table": {
+      "flag_trigger": 1,
+      "flag_no_trigger": 5,
+      "noflag_trigger": 0,
+      "noflag_no_trigger": 34
+     },
+     "p_trigger_flag": 0.167,
+     "p_trigger_flag_ci90": [
+      0.009,
+      0.582
+     ],
+     "p_trigger_noflag": 0.0,
+     "p_trigger_noflag_ci90": [
+      0.0,
+      0.084
+     ],
+     "observed_ratio": "inf",
+     "observed_ratio_ci90_bootstrap": [
+      "inf",
+      "inf"
+     ],
+     "bootstrap_valid": 2564,
+     "fisher_p_one_sided": 0.15,
+     "trigger_rate_all": 0.025,
+     "pred_trigger_rate_all": 0.061,
+     "expected_triggers_flag": 0.91,
+     "expected_triggers_noflag": 1.54,
+     "gauge_exceed_rate_1in10": 0.108,
+     "mean_swe_index": 0.06,
+     "mean_flood_index": 0.06,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       2011,
+       2012,
+       2022,
+       2024
+      ],
+      "table": {
+       "flag_trigger": 0,
+       "flag_no_trigger": 4,
+       "noflag_trigger": 1,
+       "noflag_no_trigger": 35
+      },
+      "fisher_p_one_sided": 1.0
+     }
+    }
+   },
+   "out_of_sample": {
+    "Ostrobothnia": {
+     "years": 25,
+     "spearman_swe_vs_flood_index": 0.589,
+     "spearman_p_one_sided": 0.001,
+     "spearman_ci90_bootstrap": [
+      0.335,
+      0.766
+     ],
+     "flag_years": [
+      1962,
+      1965,
+      1966,
+      1969,
+      1972,
+      1974,
+      1977,
+      1981,
+      1982,
+      1984
+     ],
+     "trigger_years": [
+      1962,
+      1965,
+      1966,
+      1970,
+      1971,
+      1972,
+      1974,
+      1977,
+      1981,
+      1984,
+      1985
+     ],
+     "hits": [
+      1962,
+      1965,
+      1966,
+      1972,
+      1974,
+      1977,
+      1981,
+      1984
+     ],
+     "false_alarms": [
+      1969,
+      1982
+     ],
+     "misses": [
+      1970,
+      1971,
+      1985
+     ],
+     "table": {
+      "flag_trigger": 8,
+      "flag_no_trigger": 2,
+      "noflag_trigger": 3,
+      "noflag_no_trigger": 12
+     },
+     "p_trigger_flag": 0.8,
+     "p_trigger_flag_ci90": [
+      0.493,
+      0.963
+     ],
+     "p_trigger_noflag": 0.2,
+     "p_trigger_noflag_ci90": [
+      0.057,
+      0.44
+     ],
+     "observed_ratio": 4.0,
+     "observed_ratio_ci90_bootstrap": [
+      1.9,
+      15.0
+     ],
+     "bootstrap_valid": 4000,
+     "fisher_p_one_sided": 0.0048,
+     "trigger_rate_all": 0.44,
+     "pred_trigger_rate_all": 0.148,
+     "expected_triggers_flag": 5.07,
+     "expected_triggers_noflag": 1.28,
+     "gauge_exceed_rate_1in10": 0.323,
+     "mean_swe_index": 0.58,
+     "mean_flood_index": 0.54,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       1962,
+       1965,
+       1966,
+       1974,
+       1981,
+       1982,
+       1984
+      ],
+      "table": {
+       "flag_trigger": 6,
+       "flag_no_trigger": 1,
+       "noflag_trigger": 5,
+       "noflag_no_trigger": 13
+      },
+      "fisher_p_one_sided": 0.0141
+     }
+    },
+    "North": {
+     "years": 25,
+     "spearman_swe_vs_flood_index": -0.135,
+     "spearman_p_one_sided": 0.7394,
+     "spearman_ci90_bootstrap": [
+      -0.518,
+      0.251
+     ],
+     "flag_years": [
+      1969,
+      1973,
+      1974
+     ],
+     "trigger_years": [
+      1981
+     ],
+     "hits": [],
+     "false_alarms": [
+      1969,
+      1973,
+      1974
+     ],
+     "misses": [
+      1981
+     ],
+     "table": {
+      "flag_trigger": 0,
+      "flag_no_trigger": 3,
+      "noflag_trigger": 1,
+      "noflag_no_trigger": 21
+     },
+     "p_trigger_flag": 0.0,
+     "p_trigger_flag_ci90": [
+      0.0,
+      0.632
+     ],
+     "p_trigger_noflag": 0.045,
+     "p_trigger_noflag_ci90": [
+      0.002,
+      0.198
+     ],
+     "observed_ratio": 0.0,
+     "observed_ratio_ci90_bootstrap": [
+      0.0,
+      0.0
+     ],
+     "bootstrap_valid": 2394,
+     "fisher_p_one_sided": 1.0,
+     "trigger_rate_all": 0.04,
+     "pred_trigger_rate_all": 0.128,
+     "expected_triggers_flag": 1.31,
+     "expected_triggers_noflag": 1.63,
+     "gauge_exceed_rate_1in10": 0.077,
+     "mean_swe_index": -0.01,
+     "mean_flood_index": -0.01,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       1962,
+       1965,
+       1969,
+       1973,
+       1974,
+       1984
+      ],
+      "table": {
+       "flag_trigger": 0,
+       "flag_no_trigger": 6,
+       "noflag_trigger": 1,
+       "noflag_no_trigger": 18
+      },
+      "fisher_p_one_sided": 1.0
+     }
+    },
+    "Satakunta–SE": {
+     "years": 25,
+     "spearman_swe_vs_flood_index": 0.769,
+     "spearman_p_one_sided": 0.0,
+     "spearman_ci90_bootstrap": [
+      0.608,
+      0.862
+     ],
+     "flag_years": [
+      1962,
+      1966,
+      1967,
+      1969,
+      1970,
+      1972,
+      1974,
+      1977,
+      1981,
+      1982,
+      1984
+     ],
+     "trigger_years": [
+      1966,
+      1970,
+      1981,
+      1984
+     ],
+     "hits": [
+      1966,
+      1970,
+      1981,
+      1984
+     ],
+     "false_alarms": [
+      1962,
+      1967,
+      1969,
+      1972,
+      1974,
+      1977,
+      1982
+     ],
+     "misses": [],
+     "table": {
+      "flag_trigger": 4,
+      "flag_no_trigger": 7,
+      "noflag_trigger": 0,
+      "noflag_no_trigger": 14
+     },
+     "p_trigger_flag": 0.364,
+     "p_trigger_flag_ci90": [
+      0.135,
+      0.65
+     ],
+     "p_trigger_noflag": 0.0,
+     "p_trigger_noflag_ci90": [
+      0.0,
+      0.193
+     ],
+     "observed_ratio": "inf",
+     "observed_ratio_ci90_bootstrap": [
+      "inf",
+      "inf"
+     ],
+     "bootstrap_valid": 3955,
+     "fisher_p_one_sided": 0.0261,
+     "trigger_rate_all": 0.16,
+     "pred_trigger_rate_all": 0.061,
+     "expected_triggers_flag": 1.67,
+     "expected_triggers_noflag": 0.64,
+     "gauge_exceed_rate_1in10": 0.2,
+     "mean_swe_index": 0.71,
+     "mean_flood_index": 0.14,
+     "sensitivity_trailing30_cutoff": {
+      "flag_years": [
+       1962,
+       1966,
+       1969,
+       1974,
+       1981,
+       1982,
+       1984
+      ],
+      "table": {
+       "flag_trigger": 3,
+       "flag_no_trigger": 4,
+       "noflag_trigger": 1,
+       "noflag_no_trigger": 17
+      },
+      "fisher_p_one_sided": 0.0526
+     }
+    }
+   },
+   "pooled_in_sample": {
+    "table": {
+     "flag_trigger": 6,
+     "flag_no_trigger": 12,
+     "noflag_trigger": 8,
+     "noflag_no_trigger": 94
+    },
+    "p_trigger_flag": 0.333,
+    "p_trigger_flag_ci90": [
+     0.156,
+     0.554
+    ],
+    "p_trigger_noflag": 0.078,
+    "p_trigger_noflag_ci90": [
+     0.04,
+     0.137
+    ],
+    "observed_ratio": 4.25,
+    "hit_rate": 0.429,
+    "fisher_p_one_sided": 0.0071,
+    "model_expected_triggers_flag": 6.56,
+    "model_expected_triggers_noflag": 6.95,
+    "sensitivity_trailing30_cutoff": {
+     "table": {
+      "flag_trigger": 6,
+      "flag_no_trigger": 13,
+      "noflag_trigger": 8,
+      "noflag_no_trigger": 93
+     },
+     "fisher_p_one_sided": 0.0096
+    },
+    "note": "pooled over the 3 clusters (cluster-years); clusters share years, so not independent"
+   },
+   "pooled_out_of_sample": {
+    "table": {
+     "flag_trigger": 12,
+     "flag_no_trigger": 12,
+     "noflag_trigger": 4,
+     "noflag_no_trigger": 47
+    },
+    "p_trigger_flag": 0.5,
+    "p_trigger_flag_ci90": [
+     0.319,
+     0.681
+    ],
+    "p_trigger_noflag": 0.078,
+    "p_trigger_noflag_ci90": [
+     0.027,
+     0.171
+    ],
+    "observed_ratio": 6.38,
+    "hit_rate": 0.75,
+    "fisher_p_one_sided": 0.0001,
+    "model_expected_triggers_flag": 8.05,
+    "model_expected_triggers_noflag": 3.55,
+    "sensitivity_trailing30_cutoff": {
+     "table": {
+      "flag_trigger": 9,
+      "flag_no_trigger": 11,
+      "noflag_trigger": 7,
+      "noflag_no_trigger": 48
+     },
+     "fisher_p_one_sided": 0.0047
+    },
+    "note": "pooled over the 3 clusters (cluster-years); clusters share years, so not independent"
+   }
+  }
+ }
+}
