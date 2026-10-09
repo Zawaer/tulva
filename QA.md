@@ -99,6 +99,16 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
   with AI coding agents (Claude Code). The next step is an ML seasonal forecaster: snow plus soil moisture plus
   ECMWF seasonal forecasts."
 
+## "What did you do before the event?" (answer honestly, calmly, ~15 s)
+"Before the event we did research: we read up on Finnish floods, insurance and reinsurance, found the public data
+sources (SYKE, FMI), and studied which quantum methods fit risk pricing, and that QAOA didn't fit while amplitude
+estimation does. All the code, the data analysis, the model, the pricing, the hardware runs and the demo were built
+here, from Thursday 18:00. Our commit history starts then."
+- If they dig deeper: "We also sketched rough feasibility simulations to decide on the method, but we rebuilt
+  everything from scratch here with real data. Nothing from that was reused."
+- Don't apologise or over-explain. Research before a hackathon is normal and expected; the pitch-training slides
+  even ask for "progress – pre-event and during the event".
+
 ## Traps
 - Never say "quantum is faster" or "advantage".
 - Never claim "EIOPA assumes 0 % in Finland". The 0 % is cross-border (FI–SE/NO/DK); inside Finland EIOPA uses
