@@ -2,7 +2,7 @@
 
 Vaishnav: slides, pitch script, demo-video script and Q&A notes go here.
 
-- `PITCH.md`: the spoken script, slide by slide with timing marks (≈2:43 at 135 wpm: 228 live words + the 37 s demo video,
+- `PITCH.md`: the spoken script, slide by slide with timing marks (≈2:29 at 135 wpm, ≈2:42 at 120 wpm: 240 live words + the 37 s demo video,
   which the presenter narrates live). The `>` lines become each slide's speaker notes.
 - `build_deck.py`: builds `Tulva_QxF2026.pptx` (16:9, editable text boxes; charts are inserted from `out/*.png`, the demo video from `deck/video/`).
 - `Tulva_QxF2026.pdf`, `preview/slide-N.png`: exports for checking layout.
@@ -35,7 +35,7 @@ deck if those numbers change.
 
 ## Demo video
 `deck/video/tulva_demo.mp4`: a 37-second scripted walkthrough of the demo app at 1920×1080, page zoom 1.5, short
-burned-in captions: map → snow outlook set to high → real IQM Emerald shots (low vs snowy March) → all 14 areas on
+burned-in captions: map → snow outlook set to high → real IQM Emerald shots (low vs snowy March) → a simplified (two-level) 14-river model on
 one chip (1-in-10 run, ≥4 row highlighted) → 2005 replay. It is silent: the presenter narrates it live (PITCH.md,
 slide 4). Re-record after the app changes (app served on :3141):
 `source /data/chats/s_7z3ZoxoroN/env.sh; PLAYWRIGHT_PKG=/data/chats/s_7z3ZoxoroN/talkoot/package.json node deck/video/record_demo.mjs`,

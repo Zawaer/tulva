@@ -240,3 +240,35 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   independence. Snow conditioning then moves it ×3 within a season (high-snow 6.3 %) · monte-carlo
 - **Two-level (circuit) model vs continuous on the product trigger:** 1.10 % vs 1.98 % (−44 %); at 1-in-10 (≥4 of 14)
   10.9 % vs 12.2 %. The circuit's model is a simplified version; prices come from the continuous classical model · exact
+
+## Round-2 deck pass (Sat 10 Oct, early) · derived from the lines above unless marked
+- **Slide 3 "≈2× under-priced even vs regulator-style correlation"** = North "≥2 of 5 over 1-in-50" Tulva 1.96 % (exact)
+  / 1.09 % at equicorrelation 0.27 (monte-carlo, "Realistic baseline" above) = 1.80×, shown rounded as ≈2× (spoken "about
+  TWICE"); the second line "≈5× if rivers priced independently" = 5.1× (pricing section). Cross-check: one-factor
+  Gauss–Hermite quadrature at equicorrelation 0.27 gives 1.11 % (ratio 1.77×), same rounding · derived / exact
+- **Slide 3 chart, "Regulator-style correlation (0.27)" rate on line 2.7–3.8 %** = 1.09 % × €10M × 2.5–3.5 ÷ €10M
+  (same method as the other bars: probability × payout × market multiple ÷ limit) · derived · scripts/pitch_charts.py
+  (`P_REG_027`) → out/pitch_cost.png. Other bars unchanged: independent 1.0–1.3 %, Tulva 4.9–6.9 %, after a snowy March
+  16–23 %
+- **Slide 3 "Per €1M of cover: ~€49–69k / year"** = Tulva rate on line 4.9–6.9 % × €1M (replaces the €3M example) · derived
+- Spoken "this March's snow moves it THREE times more" = after a top-15 % snow March 6.4 % vs 1.96 % (3.3×; "×3" in the
+  realistic-baseline line) · exact
+- **Slide 5 "+19 % / +31 % bias (calibrated; raw 2–3× off)"** = IBM run 2 0.149 % / 0.125 % = +19 %, IQM Garnet run 2
+  0.164 % / 0.125 % = +31 % (bootstrap estimator, intervals exclude exact); raw 2.1× / 2.9× · qae-ibm / qae-iqm
+- Slide 5 block "a two-level version of the 14-area model: 18 qubits, 44 two-qubit gates on IQM Emerald (sampling)" =
+  the full-scale loader line above; replaces "all 14 areas, one chip" / "whole model" wording in deck, app, video and QA
+- Demo video caption "Snowy March: more than twice the red" = raw both-flood shots on the app's IQM Emerald grid, 31 vs
+  13 of 8,000 (2.4×); spoken "about three times the risk" on slide 5 = calibrated 3.05× (CI 2.6–3.6) · qae-iqm
+- **Slide 7 "Year 3: Nordic snowmelt flood, 3–6 insurers ≈ €0.1–0.6M a year"**: ASSUMPTION, the business case's
+  illustrative year-3 SOM (business/reports/Tulva flood cover business case.md §5: "3–6 licences at €30–100k, so about
+  €0.1–0.6M a year, plus structuring fees"); "€25k pilot, then fee per deal / ~€75k a year" = the licence assumption
+  above · assumption
+- Slide 7 "regulator judged snowmelt correlation insignificant (one vendor model)" = EIOPA-BoS-24/462 §4.70 as summarised
+  in the business case §3 · source. "65 years of evidence" = SYKE spring peaks 1961–2025 · data
+- QA 2024 back-test: Ostrobothnia's top-15 % snow flag was on in 2024 and the Ostrobothnia index did not pay (one of its
+  six false alarms: 1962, 1981, 1982, 1988, 2022, 2024); only Alavieska–Ylivieska passed its empirical 1-in-10 (115 %),
+  four others peaked at 95–97 % of it. North paid in 2024 (3 of 5 over GEV 1-in-10) without a snow flag (a miss) ·
+  exact (counts) · out/backtest.json, web/data/app.json (replay peaks)
+- App badges: snow-conditioned probabilities and prices are now labelled "model" (in-sample snow skill), market ranges
+  "model + market multiple" (the 2.5–3.5× multiple is an outside source); unconditional model values stay "exact".
+  App co-flooding multipliers now round half up (Ostrobothnia 3.15 → 3.2×, as above; it showed 3.1×) · web/app.js

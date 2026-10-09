@@ -214,16 +214,20 @@ def s2_gap(prs, n):
 def s3_product(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     header(s, n, "The product", "Tulva Index: sold in autumn, updated in March")
-    rect(s, MX, 1.55, W - 2 * MX, 0.95, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
-    text(s, MX + 0.4, 1.55, W - 2 * MX - 0.8, 0.95,
+    rect(s, MX, 1.5, W - 2 * MX, 0.8, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
+    text(s, MX + 0.4, 1.5, W - 2 * MX - 0.8, 0.8,
          "Pays if ≥2 of 5 northern rivers pass their 1-in-50 flood level",
-         size=28, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
-    text(s, MX, 2.68, 9, 0.35, "MARKET PRICE, % OF THE LIMIT PER YEAR", size=18, bold=True, color=BLUE)
-    picture(s, OUT / "pitch_cost.png", MX, 3.05, W - 2 * MX, 2.85)  # scripts/pitch_charts.py
-    rect(s, MX, 6.15, 0.1, 0.55, BLUE)
-    text(s, MX + 0.3, 6.15, W - 2 * MX, 0.55, "Example: €3M limit ≈ €150–210k / year",
-         size=26, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
-    source(s, "Sources: SYKE 1961–2025, Tulva model; market 2.5–3.5× expected payout (AM Best cat bonds)")
+         size=26, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
+    text(s, MX, 2.45, W - 2 * MX, 0.55, "≈2× under-priced even vs regulator-style correlation",
+         size=32, bold=True, color=RED)
+    text(s, MX, 3.05, W - 2 * MX, 0.35, "≈5× if rivers priced independently", size=18, color=GREY)
+    text(s, MX, 3.5, 9, 0.3, "MARKET PRICE, % OF THE LIMIT PER YEAR", size=14, bold=True, color=BLUE)
+    picture(s, OUT / "pitch_cost.png", MX, 3.8, W - 2 * MX, 2.4)  # scripts/pitch_charts.py
+    rect(s, MX, 6.3, 0.1, 0.5, BLUE)
+    text(s, MX + 0.3, 6.3, W - 2 * MX, 0.5, "Per €1M of cover: ~€49–69k / year",
+         size=24, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
+    source(s, "Sources: SYKE 1961–2025, Tulva model; 0.27 = mean of the 19-zone matrix, Del. Reg. (EU) 2026/269; "
+              "market 2.5–3.5× (AM Best)")
     return s
 
 
@@ -264,23 +268,23 @@ def s5_quantum(prs, n):
          color=NAVY)
     picture(s, OUT / "pitch_snow.png", MX, 2.0, 7.6, 4.6)  # scripts/pitch_charts.py
     x, w = 8.65, 4.1
-    text(s, x, 1.55, w, 0.35, "ALL 14 AREAS, ONE CHIP", size=16, color=BLUE, bold=True)
-    text(s, x, 1.9, w, 0.9, "18 qubits, 44 two-qubit gates on IQM Emerald (sampling)", size=20, bold=True,
-         color=NAVY, spacing=1.0)
-    rect(s, x, 2.95, w, 0.015, LINE)
-    text(s, x, 3.1, w, 0.35, "AMPLITUDE ESTIMATION", size=16, color=BLUE, bold=True)
-    text(s, x, 3.42, w, 0.35, "Kittilä + Ivalo, 1-in-50", size=16, color=GREY)
-    rows = [("Exact", "0.125 %", "", NAVY), ("IBM", "0.149 %", "0.140–0.157", BLUE),
-            ("IQM", "0.164 %", "0.147–0.180", BLUE)]
-    y = 3.8
-    for lab, val, ci, c in rows:
+    text(s, x, 1.55, w, 0.35, "AMPLITUDE ESTIMATION", size=16, color=BLUE, bold=True)
+    text(s, x, 1.87, w, 0.35, "Kittilä + Ivalo, 1-in-50", size=16, color=GREY)
+    rows = [("Exact", "0.125 %", ""), ("IBM", "0.149 %", "0.140–0.157"), ("IQM", "0.164 %", "0.147–0.180")]
+    y = 2.25
+    for lab, val, ci in rows:
         text(s, x, y + 0.08, 1.4, 0.4, lab, size=20, bold=True)
-        text(s, x + 1.3, y, 2.8, 0.45, val, size=26, bold=True, color=c, align=PP_ALIGN.RIGHT)
+        text(s, x + 1.3, y, 2.8, 0.45, val, size=26, bold=True, color=NAVY, align=PP_ALIGN.RIGHT)
         if ci:
             text(s, x + 1.3, y + 0.45, 2.8, 0.3, f"90 % CI {ci}", size=14, color=GREY, align=PP_ALIGN.RIGHT)
         rect(s, x, y + 0.78, w, 0.012, LINE)
         y += 0.8
-    text(s, x, y + 0.1, w + 0.1, 0.4, "Calibrated; raw readings were 2–3×\u00a0off", size=16, bold=True, color=NAVY)
+    text(s, x, y + 0.08, w + 0.1, 0.7, ["+19 % / +31 % bias", "(calibrated; raw 2–3×\u00a0off)"], size=16, bold=True,
+         color=GREY)
+    rect(s, x, 5.55, w, 1.05, LIGHT)
+    text(s, x + 0.2, 5.62, w - 0.35, 0.95,
+         "A two-level version of the 14-area model: 18 qubits, 44 two-qubit gates on IQM Emerald (sampling)",
+         size=15, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
     source(s, "IQM Emerald (snow: 10 copies, 240k shots per level; 14 areas: job 01a11cd4…); IBM Marrakesh, IQM Garnet; "
               "bootstrap 90 % CI")
     return s
@@ -293,16 +297,14 @@ def s6_honest(prs, n):
     text(s, MX, 6.05, 7.2, 0.4, "Kittilä and Ivalo both pass 1-in-50: error vs effort", size=16, color=GREY)
     x, w = 8.2, 4.55
     text(s, x, 1.6, w, 0.45, "Method ready, hardware not yet", size=20, bold=True, color=BLUE)
-    rect(s, x, 2.2, w, 2.3, LIGHT)
-    rect(s, x, 2.2, 0.08, 2.3, RED)
-    text(s, x + 0.3, 2.3, w - 0.45, 2.4,
-         [[("Measured today: ", {"bold": True, "color": RED}),
-           ("~18 qubits, ~50 two-qubit gates work. Rare events (1-in-50) drown in noise on the 14-area "
-            "loader. Noise also fattens tails: an independent control run reads 2× high.", {})]],
-         size=18, color=NAVY, spacing=1.05)
-    text(s, x, 4.75, w, 0.9, "Prices are computed classically; quantum is the R&D track.", size=20, bold=True,
+    rect(s, x, 2.2, w, 1.75, LIGHT)
+    rect(s, x, 2.2, 0.08, 1.75, RED)
+    text(s, x + 0.3, 2.35, w - 0.45, 1.5, "Today: rare floods drown in noise.", size=30, bold=True, color=NAVY,
+         spacing=1.0)
+    text(s, x + 0.3, 3.45, w - 0.45, 0.45, "~18 qubits / ~50 two-qubit gates work", size=16, color=GREY)
+    text(s, x, 4.3, w, 0.9, "Prices are computed classically; quantum is the R&D track.", size=20, bold=True,
          color=NAVY)
-    text(s, x, 5.65, w, 0.8, "Advantage needs fault-tolerant scale (cf. derivative pricing: ~8k logical qubits, "
+    text(s, x, 5.25, w, 0.8, "Advantage needs fault-tolerant scale (cf. derivative pricing: ~8k logical qubits, "
          "Chakrabarti 2021)", size=14, color=GREY)
     source(s, "Source: Tulva simulations (qae-sim) + IBM Marrakesh / IQM Garnet / IQM Emerald runs; Chakrabarti et "
               "al., Quantum 5, 463 (2021)")
@@ -312,26 +314,39 @@ def s6_honest(prs, n):
 def s7_business(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     header(s, n, "Business", "Who buys, why, and why now")
-    cols = [
-        ("Who buys", "Insurers & reinsurers"),
-        ("How we earn", "Index + pricing engine, fee per deal (€25k pilot)"),
-        ("Why now", "Solvency II flood capital, Jan 2027 — snowmelt correlation set to 0"),
-        ("Scale", "Snowmelt regions: Sweden, Norway, Alps, Canada"),
+    steps = [
+        ("Buyer", "Insurer with internal capital model", "e.g. If", BLUE),
+        ("Risk carrier", "A reinsurer", "", BLUE),
+        ("Tulva", "Index + pricing engine", "€25k pilot, then fee per deal / ~€75k a year", BLUE),
+        ("Year 3", ["3–6 insurers", "≈ €0.1–0.6M", "a year"], "Nordic snowmelt flood (assumption)", NAVY),
     ]
-    cw, gap = 2.85, 0.193
-    for i, (k, head) in enumerate(cols):
+    gap = 0.45
+    cw = (W - 2 * MX - 3 * gap) / 4
+    y0, bh = 1.6, 2.75
+    for i, (k, big, small, c) in enumerate(steps):
         x = MX + i * (cw + gap)
-        c = RED if k == "Why now" else BLUE
-        rect(s, x, 1.65, cw, 3.9, LIGHT)
-        rect(s, x, 1.65, cw, 0.07, c)
-        text(s, x + 0.22, 1.9, cw - 0.44, 0.35, k.upper(), size=18, bold=True, color=c)
-        text(s, x + 0.22, 2.4, cw - 0.44, 3.0, head, size=24, bold=True, color=NAVY, spacing=1.0)
+        rect(s, x, y0, cw, bh, LIGHT)
+        rect(s, x, y0, cw, 0.07, c)
+        text(s, x + 0.2, y0 + 0.22, cw - 0.4, 0.35, k.upper(), size=16, bold=True, color=c)
+        text(s, x + 0.2, y0 + 0.65, cw - 0.4, 1.5, big, size=22, bold=True, color=NAVY, spacing=1.0)
+        if small:
+            text(s, x + 0.2, y0 + bh - 0.75, cw - 0.4, 0.6, small, size=14, color=GREY, anchor=MSO_ANCHOR.BOTTOM)
+        if i < 3:
+            text(s, x + cw, y0 + bh / 2 - 0.3, gap, 0.6, "→", size=30, bold=True, color=BLUE, align=PP_ALIGN.CENTER,
+                 anchor=MSO_ANCHOR.MIDDLE)
+    rect(s, MX, 4.6, 0.1, 1.0, RED)
+    text(s, MX + 0.3, 4.6, W - 2 * MX - 0.3, 1.0,
+         [[("Why now  ", {"color": RED}),
+           ("2027: Finland's first Solvency II flood charge — regulator judged snowmelt correlation insignificant "
+            "(one vendor model). ", {}), ("We have 65 years of evidence.", {"color": BLUE})]],
+         size=19, bold=True, color=NAVY, anchor=MSO_ANCHOR.MIDDLE, spacing=1.0)
     rect(s, MX, 5.85, W - 2 * MX, 0.85, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
     text(s, MX + 0.3, 5.85, W - 2 * MX - 0.4, 0.85,
          [[("Ask  ", {"color": PALE_BLUE}),
-           ("One insurer's flood claims for 8 weeks → basis-risk map + firm quote for 1 Jan 2028.", {})]],
+           ("One insurer's flood claims for 8 weeks → basis-risk map + firm quote for 1 Jan 2028.", {})]],
          size=19, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
-    source(s, "Sources: Del. Reg. (EU) 2026/269; EIOPA-BoS-24/462 §4.70 (25 % snowmelt correlation rejected)")
+    source(s, "Sources: Del. Reg. (EU) 2026/269; EIOPA-BoS-24/462 §4.70; pricing and year-3 range are team assumptions "
+              "(business case §5)")
     return s
 
 
