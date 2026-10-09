@@ -94,3 +94,7 @@ Snowy toggle). index.html edits: one CSS link, one nav link, the section, one sc
 - `deck/PITCH_NOTES.md` (Vaishnav, Fri evening): two spoken additions the workshop asked for (how we differ from
   existing solutions; hackathon journey + tools), Q&A facts (hardware sweet spot, snow 2.8× vs 3.0×, rain), and the
   who-pays-whom explanation. Suggest taking the ~27 s from slides 5–6. PITCH.md itself untouched.
+- Web display name: Vaishnav asked for "Pohjanmaa" instead of "Ostrobothnia" in the app. Done display-only
+  (CLUSTER_NAME map in app.js, label in pipeline.js); data keys, CLAIMS, charts and the deck still say Ostrobothnia.
+  If you prefer one name everywhere, pick one; the video currently shows the old name.
+- QA.md: appended two answers (what the tool is for; trigger fires but no flood).

@@ -322,3 +322,17 @@ history shows."
 - **"Is the payout staged?"** "No. The product pays the full limit when ≥2 of 5 northern gauges pass 1-in-50; that is
   what slide 3 prices. A staged version (50 % at 2, 100 % at 3) costs 67 % of it; it is a variant we could offer."
 
+## Added Fri evening (Vaishnav)
+
+- **"So what is the tool for, exactly?"** "Two numbers per region, every spring. One: how likely it is that many of
+  an insurer's customers flood at once this spring (the joint-flood probability, updated from the 1 March snow).
+  Two: what protecting against that would cost (the fair price of a reinsurance cover built on the Tulva Index).
+  From those two, the insurer decides whether to buy reinsurance, how much, and at what price, and shows the
+  number in its ORSA. It is about many claims at once, the insurer's accumulation problem, not about pricing a
+  single house. Tulva never carries or pays the cover: a reinsurer does; we license the engine."
+- **"What if the trigger fires but there is no flood?"** "The trigger *is* the flood: a gauge reading above the
+  1-in-50 level, the same test all seven Finnish home insurers use to pay homeowners (docs/flood_terms_check.md),
+  certified by SYKE's Flood Centre. 'Fires with no damage' can happen when defences hold or the flooded land is
+  empty; then the insurer is paid without a loss, the reinsurer bears it, and that is priced into the premium. The
+  reverse, damage without a trigger, is the insurer's basis risk; we reduce it with a multi-gauge trigger
+  (≥2 of 5), the staged payout, and by testing the trigger against the insurer's own claims in the pilot."

@@ -150,7 +150,7 @@
       y += rowH;
     };
     for (const [cl, E] of Object.entries(D.all_data)) {
-      s += `<text x="0" y="${y + 14}" font-size="13" font-weight="700" fill="${CLC[cl]}" letter-spacing=".06em">${cl.toUpperCase()}</text>`;
+      s += `<text x="0" y="${y + 14}" font-size="13" font-weight="700" fill="${CLC[cl]}" letter-spacing=".06em">${(cl === "Ostrobothnia" ? "Pohjanmaa" : cl).toUpperCase()}</text>`;
       y += 22;
       E.areas.forEach((A) => row(A.area, "river flow, m³/s", A.peaks, CLC[cl], A.q50));
       const snowVals = Object.values(E.snow_mm).filter((a) => a != null).sort((a, b) => a - b);

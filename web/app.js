@@ -2,6 +2,9 @@
 "use strict";
 
 const CLUSTER_COLOR = { "Ostrobothnia": "#2f6fde", "North": "#0f9e94", "Satakunta–SE": "#d4902a" };
+// display names (data files keep the English cluster keys)
+const CLUSTER_NAME = { "Ostrobothnia": "Pohjanmaa" };
+const cname = (n) => CLUSTER_NAME[n] || n;
 const SRC_LABEL = {
   "exact": "exact", "monte-carlo": "Monte Carlo", "qae-sim": "QAE sim", "qae-sim-noisy": "QAE noisy sim",
   "qae-q20": "Q20", "qae-ibm": "IBM", "qae-iqm": "IQM", "data": "observed", "placeholder": "placeholder",
@@ -157,7 +160,7 @@ function drawIntro() {
   Object.entries(APP.clusters).forEach(([name, cl]) => {
     const mult = j[name] ? fix1(j[name].multiplier) + "× joint floods" : "";
     ul.insertAdjacentHTML("beforeend", `<li><span class="dot" style="background:${CLUSTER_COLOR[name]}"></span>
-      <span><b>${esc(name)}</b> · ${cl.n} areas · ${mult} <span class="who">${cl.areas.map(esc).join(", ")}</span></span></li>`);
+      <span><b>${esc(cname(name))}</b> · ${cl.n} areas · ${mult} <span class="who">${cl.areas.map(esc).join(", ")}</span></span></li>`);
   });
 }
 
@@ -202,7 +205,7 @@ function renderOutlook() {
     ];
     const bars = rows.map(([l, v, col]) => `<div class="bar"><span>${l}</span><span class="track"><span class="fill" style="display:block;width:${Math.max(1, v / max * 100)}%;background:${col}"></span></span><span class="num">${pct(v)}</span></div>`).join("");
     return `<div class="tile" style="--cc:${CLUSTER_COLOR[name]}">
-      <h3>${esc(name)}</h3><div class="sub">≥2 of ${cl.n} gauges over their 1-in-50 level${state.mode === "latest" ? " · " + ordinal(cl.latest_march.pct) + " pct snow in " + cl.latest_march.year : ""}</div>
+      <h3>${esc(cname(name))}</h3><div class="sub">≥2 of ${cl.n} gauges over their 1-in-50 level${state.mode === "latest" ? " · " + ordinal(cl.latest_march.pct) + " pct snow in " + cl.latest_march.year : ""}</div>
       <div class="big">${pct(p)} <span class="unit">per spring</span> ${tag(pn.src, pn.note)}</div>
       <div class="bars">${bars}</div>
       <div class="price-row"><span>Expected payout on €10M ${tag(pn.src === "model" ? "model" : "exact", "probability × €10M; pure premium before loadings")}</span><b>${eur(p * APP.payout_eur)}</b></div>
