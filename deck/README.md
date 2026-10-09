@@ -2,7 +2,7 @@
 
 Vaishnav: slides, pitch script, demo-video script and Q&A notes go here.
 
-- `PITCH.md`: the 3:00 spoken script, slide by slide with timing marks (~410 words incl. the ~60 s demo
+- `PITCH.md`: the 3:00 spoken script, slide by slide with timing marks (270 live words + the ~60 s demo
   voice-over). The `>` lines become each slide's speaker notes.
 - `build_deck.py`: builds `Tulva_QxF2026.pptx` (16:9, editable text boxes; charts are inserted from `out/*.png`, the demo video from `deck/video/`).
 - `Tulva_QxF2026.pdf`, `preview/slide-N.png`: exports for checking layout.
@@ -23,7 +23,7 @@ are lost on the next rebuild.
 ## Demo video (embedded)
 
 The PPTX now contains the demo video: `build_deck.py` embeds whatever `deck/video/tulva_demo.mp4` is on disk at
-build time into slide 5 (poster frame = a still from 2 s in, extracted with imageio-ffmpeg), so after re-recording
+build time into slide 4 (poster frame = a still from 2 s in, extracted with imageio-ffmpeg), so after re-recording
 just rebuild. The file is embedded, not linked. Playback in PowerPoint/Keynote starts on click by default; if it
 should start by itself, set Playback → Start: Automatically and save under a new name (e.g.
 `Tulva_QxF2026_final.pptx`) so a rebuild doesn't overwrite it. Google Slides does not autoplay (or reliably play)

@@ -60,21 +60,46 @@ probability. We run it at 0, 1 and 2 amplification steps and fit the answer by m
 - *"Basis risk?"* The cover pays on gauges, not on the insurer's claims. The back-test: a "≥2 gauges" trigger paid
   in 2005 when Lapland flooded. We'd fit the gauge choice to each buyer's exposure; the staged payout
   (50 % at 2, 100 % at 3) reduces it.
-- *"Does the snow signal work?"* The 1 March snow flag caught 11 of 19 payout years in advance, and no payout
+- *"Does the snow signal work?"* At the 1-in-10 level, the 1 March snow flag caught 11 of 19 payout years in advance, and no payout
   followed a low-snow March. That's in-sample with a small sample, and we say so.
 
 ## Business (Vaishnav)
 - *"Who buys, and why?"* A Finnish non-life insurer, for the flood losses it keeps under its reinsurance retention.
   Reinsurance is bought on 1 January, before the spring signal exists; an index cover pays fast with no claims
   adjustment.
-- *"What does it cost?"* North cluster, €10M if ≥2 gauges pass 1-in-50: technical €265k, market €491k–€687k a
-  year. If priced as independent, it would be €96k–€134k. The market currently has no price for this joint risk.
+- *"What does it cost?"* North cluster, €10M if ≥2 gauges pass 1-in-50: market price €491k–€687k a
+  year (always quote market prices). If priced as independent, it would be €96k–€134k. The market currently has no price for this joint risk.
 - *"Isn't Finland too small?"* Finland is the pilot with the best open data. The same engine prices Sweden
   (Gävle 2021, SEK 1.9bn), Norway and Central Europe (storm Boris, €2.15bn insured).
 - *"Won't sellers just raise the price after a snowy March?"* Yes, that's why it's bought in winter, and Tulva is the
   pricing engine for whoever carries the risk.
 - *"Why now?"* EIOPA adds a Finnish flood capital factor from January 2027, and insurers must include climate
   scenarios in ORSA.
+
+## New jury questions (research/18)
+
+- **Steinmann / Mehtola: "Your 14-area chip result is sampling. Did amplitude estimation run on the full model?"**
+  "No, and that's deliberate. Emerald shows the full loader fits: 18 qubits, 44 gates. Amplitude estimation adds
+  two loader copies per step, which at 14 areas is far past today's ~50-gate budget. So we ran it on the 3-qubit
+  Kittilä–Ivalo piece on Marrakesh and Garnet. The loader is the part that has to scale, and it scales linearly."
+- **Mehtola: "Your calibration circuits have known answers. Isn't the mitigation tuned towards the result you
+  wanted?"** "The calibration circuits have *different* known answers, one large and one near zero, never the
+  target value. They measure how much signal survives each step and the false-trigger floor, in the same job and
+  on the same qubits. We invert that, and only afterwards compare with exact. Raw numbers are on the slide next to
+  the calibrated ones."
+- **Toikka: "Do 1961–2025 data hold as winters warm?"** "Not fully. Spring floods are shrinking and coming
+  earlier, fastest in Ostrobothnia; Lapland is roughly stable to about 2050; rain and winter floods grow (SYKE/FMI,
+  Veijalainen 2010). So the model must be re-fitted on recent decades and conditioned on climate scenarios; that's
+  on our roadmap. Today the price already moves with *this* winter's snow, not the 65-year average." (Sources:
+  business/NOTES_FOR_TOIVO.md.)
+- **Toikka (OP as buyer): "Who sells us this, and why not just buy more treaty reinsurance?"** "A reinsurer or an
+  ILS fund that wants Nordic diversification sells it at the 2.5–3.5× multiple we priced. It doesn't replace your
+  treaty. It fills the gap the treaty can't: the correlated spring layer you retain, priced once the snow is known
+  and paid in days off a public gauge. We license the engine to whichever side you're on."
+- **Anbarjafari: "The theme is AI × quantum. Where is the AI?"** "Honestly: the product's early-warning signal is
+  statistical, snow index to risk shift, because an insurer has to defend the trigger to a regulator. We built it
+  with AI coding agents (Claude Code). The next step is an ML seasonal forecaster: snow plus soil moisture plus
+  ECMWF seasonal forecasts."
 
 ## Traps
 - Never say "quantum is faster" or "advantage".

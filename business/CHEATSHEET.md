@@ -35,7 +35,7 @@ It is **not** a weather forecast. It is a risk price.
 - Areas in the same region pass their 1-in-10 level together **2.8×** more often than chance.
 - Ostrobothnia cover: chance **2.56 %** per spring → price **€346k**. Assuming independence: €77k (**4.5×** too cheap).
 - After a high-snow March: Ostrobothnia price **€1.74M** (5× normal).
-- Back-test: the March snow signal flagged **11 of 19** paying years in advance; no payout ever followed a low-snow year.
+- Back-test: the March snow signal flagged **11 of 19** paying years (1-in-10 back-test, in-sample) in advance; no payout ever followed a low-snow year.
 
 ## Outside facts (cite the source, not "our model")
 - Since **2014** the state no longer pays for floods; home insurance does, and only for floods rarer than **1-in-50** (vesi.fi, OP). Same level as our trigger.
