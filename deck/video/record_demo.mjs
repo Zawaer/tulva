@@ -1,7 +1,7 @@
 // Records a ~60 s scripted walkthrough of the Tulva demo app (1920x1080, captions burned in).
 //   source /data/chats/s_7z3ZoxoroN/env.sh; node deck/video/record_demo.mjs [url]
 import { createRequire } from "node:module";
-const require = createRequire("/data/chats/s_7z3ZoxoroN/talkoot/package.json");
+const require = createRequire(process.env.PLAYWRIGHT_PKG || (process.cwd() + "/package.json"))  // any project with playwright installed;
 const { chromium } = require("playwright");
 const APP_URL = process.argv[2] || "http://127.0.0.1:3141";
 const OUT = new URL("./", import.meta.url).pathname;
