@@ -58,3 +58,4 @@ Append one line per decision: date time · who · decision · why.
   Basis-risk line counts payouts without a recorded loss too. One amplification statement everywhere (round5_numbers).
   · Round-5 business, quantum and coach reviews.
 - 2026-10-10 · Toivo · Snow warning tested out of sample (scripts/oos_snow_test.py, both splits): ranking holds, "triples" untestable on 2001–25 (flag fired twice), North unstable; deck untouched, "triples" stays labelled in-sample; QA answer added. · Honesty check.
+- 2026-10-10 · Toivo · Round 6 deck: new stage slide 5 "Our circuit: quantum amplitude estimation" (Qiskit drawing of the hardware circuit + one why-quantum line); old 5–8 → 6–9, backups → 10–12. Slide 3 bar "0.27-correlation model" → "Standard assumption (regulator's average link)"; slide 6 retitled "On real chips, the snow effect still shows". Live script re-trimmed to 240 words. · Mentor feedback + mentors' "why quantum?".

@@ -71,7 +71,7 @@ def cost_chart():
     d = json.loads((OUT / "pricing.json").read_text())
     t = d["clusters"]["North"]["triggers"]["ge2"]
     b = json.loads((OUT / "round4_numbers.json").read_text())["north_ge2_of5_bootstrap"]
-    rows = [("0.27 average correlation", P_REG_027, None, GREY),
+    rows = [("Standard assumption (0.27)", P_REG_027, None, GREY),
             ("Tulva, priced in autumn", t["tulva"]["p_exact"], b["p_tulva_ci90"], BLUE),
             ("Tulva after a snowy March", t["tulva_high_outlook"]["p_exact"], b["p_high_snow_ci90"], NAVY)]
     fig, ax = plt.subplots(figsize=(12.1, 2.0), dpi=DPI)

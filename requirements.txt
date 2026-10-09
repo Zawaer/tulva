@@ -5,3 +5,4 @@ matplotlib
 requests
 qiskit>=1.2
 qiskit-aer
+pylatexenc  # Qiskit 'mpl' circuit drawings (scripts/qae_circuit_figure.py)

@@ -4,8 +4,8 @@ Rerun after the charts in out/ change:
     .venv/bin/python deck/build_deck.py            # pptx only
     .venv/bin/python deck/build_deck.py --pdf      # + PDF and PNG previews (needs LibreOffice + pdftoppm)
 
-Every number on a slide comes from CLAIMS.md. Slides 1-8 are the stage deck (one idea each, big type); caveats,
-intervals and sources are on the backup slides 9-11 (Q&A only) and in QA.md.
+Every number on a slide comes from CLAIMS.md. Slides 1-9 are the stage deck (one idea each, big type); caveats,
+intervals and sources are on the backup slides 10-12 (Q&A only) and in QA.md.
 Speaker notes are the `>` lines of deck/PITCH.md for the matching slide number.
 """
 from __future__ import annotations
@@ -171,8 +171,8 @@ def crops():
 
 
 # --------------------------------------------------------------------------- slides
-# Stage deck (slides 1-8): one idea per slide, title <= 8 words, body >= 28 pt, big numbers >= 60 pt.
-# Caveats, intervals and sources live on the backup slides (9-11) and in QA.md.
+# Stage deck (slides 1-9): one idea per slide, title <= 8 words, body >= 28 pt, big numbers >= 60 pt.
+# Caveats, intervals and sources live on the backup slides (10-12) and in QA.md.
 TITLE_SIZE = 40
 BODY = 28
 PURPLE = RGBColor(0x82, 0x50, 0xDF)  # IQM chip, as in scripts/pitch_charts.py
@@ -230,14 +230,15 @@ def s2_gap(prs, n):
 
 
 def s3_product(prs, n):
-    """North '>=2 of 5 over 1-in-50' expected loss: 0.27-correlation model 1.11 %, Tulva 1.96 %, snowy March 6.4 %."""
+    """North '>=2 of 5 over 1-in-50' expected loss: standard assumption (one 0.27 correlation, the mean of the 2027
+    19-zone matrix) 1.11 %, Tulva 1.96 %, snowy March 6.4 %."""
     s = prs.slides.add_slide(prs.slide_layouts[6])
     title(s, n, "Tulva Index: pays if ≥2 northern rivers flood")
-    rows = [("0.27-correlation model", 1.11, "1.11 %", GREY), ("Tulva", 1.96, "1.96 %", BLUE),
+    rows = [("Standard assumption (regulator's average link)", 1.11, "1.11 %", GREY), ("Tulva", 1.96, "1.96 %", BLUE),
             ("Tulva, after a snowy March", 6.4, "6.4 %", NAVY)]
     scale, y = 5.4 / 6.4, 1.65
     for lab, v, vt, c in rows:
-        text(s, MX, y, 8, 0.5, lab, size=BODY, color=NAVY)
+        text(s, MX, y, 8.3, 0.5, lab, size=BODY, color=NAVY)
         rect(s, MX, y + 0.55, v * scale, 0.6, c)
         text(s, MX + v * scale + 0.2, y + 0.5, 2.2, 0.7, vt, size=36, bold=True, color=c,
              anchor=MSO_ANCHOR.MIDDLE)
@@ -278,12 +279,28 @@ def s4_demo(prs, n):
     return s
 
 
-def s5_quantum(prs, n):
+def s5_circuit(prs, n):
+    """The QAE circuit we ran (out/stage_qae_circuit.png from scripts/qae_circuit_figure.py) + why quantum.
+    Simulator numbers: CLAIMS.md (qae-sim 0.125 % ± 0.011 pp vs Monte Carlo ± 0.027 pp at 16,000 oracle queries)."""
+    s = prs.slides.add_slide(prs.slide_layouts[6])
+    title(s, n, "Our circuit: quantum amplitude estimation")
+    picture(s, OUT / "stage_qae_circuit.png", MX, 1.35, W - 2 * MX, 3.6)
+    text(s, MX, 5.05, W - 2 * MX, 1.75,
+         [[("Qubits = wet spring + rivers. Gates = our flood model.", {})],
+          [("Why quantum?  ", {"bold": True, "color": RED}), ("2× accuracy: sampling needs 4× the runs, QAE 2×.", {})],
+          [("Perfect simulator: exact 0.125 %, ≈2.5× tighter than Monte Carlo", {})]],
+         size=BODY, color=NAVY, space_after=6)
+    source(s, "MLAE, Grover steps k = 0, 1, 2 · simulator ±0.011 vs Monte Carlo ±0.027 pp, 16,000 runs each · "
+              "2× vs 4× = ideal scaling")
+    return s
+
+
+def s6_quantum(prs, n):
     """IQM Emerald, two-river North-cluster pair, both over 1-in-50: exact vs calibrated chip (out/bootstrap_ci.json)."""
     import json
     b = json.loads((OUT / "bootstrap_ci.json").read_text())
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    title(s, n, "Snow warning survives on real chips")
+    title(s, n, "On real chips, the snow effect still shows")
     # legend
     for i, (lab, c) in enumerate([("Exact", BLUE), ("IQM chip", PURPLE)]):
         x = MX + i * 2.6
@@ -291,7 +308,7 @@ def s5_quantum(prs, n):
         text(s, x + 0.45, 1.5, 2.0, 0.55, lab, size=BODY, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
     base, top, bw = 5.75, 2.35, 1.25
     vmax = 100 * b["emerald snow high"]["estimate"]
-    for gx, lab, key in [(0.9, "Low snow", "emerald snow low"), (4.3, "Snowy", "emerald snow high")]:
+    for gx, lab, key in [(0.9, "Low-snow March", "emerald snow low"), (4.3, "Snowy March", "emerald snow high")]:
         for j, (v, c) in enumerate([(100 * b[key]["exact"], BLUE), (100 * b[key]["estimate"], PURPLE)]):
             h = (base - top) * v / vmax
             rect(s, gx + j * (bw + 0.08), base - h, bw, h, c)
@@ -308,7 +325,7 @@ def s5_quantum(prs, n):
     return s
 
 
-def s6_honest(prs, n):
+def s7_honest(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     title(s, n, "Classical still wins today")
     picture(s, OUT / "stage_scaling.png", MX, 1.55, 8.2, 4.9)  # scripts/pitch_charts.py
@@ -320,7 +337,7 @@ def s6_honest(prs, n):
     return s
 
 
-def s7_business(prs, n):
+def s8_business(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     title(s, n, "Who pays")
     # money flows FROM the insurer: licence to Tulva (left), premium to the reinsurer (right)
@@ -345,7 +362,7 @@ def s7_business(prs, n):
     return s
 
 
-def s8_close(prs, n):
+def s9_close(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     rect(s, 0, 0, W, H, NAVY)
     title(s, n, "Built this weekend", dark=True)
@@ -381,7 +398,7 @@ def backup_header(slide, n, t):
     footer(slide, n)
 
 
-def s9_backup_product(prs, n):
+def s10_backup_product(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     backup_header(s, n, "Product and pricing in detail")
     text(s, MX, 1.5, 9, 0.3, "EXPECTED LOSS, % OF THE LIMIT PER YEAR (YEAR-BOOTSTRAP 90 % INTERVALS)", size=14,
@@ -390,7 +407,7 @@ def s9_backup_product(prs, n):
     bullets(s, MX, 4.05, W - 2 * MX, 3.0, [
         "Index: pays the full limit if ≥2 of 5 northern rivers pass their 1-in-50 level (a staged payout is only a "
         "variant). Priced in autumn; in March the insurer can buy top-up cover and staff claims in the regions at risk.",
-        "Tulva 1.96 % (1.6–2.2 %) vs 1.11 % for a model with one 0.27 correlation = 1.77× (≈1.8×). 0.27 = mean of the "
+        "Tulva 1.96 % (1.6–2.2 %) vs 1.11 % for the standard assumption (a model with one 0.27 correlation) = 1.77× (≈1.8×). 0.27 = mean of the "
         "2027 Finnish 19-zone flood matrix, Del. Reg. (EU) 2026/269. ≈5× only vs independence (0.38 %).",
         "Snowy (top-15 %) March vs autumn (normal): 6.4 % (3.6–9.1 %) vs 1.96 % = 3.3× (90 %: 2.1–4.4×).",
         "Market price = expected loss × 2.5–3.5: 4.9–6.9 % rate on line ≈ €49–69k a year per €1M of cover.",
@@ -401,7 +418,7 @@ def s9_backup_product(prs, n):
     return s
 
 
-def s10_backup_business(prs, n):
+def s11_backup_business(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     backup_header(s, n, "Basis risk and business in detail")
     bullets(s, MX, 1.6, W - 2 * MX, 5.4, [
@@ -429,7 +446,7 @@ def s10_backup_business(prs, n):
     return s
 
 
-def s11_backup_hardware(prs, n):
+def s12_backup_hardware(prs, n):
     """Hardware details (intervals, raw readings, job IDs, amplification, resources)."""
     s = prs.slides.add_slide(prs.slide_layouts[6])
     backup_header(s, n, "Hardware runs in detail")
@@ -481,8 +498,8 @@ def s11_backup_hardware(prs, n):
     return s
 
 
-SLIDES = [s1_hook, s2_gap, s3_product, s4_demo, s5_quantum, s6_honest, s7_business, s8_close,
-          s9_backup_product, s10_backup_business, s11_backup_hardware]
+SLIDES = [s1_hook, s2_gap, s3_product, s4_demo, s5_circuit, s6_quantum, s7_honest, s8_business, s9_close,
+          s10_backup_product, s11_backup_business, s12_backup_hardware]
 
 
 def build():

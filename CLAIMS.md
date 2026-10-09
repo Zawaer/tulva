@@ -507,3 +507,24 @@ an existing claim, read by deck/video/anim/export_data.py (which asserts the spo
   caught only 4–12 hits). But all three stay ~2–3× high: on Q50 the zero-calibration circuit does not capture all
   of the error (raw 0.66–0.72 % vs calibration 0.32–0.39 %), unlike IBM (+19 %) and IQM Garnet (+31 %).
   Not on the main slides (deck frozen); QA only.
+
+## Round-6 deck pass (Sat 10 Oct): new circuit slide 5; stage slides 1–9, backup 10–12
+Slide numbers in the sections above are from earlier rounds (old 5 → now 6, 6 → 7, 7 → 8, 8 → 9, backups 9–11 → 10–12).
+- **Slide 5 figure out/stage_qae_circuit.png** = the hardware circuit A3_kittila_ivalo_both (scripts/run_hw.py):
+  3 qubits (wet spring, river 1, river 2); A = RY(θw) + RY(θi) + CRY(φi) per river (src/tulva/quantum.a_operator,
+  3 RY + 2 CRY); marking = 1 CZ (mark_event "all"); one Grover step = CZ · A† · S0 · A (grover_circuit), run at
+  k = 0, 1, 2 and fitted by MLAE (no phase estimation). A† and S0 drawn as blocks. Target-instance probabilities
+  printed by the script: P(wet) 0.300, P(river | dry / wet) 0.0009 / 0.0645 · drawing · scripts/qae_circuit_figure.py
+  (Qiskit 'mpl', needs pylatexenc)
+- Slide 5 "Perfect simulator: exact 0.125 %, ≈2.5× tighter than Monte Carlo" = QAE on ideal simulator 0.125 %
+  ± 0.011 pp vs Monte Carlo ± 0.027 pp at the same 16,000 oracle queries (0.027 / 0.011 = 2.45) · qae-sim /
+  monte-carlo · scripts/qae_sim.py (line "P(Kittilä AND Ivalo both pass 1-in-50…)" above)
+- Slide 5 "Why quantum? 2× accuracy: sampling needs 4× the runs, QAE 2×" = textbook scaling (Monte Carlo error
+  ∝ 1/√N, ideal amplitude estimation ∝ 1/N; QA "Quantify the quantum advantage", scaling line above). Not reached by our
+  shallow k = 0–2 hardware runs (slide 7) · theory
+- Slide 3 bar relabelled "Standard assumption (regulator's average link)" = the former "0.27-correlation model"
+  1.11 % (one 0.27 correlation, mean of the 2027 Finnish 19-zone flood matrix); backup chart label "Standard
+  assumption (0.27)" · exact · out/pricing.json (Round-3 line above). Spoken "1.8 TIMES the regulator's standard
+  assumption" = 1.96 / 1.11 = 1.77×.
+- Slide 6 relabelled only ("On real chips, the snow effect still shows"; "Low-snow March" / "Snowy March"; "Exact" /
+  "IQM chip"): numbers unchanged, 3.05× chip vs 2.75× exact · qae-iqm / exact · out/bootstrap_ci.json (Round-5 line).

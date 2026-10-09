@@ -382,3 +382,25 @@ March is weak (policies are bought all year round); be able to say what "prepari
   that gain is lost; it needs error-corrected hardware." (CLAIMS: qae-sim, scripts/qae_sim.py)
 - **"Does the model forecast years ahead?"** "No, one spring at a time: the 1 March snow forecasts the coming spring's
   melt, March to June."
+
+## Deck round 6 (Sat) · new slide 5 "Our circuit: quantum amplitude estimation"
+- **"What exactly is your circuit?"** (Toivo, point at slide 5, ~20 s) "Three qubits: the wet spring and two
+  northern rivers. A is our flood model: one RY sets the chance of a wet spring; each river gets an RY plus a
+  controlled RY, so its flood chance depends on the spring. A CZ marks 'both rivers flood'. One Grover step is: mark,
+  undo A, reflect about zero, redo A. The method is quantum amplitude estimation in its maximum-likelihood form: we
+  run 0, 1 and 2 Grover steps, no phase estimation, and fit the probability from the counts. On hardware we add two
+  known-answer calibration circuits in the same job." (Figure: scripts/qae_circuit_figure.py; the circuit is
+  instance A3_kittila_ivalo_both of scripts/run_hw.py, gates from src/tulva/quantum.py.)
+- **"Why compare quantum to classical at all?"** "Because it's an honest experiment: the same probability problem,
+  solved both ways. Classical exact and Monte Carlo are the reference; they tell us whether the chip got it right,
+  where quantum stands today, and what has to improve, noise and depth, before it pays off."
+- **"Did you try other feature maps, embeddings or input scaling?"** "In amplitude estimation the encoding isn't a
+  free choice like in quantum machine learning. Each rotation angle is set exactly from a probability in our model,
+  2·arcsin(√p), so the amplitude IS the probability. Scaling it would change the answer. What we tuned instead was
+  calibration and circuit depth: how many Grover steps survive the noise."
+- **"Why quantum here?"** (spoken on slide 5) "Pricing rare floods means estimating tiny probabilities. For twice
+  the accuracy, sampling needs four times the runs; amplitude estimation only twice. That's the ideal scaling; our
+  shallow runs on today's chips don't reach it, which is why classical still wins today (slide 7)."
+- **"What is the 'standard assumption' on slide 3?"** "The 2027 Solvency II formula links Finnish flood zones with a
+  correlation matrix; its average is 0.27. We priced our cover with that one average link: 1.11 %. Our snow-aware
+  model gives 1.96 %, 1.8 times more."
