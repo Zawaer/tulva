@@ -234,3 +234,9 @@ correlation dropped), wet-spring qubit from the fitted P(W | s,t,r), five area q
   14-area loader (18 qubits) → 2005 replay (North snow top 15 %) · deck/video/record_demo.mjs
 - Slide 7 "fee per deal (€25k pilot)": the €25k pilot is the team assumption in the licence line above; the per-deal
   fee model replaces the per-insurer licence on the slide · assumption
+- **Realistic baseline (round 2 review, verified):** North "≥2 of 5 over 1-in-50", 2M-sample Monte Carlo of the Gaussian
+  copula: independence 0.38 %; **equicorrelation 0.27 (≈ mean of the regulator's 19-zone matrix inside Finland) 1.09 %**;
+  Tulva fitted (within-cluster corr 0.56) **1.98 %** → **≈1.8× under-priced vs regulator-style correlation**, ≈5× vs
+  independence. Snow conditioning then moves it ×3 within a season (high-snow 6.3 %) · monte-carlo
+- **Two-level (circuit) model vs continuous on the product trigger:** 1.10 % vs 1.98 % (−44 %); at 1-in-10 (≥4 of 14)
+  10.9 % vs 12.2 %. The circuit's model is a simplified version; prices come from the continuous classical model · exact
