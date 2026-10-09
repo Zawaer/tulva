@@ -126,3 +126,9 @@ Two-level model (circuit's own model), North loadings, 8,000 shots per circuit, 
 - 14-area loader at 1-in-50 (18 qubits, 44 CZ, 20,000 shots): P(≥2 areas) readout-corrected 16.0 % vs exact 4.8 %
   (independence 3.1 %); P(≥3) 4.6 % vs 0.8 %. At rare levels gate noise creates false triggers that swamp the true
   signal (at 1-in-10 the same circuit was close, see above) · qae-iqm (sampling) · loader-iqm-emerald-20261009T074104Z
+- **Rerun with side-by-side copies** (IQM Emerald, 10 copies of the 3-qubit circuit = 240,000 shots per instance; 6
+  copies of the 6-qubit k=0 circuit = 48,000): Kittilä + Ivalo low / normal / high snow, exact 0.070 / 0.125 /
+  0.193 % → noise-aware **0.082 / 0.166 / 0.249 %** (errors 0.012–0.056 pp, about half of the 1-copy run). **High-snow
+  vs low-snow risk ratio: exact 2.8×, hardware 3.0×.** Product "≥2 of 5 North", k=0 only: exact 1.10 % / 1.70 % →
+  1.84 % / 2.68 % (worse than the k=0,1 run: the ≈0 twin has no single-trigger states, so it under-calibrates the
+  false ≥2 counts) · qae-iqm (emerald) · product-iqm-emerald-20261009T075338Z

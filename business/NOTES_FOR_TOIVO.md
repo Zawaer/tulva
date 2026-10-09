@@ -41,3 +41,6 @@ Results logged in CLAIMS.md (section "IQM Emerald runs, 9 Oct"). Also ran `run_l
 at 1-in-50 the loader is swamped by noise (16 % vs 4.8 % exact for ≥2) — a clear "rare events need error correction"
 data point. Not yet in out/HARDWARE_RESULTS.md / charts; your call whether to add them.
 IQM venv on Windows: `.venv-iqm` (added to .gitignore).
+- Rerun 07:53Z with `--copies-a3 10 --copies-n5 6` (2q per copy unchanged, no SWAP overhead): A3 snow errors halved;
+  hardware high/low snow ratio 3.0× vs exact 2.8×. N5 k=0-only calibration is biased (zero twin has no 1-trigger
+  states); a twin with realistic single-trigger rates or readout mitigation would fix it. `--dry-run` prints gate counts.

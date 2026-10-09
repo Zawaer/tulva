@@ -3,10 +3,12 @@
     python scripts/run_product_hw.py --backend sim                                   # ideal check
     .venv-iqm/bin/python scripts/run_product_hw.py --backend iqm-fake                # IQM noise rehearsal
     IQM_TOKEN=... .venv-iqm/bin/python scripts/run_product_hw.py --backend iqm --iqm-name emerald
+    ... --copies-a3 10 --copies-n5 6     # side-by-side copies on disjoint qubits: N× the samples per job
 
 Instances (North cluster loadings from out/model_params.json, two-level model as in run_hw.py):
 * N5_north_atleast2of5_{clim,high}: the product trigger, "≥2 of 5 North gauges pass 1-in-50", without and
   with a top-15 % March snow outlook. 6 qubits; the ≥2-of-5 marker is a diagonal phase gate.
+  Default k=0 only: on IQM Emerald k=1 (~230 CZ) kept 12 % of the signal (9 Oct run).
 * A3_kittila_ivalo_both_{low,clim,high}: the 3-qubit instance under a bottom-15 % / no / top-15 % snow outlook.
   Same circuit shape in all three, only the rotation angles change, so the hardware sees the snow effect directly.
 
@@ -36,8 +38,11 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--backend", default="sim", choices=["sim", "iqm", "iqm-fake"])
 ap.add_argument("--iqm-name", default="emerald", help="IQM Resonance device, e.g. garnet (20q), emerald (54q)")
 ap.add_argument("--shots", type=int, default=4000)
-ap.add_argument("--ks-n5", default="0,1", help="Grover powers for the 6-qubit product instance")
+ap.add_argument("--ks-n5", default="0", help="Grover powers for the 6-qubit product instance (k=1 is ~230 CZ: noise)")
 ap.add_argument("--ks-a3", default="0,1,2", help="Grover powers for the 3-qubit snow instances")
+ap.add_argument("--copies-a3", type=int, default=1, help="side-by-side copies of each 3-qubit circuit")
+ap.add_argument("--copies-n5", type=int, default=1, help="side-by-side copies of each 6-qubit circuit")
+ap.add_argument("--dry-run", action="store_true", help="transpile and print gate counts per copy, do not run")
 ap.add_argument("--instances", default="all", help="comma-separated instance names, or 'all'")
 args = ap.parse_args()
 
@@ -103,6 +108,15 @@ def grover(A: QuantumCircuit, k: int, event: str) -> QuantumCircuit:
     return qc
 
 
+def widen(qc: QuantumCircuit, copies: int) -> QuantumCircuit:
+    """copies of qc on disjoint qubits; copy j's measured bits are clbits [j*nb, (j+1)*nb) (as in run_hw.py)."""
+    nq, nb = qc.num_qubits, qc.num_clbits
+    wide = QuantumCircuit(nq * copies, nb * copies, name=qc.name)
+    for j in range(copies):
+        wide.compose(qc, qubits=range(j * nq, (j + 1) * nq), clbits=range(j * nb, (j + 1) * nb), inplace=True)
+    return wide
+
+
 KS_N5 = [int(k) for k in args.ks_n5.split(",")]
 KS_A3 = [int(k) for k in args.ks_a3.split(",")]
 INSTANCES = {   # name: (n_areas, event, snow, ks)
@@ -132,17 +146,22 @@ def main():
             p_s, p_area = collapse(m)
             A = q.a_operator(p_s, p_area)
             for k in ks:
-                qc = grover(A, k, event)
+                copies = args.copies_n5 if n == 5 else args.copies_a3
+                qc = widen(grover(A, k, event), copies) if copies > 1 else grover(A, k, event)
                 qc.name = f"{name}|{role}|k{k}"
                 circuits.append(qc)
                 record["circuits"].append({"name": qc.name, "instance": name, "role": role, "k": k, "rep": 0,
-                                           "event": event, "n_areas": n, "snow": snow,
+                                           "event": event, "n_areas": n, "snow": snow, "copies": copies,
                                            "exact": exact(m, n, event)})
     tqcs = transpile(circuits, backend, optimization_level=3, seed_transpiler=11)
     for c, t in zip(record["circuits"], tqcs):
         ops = t.count_ops()
-        c["two_qubit_gates"] = int(sum(v for g, v in ops.items() if g in ("cz", "cx", "ecr")))
+        c["two_qubit_gates"] = int(sum(v for g, v in ops.items() if g in ("cz", "cx", "ecr"))) // c["copies"]  # per copy
         c["depth"] = int(t.depth())
+    if args.dry_run:
+        for c in record["circuits"]:
+            print(f"{c['name']:42s} copies {c['copies']:2d}  2q per copy {c['two_qubit_gates']}  depth {c['depth']}")
+        return
     out_dir = ROOT / "out" / "runs"
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / f"product-{args.backend}{'-' + args.iqm_name if args.backend == 'iqm' else ''}-{stamp}.json"
