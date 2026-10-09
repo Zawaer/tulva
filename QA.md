@@ -358,8 +358,8 @@ too few to confirm 'triples'. Run backwards, flagged springs paid 50 % versus 8 
   iqm-garnet-20261008T182125Z; tensor-product readout inversion with p01 from the zero circuit, p10 0–3.4 %.)
 
 
-## After the OP mentor talk (Fri evening)
-Mentor (OP, quantum/AI) feedback: lead the business case with "buy extra cover in time"; home-insurance pricing in
+## Mentor feedback (Fri evening)
+Feedback: lead the business case with "buy extra cover in time"; home-insurance pricing in
 March is weak (policies are bought all year round); be able to say what "preparing" means and how the automatic
 (parametric) payout differs from ordinary reinsurance; quantify the quantum gain.
 
