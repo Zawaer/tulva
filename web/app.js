@@ -308,6 +308,7 @@ const LOADER_SERIES = [
   { key: "exact", label: "Exact model", color: "#0a7fc2", mark: "line" },
   { key: "independent", label: "If independent", color: "#b4581b", mark: "dash" },
   { key: "observed", label: "Observed 1961–2025", color: "#1c2b40", mark: "ring" },
+  { key: "control", label: "Chip, independent circuit", color: "#c4307a", mark: "dash" },
 ];
 function loaderCard(L) {
   if (!L) return "";
@@ -325,6 +326,8 @@ function loaderCard(L) {
   g += `<path d="${path("independent")}" class="ln" stroke="#b4581b" stroke-dasharray="7 5"/>`;
   g += `<path d="${path("exact")}" class="ln" stroke="#0a7fc2"/>`;
   g += pts("observed").map(([a, b]) => `<circle cx="${a}" cy="${b}" r="7.5" fill="#fff" stroke="#1c2b40" stroke-width="2"/>`).join("");
+  if (L.control) g += `<path d="${path("control")}" class="ln" stroke="#c4307a" stroke-width="2.5" stroke-dasharray="3 5"/>`
+    + pts("control").map(([a, b]) => `<circle cx="${a}" cy="${b}" r="4" fill="#c4307a"/>`).join("");
   g += pts("hardware").map(([a, b]) => `<rect x="${a - 6}" y="${b - 6}" width="12" height="12" rx="2" fill="#c4307a" stroke="#fff" stroke-width="2"/>`).join("");
   // direct labels at the right end of the two lines
   const lastI = L.k.length - 1;
@@ -332,9 +335,12 @@ function loaderCard(L) {
   g += `<text x="${x(L.k[lastI]) - 4}" y="${y(L.exact[lastI]) + 19}" class="dl" text-anchor="end">exact model</text>`;
   // hover columns
   g += L.k.map((k, i) => `<rect class="hit" data-i="${i}" x="${x(k) - 40}" y="${m.t}" width="80" height="${H - m.t - m.b}"/>`).join("");
-  const legend = LOADER_SERIES.map((s) => `<span class="lg"><i class="mk ${s.mark}" style="--c:${s.color}"></i>${s.label}</span>`).join("");
+  const legend = LOADER_SERIES.filter((s) => L[s.key]).map((s) => `<span class="lg"><i class="mk ${s.mark}" style="--c:${s.color}"></i>${s.label}</span>`).join("");
   const job = L.jobs.join(", ");
-  const rows = L.k.map((k, i) => `<tr><td>≥${k}</td><td class="v hwv">${pct(L.hardware[i], 1)}</td><td class="v">${pct(L.exact[i], 1)}</td><td class="v">${pct(L.independent[i], L.independent[i] < 0.01 ? 2 : 1)}</td><td class="v">${L.observed[i] ? pct(L.observed[i], 1) : "0 %"}</td></tr>`).join("");
+  const rows = L.k.map((k, i) => `<tr><td>≥${k}</td><td class="v hwv">${pct(L.hardware[i], 1)}</td><td class="v">${pct(L.exact[i], 1)}</td><td class="v">${pct(L.independent[i], L.independent[i] < 0.01 ? 2 : 1)}</td><td class="v">${L.observed[i] ? pct(L.observed[i], 1) : "0 %"}</td>${L.control ? `<td class="v">${pct(L.control[i], 1)}</td>` : ""}</tr>`).join("");
+  const ki = (k) => L.k.indexOf(k);
+  const ratios = L.control ? [4, 5, 6].map((k) => L.hardware[ki(k)] / L.control[ki(k)]) : null;
+  const fmtR = (r) => (r < 2 ? r.toFixed(1) : Math.round(r)) + "×";
   return `<div class="panel loader">
     <div class="loader-head">
       <div><h3>All 14 areas on one quantum chip</h3>
@@ -351,9 +357,10 @@ function loaderCard(L) {
         <tr><th>k areas</th><th style="text-align:right">Hardware ${tag("qae-iqm", `IQM Emerald, job ${job}, ${L.shots.toLocaleString("en")} shots, readout-corrected (flip rates ${pct(L.readout_flip[0], 1)} / ${pct(L.readout_flip[1], 1)}). ${L.file}`)}</th>
           <th style="text-align:right">Exact ${tag("exact", "the circuit's two-level factor model, computed exactly")}</th>
           <th style="text-align:right">Indep. ${tag("exact", "each area 10 %/yr, independently")}</th>
-          <th style="text-align:right">Observed ${tag("data", "share of years 1961–2025, SYKE / SMHI spring peaks")}</th></tr>
+          <th style="text-align:right">Observed ${tag("data", "share of years 1961–2025, SYKE / SMHI spring peaks")}</th>
+          ${L.control ? `<th style="text-align:right">Chip, indep. ${tag("qae-iqm", `Control: the same 18-qubit, ${L.two_qubit_gates}-gate circuit with the correlations switched off, IQM Emerald, job ${L.control_jobs.join(", ")}, readout-corrected. ${L.control_file}`)}</th>` : ""}</tr>
         ${rows}</table>
-        <p class="honest">The chip reproduces the fat joint tail: ≥5 areas at once is ${Math.round(L.hardware[3] / L.independent[3])}× likelier than independence says, close to the exact model and to what Finland saw (1966, 1977, 1984, 2018, 2024). Sampling noise and gate errors lift the hardware a little above the model.</p>
+        <p class="honest">${ratios ? `On the same chip, the correlated model gives ${fmtR(Math.min(...ratios))}–${fmtR(Math.max(...ratios))} more multi-area floods (≥4 to ≥6 areas) than an identical independent circuit; noise inflates both. The correlation survives on hardware, weakened by noise.` : "Sampling noise and gate errors lift the hardware above the model."}</p>
       </div>
     </div>
   </div>`;
@@ -414,10 +421,10 @@ function renderReplay() {
       <span class="track" title="Line marks the 1-in-10 level (${lvl} m³/s)"><span class="fill" style="width:${w}%;background:${isOver ? col : col + "55"}"></span><span class="mark" style="left:50%"></span></span>
       <span class="num">${r == null ? "no data" : (r * 100).toFixed(0) + " %"}</span></div>`;
   });
-  const swe = APP.replay.swe_national_pct[y];
+  const sn = (APP.replay.swe_north_pct || {})[y];
   $("#replay-head").innerHTML = `<span class="big">${over} of ${have}</span> areas over their 1-in-10 level in spring ${y}
     ${tag("data", "Spring (Mar–Jun) peak daily discharge vs " + APP.replay.level_src)}<br>
-    <span class="cap">1 March snow, national index: ${swe != null ? ordinal(swe) + " percentile" : "–"} ${tag("data", "SYKE areal SWE")} · bars: peak as % of 1-in-10 level (line = 100 %)</span>`;
+    <span class="cap">1 March snow, North (Lapland): ${sn ? ordinal(sn.pct) + " percentile" + (sn.top15 ? " · <b>top 15 %</b>" : "") : "–"} ${tag("data", "SYKE areal SWE, North cluster index (4 Lapland catchments), percentile among 1961–2025; top 15 % as in out/snow_skill.json")} · bars: peak as % of 1-in-10 level (line = 100 %)</span>`;
   $("#replay-list").innerHTML = rows.join("");
 }
 

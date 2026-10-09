@@ -134,13 +134,13 @@ def p_atleast_tail(k: int, n: int, z: float, h: float, s: float, side: str, q: f
 
 def cluster_swe_index(swe_rows: list[dict], catchments: list[int]) -> dict[int, float]:
     """Mean normal score of 1 March SWE over the cluster's catchments, as in out/snow_skill.json."""
+    # Same as fit_dependence.py (model.normal_scores + nan-mean): missing years are skipped, not ranked top.
+    import pandas as pd
     years = [int(r["year"]) for r in swe_rows]
-    scores = np.zeros(len(years))
-    for c in catchments:
-        v = np.array([num(r[str(c)]) for r in swe_rows], float)
-        ranks = v.argsort().argsort() + 1
-        scores += norm.ppf(ranks / (len(v) + 1))
-    return dict(zip(years, scores / len(catchments)))
+    df = pd.DataFrame({c: [num(r[str(c)]) for r in swe_rows] for c in catchments}, index=years, dtype=float)
+    ns = pd.DataFrame(norm.ppf(df.rank() / (df.notna().sum() + 1)), index=df.index, columns=df.columns)
+    idx = ns.mean(axis=1, skipna=True).dropna()
+    return {int(y): float(v) for y, v in idx.items()}
 
 
 # ---------------------------------------------------------------- pricing.json (other agent) merge
@@ -237,6 +237,13 @@ def hardware_summary(runs: list[dict]) -> dict:
                   "exact": [r["p_at_least_k_exact"][k] for k in ks],
                   "independent": [r["p_at_least_k_independent"][k] for k in ks],
                   "observed": [obs[k - 1] for k in ks]}
+        # control: the identical circuit with the correlations switched off, same chip and gate count
+        cf = sorted((OUT / "runs").glob("loader-control-indep-iqm-emerald-*.json"))
+        if cf:
+            c = load(cf[-1])
+            loader["control"] = [c["p_at_least_k_readout_corrected"][k] for k in ks]
+            loader["control_file"] = f"out/runs/{cf[-1].name}"
+            loader["control_jobs"] = c["jobs"]
 
     qrisp = None
     qf = sorted((OUT / "runs").glob("qrisp_qae_iqm_*.json"))
@@ -247,6 +254,9 @@ def hardware_summary(runs: list[dict]) -> dict:
                  "exact": c["exact"], "shots_per_k": r["shots_per_k"],
                  "cz_by_k": [v["qrisp_iqm_pass_manager"]["cz"] for v in r["gate_counts_garnet"].values()]}
     return {"qae": qae, "loader": loader, "qrisp": qrisp}
+
+
+NORTH_CLUSTER = "North"
 
 
 def main() -> None:
@@ -328,6 +338,11 @@ def main() -> None:
     swe_nat = cluster_swe_index(swe, skill["clusters"]["National"]["swe_catchments"])
     nat_vals = np.array(list(swe_nat.values()))
     swe_pct = {str(y): round(float((nat_vals < v).sum() + 0.5) / len(nat_vals) * 100) for y, v in swe_nat.items()}
+    swe_north = cluster_swe_index(swe, skill["clusters"][NORTH_CLUSTER]["swe_catchments"])
+    north_vals = np.array(list(swe_north.values()))
+    north_top = set(skill["clusters"][NORTH_CLUSTER]["top_years"])
+    swe_north_pct = {str(y): {"pct": round(float((north_vals < v).sum() + 0.5) / len(north_vals) * 100),
+                              "top15": y in north_top} for y, v in swe_north.items()}
 
     runs = runs_summary()
     app = {
@@ -341,7 +356,7 @@ def main() -> None:
         "clusters": clusters,
         "joint_counts": {"observed_years_ge4": counts["observed_years"].get("4", []),
                          "max_year": counts["max_observed_year"], "max_count": counts["max_observed_count"]},
-        "replay": {"peaks": replay, "swe_national_pct": swe_pct, "src": "data",
+        "replay": {"peaks": replay, "swe_national_pct": swe_pct, "swe_north_pct": swe_north_pct, "src": "data",
                    "level_src": "the gauge's empirical 1-in-10 level (top 10 % of its 1961–2025 spring peaks), as in out/joint_counts.json"},
         "qae": qae,
         "runs": runs,

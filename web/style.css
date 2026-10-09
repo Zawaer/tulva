@@ -123,7 +123,7 @@ table.cmp tr.hw b { color: var(--navy); font-size: 16px; }
 .loader-head { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
 .loader-head h3 { font-size: 22px; }
 .loader-head .sub { max-width: 620px; font-size: 14px; }
-.loader-body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 6px; }
+.loader-body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 6px; }
 .lchart { position: relative; }
 .lchart svg { width: 100%; height: auto; display: block; }
 .lchart .grid { stroke: var(--line); stroke-width: 1; }
@@ -144,7 +144,7 @@ table.cmp tr.hw b { color: var(--navy); font-size: 16px; }
   box-shadow: 0 6px 20px rgba(11,31,58,.12); padding: 10px 12px; font-size: 13px; min-width: 230px; pointer-events: none; }
 .ltip div { display: flex; align-items: center; gap: 7px; margin-top: 4px; }
 .ltip span { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 600; }
-.ltable table.cmp { font-size: 15px; }
+.ltable table.cmp { font-size: 14px; }
 .ltable td.hwv { font-weight: 700; color: var(--navy); }
 
 /* replay */
@@ -186,4 +186,4 @@ table.cmp tr.hw b { color: var(--navy); font-size: 16px; }
 .view .mkt { text-align: left; }
 .view .vpr.stg b { font-size: 16px; }
 
-.ltable th { white-space: nowrap; }
+.ltable th { white-space: normal; letter-spacing: 0; font-size: 11px; vertical-align: bottom; }
