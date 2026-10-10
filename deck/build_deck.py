@@ -66,8 +66,8 @@ def notes_from_pitch() -> dict[int, str]:
             qa.setdefault(cur, []).append(line.strip())
         else:
             in_qa = False
-    return {k: v[0] + "\n" + " ".join(v[1:]) + ("\n\n" + " ".join(qa[k]) if k in qa else "")
-            for k, v in notes.items()}
+    # Spoken lines only, so the notes can be memorised; Q&A details live in QA.md.
+    return {k: v[0] + "\n" + " ".join(v[1:]) for k, v in notes.items()}
 
 
 def text(slide, x, y, w, h, runs, size=18, color=NAVY, bold=False, align=PP_ALIGN.LEFT,
