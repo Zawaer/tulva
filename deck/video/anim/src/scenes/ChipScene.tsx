@@ -1,6 +1,6 @@
 import React from "react";
 import data from "../data.json";
-import { C, ramp, word } from "../theme";
+import { BEAT, C, ramp, word } from "../theme";
 
 // Beat 3: IQM Emerald vs exact, the same bars as slide 6 (out/bootstrap_ci.json via export_data.py): chance that both
 // rivers of the two-river North pair pass their 1-in-50 level in one spring, low-snow vs snowy March; chip bars are the
@@ -16,8 +16,9 @@ const GROUPS = [{ key: "low" as const, label: "Low-snow March", cx: 400 }, { key
 const pc = (v: number) => `${(100 * v).toFixed(3)} %`;
 
 export const ChipScene: React.FC<{ t: number }> = ({ t }) => {
-  const tNow = word(3, "now"), tBlue = word(3, "blue"), tPurple = word(3, "purple");
-  const tSnowy = word(3, "snowy"), tThree = word(3, "three"), tTwo = word(3, "two");
+  const b = BEAT.chip;
+  const tNow = word(b, "now"), tBlue = word(b, "blue"), tPurple = word(b, "purple");
+  const tSnowy = word(b, "snowy"), tThree = word(b, "three"), tTwo = word(b, "two");
   const head = ramp(t, tNow - 0.6, tNow - 0.1);
   const grow = (t0: number, k: number) => ramp(t, t0 + 0.12 * k, t0 + 0.12 * k + 0.6, "out");
   const ci = ramp(t, tPurple + 0.7, tPurple + 1.1);

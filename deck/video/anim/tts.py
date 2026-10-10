@@ -10,7 +10,7 @@ A line is one sentence of narration.md (consecutive `>` caption lines up to a fu
 own with the neighbouring sentences as context, saved as lines/NN_slug.mp3 with its character alignment in
 lines/NN_slug.json, so a single line can be redone. Foreign words in SPLICE are also generated inside a sentence of
 their own language, cut out by the alignment and spliced into the English line (lines/NN_slug.fi.mp3); build uses
-the spliced file only for line numbers in USE_SPLICE (pick by ear). Needs ELEVENLABS_API_KEY in the repo's
+the spliced file for the words in USE_SPLICE (pick by ear). Needs ELEVENLABS_API_KEY in the repo's
 git-ignored .env.local or .env (never printed), and ffmpeg.
 """
 from __future__ import annotations
@@ -40,8 +40,8 @@ MODEL = "eleven_multilingual_v2"
 SETTINGS = {"stability": 0.55, "similarity_boost": 0.8, "style": 0.25, "speed": 1.12}
 SPLICE = {"Tulva": ("fi", "Tämä on tulva.")}   # word -> (language tag, native carrier sentence; lower case,
 #                                                capitalised "Tulva" is read as the name "Tuula")
-USE_SPLICE: set[int] = {10}                    # line numbers whose spliced version goes into the build
-#                                                (10 "Tulva.": STT hears the English take as "Tolva")
+USE_SPLICE: set[str] = {"Tulva"}               # words whose spliced version goes into the build
+#                                                ("Tulva.": STT hears the English take as "Tolva")
 LEAD, SENT_GAP, BEAT_GAP, TAIL = 0.7, 0.7, 1.7, 2.5   # s of silence: start, between sentences, between beats, end
 PRE, POST = 0.06, 0.22          # s kept before the first / after the last sound of a line when joining
 
@@ -234,7 +234,8 @@ def cmd_build(beats: list[dict], sents: list[dict], dry: bool) -> None:
     placed, t, inputs = [], LEAD, []
     WORK.mkdir(exist_ok=True)
     for k, s in enumerate(sents):
-        stem = s["stem"] + (".fi" if s["n"] in USE_SPLICE else "")
+        tag = next((SPLICE[w][0] for w in USE_SPLICE if re.search(rf"\b{re.escape(w)}\b", s["text"])), None)
+        stem = s["stem"] + (f".{tag}" if tag else "")
         mp3, meta = LINES / f"{stem}.mp3", json.loads((LINES / f"{stem}.json").read_text())
         if meta["text"] != s["text"] or meta.get("hash") != digest(s["text"]):
             raise SystemExit(f"{mp3.name} is out of date: run `tts.py lines` first")

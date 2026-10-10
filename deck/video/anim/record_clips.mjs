@@ -14,9 +14,9 @@ const HERE = new URL("./", import.meta.url).pathname;
 const APP_URL = process.argv[2] || "http://127.0.0.1:3141";
 const FPS = 30, VW = 1280, VH = 720, DSF = 2.5;
 const T = JSON.parse(readFileSync(HERE + "src/timing.json", "utf8"));
-const beat = T.beats.find((b) => b.n === 2);
-const word = (w) => T.words.find((x) => x.beat === 1 && x.w.toLowerCase().startsWith(w)).start;
-const PRE = 0.5, POST = 0.5;                       // extra footage for the cross-fades
+const beat = T.beats.find((b) => b.title.startsWith("App"));   // the narration.md beat this clip plays under
+const word = (w) => T.words.find((x) => x.beat === beat.n - 1 && x.w.toLowerCase().startsWith(w)).start;
+const PRE = Math.min(0.5, beat.start), POST = 0.5;  // extra footage for the cross-fades (none before 0 s)
 const t0 = beat.start - PRE, t1 = beat.end + POST;  // absolute video times covered by the clip
 const cue = {
   scroll: [word("snow") - 0.1, word("price") + 0.35],   // "Our app turns that snow into a price."

@@ -1,16 +1,16 @@
 import React from "react";
 import timing from "../timing.json";
-import { C, mix, ramp, word } from "../theme";
+import { BEAT, C, mix, ramp, word } from "../theme";
 
 // Beat 5: "Tulva. The snow warns two months early." The words appear with the voice (no caption on this card).
-const TAG = timing.words.filter((w) => w.beat === 4).slice(1);
+const TAG = timing.words.filter((w) => w.beat === BEAT.end - 1).slice(1);
 const FLAKES = Array.from({ length: 70 }, (_, i) => {
   const r = (k: number) => ((Math.sin(i * 17.123 + k * 61.77) * 43758.5453) % 1 + 1) % 1;
   return { x: r(1) * 1920, y: r(2) * 1080, s: 1.5 + r(3) * 3, v: 14 + r(4) * 30, ph: r(5) * 6.28 };
 });
 
 export const EndCard: React.FC<{ t: number }> = ({ t }) => {
-  const tName = word(5, "tulva");
+  const tName = word(BEAT.end, "tulva");
   const logo = ramp(t, tName - 0.35, tName + 0.25, "out");
   return (
     <div style={{ position: "absolute", inset: 0, background: `radial-gradient(1200px 700px at 50% 45%, ${C.navy3}, ${C.navy})` }}>

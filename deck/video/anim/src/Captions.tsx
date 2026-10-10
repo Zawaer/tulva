@@ -1,10 +1,10 @@
 import React from "react";
-import { beat, CAPTION_TOP, C, H, ramp } from "./theme";
+import { BEAT, beat, CAPTION_TOP, C, H, ramp } from "./theme";
 import timing from "./timing.json";
 
 // Burned-in captions = the narration.md caption lines, timed to the voice. The end card (beat 5) shows its words
 // on screen instead.
-const CHUNKS = timing.chunks.filter((c) => c.beat < 4);
+const CHUNKS = timing.chunks.filter((c) => c.beat !== BEAT.end - 1);
 const HOLD = 0.9; // s a caption may stay after its last word, unless the next one starts or its scene ends
 const until = (k: number) => {
   const c = CHUNKS[k], next = CHUNKS[k + 1];

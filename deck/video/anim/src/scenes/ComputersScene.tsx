@@ -1,6 +1,6 @@
 import React from "react";
 import data from "../data.json";
-import { C, mix, ramp, word } from "../theme";
+import { BEAT, C, mix, ramp, word } from "../theme";
 
 // Beat 4: the four quantum computers the two-river core ran on (CLAIMS.md "VTT Q50": Q50 counts as run, not as a
 // successful estimate). Each card lands on its maker's name in the voice.
@@ -18,7 +18,8 @@ const Chip: React.FC<{ color: string }> = ({ color }) => (
 );
 
 export const ComputersScene: React.FC<{ t: number }> = ({ t }) => {
-  const cues = [word(4, "ibm"), word(4, "iqm"), word(4, "iqm") + 0.3, word(4, "vtt")];
+  const b = BEAT.computers;
+  const cues = [word(b, "ibm"), word(b, "iqm"), word(b, "iqm") + 0.3, word(b, "vtt")];
   const colors = [C.pale, "#7fd6c9", "#7fd6c9", "#ff8a80"];
   const head = ramp(t, cues[0] - 1.25, cues[0] - 0.75);
   return (

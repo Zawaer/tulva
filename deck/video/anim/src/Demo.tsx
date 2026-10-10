@@ -6,11 +6,10 @@ import { AppScene } from "./scenes/AppScene";
 import { ChipScene } from "./scenes/ChipScene";
 import { ComputersScene } from "./scenes/ComputersScene";
 import { EndCard } from "./scenes/EndCard";
-import { MapScene } from "./scenes/MapScene";
-import { beat, C, FONT, FPS, mix, ramp } from "./theme";
+import { BEAT, beat, C, FONT, FPS, mix, ramp } from "./theme";
 
 const SCENES: [number, React.FC<{ t: number }>][] = [
-  [1, MapScene], [2, AppScene], [3, ChipScene], [4, ComputersScene], [5, EndCard],
+  [BEAT.app, AppScene], [BEAT.chip, ChipScene], [BEAT.computers, ComputersScene], [BEAT.end, EndCard],
 ];
 // Scene changes dip through the navy background: the old scene fades out over [b - X, b + 0.05], the new one fades
 // in over [b - 0.05, b + X] (b = the beat boundary, in the pause between sentences).
@@ -25,7 +24,7 @@ export const Demo: React.FC = () => {
         const b = beat(n);
         if (t < b.start - 0.05 || t > b.end + 0.05) return null;
         const last = n === SCENES[SCENES.length - 1][0];
-        const p = (n === 1 ? ramp(t, 0, 0.35) : ramp(t, b.start - 0.05, b.start + X)) *
+        const p = (n === SCENES[0][0] ? ramp(t, 0, 0.35) : ramp(t, b.start - 0.05, b.start + X)) *
           (last ? 1 : 1 - ramp(t, b.end - X, b.end + 0.05));
         return (
           <AbsoluteFill key={n} style={{ opacity: p, transform: `scale(${mix(1.015, 1, p)})` }}>

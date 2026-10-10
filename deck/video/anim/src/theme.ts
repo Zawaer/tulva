@@ -27,6 +27,9 @@ export const mix = (a: number, b: number, p: number) => a + (b - a) * p;
 
 export type Beat = (typeof timing.beats)[number];
 export const beat = (n: number): Beat => timing.beats.find((b) => b.n === n)!;
+const beatNo = (title: string) => timing.beats.find((b) => b.title.startsWith(title))!.n;
+/** Beat numbers by narration.md heading, so scenes survive beats being added or removed. */
+export const BEAT = { app: beatNo("App"), chip: beatNo("Chip"), computers: beatNo("Computers"), end: beatNo("End card") };
 /** Start time of the k-th word in beat n that begins with `w` (case-insensitive). */
 export const word = (n: number, w: string, k = 0): number => {
   const hits = timing.words.filter((x) => x.beat === n - 1 && x.w.toLowerCase().startsWith(w.toLowerCase()));

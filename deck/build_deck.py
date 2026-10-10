@@ -4,8 +4,9 @@ Rerun after the charts in out/ change:
     .venv/bin/python deck/build_deck.py            # pptx only
     .venv/bin/python deck/build_deck.py --pdf      # + PDF and PNG previews (needs LibreOffice + pdftoppm)
 
-Every number on a slide comes from CLAIMS.md. Slides 1-9 are the stage deck (one idea each, big type); caveats,
-intervals and sources are on the backup slides 10-12 (Q&A only) and in QA.md.
+Every number on a slide comes from CLAIMS.md. Slides 1-8 are the whole deck (one idea each, big type); caveats,
+intervals and sources are in QA.md. Order: hook, demo video, gap, product, circuit, classical still wins, who pays,
+close.
 Speaker notes are the `>` lines of deck/PITCH.md for the matching slide number.
 """
 from __future__ import annotations
@@ -29,9 +30,9 @@ OUT = ROOT / "out"
 DECK = ROOT / "deck"
 ASSETS = DECK / "assets"  # generated crops, rebuilt every run
 PPTX = DECK / "Tulva_QxF2026.pptx"
-VIDEO = DECK / "video" / "tulva_demo_anim.mp4"  # slide 4: 45 s demo with voiceover (deck/video/anim/);
+VIDEO = DECK / "video" / "tulva_demo_anim.mp4"  # slide 2: 35 s demo with voiceover (deck/video/anim/);
 #                                               deck/video/tulva_demo.mp4 (silent, 37 s) is kept as a backup
-POSTER_AT = 9.6  # s into the video: 2005 map with the four flooded rivers and the March snow meter
+POSTER_AT = 1.2  # s into the video: the live app, "Our app turns that snow into a price."
 
 NAVY = RGBColor(0x0B, 0x1F, 0x3A)
 BLUE = RGBColor(0x1F, 0x6F, 0xEB)
@@ -173,7 +174,7 @@ def crops():
 
 
 # --------------------------------------------------------------------------- slides
-# Stage deck (slides 1-9): one idea per slide, title <= 8 words, body >= 28 pt, big numbers >= 60 pt.
+# Stage deck (slides 1-8): one idea per slide, title <= 8 words, body >= 28 pt, big numbers >= 60 pt.
 # Caveats, intervals and sources live on the backup slides (10-12) and in QA.md.
 TITLE_SIZE = 40
 BODY = 28
@@ -209,7 +210,7 @@ def s1_hook(prs, n):
     return s
 
 
-def s2_gap(prs, n):
+def s3_gap(prs, n):
     """Observed 15.4 % vs chance 3.9 % of springs with >=4 of 14 areas over 1-in-10 (CLAIMS.md, slide 2 lines)."""
     s = prs.slides.add_slide(prs.slide_layouts[6])
     title(s, n, "Rivers flood together, not one at a time")
@@ -231,7 +232,7 @@ def s2_gap(prs, n):
     return s
 
 
-def s3_product(prs, n):
+def s4_product(prs, n):
     """North '>=2 of 5 over 1-in-50' expected loss: standard assumption (one 0.27 correlation, the mean of the 2027
     19-zone matrix) 1.11 %, Tulva 1.96 %, snowy March 6.4 %."""
     s = prs.slides.add_slide(prs.slide_layouts[6])
@@ -264,7 +265,7 @@ def poster_frame() -> Path:
     return out
 
 
-def s4_demo(prs, n):
+def s2_demo(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     rect(s, 0, 0, W, H, NAVY)
     fh = 5.85
@@ -276,7 +277,7 @@ def s4_demo(prs, n):
     else:  # placeholder if the recording is missing
         rect(s, fx, fy, fw, fh, RGBColor(0x14, 0x2B, 0x4D), line=PALE_BLUE)
         picture(s, ASSETS / "app_product.png", fx + 0.15, fy + 0.15, fw - 0.3, fh - 0.3)
-        print(f"warning: {VIDEO.relative_to(ROOT)} missing, slide 4 has a placeholder")
+        print(f"warning: {VIDEO.relative_to(ROOT)} missing, the video slide has a placeholder")
     footer(s, n, dark=True)
     return s
 
@@ -294,37 +295,7 @@ def s5_circuit(prs, n):
     return s
 
 
-def s6_quantum(prs, n):
-    """IQM Emerald, two-river North-cluster pair, both over 1-in-50: exact vs calibrated chip (out/bootstrap_ci.json)."""
-    import json
-    b = json.loads((OUT / "bootstrap_ci.json").read_text())
-    s = prs.slides.add_slide(prs.slide_layouts[6])
-    title(s, n, "On real chips, the snow effect still shows")
-    # legend
-    for i, (lab, c) in enumerate([("Exact", BLUE), ("IQM chip", PURPLE)]):
-        x = MX + i * 2.6
-        rect(s, x, 1.62, 0.32, 0.32, c)
-        text(s, x + 0.45, 1.5, 2.0, 0.55, lab, size=BODY, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
-    base, top, bw = 5.75, 2.35, 1.25
-    vmax = 100 * b["emerald snow high"]["estimate"]
-    for gx, lab, key in [(0.9, "Low-snow March", "emerald snow low"), (4.3, "Snowy March", "emerald snow high")]:
-        for j, (v, c) in enumerate([(100 * b[key]["exact"], BLUE), (100 * b[key]["estimate"], PURPLE)]):
-            h = (base - top) * v / vmax
-            rect(s, gx + j * (bw + 0.08), base - h, bw, h, c)
-        text(s, gx - 0.3, base + 0.1, 2 * bw + 0.68, 0.5, lab, size=BODY, color=NAVY, align=PP_ALIGN.CENTER)
-    rect(s, 0.7, base, 6.6, 0.02, LINE)
-    x = 8.0
-    text(s, x, 1.6, 4.8, 0.5, "Snowy vs low-snow March", size=BODY, color=GREY)
-    for y, big, lab, c in [(2.25, "3.05×", "on chip", PURPLE), (3.55, "2.75×", "exact", BLUE)]:
-        text(s, x, y, 3.1, 1.1, big, size=72, bold=True, color=c, anchor=MSO_ANCHOR.MIDDLE)
-        text(s, x + 3.15, y, 1.7, 1.1, lab, size=BODY, color=NAVY, anchor=MSO_ANCHOR.MIDDLE)
-    rect(s, x, 5.05, 4.73, 0.02, LINE)
-    text(s, x, 5.2, 4.8, 0.5, "Ran on", size=BODY, color=GREY)
-    text(s, x, 5.7, 4.8, 0.5, "IBM · IQM · VTT Q50", size=BODY, bold=True, color=NAVY)
-    return s
-
-
-def s7_honest(prs, n):
+def s6_honest(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     title(s, n, "Classical still wins today")
     picture(s, OUT / "stage_scaling.png", MX, 1.55, 8.2, 4.9)  # scripts/pitch_charts.py
@@ -336,7 +307,7 @@ def s7_honest(prs, n):
     return s
 
 
-def s8_business(prs, n):
+def s7_business(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     title(s, n, "Who pays")
     # money flows FROM the insurer: licence to Tulva (left), premium to the reinsurer (right)
@@ -361,7 +332,7 @@ def s8_business(prs, n):
     return s
 
 
-def s9_close(prs, n):
+def s8_close(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     rect(s, 0, 0, W, H, NAVY)
     title(s, n, "Built this weekend", dark=True)
@@ -498,7 +469,7 @@ def s12_backup_hardware(prs, n):
 
 
 # Stage deck only. The backup slides (s10-s12) are kept as functions but not built: their details are in QA.md.
-SLIDES = [s1_hook, s2_gap, s3_product, s4_demo, s5_circuit, s6_quantum, s7_honest, s8_business, s9_close]
+SLIDES = [s1_hook, s2_demo, s3_gap, s4_product, s5_circuit, s6_honest, s7_business, s8_close]
 
 
 def build():

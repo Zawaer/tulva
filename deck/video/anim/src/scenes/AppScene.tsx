@@ -1,7 +1,7 @@
 import React from "react";
 import { OffthreadVideo, Sequence, staticFile } from "remotion";
 import clips from "../clips.json";
-import { C, FPS, mix, ramp, word } from "../theme";
+import { BEAT, C, FPS, mix, ramp, word } from "../theme";
 
 // Beat 2: the real web app (record_clips.mjs). Scroll to the March snow outlook, click "High snow", then zoom into
 // the North tile while the voice says "from two to six point four percent".
@@ -23,7 +23,7 @@ export const AppScene: React.FC<{ t: number }> = ({ t }) => {
   const fx = mix(VW / 2, tile.x + tile.w / 2, zoom), fy = mix(VH / 2, tile.y + tile.h / 2 - 10, zoom);
   const cx = Math.min(Math.max(fx, VW / 2 / z), VW - VW / 2 / z);
   const cy = Math.min(Math.max(fy, VH / 2 / z), VH - VH / 2 / z);
-  const tTwo = word(2, "two"), tSix = word(2, "six");
+  const tTwo = word(BEAT.app, "two"), tSix = word(BEAT.app, "six");
   const hlNo = ramp(t, tTwo - 0.1, tTwo + 0.15) * (1 - ramp(t, tSix - 0.1, tSix + 0.1));
   const hlSnow = ramp(t, tSix - 0.1, tSix + 0.15);
   const ring = ramp(t, tSix, tSix + 0.5);

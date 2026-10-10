@@ -482,26 +482,22 @@ No new numbers; every on-slide number is one already logged above. Wording mappi
   slide-7 revenue line above · assumption. Premium per €10M layer, back-test years, why now, market size: backup 10.
 - Slide 8 "Runs on 4 quantum chips" = IBM Marrakesh, IQM Garnet, IQM Emerald, VTT Q50.
 
-## Demo video with voiceover (Sat 10 Oct, slide 4) · deck/video/anim/ → deck/video/tulva_demo_anim.mp4
-45.00 s, ElevenLabs voiceover (deck/video/anim/narration.md, voice "Protégé narrator (clone)") + burned-in captions;
-embedded on slide 4 (the silent 37 s deck/video/tulva_demo.mp4 is kept as a backup). No new numbers; each one below is
-an existing claim, read by deck/video/anim/export_data.py (which asserts the spoken values) or shown live in the app.
-- Map, 2005: "four Lapland rivers hit flood levels together" = 4 of 14 areas over their empirical 1-in-10 level (Ivalo
-  142 %, Kittilä 124 %, Rovaniemi 112 %, Tornio 101 % of it); "two months earlier, the March snow was in its top 15 %" =
-  North 1 March snow 87th percentile; fine print "back-test, not a forecast made in 2005"; two months = 1 March → May
-  peak · data · web/data/app.json (slide-1 / "Pitch hook" / 2005-replay lines above)
+## Demo video with voiceover (Sat 10 Oct, slide 2) · deck/video/anim/ → deck/video/tulva_demo_anim.mp4
+34.63 s, ElevenLabs voiceover (deck/video/anim/narration.md, voice "Protégé narrator (clone)") + burned-in captions;
+embedded on slide 2, right after the hook (the silent 37 s deck/video/tulva_demo.mp4 is kept as a backup). The 2005 map
+beat was removed (the hook says it). No new numbers; each one below is an existing claim, read by
+deck/video/anim/export_data.py (which asserts them) or shown live in the app.
 - App recording: North "≥2 of 5 over 1-in-50", no outlook 2.0 % (1.96 %) → high-snow March 6.4 %; spoken "from about
   two to six point four percent" · exact · the live app (pricing / round-3 lines above)
-- Chip (bars as on slide 6, replacing the earlier shot grid): chance both rivers of the two-river North pair pass
-  their 1-in-50 level in one spring, low-snow March exact 0.070 % vs IQM Emerald 0.082 % (90 % CI 0.069–0.095 %),
-  snowy March 0.193 % vs 0.249 % (0.235–0.262 %); "snowy versus low-snow March: about three times the risk on the
-  chip, 2.75 exact" = calibrated 3.05× (90 % CI 2.6–3.6, 240,000 shots per case) vs exact 2.75× · qae-iqm / exact ·
-  out/bootstrap_ci.json ("Review fixes" and round-5 lines above)
+- Chip (bars, as the former chip slide): chance both rivers of the two-river North pair pass their 1-in-50 level in
+  one spring, low-snow March exact 0.070 % vs IQM Emerald 0.082 % (90 % CI 0.069–0.095 %), snowy March 0.193 % vs
+  0.249 % (0.235–0.262 %); "snowy versus low-snow March: about three times the risk on the chip, 2.75 exact" =
+  calibrated 3.05× (90 % CI 2.6–3.6, 240,000 shots per case) vs exact 2.75× · qae-iqm / exact · out/bootstrap_ci.json
+  ("Review fixes" and round-5 lines above)
 - "We ran it on IBM, IQM and Finland's VTT Q50" = IBM Marrakesh, IQM Garnet, IQM Emerald, VTT Q50 (Q50 run, not a
   successful estimate; card fine print "checked against exact classical values · classical computers still win today ·
   no quantum advantage claimed") · VTT Q50 section above
-- PITCH §6 (spoken) "On the IQM chip, the snow signal SURVIVES the noise" = the Emerald snow-ratio 90 % interval
-  2.6–3.6 contains the exact 2.75× ("Review fixes" line above)
+- End card "The snow warns two months early" = 1 March → May peak ≈ 2–2.5 months ("Pitch hook" above)
 
 ### VTT Q50 follow-up, 4-gate test with 10× shots (Fri 9 Oct ~17:26 UTC, run by Claude over SSH; mentor's suggestion)
 - Same two-river North-cluster pair, k = 0 only (4 two-qubit gates), 20,000 shots per circuit, 3 repeats ·

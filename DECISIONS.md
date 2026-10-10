@@ -67,3 +67,7 @@ Append one line per decision: date time · who · decision · why.
   with the chip's 90 % intervals) instead of the 8,000-shot grid; voice: "Now a real quantum computer: IQM's Emerald.
   Blue is exact, purple is the chip." Video 45.0 s, keyframe every second (clean pausing/scrubbing in PowerPoint). ·
   Mentor feedback: a bar chart reads better than the grid.
+- 2026-10-10 · Toivo · Slide order: hook, demo video, gap, product, circuit, classical still wins, who pays, close
+  (8 slides). The video plays right after the hook ("…a PRICE. Here's how."), without its 2005 map beat (34.6 s); the
+  chip bar-chart slide is removed (the video shows the same bars) and so is its spoken line; the circuit slide opens
+  "Here's the quantum part you just saw:". 231 live words: ≈2:33 at 120 wpm, ≈2:44 at 110 wpm.
