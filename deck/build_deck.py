@@ -256,8 +256,9 @@ def s4_product(prs, n):
 
 
 
-def autoplay(slide, spid: int) -> None:
-    """Make the embedded video start automatically when the slide appears (PowerPoint 'Start: Automatically')."""
+def autoplay(slide, spid: int, dur_ms: int) -> None:
+    """Make the embedded video start automatically when the slide appears (PowerPoint 'Start: Automatically'), at full
+    volume (not muted). Mirrors PowerPoint's own XML: the play command lasts the length of the video."""
     from lxml import etree
     ns = "http://schemas.openxmlformats.org/presentationml/2006/main"
     xml = (f'<p:timing xmlns:p="{ns}"><p:tnLst><p:par><p:cTn id="1" dur="indefinite" restart="never" nodeType="tmRoot">'
@@ -267,12 +268,13 @@ def autoplay(slide, spid: int) -> None:
            '<p:par><p:cTn id="4" fill="hold"><p:stCondLst><p:cond delay="0"/></p:stCondLst><p:childTnLst>'
            '<p:par><p:cTn id="5" presetID="1" presetClass="mediacall" presetSubtype="0" fill="hold" '
            'nodeType="afterEffect"><p:stCondLst><p:cond delay="0"/></p:stCondLst><p:childTnLst>'
-           '<p:cmd type="call" cmd="playFrom(0.0)"><p:cBhvr><p:cTn id="6" dur="1" fill="hold"/>'
+           '<p:cmd type="call" cmd="playFrom(0.0)"><p:cBhvr>'
+           f'<p:cTn id="6" dur="{dur_ms}" fill="hold"/>'
            f'<p:tgtEl><p:spTgt spid="{spid}"/></p:tgtEl></p:cBhvr></p:cmd></p:childTnLst></p:cTn></p:par>'
            '</p:childTnLst></p:cTn></p:par></p:childTnLst></p:cTn></p:par></p:childTnLst></p:cTn>'
            '<p:prevCondLst><p:cond evt="onPrev" delay="0"><p:tgtEl><p:sldTgt/></p:tgtEl></p:cond></p:prevCondLst>'
            '<p:nextCondLst><p:cond evt="onNext" delay="0"><p:tgtEl><p:sldTgt/></p:tgtEl></p:cond></p:nextCondLst>'
-           '</p:seq><p:video><p:cMediaNode vol="80000"><p:cTn id="7" fill="hold" display="0"><p:stCondLst>'
+           '</p:seq><p:video><p:cMediaNode vol="100000"><p:cTn id="7" fill="hold" display="0"><p:stCondLst>'
            f'<p:cond delay="indefinite"/></p:stCondLst></p:cTn><p:tgtEl><p:spTgt spid="{spid}"/></p:tgtEl>'
            '</p:cMediaNode></p:video></p:childTnLst></p:cTn></p:par></p:tnLst></p:timing>')
     sld = slide._element
@@ -304,7 +306,8 @@ def s2_demo(prs, n):
     if VIDEO.exists():
         movie = s.shapes.add_movie(str(VIDEO), Inches(fx), Inches(fy), Inches(fw), Inches(fh),
                                    poster_frame_image=str(poster_frame()), mime_type="video/mp4")
-        autoplay(s, movie.shape_id)
+        import imageio_ffmpeg
+        autoplay(s, movie.shape_id, round(1000 * imageio_ffmpeg.count_frames_and_secs(str(VIDEO))[1]))
     else:  # placeholder if the recording is missing
         rect(s, fx, fy, fw, fh, RGBColor(0x14, 0x2B, 0x4D), line=PALE_BLUE)
         picture(s, ASSETS / "app_product.png", fx + 0.15, fy + 0.15, fw - 0.3, fh - 0.3)
