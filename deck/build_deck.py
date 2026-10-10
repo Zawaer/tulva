@@ -250,7 +250,7 @@ def s4_product(prs, n):
     rect(s, 9.0, 1.65, 3.73, 4.4, LIGHT)
     text(s, 9.0, 1.95, 3.73, 2.0, "×3", size=130, bold=True, color=RED, align=PP_ALIGN.CENTER,
          anchor=MSO_ANCHOR.MIDDLE)
-    text(s, 9.2, 4.1, 3.33, 1.5, "expected loss after a snowy March", size=BODY, bold=True, color=NAVY,
+    text(s, 9.2, 4.1, 3.33, 1.5, "chance of a big joint flood after a snowy March", size=BODY, bold=True, color=NAVY,
          align=PP_ALIGN.CENTER)
     return s
 
