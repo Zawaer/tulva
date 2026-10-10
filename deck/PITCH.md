@@ -32,15 +32,15 @@ Kittilä and Rovaniemi also passed their 1-in-50 level. "Warned us" = the North'
 ## 2 · The gap (0:12–0:28)
 
 > Rivers in one region share ONE snowpack, so they flood TOGETHER: big flood springs come almost FOUR times more
-> often than if each river flooded alone. [pause] Insurers buy cover in autumn, BEFORE the snow.
+> often than if each river flooded alone.
 
 Q&A only (not spoken): 10 of 65 springs (15.4 %, 90 % interval 9–24 %) had ≥4 of 14 areas over 1-in-10; chance on the
 same gauge-years 3.9 % (3.9×). If all 14 gauges had reported every year, chance would be 4.4 % (3.5×).
 
 ## 3 · The product (0:28–0:42)
 
-> Our index pays when SEVERAL northern rivers flood TOGETHER. The real cost of that risk is almost TWICE what the
-> regulator's standard assumption gives. [pause] And after a snowy March, it TRIPLES.
+> Our index pays when SEVERAL northern rivers flood TOGETHER. The real cost is almost TWICE the regulator's
+> standard assumption. [pause] After a snowy March, it TRIPLES.
 
 Q&A only (not spoken): a model comparison, not "the rule implies a price": expected loss 1.96 % of the limit a year (year-bootstrap 90 %: 1.6–2.2 %) vs
 1.11 % for a model with one correlation of 0.27, the mean of the 2027 Finnish 19-zone flood matrix (1.77×). We used the
@@ -75,7 +75,7 @@ Monte Carlo ±0.027 pp at the same 16,000 oracle queries (≈2.5× tighter). "On
 
 ## 6 · Quantum, in practice (1:40–1:47)
 
-> And on a REAL quantum chip, a snowy March still shows about THREE times the risk.
+> And it holds on a REAL quantum chip.
 
 The numbers (3.05× on chip, 2.75× exact) and the four computers are on the slide and in the video, so they are
 not repeated here.
@@ -97,8 +97,8 @@ VTT Q50 (via LUMI): three repeats gave 0.11–0.53 % vs exact 0.125 %; calibrati
 ## 8 · Business (1:56–2:28)
 
 > Our customers: insurers like OP and If. In March, two months before the melt, our index tells them how risky
-> this spring is, so they can buy extra cover IN TIME, paid automatically on the index. They pay US a licence:
-> 25 thousand to pilot, then 75 thousand a year. From 2027, capital rules assume the SAME flood risk every year, whatever the snow. Our ask: one
+> this spring is, so they can buy extra cover IN TIME, paid automatically. They pay US 25 thousand to pilot,
+> then 75 thousand a year. From 2027, capital rules assume the SAME flood risk every year, whatever the snow. Our ask: one
 > insurer's flood claims, eight weeks.
 
 Q&A only (not spoken): premium per €10M North layer ≈ €0.5–0.7M a year (model × 2.5–3.5 market multiple) goes insurer →
