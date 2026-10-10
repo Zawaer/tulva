@@ -97,7 +97,7 @@ VTT Q50 (via LUMI): three repeats gave 0.11–0.53 % vs exact 0.125 %; calibrati
 ## 8 · Business (1:56–2:28)
 
 > Our customers: insurers like OP and If. In March, two months before the melt, our index tells them how risky
-> this spring is, so they can buy extra cover IN TIME, paid automatically. They pay US 25 thousand to pilot,
+> this spring is, so they can buy extra cover IN TIME. They pay US 25 thousand to pilot,
 > then 75 thousand a year. From 2027, capital rules assume the SAME flood risk every year, whatever the snow. Our ask: one insurer's claims data for eight
 > weeks, to test the index against REAL losses.
 
