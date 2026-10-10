@@ -98,8 +98,8 @@ VTT Q50 (via LUMI): three repeats gave 0.11–0.53 % vs exact 0.125 %; calibrati
 
 > Our customers: insurers like OP and If. In March, two months before the melt, our index tells them how risky
 > this spring is, so they can buy extra cover IN TIME, paid automatically. They pay US 25 thousand to pilot,
-> then 75 thousand a year. From 2027, capital rules assume the SAME flood risk every year, whatever the snow. Our ask: one
-> insurer's flood claims, eight weeks.
+> then 75 thousand a year. From 2027, capital rules assume the SAME flood risk every year, whatever the snow. Our ask: one insurer's claims data for eight
+> weeks, to test the index against REAL losses.
 
 Q&A only (not spoken): premium per €10M North layer ≈ €0.5–0.7M a year (model × 2.5–3.5 market multiple) goes insurer →
 reinsurer; the licence goes insurer → Tulva (the reinsurer pays Tulva nothing). "The regulator's formula" = the 2027
@@ -112,4 +112,4 @@ and 2024 in the North with no recorded Lapland loss. At the 1-in-50 product leve
 ## 9 · Close (2:28–2:41)
 
 > Everything you saw, we built THIS weekend. [pause] Next March, the snow will warn us AGAIN. [long pause] This
-> time, with Tulva, insurers will be READY. Thank you.
+> time, it will have a PRICE. Thank you.

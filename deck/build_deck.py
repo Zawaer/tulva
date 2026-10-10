@@ -356,7 +356,7 @@ def s8_business(prs, n):
     text(s, MX, 4.85, W - 2 * MX, 0.5, "3–6 Finnish insurers, then the Nordics", size=BODY, color=GREY)
     rect(s, MX, 5.95, W - 2 * MX, 0.9, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
     text(s, MX + 0.4, 5.95, W - 2 * MX - 0.6, 0.9,
-         [[("Ask:  ", {"color": PALE_BLUE}), ("one insurer's flood claims, 8 weeks.", {})]],
+         [[("Ask:  ", {"color": PALE_BLUE}), ("8 weeks of one insurer's claims data, to test on real losses.", {})]],
          size=32, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
     return s
 
@@ -377,7 +377,7 @@ def s9_close(prs, n):
     text(s, MX, 3.45, W - 2 * MX, 1.0,
          [[("Next March, the snow will warn us ", {}), ("again.", {"color": PALE_BLUE})]],
          size=44, bold=True, color=WHITE)
-    text(s, MX, 4.4, W - 2 * MX, 0.6, "This time, with Tulva, insurers will be ready.", size=32, color=PALE_BLUE)
+    text(s, MX, 4.4, W - 2 * MX, 0.6, "This time, it will have a price.", size=32, color=PALE_BLUE)
     text(s, MX, 5.85, 11, 0.9,
          [[("Toivo Kallio", {"bold": True}), ("  ·  ", {"color": PALE_BLUE}), ("Vaishnav Rane", {"bold": True})],
           [("Team 21 STUHI  ·  Quantum x Finance 2026", {"color": PALE_BLUE, "size": 18})]],
