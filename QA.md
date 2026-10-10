@@ -208,7 +208,7 @@ history shows."
 - Never say "quantum is faster" or "advantage".
 - Never claim "EIOPA assumes 0 % in Finland". The 0 % is cross-border (FI–SE/NO/DK); inside Finland EIOPA uses
   a 19-zone matrix.
-- If you don't know: "Good question. We didn't test that this weekend; here's how we would."
+- If you don't know: "Good question. We didn't test that during the hackathon; here's how we would."
 
 ## Round 3 (Sat 10 Oct): what came off the slides, and the hardware juror's questions
 

@@ -335,7 +335,7 @@ def s7_business(prs, n):
 def s8_close(prs, n):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     rect(s, 0, 0, W, H, NAVY)
-    title(s, n, "Built this weekend", dark=True)
+    title(s, n, "Built during this hackathon", dark=True)
     x, y = MX, 1.55
     for c in ["SYKE data pipeline", "Joint flood model", "Index pricing", "Live app", "Runs on 4 quantum chips"]:
         w = 0.5 + text_width(c, 24)

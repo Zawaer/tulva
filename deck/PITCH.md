@@ -4,10 +4,10 @@
 The slides carry one idea each; the details (intervals,
 sources, why now) are said or kept for Q&A.
 
-**Timing (video moved to slide 2): 231 live words + the 34.6 s demo video, which speaks for itself + 2 short
-pauses and 1 long (~3 s). Word count = `>` lines outside §2, [pause] cues removed. At 135 wpm ≈ 2:20 (1 Hook 0:12 ·
+**Timing (video moved to slide 2): 232 live words + the 34.6 s demo video, which speaks for itself + 2 short
+pauses and 1 long (~3 s). Word count = `>` lines outside §2, [pause] cues removed. At 135 wpm ≈ 2:21 (1 Hook 0:12 ·
 2 Video 0:35 · 3 Gap 0:12 · 4 Product 0:12 · 5 Circuit 0:16 · 6 Honest 0:09 · 7 Business 0:32 · 8 Close 0:13). At
-120 wpm ≈ 2:33; at a slow 110 wpm ≈ 2:44. To finish by 2:50 the live parts (everything but the video, pauses
+120 wpm ≈ 2:34; at a slow 110 wpm ≈ 2:44. To finish by 2:50 the live parts (everything but the video, pauses
 included) must take ≤ 2:15. Buzzer at 3:00. Pauses are one breath (~0.7 s); the long pause ~1.5 s.**
 
 Simple English, short sentences. **[pause]** = stop for one breath. CAPS = stress that word (say it, don't shout
@@ -100,7 +100,7 @@ like to pilot with OP; there is no agreement. Basis risk (1-in-10 back-test): pa
 missed Ostrobothnia 2012–13 and 2024 (snow flag on, index silent) and Lapland 2020; since 2005 also paid in 2015, 2023
 and 2024 in the North with no recorded Lapland loss. At the 1-in-50 product level: paid 1966 and 2005 only.
 
-## 8 · Close (2:07–2:20)
+## 8 · Close (2:07–2:21)
 
-> Everything you saw, we built THIS weekend. [pause] Next March, the snow will warn us AGAIN. [long pause] This
-> time, it will have a PRICE. Thank you.
+> Everything you saw, we built during THIS hackathon. [pause] Next March, the snow will warn us AGAIN.
+> [long pause] This time, it will have a PRICE. Thank you.
