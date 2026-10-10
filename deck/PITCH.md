@@ -32,8 +32,8 @@ Kittilä and Rovaniemi also passed their 1-in-50 level. "Warned us" = the North'
 
 ## 2 · The gap (0:12–0:24)
 
-> Rivers in one region share ONE snowpack, so they flood TOGETHER. Big flood springs happen almost FOUR times more
-> often than if each river flooded on its own. [pause] Insurers buy cover in autumn, BEFORE the snow.
+> Rivers in one region share ONE snowpack, so they flood TOGETHER: big flood springs come almost FOUR times more
+> often than if each river flooded alone. [pause] Insurers buy cover in autumn, BEFORE the snow.
 
 Q&A only (not spoken): 10 of 65 springs (15.4 %, 90 % interval 9–24 %) had ≥4 of 14 areas over 1-in-10; chance on the
 same gauge-years 3.9 % (3.9×). If all 14 gauges had reported every year, chance would be 4.4 % (3.5×).
@@ -63,8 +63,8 @@ IQM and VTT Q50 → "Tulva. The snow warns two months early." If the hall sound 
 
 ## 5 · Our circuit (1:23–1:36)
 
-> This is our quantum circuit: each qubit is a river or the weather, and the gates ARE our flood model. Why quantum?
-> For twice the accuracy, normal simulation needs four times the work; quantum, only twice.
+> Each qubit is a river or the weather; the gates ARE our flood model. Why quantum? Twice the accuracy: normal
+> simulation needs four times the work, quantum only twice.
 
 Q&A only (not spoken): method = quantum amplitude estimation (QAE), in its maximum-likelihood form (MLAE): Grover
 powers k = 0, 1, 2, no phase estimation, plus noise-aware calibration on hardware. The figure is the circuit we ran
@@ -76,8 +76,7 @@ Monte Carlo ±0.027 pp at the same 16,000 oracle queries (≈2.5× tighter). "On
 
 ## 6 · Quantum, in practice (1:36–1:40)
 
-> And it runs on REAL quantum chips: on IQM's chip, a snowy March still shows about THREE times the risk, close to
-> the exact answer.
+> And on a REAL quantum chip, a snowy March still shows about THREE times the risk.
 
 The numbers (3.05× on chip, 2.75× exact) and the four computers are on the slide and in the video, so they are
 not repeated here.
@@ -100,7 +99,7 @@ VTT Q50 (via LUMI): three repeats gave 0.11–0.53 % vs exact 0.125 %; calibrati
 
 > Our customers: insurers like OP and If. In March, two months before the melt, our index tells them how risky
 > this spring is, so they can buy extra cover IN TIME, paid automatically on the index. They pay US a licence:
-> 25 thousand to pilot, then 75 thousand a year. And from 2027, the new capital rules assume the SAME flood risk every year, whatever the snow. Our ask: one
+> 25 thousand to pilot, then 75 thousand a year. From 2027, capital rules assume the SAME flood risk every year, whatever the snow. Our ask: one
 > insurer's flood claims, eight weeks.
 
 Q&A only (not spoken): premium per €10M North layer ≈ €0.5–0.7M a year (model × 2.5–3.5 market multiple) goes insurer →
