@@ -3,14 +3,14 @@ import { AbsoluteFill, Audio, useCurrentFrame } from "remotion";
 import narration from "../narration.mp3";
 import { Captions } from "./Captions";
 import { AppScene } from "./scenes/AppScene";
+import { ChipScene } from "./scenes/ChipScene";
 import { ComputersScene } from "./scenes/ComputersScene";
 import { EndCard } from "./scenes/EndCard";
 import { MapScene } from "./scenes/MapScene";
-import { ShotsScene } from "./scenes/ShotsScene";
 import { beat, C, FONT, FPS, mix, ramp } from "./theme";
 
 const SCENES: [number, React.FC<{ t: number }>][] = [
-  [1, MapScene], [2, AppScene], [3, ShotsScene], [4, ComputersScene], [5, EndCard],
+  [1, MapScene], [2, AppScene], [3, ChipScene], [4, ComputersScene], [5, EndCard],
 ];
 // Scene changes dip through the navy background: the old scene fades out over [b - X, b + 0.05], the new one fades
 // in over [b - 0.05, b + X] (b = the beat boundary, in the pause between sentences).

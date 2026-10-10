@@ -63,3 +63,7 @@ Append one line per decision: date time · who · decision · why.
   the presenter is silent during it (PITCH §4). PITCH §6 cut to "On the IQM chip, the snow signal SURVIVES the noise."
   because the video now says the 3.05× / 2.75× and the four computers. Total ≈2:44 at 120 wpm. The silent
   deck/video/tulva_demo.mp4 stays as a backup. · The video should tell the demo on its own; keep under 2:50.
+- 2026-10-10 · Toivo · Demo video beat 3 shows the IQM Emerald vs exact bars of slide 6 (low-snow vs snowy March,
+  with the chip's 90 % intervals) instead of the 8,000-shot grid; voice: "Now a real quantum computer: IQM's Emerald.
+  Blue is exact, purple is the chip." Video 45.0 s, keyframe every second (clean pausing/scrubbing in PowerPoint). ·
+  Mentor feedback: a bar chart reads better than the grid.

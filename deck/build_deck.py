@@ -29,7 +29,7 @@ OUT = ROOT / "out"
 DECK = ROOT / "deck"
 ASSETS = DECK / "assets"  # generated crops, rebuilt every run
 PPTX = DECK / "Tulva_QxF2026.pptx"
-VIDEO = DECK / "video" / "tulva_demo_anim.mp4"  # slide 4: 44.5 s demo with voiceover (deck/video/anim/);
+VIDEO = DECK / "video" / "tulva_demo_anim.mp4"  # slide 4: 45 s demo with voiceover (deck/video/anim/);
 #                                               deck/video/tulva_demo.mp4 (silent, 37 s) is kept as a backup
 POSTER_AT = 9.6  # s into the video: 2005 map with the four flooded rivers and the March snow meter
 

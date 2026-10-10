@@ -2,7 +2,7 @@
 
 Vaishnav: slides, pitch script, demo-video script and Q&A notes go here.
 
-- `PITCH.md`: the spoken script, slide by slide with timing marks (≈2:31 at 135 wpm, ≈2:44 at 120 wpm: 230 live words + the 44.5 s demo
+- `PITCH.md`: the spoken script, slide by slide with timing marks (≈2:32 at 135 wpm, ≈2:44 at 120 wpm: 230 live words + the 45 s demo
   video, which has its own voiceover). The `>` lines become each slide's speaker notes.
 - `build_deck.py`: builds `Tulva_QxF2026.pptx` (16:9, editable text boxes; charts are inserted from `out/*.png`, the demo video from `deck/video/`).
 - `Tulva_QxF2026.pdf`, `preview/slide-N.png`: exports for checking layout.
@@ -36,8 +36,8 @@ circuit `out/stage_qae_circuit.png` from `scripts/qae_circuit_figure.py`; slide 
 only; slide 10 uses `out/pitch_cost.png`) and in QA.md.
 
 ## Demo video
-`deck/video/tulva_demo_anim.mp4` (slide 4): 44.5 s, ElevenLabs voiceover ("Protégé narrator (clone)") and burned-in
-captions; animated 2005 map → real app recording (March snow set to high) → the real IQM Emerald shots → the four
+`deck/video/tulva_demo_anim.mp4` (slide 4): 45 s, ElevenLabs voiceover ("Protégé narrator (clone)") and burned-in
+captions; animated 2005 map → real app recording (March snow set to high) → IQM Emerald vs exact bars (as slide 6) → the four
 computers → end card. Built with Remotion in `deck/video/anim/` (see its README; narration in `narration.md`). The
 presenter says nothing during it.
 

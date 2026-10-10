@@ -62,7 +62,10 @@ def main() -> None:
     assert f"{r['estimate']:.2f}" == "3.05" and f"{r['exact']:.2f}" == "2.75"  # "about three times ... 2.75 exact"
     cases = {k: {"shots": PIPE["cases"][k]["shots_k0"], "total": PIPE["cases"][k]["shots_k0_total"],
                  "shots_all": PIPE["cases"][k]["shots_total"], "estimate": PIPE["cases"][k]["estimate"],
-                 "exact": PIPE["cases"][k]["exact"]} for k in ("low", "high")}
+                 "exact": PIPE["cases"][k]["exact"], "ci90": CI[f"emerald snow {k}"]["ci90"]} for k in ("low", "high")}
+    for k in ("low", "high"):  # the bars = slide 6's bars (out/bootstrap_ci.json)
+        assert abs(cases[k]["estimate"] - CI[f"emerald snow {k}"]["estimate"]) < 1e-12, k
+        assert abs(cases[k]["exact"] - CI[f"emerald snow {k}"]["exact"]) < 1e-12, k
     assert (cases["low"]["shots"]["11"], cases["high"]["shots"]["11"]) == (13, 31)
 
     edges = [e for e in APP["edges"] if e["a"] in over and e["b"] in over]  # the app's map lines (Spearman ≥ 0.6)

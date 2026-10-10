@@ -6,11 +6,12 @@ export const W = 1920;
 export const H = 1080;
 export const CAPTION_TOP = 932; // everything above is scene content, below is the caption band
 
-// Deck colours (deck/build_deck.py) + the app's outcome colours (web/pipeline.js) for the shot grid.
+// Deck colours (deck/build_deck.py) + the app's outcome colours (web/pipeline.js).
 export const C = {
   navy: "#0B1F3A", navy2: "#11284A", navy3: "#1B3A64", blue: "#1F6FEB", red: "#D13B2F", grey: "#6B7280",
   light: "#F3F6FA", line: "#DDE3EA", pale: "#A9C8F5", white: "#FFFFFF", muted: "#93A5C0",
   riverA: "#0f9e94", riverB: "#2f6fde", both: "#d0342c", none: "#e8edf3", ink: "#1c2b40",
+  purple: "#8250DF", // IQM chip, as on slide 6
 };
 export const FONT = '"Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif';
 
