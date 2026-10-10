@@ -112,4 +112,4 @@ and 2024 in the North with no recorded Lapland loss. At the 1-in-50 product leve
 ## 9 · Close (2:28–2:41)
 
 > Everything you saw, we built THIS weekend. [pause] Next March, the snow will warn us AGAIN. [long pause] This
-> time, it will have a PRICE. Thank you.
+> time, with Tulva, insurers will be READY. Thank you.
