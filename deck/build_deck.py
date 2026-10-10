@@ -255,6 +255,36 @@ def s4_product(prs, n):
     return s
 
 
+
+def autoplay(slide, spid: int) -> None:
+    """Make the embedded video start automatically when the slide appears (PowerPoint 'Start: Automatically')."""
+    from lxml import etree
+    ns = "http://schemas.openxmlformats.org/presentationml/2006/main"
+    xml = (f'<p:timing xmlns:p="{ns}"><p:tnLst><p:par><p:cTn id="1" dur="indefinite" restart="never" nodeType="tmRoot">'
+           '<p:childTnLst><p:seq concurrent="1" nextAc="seek"><p:cTn id="2" dur="indefinite" nodeType="mainSeq">'
+           '<p:childTnLst><p:par><p:cTn id="3" fill="hold"><p:stCondLst><p:cond delay="indefinite"/>'
+           '<p:cond evt="onBegin" delay="0"><p:tn val="2"/></p:cond></p:stCondLst><p:childTnLst>'
+           '<p:par><p:cTn id="4" fill="hold"><p:stCondLst><p:cond delay="0"/></p:stCondLst><p:childTnLst>'
+           '<p:par><p:cTn id="5" presetID="1" presetClass="mediacall" presetSubtype="0" fill="hold" '
+           'nodeType="afterEffect"><p:stCondLst><p:cond delay="0"/></p:stCondLst><p:childTnLst>'
+           '<p:cmd type="call" cmd="playFrom(0.0)"><p:cBhvr><p:cTn id="6" dur="1" fill="hold"/>'
+           f'<p:tgtEl><p:spTgt spid="{spid}"/></p:tgtEl></p:cBhvr></p:cmd></p:childTnLst></p:cTn></p:par>'
+           '</p:childTnLst></p:cTn></p:par></p:childTnLst></p:cTn></p:par></p:childTnLst></p:cTn>'
+           '<p:prevCondLst><p:cond evt="onPrev" delay="0"><p:tgtEl><p:sldTgt/></p:tgtEl></p:cond></p:prevCondLst>'
+           '<p:nextCondLst><p:cond evt="onNext" delay="0"><p:tgtEl><p:sldTgt/></p:tgtEl></p:cond></p:nextCondLst>'
+           '</p:seq><p:video><p:cMediaNode vol="80000"><p:cTn id="7" fill="hold" display="0"><p:stCondLst>'
+           f'<p:cond delay="indefinite"/></p:stCondLst></p:cTn><p:tgtEl><p:spTgt spid="{spid}"/></p:tgtEl>'
+           '</p:cMediaNode></p:video></p:childTnLst></p:cTn></p:par></p:tnLst></p:timing>')
+    sld = slide._element
+    for old_t in sld.findall(f"{{{ns}}}timing"):
+        sld.remove(old_t)
+    t = etree.fromstring(xml)
+    ext = sld.find(f"{{{ns}}}extLst")
+    if ext is not None:
+        ext.addprevious(t)
+    else:
+        sld.append(t)
+
 def poster_frame() -> Path:
     """Still of the demo video at POSTER_AT, shown before playback starts."""
     import imageio_ffmpeg
@@ -272,8 +302,9 @@ def s2_demo(prs, n):
     fw = fh * 16 / 9
     fx, fy = (W - fw) / 2, 0.55
     if VIDEO.exists():
-        s.shapes.add_movie(str(VIDEO), Inches(fx), Inches(fy), Inches(fw), Inches(fh),
-                           poster_frame_image=str(poster_frame()), mime_type="video/mp4")
+        movie = s.shapes.add_movie(str(VIDEO), Inches(fx), Inches(fy), Inches(fw), Inches(fh),
+                                   poster_frame_image=str(poster_frame()), mime_type="video/mp4")
+        autoplay(s, movie.shape_id)
     else:  # placeholder if the recording is missing
         rect(s, fx, fy, fw, fh, RGBColor(0x14, 0x2B, 0x4D), line=PALE_BLUE)
         picture(s, ASSETS / "app_product.png", fx + 0.15, fy + 0.15, fw - 0.3, fh - 0.3)
