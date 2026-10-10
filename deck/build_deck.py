@@ -354,8 +354,8 @@ def s8_business(prs, n):
     text(s, xs[0], y + bh + 0.15, 5.0, 0.5, "€25k pilot, then €75k / yr", size=BODY, bold=True, color=NAVY)
     text(s, MX, 3.75, W - 2 * MX, 1.1, "Year 3: €0.2–0.45M / yr", size=64, bold=True, color=NAVY)
     text(s, MX, 4.85, W - 2 * MX, 0.5, "3–6 Finnish insurers, then the Nordics", size=BODY, color=GREY)
-    rect(s, MX, 5.95, W - 2 * MX, 0.9, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
-    text(s, MX + 0.4, 5.95, W - 2 * MX - 0.6, 0.9,
+    rect(s, MX, 5.55, W - 2 * MX, 1.35, NAVY, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.1)  # two lines at 32 pt
+    text(s, MX + 0.4, 5.55, W - 2 * MX - 0.6, 1.35,
          [[("Ask:  ", {"color": PALE_BLUE}), ("8 weeks of one insurer's claims data, to test on real losses.", {})]],
          size=32, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
     return s
