@@ -1,6 +1,6 @@
 # Tulva: 3-minute pitch script
 
-**Slides 1–8 are the whole deck (backup slides removed; details for Q&A are in QA.md and docs/QA_DRILL.md).**
+**Slides 1–8 are the whole deck (backup slides removed; details for Q&A are in QA.md).**
 The slides carry one idea each; the details (intervals,
 sources, why now) are said or kept for Q&A.
 

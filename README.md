@@ -5,6 +5,29 @@ show which areas flood *together*; a quantum amplitude-estimation engine turns t
 parametric flood cover for insurers.
 
 Built at the Quantum x Finance hackathon (Hanken × Ultrahack, 8–10 Oct 2026) by team STUHI (#21).
+Toivo Kallio: data, flood model, quantum circuits, web app. Vaishnav Rane: business case, deck and pitch research.
+
+![Springs when 4 or more of 14 rivers flood: 15.4 % observed vs 3.9 % if they flooded independently](deck/preview/slide-3.png)
+
+## What we found
+- **Rivers flood together.** In 65 years of SYKE data (1961 to 2025), springs where 4 or more of 14 river areas
+  passed their 1-in-10 level happened in 10 years (15.4 %), almost 4× the 3.9 % you'd get if each river flooded
+  on its own. They share one snowpack.
+- **The snow on 1 March warns two months ahead.** The index pays when 2 or more of 5 northern rivers pass their
+  1-in-50 level in the same spring. Its expected loss is 1.96 % of the limit a year, about 1.8× what the 2027
+  Solvency II flood matrix's average link of 0.27 implies, and about 3× higher after a snowy March. The snow
+  signal was checked out of sample (fit on 1961 to 2000, tested on 2001 to 2025).
+- **The pricing step ran on four real quantum computers** as maximum-likelihood amplitude estimation: IBM
+  Marrakesh (0.149 % vs exact 0.125 %), IQM Garnet (0.164 %), IQM Emerald (the snowy vs low-snow ratio survived
+  on the chip: 3.05× vs 2.75× exact) and VTT Q50 (unstable across repeats). On a perfect simulator it was about
+  2.5× more accurate than Monte Carlo at the same 16,000 runs.
+- **Classical still wins today.** The deeper circuits drowned in noise on every machine, so the prices themselves
+  are computed classically. The quantum advantage for rare events needs error-corrected hardware.
+
+![Error vs effort: real chips today, classical sampling and ideal quantum](deck/preview/slide-6.png)
+
+Every number above is logged with the script that produced it in [CLAIMS.md](CLAIMS.md); design choices are in
+[DECISIONS.md](DECISIONS.md). The deck is [deck/Tulva_QxF2026.pdf](deck/Tulva_QxF2026.pdf).
 
 ## Layout
 - `src/tulva/`: data pipeline, joint flood model, index pricing, quantum circuits
@@ -61,3 +84,7 @@ Qrisp pass manager (`iqm.qrisp_iqm.create_iqm_pass_manager`) on Garnet's couplin
 IQM_TOKEN=... .venv-iqm/bin/python scripts/qae_qrisp.py --backend iqm --device garnet   # Qrisp IQMBackend
 ```
 Hardware and fake-device runs go to `out/runs/qrisp_qae_*.json`.
+
+## Data and licence
+River flow and snow data: Finnish Environment Institute (SYKE), weather: Finnish Meteorological Institute (FMI),
+both open data under CC BY 4.0. Code is MIT licensed, see [LICENSE](LICENSE).
